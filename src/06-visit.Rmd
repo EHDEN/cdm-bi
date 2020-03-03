@@ -9,3 +9,21 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Visit
 
+## Visit - Types
+
+Discuss what is important to see in this chart... TO DO
+
+### SQL query
+
+```sql
+-- 201  Visit - Types
+SELECT source.name, 
+       concept_name AS "Observation", 
+       count_value AS "Nr_Observations",
+       source.slug
+FROM public.achilles_results AS achilles INNER JOIN 
+	public.data_source AS source ON achilles.data_source_id=source.id
+INNER JOIN public.concept ON stratum_1 = CAST(concept_id AS text)
+WHERE analysis_id = 201;
+```
+

@@ -7,11 +7,13 @@ output: html_document
 
 # General
 
+VERY INCOMPLETE
 Discuss the goal of this dashboard... TO DO
 
 ## Database Type Filter
 
 This filter which is a type of chart in Superset was designed to be used in the dashboard aiming the filtering of the data based on the field ''database_type'' from the table ''data_source''. It is important to give the alias ''Type'' to this field in the select operations because Superset does not recognize as the same field otherwise.
+
 ### SQL query
 
 ```sql
@@ -21,7 +23,7 @@ SELECT source.name,
        database_type AS Type,
        source.slug
 FROM public.data_source AS source INNER JOIN public.country 
-  AS country ON source.country_id=country.id;
+    AS country ON source.country_id=country.id;
 ```
 
 ### Chart settings
@@ -29,7 +31,6 @@ FROM public.data_source AS source INNER JOIN public.country
 The main characteristics of this chart are presented in Figure \@ref(fig:databaseTypeFilter), being the following:
 
 - todo
-
 
 <div class="figure">
 <img src="images/databaseTypeFilter.png" alt="Superset chart creation: Settings for creating the database type filter." width="100%" />
@@ -49,7 +50,7 @@ SELECT source.name,
        database_type AS Type,
        source.slug
 FROM public.data_source AS source INNER JOIN public.country 
-  AS country ON source.country_id=country.id;
+    AS country ON source.country_id=country.id;
 ```
 
 ### Chart settings
@@ -75,7 +76,7 @@ SELECT  name,
         country AS Country,
         continent
 FROM public.data_source AS source INNER JOIN public.country 
-  AS country ON source.country_id=country.id;
+    AS country ON source.country_id=country.id;
 ```
 
 ### Chart settings
@@ -110,10 +111,10 @@ FROM (
             source.database_type, 
             source.release_date
      FROM public.achilles_results AS achilles INNER JOIN 
-      public.data_source AS source ON
-      achilles.data_source_id=source.id
+        public.data_source AS source ON
+        achilles.data_source_id=source.id
      INNER JOIN public.country AS country ON 
-      source.country_id=country.id
+        source.country_id=country.id
      ) data
 WHERE analysis_id = 108;
 ```
@@ -133,8 +134,8 @@ Discuss what is important to see in this chart... TO DO
 ```sql
 -- 108    General - Network Growth by Date
 SELECT data.source,
-       data.country,
-       data.database_type,
+       data.country AS Country,
+       data.database_type AS Type,
        cast(stratum_1 as Integer)*30 AS DAY,
        count_value                   AS count
 FROM (
@@ -149,10 +150,10 @@ FROM (
             country.country,
             source.database_type
      FROM public.achilles_results AS achilles INNER JOIN 
-      public.data_source AS source ON 
-      achilles.data_source_id=source.id
+        public.data_source AS source ON 
+        achilles.data_source_id=source.id
      INNER JOIN public.country AS country ON 
-      source.country_id=country.id
+        source.country_id=country.id
      ) data
 WHERE analysis_id = 108;
 ```
@@ -170,14 +171,14 @@ Discuss what is important to see in this chart... TO DO
 ```sql
 -- 1    General - Patients per Country
 SELECT source.name,
-       country.country,
-       source.database_type,
-       count_value as patient_count,
+       country.country AS Country,
+       source.database_type AS Type,
+       count_value AS patient_count,
        source.slug
 FROM public.achilles_results AS achilles INNER JOIN 
-  public.data_source AS source ON achilles.data_source_id=source.id
-  INNER JOIN public.country AS country ON 
-  source.country_id=country.id
+    public.data_source AS source ON achilles.data_source_id=source.id
+    INNER JOIN public.country AS country ON 
+    source.country_id=country.id
 WHERE analysis_id = 1;
 ```
 
@@ -194,14 +195,14 @@ Discuss what is important to see in this chart... TO DO
 ```sql
 -- 1    General - Database types per Country
 SELECT source.name, 
-       country.country as Country, 
-       database_type as Type,
-       count_value as "Nr_patients",
+       country.country AS Country, 
+       database_type AS Type,
+       count_value AS "Nr_patients",
        source.slug
 FROM public.achilles_results AS achilles INNER JOIN 
-  public.data_source AS source ON achilles.data_source_id=source.id
-  INNER JOIN public.country AS country ON 
-  source.country_id=country.id
+    public.data_source AS source ON achilles.data_source_id=source.id
+    INNER JOIN public.country AS country ON 
+    source.country_id=country.id
 WHERE analysis_id = 1;
 ```
 

@@ -7,3 +7,97 @@ output: html_document
 
 # Person
 
+
+Discuss the goal of this dashboard... TO DO
+Reuses the ''Database Type Filter''
+CSS Template change 
+
+
+## Person - Patients by age
+
+Discuss what is important to see in this chart... TO DO
+
+### SQL query
+
+```sql
+-- 101  Person - Patients by age
+SELECT source.name,
+    cast(stratum_1 as int) as Age,
+    count_value as count, 
+    source.slug
+FROM public.achilles_results AS achilles INNER JOIN 
+	public.data_source AS source ON achilles.data_source_id=source.id
+WHERE analysis_id = 101;
+```
+
+### Chart settings
+
+The main characteristics of this chart are presented in Figure \@ref(fig:personPatientsByAge), being the following:
+
+- todo
+
+<div class="figure">
+<img src="images/personPatientsByAge.png" alt="Settings for creating chart representing patient by age (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:personPatientsByAge)Settings for creating chart representing patient by age (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
+
+## Person - Births by Year
+
+Discuss what is important to see in this chart... TO DO
+
+### SQL query
+
+```sql
+-- 3  Person - Births by year
+SELECT source.name,
+       stratum_1 AS "Birth_year",
+       count_value AS count, 
+       source.slug
+FROM public.achilles_results AS achilles INNER JOIN 
+	public.data_source AS source ON achilles.data_source_id=source.id
+WHERE analysis_id = 3;
+```
+
+### Chart settings
+
+The main characteristics of this chart are presented in Figure \@ref(fig:personBirthsByYear), being the following:
+
+- todo
+
+<div class="figure">
+<img src="images/personBirthsByYear.png" alt="Settings for creating chart representing births by year (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:personBirthsByYear)Settings for creating chart representing births by year (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
+
+
+## Person - Gender Distribution
+
+Discuss what is important to see in this chart... TO DO
+
+### SQL query
+
+```sql
+-- 2  Person - Gender distribution
+SELECT source.name,
+       concept_name AS Gender, 
+       count_value AS Number_of_persons,
+       source.slug
+FROM public.achilles_results AS achilles INNER JOIN 
+	public.data_source AS source ON achilles.data_source_id=source.id
+	JOIN (
+		SELECT '8507' AS concept_id, 'Male' AS concept_name UNION 
+		SELECT '8532' AS concept_id, 'Female' AS concept_name) AS 
+		concepts ON achilles.stratum_1 = concept_id
+WHERE analysis_id = 2;
+```
+
+### Chart settings
+
+The main characteristics of this chart are presented in Figure \@ref(fig:personGenderDistribution), being the following:
+
+- todo
+
+<div class="figure">
+<img src="images/personGenderDistribution.png" alt="Settings for creating chart representing the gender distribution (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:personGenderDistribution)Settings for creating chart representing the gender distribution (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>

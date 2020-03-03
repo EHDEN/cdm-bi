@@ -439,7 +439,7 @@ TO DO
 
 \chapter{General}\label{general}
 
-Discuss the goal of this dashboard\ldots{} TO DO
+VERY INCOMPLETE Discuss the goal of this dashboard\ldots{} TO DO
 
 \section{Database Type Filter}\label{database-type-filter}
 
@@ -447,8 +447,9 @@ This filter which is a type of chart in Superset was designed to be used
 in the dashboard aiming the filtering of the data based on the field
 `'database\_type'`from the table'`data\_source'`. It is important to
 give the alias'`Type'' to this field in the select operations because
-Superset does not recognize as the same field otherwise. \#\#\# SQL
-query
+Superset does not recognize as the same field otherwise.
+
+\subsection{SQL query}\label{sql-query}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -458,7 +459,7 @@ query
 \NormalTok{       database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
 \NormalTok{       source.slug}
 \KeywordTok{FROM}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }
-  \KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}\NormalTok{ source.country_id=country.id;}
+    \KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}\NormalTok{ source.country_id=country.id;}
 \end{Highlighting}
 \end{Shaded}
 
@@ -481,7 +482,7 @@ The main characteristics of this chart are presented in Figure
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query}
+\subsection{SQL query}\label{sql-query-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -491,7 +492,7 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \NormalTok{       database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
 \NormalTok{       source.slug}
 \KeywordTok{FROM}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }
-  \KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}\NormalTok{ source.country_id=country.id;}
+    \KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}\NormalTok{ source.country_id=country.id;}
 \end{Highlighting}
 \end{Shaded}
 
@@ -503,7 +504,7 @@ TO DO
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query-1}
+\subsection{SQL query}\label{sql-query-2}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -518,7 +519,7 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \NormalTok{        country }\KeywordTok{AS}\NormalTok{ Country,}
 \NormalTok{        continent}
 \KeywordTok{FROM}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }
-  \KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}\NormalTok{ source.country_id=country.id;}
+    \KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}\NormalTok{ source.country_id=country.id;}
 \end{Highlighting}
 \end{Shaded}
 
@@ -531,7 +532,7 @@ TO DO
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query-2}
+\subsection{SQL query}\label{sql-query-3}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -556,10 +557,10 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \NormalTok{            source.database_type, }
 \NormalTok{            source.release_date}
      \KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{      public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}
-\NormalTok{      achilles.data_source_id=source.id}
+\NormalTok{        public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}
+\NormalTok{        achilles.data_source_id=source.id}
      \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} 
-\NormalTok{      source.country_id=country.id}
+\NormalTok{        source.country_id=country.id}
 \NormalTok{     ) }\KeywordTok{data}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{108}\NormalTok{;}
 \end{Highlighting}
@@ -574,14 +575,14 @@ Date}\label{general---network-growth-by-date}
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query-3}
+\subsection{SQL query}\label{sql-query-4}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{-- 108    General - Network Growth by Date}
 \KeywordTok{SELECT}\NormalTok{ data.source,}
-\NormalTok{       data.country,}
-\NormalTok{       data.database_type,}
+\NormalTok{       data.country }\KeywordTok{AS}\NormalTok{ Country,}
+\NormalTok{       data.database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
        \FunctionTok{cast}\NormalTok{(stratum_1 }\KeywordTok{as} \DataTypeTok{Integer}\NormalTok{)*}\DecValTok{30} \KeywordTok{AS} \DataTypeTok{DAY}\NormalTok{,}
 \NormalTok{       count_value                   }\KeywordTok{AS} \FunctionTok{count}
 \KeywordTok{FROM}\NormalTok{ (}
@@ -596,10 +597,10 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \NormalTok{            country.country,}
 \NormalTok{            source.database_type}
      \KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{      public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{      achilles.data_source_id=source.id}
+\NormalTok{        public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{        achilles.data_source_id=source.id}
      \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} 
-\NormalTok{      source.country_id=country.id}
+\NormalTok{        source.country_id=country.id}
 \NormalTok{     ) }\KeywordTok{data}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{108}\NormalTok{;}
 \end{Highlighting}
@@ -614,20 +615,20 @@ Country}\label{general---patients-per-country}
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query-4}
+\subsection{SQL query}\label{sql-query-5}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{-- 1    General - Patients per Country}
 \KeywordTok{SELECT}\NormalTok{ source.name,}
-\NormalTok{       country.country,}
-\NormalTok{       source.database_type,}
-\NormalTok{       count_value }\KeywordTok{as}\NormalTok{ patient_count,}
+\NormalTok{       country.country }\KeywordTok{AS}\NormalTok{ Country,}
+\NormalTok{       source.database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
+\NormalTok{       count_value }\KeywordTok{AS}\NormalTok{ patient_count,}
 \NormalTok{       source.slug}
 \KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{  public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
-  \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} 
-\NormalTok{  source.country_id=country.id}
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} 
+\NormalTok{    source.country_id=country.id}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{1}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
@@ -641,20 +642,20 @@ Country}\label{general---database-types-per-country}
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query-5}
+\subsection{SQL query}\label{sql-query-6}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{-- 1    General - Database types per Country}
 \KeywordTok{SELECT}\NormalTok{ source.name, }
-\NormalTok{       country.country }\KeywordTok{as}\NormalTok{ Country, }
-\NormalTok{       database_type }\KeywordTok{as} \KeywordTok{Type}\NormalTok{,}
-\NormalTok{       count_value }\KeywordTok{as} \OtherTok{"Nr_patients"}\NormalTok{,}
+\NormalTok{       country.country }\KeywordTok{AS}\NormalTok{ Country, }
+\NormalTok{       database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
+\NormalTok{       count_value }\KeywordTok{AS} \OtherTok{"Nr_patients"}\NormalTok{,}
 \NormalTok{       source.slug}
 \KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{  public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
-  \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} 
-\NormalTok{  source.country_id=country.id}
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} 
+\NormalTok{    source.country_id=country.id}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{1}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
@@ -665,15 +666,443 @@ TO DO
 
 \chapter{Person}\label{person}
 
+Discuss the goal of this dashboard\ldots{} TO DO Reuses the `'Database
+Type Filter'' CSS Template change
+
+\section{Person - Patients by age}\label{person---patients-by-age}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+\subsection{SQL query}\label{sql-query-7}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- 101  Person - Patients by age}
+\KeywordTok{SELECT}\NormalTok{ source.name,}
+    \FunctionTok{cast}\NormalTok{(stratum_1 }\KeywordTok{as} \DataTypeTok{int}\NormalTok{) }\KeywordTok{as}\NormalTok{ Age,}
+\NormalTok{    count_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
+\NormalTok{    source.slug}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{101}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Chart settings}\label{chart-settings-7}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:personPatientsByAge}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  todo
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/personPatientsByAge} \caption{Settings for creating chart representing patient by age (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:personPatientsByAge}
+\end{figure}
+
+\section{Person - Births by Year}\label{person---births-by-year}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+\subsection{SQL query}\label{sql-query-8}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- 3  Person - Births by year}
+\KeywordTok{SELECT}\NormalTok{ source.name,}
+\NormalTok{       stratum_1 }\KeywordTok{AS} \OtherTok{"Birth_year"}\NormalTok{,}
+\NormalTok{       count_value }\KeywordTok{AS} \FunctionTok{count}\NormalTok{, }
+\NormalTok{       source.slug}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{3}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Chart settings}\label{chart-settings-8}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:personBirthsByYear}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  todo
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/personBirthsByYear} \caption{Settings for creating chart representing births by year (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:personBirthsByYear}
+\end{figure}
+
+\section{Person - Gender
+Distribution}\label{person---gender-distribution}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+\subsection{SQL query}\label{sql-query-9}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- 2  Person - Gender distribution}
+\KeywordTok{SELECT}\NormalTok{ source.name,}
+\NormalTok{       concept_name }\KeywordTok{AS}\NormalTok{ Gender, }
+\NormalTok{       count_value }\KeywordTok{AS}\NormalTok{ Number_of_persons,}
+\NormalTok{       source.slug}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+    \KeywordTok{JOIN}\NormalTok{ (}
+        \KeywordTok{SELECT} \StringTok{'8507'} \KeywordTok{AS}\NormalTok{ concept_id, }\StringTok{'Male'} \KeywordTok{AS}\NormalTok{ concept_name }\KeywordTok{UNION} 
+        \KeywordTok{SELECT} \StringTok{'8532'} \KeywordTok{AS}\NormalTok{ concept_id, }\StringTok{'Female'} \KeywordTok{AS}\NormalTok{ concept_name) }\KeywordTok{AS} 
+\NormalTok{        concepts }\KeywordTok{ON}\NormalTok{ achilles.stratum_1 = concept_id}
+\KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{2}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Chart settings}\label{chart-settings-9}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:personGenderDistribution}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  todo
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/personGenderDistribution} \caption{Settings for creating chart representing the gender distribution (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:personGenderDistribution}
+\end{figure}
+
 \chapter{Population Characteristics}\label{population-characteristics}
+
+Discuss the goal of this dashboard\ldots{} TO DO Reuses the `'Database
+Type Filter''
+
+\section{Population characteristics - Patients in Observation Period per
+month (whole
+month)}\label{population-characteristics---patients-in-observation-period-per-month-whole-month}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+\subsection{SQL query}\label{sql-query-10}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- 110    Population characteristics - Patients in Observation }
+\NormalTok{    Period per }\DataTypeTok{month}\NormalTok{ (whole }\DataTypeTok{month}\NormalTok{)}
+\KeywordTok{SELECT}\NormalTok{ source.name, }
+       \FunctionTok{to_date}\NormalTok{(stratum_1, }\StringTok{'YYYYMM'}\NormalTok{) }\KeywordTok{as} \DataTypeTok{Date}\NormalTok{,}
+\NormalTok{       count_value }\KeywordTok{as} \OtherTok{"Nr_patients"}\NormalTok{,}
+\NormalTok{       source.slug}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{110}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Chart settings}\label{chart-settings-10}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:populationCharacteristicsPatientsInObservationPeriodPerMonth},
+being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  todo
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsPatientsInObservationPeriodPerMonth} \caption{Settings for creating chart representing patient in observation per month (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:populationCharacteristicsPatientsInObservationPeriodPerMonth}
+\end{figure}
+
+\section{Population characteristics - Observation Period End
+Dates}\label{population-characteristics---observation-period-end-dates}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+\subsection{SQL query}\label{sql-query-11}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- 112  Population characteristics - Observation Period End Dates}
+\KeywordTok{SELECT}\NormalTok{ source.name,}
+       \FunctionTok{to_date}\NormalTok{(stratum_1, }\StringTok{'YYYYMM'}\NormalTok{) }\KeywordTok{as}\NormalTok{ year_month,}
+\NormalTok{       count_value }\KeywordTok{as}\NormalTok{ patient_count}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{where}\NormalTok{ analysis_id = }\DecValTok{112}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Chart settings}\label{chart-settings-11}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:populationCharacteristicsObservationPeriodEndDates}, being the
+following:
+
+\begin{itemize}
+\tightlist
+\item
+  todo
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodEndDates} \caption{Settings for creating chart representing the number of patients at the end of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:populationCharacteristicsObservationPeriodEndDates}
+\end{figure}
+
+\section{Population characteristics - Observation Period Start
+Dates}\label{population-characteristics---observation-period-start-dates}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+\subsection{SQL query}\label{sql-query-12}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- 111  Population characteristics - Observation Period Start Dates}
+\KeywordTok{SELECT}\NormalTok{ source.name,}
+       \FunctionTok{to_date}\NormalTok{(stratum_1, }\StringTok{'YYYYMM'}\NormalTok{) }\KeywordTok{as}\NormalTok{ year_month,}
+\NormalTok{       count_value }\KeywordTok{as}\NormalTok{ patient_count}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{where}\NormalTok{ analysis_id = }\DecValTok{111}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Chart settings}\label{chart-settings-12}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:populationCharacteristicsObservationPeriodStartDates}, being
+the following:
+
+\begin{itemize}
+\tightlist
+\item
+  todo
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:populationCharacteristicsObservationPeriodStartDates}
+\end{figure}
 
 \chapter{Visit}\label{visit}
 
+\section{Visit - Types}\label{visit---types}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+\subsection{SQL query}\label{sql-query-13}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- 201  Visit - Types}
+\KeywordTok{SELECT}\NormalTok{ source.name, }
+\NormalTok{       concept_name }\KeywordTok{AS} \OtherTok{"Observation"}\NormalTok{, }
+\NormalTok{       count_value }\KeywordTok{AS} \OtherTok{"Nr_Observations"}\NormalTok{,}
+\NormalTok{       source.slug}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.concept }\KeywordTok{ON}\NormalTok{ stratum_1 = }\FunctionTok{CAST}\NormalTok{(concept_id }\KeywordTok{AS}\NormalTok{ text)}
+\KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{201}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
 \chapter{Death}\label{death}
+
+\section{Death - By Month per Thousand
+People}\label{death---by-month-per-thousand-people}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+\subsection{SQL query}\label{sql-query-14}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- 502  Death - By Month per Thousand People}
+\KeywordTok{SELECT}\NormalTok{ source.name,}
+    \FunctionTok{to_date}\NormalTok{(stratum_1, }\StringTok{'YYYYMM'}\NormalTok{) }\KeywordTok{as} \DataTypeTok{Date}\NormalTok{,}
+\NormalTok{    count_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
+\NormalTok{    source.slug}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{502}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Death - Number of Records}\label{death---number-of-records}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+\subsection{SQL query}\label{sql-query-15}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- 501  Death - Number of Records}
+\KeywordTok{SELECT}\NormalTok{ source.name,}
+\NormalTok{    count_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
+\NormalTok{    source.slug}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{501}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
 
 \chapter{Concepts}\label{concepts}
 
+Discuss the organization of this dashboard One tab uses the same query
+
+\section{Concepts General Tab}\label{concepts-general-tab}
+
+\subsection{SQL query}\label{sql-query-16}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT}
+\NormalTok{    q1.concept_id }\KeywordTok{AS}\NormalTok{ concept_id,}
+\NormalTok{    q1.concept_name }\KeywordTok{AS}\NormalTok{ concept_name,}
+\NormalTok{    q1.domain_id,}
+\NormalTok{    source.name,}
+    \FunctionTok{sum}\NormalTok{(q1.count_value) }\KeywordTok{AS} \OtherTok{"Occurrence_count"}\NormalTok{,}
+    \FunctionTok{sum}\NormalTok{(q1.count_person) }\KeywordTok{AS} \OtherTok{"Person_count"}\NormalTok{,}
+    \KeywordTok{CASE} 
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_value)<=}\DecValTok{10} \KeywordTok{THEN} \StringTok{'<=10'}
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_value)<=}\DecValTok{100} \KeywordTok{THEN} \StringTok{'11-10ˆ2'}
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_value)<=}\DecValTok{1000} \KeywordTok{THEN} \StringTok{'10ˆ2-10ˆ3'}
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_value)<=}\DecValTok{10000} \KeywordTok{THEN} \StringTok{'10ˆ3-10ˆ4'}
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_value)<=}\DecValTok{100000} \KeywordTok{THEN} \StringTok{'10ˆ4-10ˆ5'}
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_value)<=}\DecValTok{1000000} \KeywordTok{THEN} \StringTok{'10ˆ5-10ˆ6'}
+        \KeywordTok{ELSE} \StringTok{'>10ˆ6'}
+    \KeywordTok{END} \KeywordTok{AS} \OtherTok{"magnitude_occurrences"}\NormalTok{,}
+    \KeywordTok{CASE} 
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_person)<=}\DecValTok{10} \KeywordTok{THEN} \StringTok{'<=10'}
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_person)<=}\DecValTok{100} \KeywordTok{THEN} \StringTok{'11-10ˆ2'}
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_person)<=}\DecValTok{1000} \KeywordTok{THEN} \StringTok{'10ˆ2-10ˆ3'}
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_person)<=}\DecValTok{10000} \KeywordTok{THEN} \StringTok{'10ˆ3-10ˆ4'}
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_person)<=}\DecValTok{100000} \KeywordTok{THEN} \StringTok{'10ˆ4-10ˆ5'}
+        \KeywordTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count_person)<=}\DecValTok{1000000} \KeywordTok{THEN} \StringTok{'10ˆ5-10ˆ6'}
+        \KeywordTok{ELSE} \StringTok{'>10ˆ6'}
+    \KeywordTok{END} \KeywordTok{AS} \OtherTok{"magnitude_persons"}
+\KeywordTok{FROM}\NormalTok{ (}\KeywordTok{SELECT}\NormalTok{ analysis_id,}
+\NormalTok{             stratum_1 concept_id,}
+\NormalTok{             data_source_id,}
+\NormalTok{             concept_name,}
+\NormalTok{             domain_id,}
+\NormalTok{             count_value, }\DecValTok{0} \KeywordTok{AS}\NormalTok{ count_person}
+    \KeywordTok{FROM}\NormalTok{ achilles_results}
+    \KeywordTok{JOIN}\NormalTok{ concept }\KeywordTok{ON} \FunctionTok{cast}\NormalTok{(stratum_1 }\KeywordTok{AS}\NormalTok{ BIGINT)=concept_id}
+    \KeywordTok{WHERE}\NormalTok{ analysis_id }\KeywordTok{in}\NormalTok{ (}\DecValTok{201}\NormalTok{, }\DecValTok{301}\NormalTok{, }\DecValTok{401}\NormalTok{, }\DecValTok{601}\NormalTok{, }\DecValTok{701}\NormalTok{, }\DecValTok{801}\NormalTok{, }\DecValTok{901}\NormalTok{, }\DecValTok{1001}\NormalTok{, }
+        \DecValTok{1801}\NormalTok{)}
+    \KeywordTok{UNION}\NormalTok{ (}\KeywordTok{SELECT}\NormalTok{  analysis_id,}
+\NormalTok{                   stratum_1 concept_id,}
+\NormalTok{                   data_source_id,}
+\NormalTok{                   concept_name,}
+\NormalTok{                   domain_id,}
+                   \DecValTok{0} \KeywordTok{AS}\NormalTok{ count_value,}
+                   \FunctionTok{sum}\NormalTok{(count_value) }\KeywordTok{AS}\NormalTok{ count_person}
+            \KeywordTok{FROM}\NormalTok{  achilles_results}
+            \KeywordTok{JOIN}\NormalTok{ concept }\KeywordTok{on} \FunctionTok{cast}\NormalTok{(stratum_1 }\KeywordTok{AS}\NormalTok{ BIGINT)=concept_id}
+            \KeywordTok{WHERE}\NormalTok{ analysis_id }\KeywordTok{in}\NormalTok{ (}\DecValTok{202}\NormalTok{, }\DecValTok{401}\NormalTok{, }\DecValTok{601}\NormalTok{, }\DecValTok{701}\NormalTok{, }\DecValTok{801}\NormalTok{, }\DecValTok{901}\NormalTok{, }
+                \DecValTok{1001}\NormalTok{, }\DecValTok{1801}\NormalTok{)}
+            \KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ analysis_id, stratum_1, data_source_id, }
+\NormalTok{                concept_name, domain_id) ) }\KeywordTok{AS}\NormalTok{ q1}
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ q1.data_source_id=source.id}
+\KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ q1.concept_id, q1.concept_name, q1.domain_id,source.name;}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Charts}\label{charts}
+
+Here are all the charts presented in this dashboard using the previous
+query
+
+\subsubsection{Concept Browser Table}\label{concept-browser-table}
+
+\subsubsection{\# of Occurrences}\label{of-occurrences}
+
+\subsubsection{\# of Patients}\label{of-patients}
+
+\subsubsection{Entity Type Filter}\label{entity-type-filter}
+
+\subsubsection{Concept Filter}\label{concept-filter}
+
+\subsubsection{Number of Concepts}\label{number-of-concepts}
+
+\section{Concepts Domains Tab}\label{concepts-domains-tab}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+\subsection{SQL query}\label{sql-query-17}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- Concepts Domains}
+\KeywordTok{SELECT}\NormalTok{ source.name,}
+    \KeywordTok{CASE} \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{405} \KeywordTok{THEN} \StringTok{'Condition'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{605} \KeywordTok{THEN} \StringTok{'Procedure'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{705} \KeywordTok{THEN} \StringTok{'Drug'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{805} \KeywordTok{THEN} \StringTok{'Observation'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{1805} \KeywordTok{THEN} \StringTok{'Measurement'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{2105} \KeywordTok{THEN} \StringTok{'Device'}
+    \KeywordTok{ELSE} \StringTok{'Other'} \KeywordTok{END} \KeywordTok{AS}\NormalTok{ domain_name,}
+\NormalTok{    concept_name, }\FunctionTok{sum}\NormalTok{(count_value) }\KeywordTok{AS}\NormalTok{ num_records}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.concept }\KeywordTok{AS}\NormalTok{ c1 }\KeywordTok{ON}\NormalTok{ stratum_2 = }\FunctionTok{CAST}\NormalTok{(concept_id }\KeywordTok{AS} 
+\NormalTok{    text)}
+\KeywordTok{WHERE}\NormalTok{ analysis_id }\KeywordTok{IN}\NormalTok{ (}\DecValTok{405}\NormalTok{, }\DecValTok{605}\NormalTok{, }\DecValTok{705}\NormalTok{, }\DecValTok{805}\NormalTok{, }\DecValTok{1805}\NormalTok{, }\DecValTok{2105}\NormalTok{)}
+\KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ source.name, concept_name, }
+    \KeywordTok{CASE} \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{405} \KeywordTok{THEN} \StringTok{'Condition'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{605} \KeywordTok{THEN} \StringTok{'Procedure'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{705} \KeywordTok{THEN} \StringTok{'Drug'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{805} \KeywordTok{THEN} \StringTok{'Observation'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{1805} \KeywordTok{THEN} \StringTok{'Measurement'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{2105} \KeywordTok{THEN} \StringTok{'Device'}
+    \KeywordTok{ELSE} \StringTok{'Other'} \KeywordTok{END}
+\end{Highlighting}
+\end{Shaded}
+
 \chapter{Data Domains}\label{data-domains}
+
+\section{Data Domains - Number of Records per
+Peson}\label{data-domains---number-of-records-per-peson}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+\subsection{SQL query}\label{sql-query-18}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- 201, 401, 501, 601, 701, 801, 1801, 2101, 2201   Data domains - }
+    \DataTypeTok{Number} \KeywordTok{of}\NormalTok{ records per peson}
+\KeywordTok{SELECT} 
+\NormalTok{    source.name,}
+    \KeywordTok{CASE} 
+      \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{201} \KeywordTok{THEN} \StringTok{'Visit'}
+      \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{401} \KeywordTok{THEN} \StringTok{'Condition'}
+      \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{501} \KeywordTok{THEN} \StringTok{'Death'}
+      \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{601} \KeywordTok{THEN} \StringTok{'Procedure'}
+      \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{701} \KeywordTok{THEN} \StringTok{'Drug Exposure'}
+      \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{801} \KeywordTok{THEN} \StringTok{'Observation'}
+      \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{1801} \KeywordTok{THEN} \StringTok{'Measurement'}
+      \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{2101} \KeywordTok{THEN} \StringTok{'Device'}
+      \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{2201} \KeywordTok{THEN} \StringTok{'Note'}
+    \KeywordTok{END} \KeywordTok{AS}\NormalTok{ Data_Domain,}
+    \FunctionTok{SUM}\NormalTok{(count_value) /AVG(num_persons) }\KeywordTok{AS} \OtherTok{"Records per person"}\NormalTok{,}
+\NormalTok{    source.slug}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ (}\KeywordTok{SELECT}\NormalTok{ data_source_id , count_value }\KeywordTok{AS}\NormalTok{ num_persons }\KeywordTok{FROM} 
+\NormalTok{    achilles_results }\KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{1}\NormalTok{) counts}
+\KeywordTok{ON}\NormalTok{ achilles.data_source_id = counts.data_source_id }
+\KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ analysis_id, source.name, source.slug}
+\KeywordTok{HAVING}\NormalTok{ analysis_id }\KeywordTok{IN}\NormalTok{ (}\DecValTok{201}\NormalTok{, }\DecValTok{401}\NormalTok{, }\DecValTok{501}\NormalTok{, }\DecValTok{601}\NormalTok{, }\DecValTok{701}\NormalTok{, }\DecValTok{801}\NormalTok{, }\DecValTok{1801}\NormalTok{, }\DecValTok{2101}\NormalTok{, }
+    \DecValTok{2201}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \bibliography{refs.bib}
 
