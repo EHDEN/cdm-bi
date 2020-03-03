@@ -236,7 +236,7 @@ The European Health Data and Evidence Network (EHDEN) project therefore
 designed a Data Network Dashboard tool, a web application to aggregate
 information from distributed OMOP CDM databases. It uses the ACHILLES
 results files to construct graphical dashboards and enables database
-comparison (Figure \ref{fig:cdmBI}.). The tool is built on Apache
+comparison (Figure \ref{fig:cdmBI}). The tool is built on Apache
 Superset, which is an open-source enterprise-ready business intelligence
 web application that can provide powerful and fully customizable
 graphical representations of data. Achilles results can be uploaded
@@ -418,12 +418,12 @@ psql achilles
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{create} \KeywordTok{index}\NormalTok{ achilles_results_analysis_id_index }\KeywordTok{on} 
+\KeywordTok{CREATE} \KeywordTok{INDEX}\NormalTok{ achilles_results_analysis_id_index }\KeywordTok{ON} 
 \NormalTok{    achilles_results (analysis_id);}
-\KeywordTok{create} \KeywordTok{index}\NormalTok{ achilles_results_source_index }\KeywordTok{on}\NormalTok{ achilles_results }
+\KeywordTok{CREATE} \KeywordTok{INDEX}\NormalTok{ achilles_results_source_index }\KeywordTok{ON}\NormalTok{ achilles_results }
 \NormalTok{    (data_source_id);}
-\KeywordTok{create} \KeywordTok{index}\NormalTok{ concept_concept_id_index }\KeywordTok{on}\NormalTok{ concept (concept_id);}
-\KeywordTok{create} \KeywordTok{index}\NormalTok{ concept_concept_name_index }\KeywordTok{on}\NormalTok{ concept }
+\KeywordTok{CREATE} \KeywordTok{INDEX}\NormalTok{ concept_concept_id_index }\KeywordTok{ON}\NormalTok{ concept (concept_id);}
+\KeywordTok{CREATE} \KeywordTok{INDEX}\NormalTok{ concept_concept_name_index }\KeywordTok{ON}\NormalTok{ concept }
 \NormalTok{    (concept_name);}
 \end{Highlighting}
 \end{Shaded}
@@ -443,16 +443,19 @@ Discuss the goal of this dashboard\ldots{} TO DO
 
 \section{Database Type Filter}\label{database-type-filter}
 
-Discuss what is important to see in this chart\ldots{} TO DO
-
-\subsection{SQL query}\label{sql-query}
+This filter which is a type of chart in Superset was designed to be used
+in the dashboard aiming the filtering of the data based on the field
+`'database\_type'`from the table'`data\_source'`. It is important to
+give the alias'`Type'' to this field in the select operations because
+Superset does not recognize as the same field otherwise. \#\#\# SQL
+query
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{--  Country and database type filters}
 \KeywordTok{SELECT}\NormalTok{ source.name, }
-\NormalTok{       country.country }\KeywordTok{as}\NormalTok{ Country, }
-\NormalTok{       database_type }\KeywordTok{as} \KeywordTok{Type}\NormalTok{,}
+\NormalTok{       country.country }\KeywordTok{AS}\NormalTok{ Country, }
+\NormalTok{       database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
 \NormalTok{       source.slug}
 \KeywordTok{FROM}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }
   \KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}\NormalTok{ source.country_id=country.id;}
@@ -461,20 +464,31 @@ Discuss what is important to see in this chart\ldots{} TO DO
 
 \subsection{Chart settings}\label{chart-settings}
 
-TO DO
+The main characteristics of this chart are presented in Figure
+\ref{fig:databaseTypeFilter}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  todo
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/databaseTypeFilter} \caption{Superset chart creation: Settings for creating the database type filter.}\label{fig:databaseTypeFilter}
+\end{figure}
 
 \section{Country Filter}\label{country-filter}
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query-1}
+\subsection{SQL query}\label{sql-query}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{--  Country and database type filters}
 \KeywordTok{SELECT}\NormalTok{ source.name, }
-\NormalTok{       country.country }\KeywordTok{as}\NormalTok{ Country, }
-\NormalTok{       database_type }\KeywordTok{as} \KeywordTok{Type}\NormalTok{,}
+\NormalTok{       country.country }\KeywordTok{AS}\NormalTok{ Country, }
+\NormalTok{       database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
 \NormalTok{       source.slug}
 \KeywordTok{FROM}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }
   \KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}\NormalTok{ source.country_id=country.id;}
@@ -489,7 +503,7 @@ TO DO
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query-2}
+\subsection{SQL query}\label{sql-query-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -497,11 +511,11 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \KeywordTok{SELECT}\NormalTok{  name,}
 \NormalTok{        slug,}
 \NormalTok{        release_date,}
-\NormalTok{        database_type,}
+\NormalTok{        database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
 \NormalTok{        latitude,}
 \NormalTok{        longitude,}
         \KeywordTok{link}\NormalTok{,}
-\NormalTok{        country,}
+\NormalTok{        country }\KeywordTok{AS}\NormalTok{ Country,}
 \NormalTok{        continent}
 \KeywordTok{FROM}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }
   \KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}\NormalTok{ source.country_id=country.id;}
@@ -517,14 +531,14 @@ TO DO
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query-3}
+\subsection{SQL query}\label{sql-query-2}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{-- 108    General - Network Growth (Summary)}
 \KeywordTok{SELECT}\NormalTok{ data.source,}
-\NormalTok{       data.country,}
-\NormalTok{       data.database_type,}
+\NormalTok{       data.country }\KeywordTok{AS}\NormalTok{ Country,}
+\NormalTok{       data.database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
        \CommentTok{--cast(stratum_1 as INTEGER )*30 AS Days,}
 \NormalTok{       data.release_date - }\FunctionTok{cast}\NormalTok{(stratum_1 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) * }\DataTypeTok{INTERVAL} 
         \StringTok{'1 month'} \KeywordTok{as} \DataTypeTok{Time}\NormalTok{,}
@@ -560,7 +574,7 @@ Date}\label{general---network-growth-by-date}
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query-4}
+\subsection{SQL query}\label{sql-query-3}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -600,7 +614,7 @@ Country}\label{general---patients-per-country}
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query-5}
+\subsection{SQL query}\label{sql-query-4}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -627,7 +641,7 @@ Country}\label{general---database-types-per-country}
 
 Discuss what is important to see in this chart\ldots{} TO DO
 
-\subsection{SQL query}\label{sql-query-6}
+\subsection{SQL query}\label{sql-query-5}
 
 \begin{Shaded}
 \begin{Highlighting}[]

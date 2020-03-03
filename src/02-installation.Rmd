@@ -109,12 +109,12 @@ The concepts table are not in the repository due to its dimension. Therefore, to
 8. Create index in table:
 
     ```sql
-    create index achilles_results_analysis_id_index on 
+    CREATE INDEX achilles_results_analysis_id_index ON 
         achilles_results (analysis_id);
-    create index achilles_results_source_index on achilles_results 
+    CREATE INDEX achilles_results_source_index ON achilles_results 
         (data_source_id);
-    create index concept_concept_id_index on concept (concept_id);
-    create index concept_concept_name_index on concept 
+    CREATE INDEX concept_concept_id_index ON concept (concept_id);
+    CREATE INDEX concept_concept_name_index ON concept 
         (concept_name);
     ```
     

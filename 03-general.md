@@ -11,15 +11,14 @@ Discuss the goal of this dashboard... TO DO
 
 ## Database Type Filter
 
-Discuss what is important to see in this chart... TO DO
-
+This filter which is a type of chart in Superset was designed to be used in the dashboard aiming the filtering of the data based on the field ''database_type'' from the table ''data_source''. It is important to give the alias ''Type'' to this field in the select operations because Superset does not recognize as the same field otherwise.
 ### SQL query
 
 ```sql
 --  Country and database type filters
 SELECT source.name, 
-       country.country as Country, 
-       database_type as Type,
+       country.country AS Country, 
+       database_type AS Type,
        source.slug
 FROM public.data_source AS source INNER JOIN public.country 
   AS country ON source.country_id=country.id;
@@ -27,7 +26,15 @@ FROM public.data_source AS source INNER JOIN public.country
 
 ### Chart settings
 
-TO DO
+The main characteristics of this chart are presented in Figure \@ref(fig:databaseTypeFilter), being the following:
+
+- todo
+
+
+<div class="figure">
+<img src="images/databaseTypeFilter.png" alt="Superset chart creation: Settings for creating the database type filter." width="100%" />
+<p class="caption">(\#fig:databaseTypeFilter)Superset chart creation: Settings for creating the database type filter.</p>
+</div>
 
 ## Country Filter
 
@@ -38,8 +45,8 @@ Discuss what is important to see in this chart... TO DO
 ```sql
 --  Country and database type filters
 SELECT source.name, 
-       country.country as Country, 
-       database_type as Type,
+       country.country AS Country, 
+       database_type AS Type,
        source.slug
 FROM public.data_source AS source INNER JOIN public.country 
   AS country ON source.country_id=country.id;
@@ -61,11 +68,11 @@ Discuss what is important to see in this chart... TO DO
 SELECT  name,
         slug,
         release_date,
-        database_type,
+        database_type AS Type,
         latitude,
         longitude,
         link,
-        country,
+        country AS Country,
         continent
 FROM public.data_source AS source INNER JOIN public.country 
   AS country ON source.country_id=country.id;
@@ -84,8 +91,8 @@ Discuss what is important to see in this chart... TO DO
 ```sql
 -- 108    General - Network Growth (Summary)
 SELECT data.source,
-       data.country,
-       data.database_type,
+       data.country AS Country,
+       data.database_type AS Type,
        --cast(stratum_1 as INTEGER )*30 AS Days,
        data.release_date - cast(stratum_1 AS INTEGER) * INTERVAL 
         '1 month' as Time,
