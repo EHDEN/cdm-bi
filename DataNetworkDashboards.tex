@@ -119,7 +119,7 @@
 
 \title{Data Network Dashboards}
 \author{This document is currently under construction}
-\date{2020-03-03}
+\date{2020-03-04}
 
 \begin{document}
 \maketitle
@@ -471,7 +471,49 @@ The main characteristics of this chart are presented in Figure
 \begin{itemize}
 \tightlist
 \item
-  todo
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
 \end{itemize}
 
 \begin{figure}
@@ -541,8 +583,8 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \NormalTok{       data.country }\KeywordTok{AS}\NormalTok{ Country,}
 \NormalTok{       data.database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
        \CommentTok{--cast(stratum_1 as INTEGER )*30 AS Days,}
-\NormalTok{       data.release_date - }\FunctionTok{cast}\NormalTok{(stratum_1 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) * }\DataTypeTok{INTERVAL} 
-        \StringTok{'1 month'} \KeywordTok{as} \DataTypeTok{Time}\NormalTok{,}
+\NormalTok{       data.release_date - }\FunctionTok{cast}\NormalTok{(stratum_1 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) * }
+       \DataTypeTok{INTERVAL} \StringTok{'1 month'} \KeywordTok{as} \DataTypeTok{Time}\NormalTok{,}
 \NormalTok{       count_value                   }\KeywordTok{AS} \FunctionTok{count}
 \KeywordTok{FROM}\NormalTok{ (}
      \KeywordTok{SELECT}\NormalTok{ source.name              }\KeywordTok{AS} \KeywordTok{source}\NormalTok{,}
@@ -625,10 +667,11 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \NormalTok{       source.database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
 \NormalTok{       count_value }\KeywordTok{AS}\NormalTok{ patient_count,}
 \NormalTok{       source.slug}
-\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id=source.id}
     \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} 
-\NormalTok{    source.country_id=country.id}
+\NormalTok{      source.country_id=country.id}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{1}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
@@ -652,10 +695,11 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \NormalTok{       database_type }\KeywordTok{AS} \KeywordTok{Type}\NormalTok{,}
 \NormalTok{       count_value }\KeywordTok{AS} \OtherTok{"Nr_patients"}\NormalTok{,}
 \NormalTok{       source.slug}
-\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id=source.id}
     \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} 
-\NormalTok{    source.country_id=country.id}
+\NormalTok{      source.country_id=country.id}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{1}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
@@ -666,8 +710,22 @@ TO DO
 
 \chapter{Person}\label{person}
 
-Discuss the goal of this dashboard\ldots{} TO DO Reuses the `'Database
-Type Filter'' CSS Template change
+Discuss the goal of this dashboard\ldots{} TO DO
+
+In this dashboard is present the `'Database Type Filter'', that was
+detailed in the Chapter General. Besides, it was necessary to customize
+the dashboard JSON Metadata in order to obtain the colours blue and rose
+in the chart representing the gender distribution. Therefore, the
+following entry should be added in the settings of this dashboard:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ErrorTok{"label_colors":} \FunctionTok{\{}
+    \DataTypeTok{"Male"}\FunctionTok{:} \StringTok{"#3366FF"}\FunctionTok{,} 
+    \DataTypeTok{"Female"}\FunctionTok{:} \StringTok{"#FF3399"}
+\FunctionTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
 \section{Person - Patients by age}\label{person---patients-by-age}
 
@@ -679,11 +737,12 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \begin{Highlighting}[]
 \CommentTok{-- 101  Person - Patients by age}
 \KeywordTok{SELECT}\NormalTok{ source.name,}
-    \FunctionTok{cast}\NormalTok{(stratum_1 }\KeywordTok{as} \DataTypeTok{int}\NormalTok{) }\KeywordTok{as}\NormalTok{ Age,}
-\NormalTok{    count_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
-\NormalTok{    source.slug}
+       \FunctionTok{cast}\NormalTok{(stratum_1 }\KeywordTok{as} \DataTypeTok{int}\NormalTok{) }\KeywordTok{as}\NormalTok{ Age,}
+\NormalTok{       count_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
+\NormalTok{       source.slug}
 \KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{    achilles.data_source_id=source.id}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{101}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
@@ -696,7 +755,49 @@ The main characteristics of this chart are presented in Figure
 \begin{itemize}
 \tightlist
 \item
-  todo
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}: MAX(count)
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}: age
+  \item
+    \textbf{Breakdowns}: name
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}: Count
+  \item
+    \textbf{X Axis Label}: Age
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}: Checked
+  \item
+    \textbf{Bar Values}: Not checked
+  \item
+    \textbf{Sort Bars}: Checked
+  \item
+    \textbf{Extra Controls}: Not checked
+  \item
+    \textbf{Reduce X ticks}: Checked
+  \end{itemize}
 \end{itemize}
 
 \begin{figure}
@@ -717,7 +818,8 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \NormalTok{       count_value }\KeywordTok{AS} \FunctionTok{count}\NormalTok{, }
 \NormalTok{       source.slug}
 \KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\NormalTok{      public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{    achilles.data_source_id=source.id}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{3}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
@@ -730,7 +832,49 @@ The main characteristics of this chart are presented in Figure
 \begin{itemize}
 \tightlist
 \item
-  todo
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}: SUM(count)
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}: Birth\_year
+  \item
+    \textbf{Breakdowns}: name
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}: Count
+  \item
+    \textbf{X Axis Label}: Age
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}: Checked
+  \item
+    \textbf{Bar Values}: Not checked
+  \item
+    \textbf{Sort Bars}: Checked
+  \item
+    \textbf{Extra Controls}: Not checked
+  \item
+    \textbf{Reduce X ticks}: Checked
+  \end{itemize}
 \end{itemize}
 
 \begin{figure}
@@ -752,11 +896,12 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \NormalTok{       count_value }\KeywordTok{AS}\NormalTok{ Number_of_persons,}
 \NormalTok{       source.slug}
 \KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\NormalTok{      public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{    achilles.data_source_id = source.id}
     \KeywordTok{JOIN}\NormalTok{ (}
         \KeywordTok{SELECT} \StringTok{'8507'} \KeywordTok{AS}\NormalTok{ concept_id, }\StringTok{'Male'} \KeywordTok{AS}\NormalTok{ concept_name }\KeywordTok{UNION} 
         \KeywordTok{SELECT} \StringTok{'8532'} \KeywordTok{AS}\NormalTok{ concept_id, }\StringTok{'Female'} \KeywordTok{AS}\NormalTok{ concept_name) }\KeywordTok{AS} 
-\NormalTok{        concepts }\KeywordTok{ON}\NormalTok{ achilles.stratum_1 = concept_id}
+\NormalTok{        concepts }\KeywordTok{ON}\NormalTok{ achilles.stratum_1=concept_id}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{2}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
@@ -769,7 +914,49 @@ The main characteristics of this chart are presented in Figure
 \begin{itemize}
 \tightlist
 \item
-  todo
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}: Max(number\_of\_persons)
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}: name
+  \item
+    \textbf{Breakdowns}: gender
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}: Empty
+  \item
+    \textbf{X Axis Label}: Databases
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}: Checked
+  \item
+    \textbf{Bar Values}: Not checked
+  \item
+    \textbf{Sort Bars}: Checked
+  \item
+    \textbf{Extra Controls}: Checked
+  \item
+    \textbf{Reduce X ticks}: Checked
+  \end{itemize}
 \end{itemize}
 
 \begin{figure}
@@ -791,14 +978,15 @@ Discuss what is important to see in this chart\ldots{} TO DO
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{-- 110    Population characteristics - Patients in Observation }
-\NormalTok{    Period per }\DataTypeTok{month}\NormalTok{ (whole }\DataTypeTok{month}\NormalTok{)}
+\CommentTok{-- 110    Population characteristics - }
+\CommentTok{-- Patients in Observation Period per month (whole month)}
 \KeywordTok{SELECT}\NormalTok{ source.name, }
        \FunctionTok{to_date}\NormalTok{(stratum_1, }\StringTok{'YYYYMM'}\NormalTok{) }\KeywordTok{as} \DataTypeTok{Date}\NormalTok{,}
 \NormalTok{       count_value }\KeywordTok{as} \OtherTok{"Nr_patients"}\NormalTok{,}
 \NormalTok{       source.slug}
-\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id=source.id}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{110}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
@@ -812,7 +1000,49 @@ being the following:
 \begin{itemize}
 \tightlist
 \item
-  todo
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
 \end{itemize}
 
 \begin{figure}
@@ -828,13 +1058,15 @@ Discuss what is important to see in this chart\ldots{} TO DO
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{-- 112  Population characteristics - Observation Period End Dates}
+\CommentTok{-- 112  Population characteristics - }
+\CommentTok{--      Observation Period End Dates}
 \KeywordTok{SELECT}\NormalTok{ source.name,}
        \FunctionTok{to_date}\NormalTok{(stratum_1, }\StringTok{'YYYYMM'}\NormalTok{) }\KeywordTok{as}\NormalTok{ year_month,}
 \NormalTok{       count_value }\KeywordTok{as}\NormalTok{ patient_count}
-\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
-\KeywordTok{where}\NormalTok{ analysis_id = }\DecValTok{112}\NormalTok{;}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id=source.id}
+\KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{112}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
 
@@ -847,7 +1079,49 @@ following:
 \begin{itemize}
 \tightlist
 \item
-  todo
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
 \end{itemize}
 
 \begin{figure}
@@ -863,13 +1137,15 @@ Discuss what is important to see in this chart\ldots{} TO DO
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{-- 111  Population characteristics - Observation Period Start Dates}
+\CommentTok{-- 111  Population characteristics - }
+\CommentTok{--      Observation Period Start Dates}
 \KeywordTok{SELECT}\NormalTok{ source.name,}
        \FunctionTok{to_date}\NormalTok{(stratum_1, }\StringTok{'YYYYMM'}\NormalTok{) }\KeywordTok{as}\NormalTok{ year_month,}
 \NormalTok{       count_value }\KeywordTok{as}\NormalTok{ patient_count}
-\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
-\KeywordTok{where}\NormalTok{ analysis_id = }\DecValTok{111}\NormalTok{;}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id=source.id}
+\KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{111}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
 
@@ -882,7 +1158,49 @@ the following:
 \begin{itemize}
 \tightlist
 \item
-  todo
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
 \end{itemize}
 
 \begin{figure}
@@ -904,12 +1222,71 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \NormalTok{       concept_name }\KeywordTok{AS} \OtherTok{"Observation"}\NormalTok{, }
 \NormalTok{       count_value }\KeywordTok{AS} \OtherTok{"Nr_Observations"}\NormalTok{,}
 \NormalTok{       source.slug}
-\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
-\KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.concept }\KeywordTok{ON}\NormalTok{ stratum_1 = }\FunctionTok{CAST}\NormalTok{(concept_id }\KeywordTok{AS}\NormalTok{ text)}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id=source.id}
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.concept }\KeywordTok{ON} 
+\NormalTok{      stratum_1 = }\FunctionTok{CAST}\NormalTok{(concept_id }\KeywordTok{AS}\NormalTok{ text)}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{201}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
+
+\subsection{Chart settings}\label{chart-settings-13}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes}
+\end{figure}
 
 \chapter{Death}\label{death}
 
@@ -924,14 +1301,72 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \begin{Highlighting}[]
 \CommentTok{-- 502  Death - By Month per Thousand People}
 \KeywordTok{SELECT}\NormalTok{ source.name,}
-    \FunctionTok{to_date}\NormalTok{(stratum_1, }\StringTok{'YYYYMM'}\NormalTok{) }\KeywordTok{as} \DataTypeTok{Date}\NormalTok{,}
-\NormalTok{    count_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
-\NormalTok{    source.slug}
-\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+       \FunctionTok{to_date}\NormalTok{(stratum_1, }\StringTok{'YYYYMM'}\NormalTok{) }\KeywordTok{as} \DataTypeTok{Date}\NormalTok{,}
+\NormalTok{       count_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
+\NormalTok{       source.slug}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id=source.id}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{502}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
+
+\subsection{Chart settings}\label{chart-settings-14}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes1}
+\end{figure}
 
 \section{Death - Number of Records}\label{death---number-of-records}
 
@@ -943,13 +1378,71 @@ Discuss what is important to see in this chart\ldots{} TO DO
 \begin{Highlighting}[]
 \CommentTok{-- 501  Death - Number of Records}
 \KeywordTok{SELECT}\NormalTok{ source.name,}
-\NormalTok{    count_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
-\NormalTok{    source.slug}
-\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
+\NormalTok{       count_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
+\NormalTok{       source.slug}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id=source.id}
 \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{501}\NormalTok{;}
 \end{Highlighting}
 \end{Shaded}
+
+\subsection{Chart settings}\label{chart-settings-15}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes2}
+\end{figure}
 
 \chapter{Concepts}\label{concepts}
 
@@ -1021,15 +1514,345 @@ query
 
 \subsubsection{Concept Browser Table}\label{concept-browser-table}
 
+The main characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes3}
+\end{figure}
+
 \subsubsection{\# of Occurrences}\label{of-occurrences}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes4}
+\end{figure}
 
 \subsubsection{\# of Patients}\label{of-patients}
 
+The main characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes5}
+\end{figure}
+
 \subsubsection{Entity Type Filter}\label{entity-type-filter}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes6}
+\end{figure}
 
 \subsubsection{Concept Filter}\label{concept-filter}
 
+The main characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes7}
+\end{figure}
+
 \subsubsection{Number of Concepts}\label{number-of-concepts}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes8}
+\end{figure}
 
 \section{Concepts Domains Tab}\label{concepts-domains-tab}
 
@@ -1049,10 +1872,11 @@ Discuss what is important to see in this chart\ldots{} TO DO
     \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{2105} \KeywordTok{THEN} \StringTok{'Device'}
     \KeywordTok{ELSE} \StringTok{'Other'} \KeywordTok{END} \KeywordTok{AS}\NormalTok{ domain_name,}
 \NormalTok{    concept_name, }\FunctionTok{sum}\NormalTok{(count_value) }\KeywordTok{AS}\NormalTok{ num_records}
-\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
-\KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.concept }\KeywordTok{AS}\NormalTok{ c1 }\KeywordTok{ON}\NormalTok{ stratum_2 = }\FunctionTok{CAST}\NormalTok{(concept_id }\KeywordTok{AS} 
-\NormalTok{    text)}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id=source.id}
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.concept }\KeywordTok{AS}\NormalTok{ c1 }\KeywordTok{ON} 
+\NormalTok{      stratum_2 = }\FunctionTok{CAST}\NormalTok{(concept_id }\KeywordTok{AS}\NormalTok{ text)}
 \KeywordTok{WHERE}\NormalTok{ analysis_id }\KeywordTok{IN}\NormalTok{ (}\DecValTok{405}\NormalTok{, }\DecValTok{605}\NormalTok{, }\DecValTok{705}\NormalTok{, }\DecValTok{805}\NormalTok{, }\DecValTok{1805}\NormalTok{, }\DecValTok{2105}\NormalTok{)}
 \KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ source.name, concept_name, }
     \KeywordTok{CASE} \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{405} \KeywordTok{THEN} \StringTok{'Condition'}
@@ -1076,8 +1900,8 @@ Discuss what is important to see in this chart\ldots{} TO DO
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{-- 201, 401, 501, 601, 701, 801, 1801, 2101, 2201   Data domains - }
-    \DataTypeTok{Number} \KeywordTok{of}\NormalTok{ records per peson}
+\CommentTok{-- 201, 401, 501, 601, 701, 801, 1801, 2101, 2201   }
+\CommentTok{-- Data domains - Number of records per peson}
 \KeywordTok{SELECT} 
 \NormalTok{    source.name,}
     \KeywordTok{CASE} 
@@ -1093,16 +1917,77 @@ Discuss what is important to see in this chart\ldots{} TO DO
     \KeywordTok{END} \KeywordTok{AS}\NormalTok{ Data_Domain,}
     \FunctionTok{SUM}\NormalTok{(count_value) /AVG(num_persons) }\KeywordTok{AS} \OtherTok{"Records per person"}\NormalTok{,}
 \NormalTok{    source.slug}
-\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-\NormalTok{    public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data_source_id=source.id}
-\KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ (}\KeywordTok{SELECT}\NormalTok{ data_source_id , count_value }\KeywordTok{AS}\NormalTok{ num_persons }\KeywordTok{FROM} 
-\NormalTok{    achilles_results }\KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{1}\NormalTok{) counts}
-\KeywordTok{ON}\NormalTok{ achilles.data_source_id = counts.data_source_id }
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id=source.id}
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ (}
+        \KeywordTok{SELECT}\NormalTok{ data_source_id , count_value }\KeywordTok{AS}\NormalTok{ num_persons }
+        \KeywordTok{FROM}\NormalTok{ achilles_results }
+        \KeywordTok{WHERE}\NormalTok{ analysis_id = }\DecValTok{1}
+\NormalTok{        ) counts }\KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id = counts.data_source_id }
 \KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ analysis_id, source.name, source.slug}
 \KeywordTok{HAVING}\NormalTok{ analysis_id }\KeywordTok{IN}\NormalTok{ (}\DecValTok{201}\NormalTok{, }\DecValTok{401}\NormalTok{, }\DecValTok{501}\NormalTok{, }\DecValTok{601}\NormalTok{, }\DecValTok{701}\NormalTok{, }\DecValTok{801}\NormalTok{, }\DecValTok{1801}\NormalTok{, }\DecValTok{2101}\NormalTok{, }
     \DecValTok{2201}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\subsection{Chart settings}\label{chart-settings-16}
+
+The main characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes21}
+\end{figure}
 
 \bibliography{refs.bib}
 

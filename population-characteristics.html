@@ -24,7 +24,7 @@
 <meta name="author" content="This document is currently under construction" />
 
 
-<meta name="date" content="2020-03-03" />
+<meta name="date" content="2020-03-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -181,14 +181,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6" data-path="visit.html"><a href="visit.html"><i class="fa fa-check"></i><b>6</b> Visit</a><ul>
 <li class="chapter" data-level="6.1" data-path="visit.html"><a href="visit.html#visit---types"><i class="fa fa-check"></i><b>6.1</b> Visit - Types</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="visit.html"><a href="visit.html#sql-query-13"><i class="fa fa-check"></i><b>6.1.1</b> SQL query</a></li>
+<li class="chapter" data-level="6.1.2" data-path="visit.html"><a href="visit.html#chart-settings-13"><i class="fa fa-check"></i><b>6.1.2</b> Chart settings</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="death.html"><a href="death.html"><i class="fa fa-check"></i><b>7</b> Death</a><ul>
 <li class="chapter" data-level="7.1" data-path="death.html"><a href="death.html#death---by-month-per-thousand-people"><i class="fa fa-check"></i><b>7.1</b> Death - By Month per Thousand People</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="death.html"><a href="death.html#sql-query-14"><i class="fa fa-check"></i><b>7.1.1</b> SQL query</a></li>
+<li class="chapter" data-level="7.1.2" data-path="death.html"><a href="death.html#chart-settings-14"><i class="fa fa-check"></i><b>7.1.2</b> Chart settings</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="death.html"><a href="death.html#death---number-of-records"><i class="fa fa-check"></i><b>7.2</b> Death - Number of Records</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="death.html"><a href="death.html#sql-query-15"><i class="fa fa-check"></i><b>7.2.1</b> SQL query</a></li>
+<li class="chapter" data-level="7.2.2" data-path="death.html"><a href="death.html#chart-settings-15"><i class="fa fa-check"></i><b>7.2.2</b> Chart settings</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="concepts.html"><a href="concepts.html"><i class="fa fa-check"></i><b>8</b> Concepts</a><ul>
@@ -203,6 +206,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9" data-path="data-domains.html"><a href="data-domains.html"><i class="fa fa-check"></i><b>9</b> Data Domains</a><ul>
 <li class="chapter" data-level="9.1" data-path="data-domains.html"><a href="data-domains.html#data-domains---number-of-records-per-peson"><i class="fa fa-check"></i><b>9.1</b> Data Domains - Number of Records per Peson</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="data-domains.html"><a href="data-domains.html#sql-query-18"><i class="fa fa-check"></i><b>9.1.1</b> SQL query</a></li>
+<li class="chapter" data-level="9.1.2" data-path="data-domains.html"><a href="data-domains.html#chart-settings-16"><i class="fa fa-check"></i><b>9.1.2</b> Chart settings</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -230,21 +234,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Discuss what is important to see in this chart… TO DO</p>
 <div id="sql-query-10" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> SQL query</h3>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- 110    Population characteristics - Patients in Observation </span>
-    Period per <span class="dt">month</span> (whole <span class="dt">month</span>)
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- 110    Population characteristics - </span>
+<span class="co">-- Patients in Observation Period per month (whole month)</span>
 <span class="kw">SELECT</span> source.name, 
        <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">as</span> <span class="dt">Date</span>,
        count_value <span class="kw">as</span> <span class="ot">&quot;Nr_patients&quot;</span>,
        source.slug
-<span class="kw">FROM</span> public.achilles_results <span class="kw">AS</span> achilles <span class="kw">INNER</span> <span class="kw">JOIN</span> 
-    public.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id=source.id
+<span class="kw">FROM</span> public.achilles_results <span class="kw">AS</span> achilles 
+    <span class="kw">INNER</span> <span class="kw">JOIN</span> public.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> 
+      achilles.data_source_id=source.id
 <span class="kw">WHERE</span> analysis_id = <span class="dv">110</span>;</code></pre></div>
 </div>
 <div id="chart-settings-10" class="section level3">
 <h3><span class="header-section-number">5.1.2</span> Chart settings</h3>
 <p>The main characteristics of this chart are presented in Figure <a href="population-characteristics.html#fig:populationCharacteristicsPatientsInObservationPeriodPerMonth">5.1</a>, being the following:</p>
 <ul>
-<li>todo</li>
+<li><strong>Data Tab</strong>:
+<ul>
+<li><strong>Visualization Type</strong>: Bar Chart</li>
+<li><strong>Time range</strong>: No filter</li>
+<li><strong>Metrics</strong>:</li>
+<li><strong>Filters</strong>: Empty</li>
+<li><strong>Series</strong>:</li>
+<li><strong>Breakdowns</strong>:</li>
+<li><strong>Row limit</strong>: Empty</li>
+<li><strong>Contribution</strong>: Not checked</li>
+</ul></li>
+<li><strong>Costumize Tab</strong>:
+<ul>
+<li><strong>Y Axis Label</strong>:</li>
+<li><strong>X Axis Label</strong>:</li>
+<li><strong>Legend</strong>: Checked</li>
+<li><strong>Stacked Bars</strong>:</li>
+<li><strong>Bar Values</strong>:</li>
+<li><strong>Sort Bars</strong>:</li>
+<li><strong>Extra Controls</strong>:</li>
+<li><strong>Reduce X ticks</strong>:</li>
+</ul></li>
 </ul>
 <div class="figure"><span id="fig:populationCharacteristicsPatientsInObservationPeriodPerMonth"></span>
 <img src="images/populationCharacteristicsPatientsInObservationPeriodPerMonth.png" alt="Settings for creating chart representing patient in observation per month (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
@@ -259,19 +285,42 @@ Figure 5.1: Settings for creating chart representing patient in observation per 
 <p>Discuss what is important to see in this chart… TO DO</p>
 <div id="sql-query-11" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> SQL query</h3>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- 112  Population characteristics - Observation Period End Dates</span>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- 112  Population characteristics - </span>
+<span class="co">--      Observation Period End Dates</span>
 <span class="kw">SELECT</span> source.name,
        <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">as</span> year_month,
        count_value <span class="kw">as</span> patient_count
-<span class="kw">FROM</span> public.achilles_results <span class="kw">AS</span> achilles <span class="kw">INNER</span> <span class="kw">JOIN</span> 
-    public.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id=source.id
-<span class="kw">where</span> analysis_id = <span class="dv">112</span>;</code></pre></div>
+<span class="kw">FROM</span> public.achilles_results <span class="kw">AS</span> achilles 
+    <span class="kw">INNER</span> <span class="kw">JOIN</span> public.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> 
+      achilles.data_source_id=source.id
+<span class="kw">WHERE</span> analysis_id = <span class="dv">112</span>;</code></pre></div>
 </div>
 <div id="chart-settings-11" class="section level3">
 <h3><span class="header-section-number">5.2.2</span> Chart settings</h3>
 <p>The main characteristics of this chart are presented in Figure <a href="population-characteristics.html#fig:populationCharacteristicsObservationPeriodEndDates">5.2</a>, being the following:</p>
 <ul>
-<li>todo</li>
+<li><strong>Data Tab</strong>:
+<ul>
+<li><strong>Visualization Type</strong>: Bar Chart</li>
+<li><strong>Time range</strong>: No filter</li>
+<li><strong>Metrics</strong>:</li>
+<li><strong>Filters</strong>: Empty</li>
+<li><strong>Series</strong>:</li>
+<li><strong>Breakdowns</strong>:</li>
+<li><strong>Row limit</strong>: Empty</li>
+<li><strong>Contribution</strong>: Not checked</li>
+</ul></li>
+<li><strong>Costumize Tab</strong>:
+<ul>
+<li><strong>Y Axis Label</strong>:</li>
+<li><strong>X Axis Label</strong>:</li>
+<li><strong>Legend</strong>: Checked</li>
+<li><strong>Stacked Bars</strong>:</li>
+<li><strong>Bar Values</strong>:</li>
+<li><strong>Sort Bars</strong>:</li>
+<li><strong>Extra Controls</strong>:</li>
+<li><strong>Reduce X ticks</strong>:</li>
+</ul></li>
 </ul>
 <div class="figure"><span id="fig:populationCharacteristicsObservationPeriodEndDates"></span>
 <img src="images/populationCharacteristicsObservationPeriodEndDates.png" alt="Settings for creating chart representing the number of patients at the end of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
@@ -286,19 +335,42 @@ Figure 5.2: Settings for creating chart representing the number of patients at t
 <p>Discuss what is important to see in this chart… TO DO</p>
 <div id="sql-query-12" class="section level3">
 <h3><span class="header-section-number">5.3.1</span> SQL query</h3>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- 111  Population characteristics - Observation Period Start Dates</span>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- 111  Population characteristics - </span>
+<span class="co">--      Observation Period Start Dates</span>
 <span class="kw">SELECT</span> source.name,
        <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">as</span> year_month,
        count_value <span class="kw">as</span> patient_count
-<span class="kw">FROM</span> public.achilles_results <span class="kw">AS</span> achilles <span class="kw">INNER</span> <span class="kw">JOIN</span> 
-    public.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id=source.id
-<span class="kw">where</span> analysis_id = <span class="dv">111</span>;</code></pre></div>
+<span class="kw">FROM</span> public.achilles_results <span class="kw">AS</span> achilles 
+    <span class="kw">INNER</span> <span class="kw">JOIN</span> public.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> 
+      achilles.data_source_id=source.id
+<span class="kw">WHERE</span> analysis_id = <span class="dv">111</span>;</code></pre></div>
 </div>
 <div id="chart-settings-12" class="section level3">
 <h3><span class="header-section-number">5.3.2</span> Chart settings</h3>
 <p>The main characteristics of this chart are presented in Figure <a href="population-characteristics.html#fig:populationCharacteristicsObservationPeriodStartDates">5.3</a>, being the following:</p>
 <ul>
-<li>todo</li>
+<li><strong>Data Tab</strong>:
+<ul>
+<li><strong>Visualization Type</strong>: Bar Chart</li>
+<li><strong>Time range</strong>: No filter</li>
+<li><strong>Metrics</strong>:</li>
+<li><strong>Filters</strong>: Empty</li>
+<li><strong>Series</strong>:</li>
+<li><strong>Breakdowns</strong>:</li>
+<li><strong>Row limit</strong>: Empty</li>
+<li><strong>Contribution</strong>: Not checked</li>
+</ul></li>
+<li><strong>Costumize Tab</strong>:
+<ul>
+<li><strong>Y Axis Label</strong>:</li>
+<li><strong>X Axis Label</strong>:</li>
+<li><strong>Legend</strong>: Checked</li>
+<li><strong>Stacked Bars</strong>:</li>
+<li><strong>Bar Values</strong>:</li>
+<li><strong>Sort Bars</strong>:</li>
+<li><strong>Extra Controls</strong>:</li>
+<li><strong>Reduce X ticks</strong>:</li>
+</ul></li>
 </ul>
 <div class="figure"><span id="fig:populationCharacteristicsObservationPeriodStartDates"></span>
 <img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />

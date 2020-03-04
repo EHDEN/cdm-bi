@@ -76,15 +76,171 @@ Here are all the charts presented in this dashboard using the previous query
 
 #### Concept Browser Table
 
+The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
+
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes3)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
+
 #### \# of Occurrences
+
+The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
+
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes4)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
 
 #### \# of Patients
 
+The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
+
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes5)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
+
 #### Entity Type Filter
+
+The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
+
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes6)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
 
 #### Concept Filter
 
+The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
+
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes7)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
+
 #### Number of Concepts
+
+The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
+
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes8)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
 
 
 ## Concepts Domains Tab
@@ -104,10 +260,11 @@ SELECT source.name,
     WHEN analysis_id = 2105 THEN 'Device'
     ELSE 'Other' END AS domain_name,
     concept_name, sum(count_value) AS num_records
-FROM public.achilles_results AS achilles INNER JOIN 
-    public.data_source AS source ON achilles.data_source_id=source.id
-INNER JOIN public.concept AS c1 ON stratum_2 = CAST(concept_id AS 
-    text)
+FROM public.achilles_results AS achilles 
+    INNER JOIN public.data_source AS source ON 
+      achilles.data_source_id=source.id
+    INNER JOIN public.concept AS c1 ON 
+      stratum_2 = CAST(concept_id AS text)
 WHERE analysis_id IN (405, 605, 705, 805, 1805, 2105)
 GROUP BY source.name, concept_name, 
     CASE WHEN analysis_id = 405 THEN 'Condition'

@@ -14,8 +14,8 @@ Discuss what is important to see in this chart... TO DO
 ### SQL query
 
 ```sql
--- 201, 401, 501, 601, 701, 801, 1801, 2101, 2201   Data domains - 
-    Number of records per peson
+-- 201, 401, 501, 601, 701, 801, 1801, 2101, 2201   
+-- Data domains - Number of records per peson
 SELECT 
     source.name,
     CASE 
@@ -31,12 +31,44 @@ SELECT
     END AS Data_Domain,
     SUM(count_value) /AVG(num_persons) AS "Records per person",
     source.slug
-FROM public.achilles_results AS achilles INNER JOIN 
-    public.data_source AS source ON achilles.data_source_id=source.id
-INNER JOIN (SELECT data_source_id , count_value AS num_persons FROM 
-    achilles_results WHERE analysis_id = 1) counts
-ON achilles.data_source_id = counts.data_source_id 
+FROM public.achilles_results AS achilles 
+    INNER JOIN public.data_source AS source ON 
+      achilles.data_source_id=source.id
+    INNER JOIN (
+        SELECT data_source_id , count_value AS num_persons 
+        FROM achilles_results 
+        WHERE analysis_id = 1
+        ) counts ON 
+      achilles.data_source_id = counts.data_source_id 
 GROUP BY analysis_id, source.name, source.slug
 HAVING analysis_id IN (201, 401, 501, 601, 701, 801, 1801, 2101, 
     2201)
 ```
+
+### Chart settings
+
+The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
+
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes21)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>

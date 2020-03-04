@@ -24,7 +24,7 @@
 <meta name="author" content="This document is currently under construction" />
 
 
-<meta name="date" content="2020-03-03" />
+<meta name="date" content="2020-03-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -181,14 +181,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6" data-path="visit.html"><a href="visit.html"><i class="fa fa-check"></i><b>6</b> Visit</a><ul>
 <li class="chapter" data-level="6.1" data-path="visit.html"><a href="visit.html#visit---types"><i class="fa fa-check"></i><b>6.1</b> Visit - Types</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="visit.html"><a href="visit.html#sql-query-13"><i class="fa fa-check"></i><b>6.1.1</b> SQL query</a></li>
+<li class="chapter" data-level="6.1.2" data-path="visit.html"><a href="visit.html#chart-settings-13"><i class="fa fa-check"></i><b>6.1.2</b> Chart settings</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="death.html"><a href="death.html"><i class="fa fa-check"></i><b>7</b> Death</a><ul>
 <li class="chapter" data-level="7.1" data-path="death.html"><a href="death.html#death---by-month-per-thousand-people"><i class="fa fa-check"></i><b>7.1</b> Death - By Month per Thousand People</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="death.html"><a href="death.html#sql-query-14"><i class="fa fa-check"></i><b>7.1.1</b> SQL query</a></li>
+<li class="chapter" data-level="7.1.2" data-path="death.html"><a href="death.html#chart-settings-14"><i class="fa fa-check"></i><b>7.1.2</b> Chart settings</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="death.html"><a href="death.html#death---number-of-records"><i class="fa fa-check"></i><b>7.2</b> Death - Number of Records</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="death.html"><a href="death.html#sql-query-15"><i class="fa fa-check"></i><b>7.2.1</b> SQL query</a></li>
+<li class="chapter" data-level="7.2.2" data-path="death.html"><a href="death.html#chart-settings-15"><i class="fa fa-check"></i><b>7.2.2</b> Chart settings</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="concepts.html"><a href="concepts.html"><i class="fa fa-check"></i><b>8</b> Concepts</a><ul>
@@ -203,6 +206,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9" data-path="data-domains.html"><a href="data-domains.html"><i class="fa fa-check"></i><b>9</b> Data Domains</a><ul>
 <li class="chapter" data-level="9.1" data-path="data-domains.html"><a href="data-domains.html#data-domains---number-of-records-per-peson"><i class="fa fa-check"></i><b>9.1</b> Data Domains - Number of Records per Peson</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="data-domains.html"><a href="data-domains.html#sql-query-18"><i class="fa fa-check"></i><b>9.1.1</b> SQL query</a></li>
+<li class="chapter" data-level="9.1.2" data-path="data-domains.html"><a href="data-domains.html#chart-settings-16"><i class="fa fa-check"></i><b>9.1.2</b> Chart settings</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -229,8 +233,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Discuss what is important to see in this chart… TO DO</p>
 <div id="sql-query-18" class="section level3">
 <h3><span class="header-section-number">9.1.1</span> SQL query</h3>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- 201, 401, 501, 601, 701, 801, 1801, 2101, 2201   Data domains - </span>
-    <span class="dt">Number</span> <span class="kw">of</span> records per peson
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- 201, 401, 501, 601, 701, 801, 1801, 2101, 2201   </span>
+<span class="co">-- Data domains - Number of records per peson</span>
 <span class="kw">SELECT</span> 
     source.name,
     <span class="kw">CASE</span> 
@@ -246,14 +250,52 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="kw">END</span> <span class="kw">AS</span> Data_Domain,
     <span class="fu">SUM</span>(count_value) /AVG(num_persons) <span class="kw">AS</span> <span class="ot">&quot;Records per person&quot;</span>,
     source.slug
-<span class="kw">FROM</span> public.achilles_results <span class="kw">AS</span> achilles <span class="kw">INNER</span> <span class="kw">JOIN</span> 
-    public.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id=source.id
-<span class="kw">INNER</span> <span class="kw">JOIN</span> (<span class="kw">SELECT</span> data_source_id , count_value <span class="kw">AS</span> num_persons <span class="kw">FROM</span> 
-    achilles_results <span class="kw">WHERE</span> analysis_id = <span class="dv">1</span>) counts
-<span class="kw">ON</span> achilles.data_source_id = counts.data_source_id 
+<span class="kw">FROM</span> public.achilles_results <span class="kw">AS</span> achilles 
+    <span class="kw">INNER</span> <span class="kw">JOIN</span> public.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> 
+      achilles.data_source_id=source.id
+    <span class="kw">INNER</span> <span class="kw">JOIN</span> (
+        <span class="kw">SELECT</span> data_source_id , count_value <span class="kw">AS</span> num_persons 
+        <span class="kw">FROM</span> achilles_results 
+        <span class="kw">WHERE</span> analysis_id = <span class="dv">1</span>
+        ) counts <span class="kw">ON</span> 
+      achilles.data_source_id = counts.data_source_id 
 <span class="kw">GROUP</span> <span class="kw">BY</span> analysis_id, source.name, source.slug
 <span class="kw">HAVING</span> analysis_id <span class="kw">IN</span> (<span class="dv">201</span>, <span class="dv">401</span>, <span class="dv">501</span>, <span class="dv">601</span>, <span class="dv">701</span>, <span class="dv">801</span>, <span class="dv">1801</span>, <span class="dv">2101</span>, 
     <span class="dv">2201</span>)</code></pre></div>
+</div>
+<div id="chart-settings-16" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> Chart settings</h3>
+<p>The main characteristics of this chart are presented in Figure <a href="visit.html#fig:visitTypes">6.1</a>, being the following:</p>
+<ul>
+<li><strong>Data Tab</strong>:
+<ul>
+<li><strong>Visualization Type</strong>: Bar Chart</li>
+<li><strong>Time range</strong>: No filter</li>
+<li><strong>Metrics</strong>:</li>
+<li><strong>Filters</strong>: Empty</li>
+<li><strong>Series</strong>:</li>
+<li><strong>Breakdowns</strong>:</li>
+<li><strong>Row limit</strong>: Empty</li>
+<li><strong>Contribution</strong>: Not checked</li>
+</ul></li>
+<li><strong>Costumize Tab</strong>:
+<ul>
+<li><strong>Y Axis Label</strong>:</li>
+<li><strong>X Axis Label</strong>:</li>
+<li><strong>Legend</strong>: Checked</li>
+<li><strong>Stacked Bars</strong>:</li>
+<li><strong>Bar Values</strong>:</li>
+<li><strong>Sort Bars</strong>:</li>
+<li><strong>Extra Controls</strong>:</li>
+<li><strong>Reduce X ticks</strong>:</li>
+</ul></li>
+</ul>
+<div class="figure"><span id="fig:visitTypes21"></span>
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">
+Figure 9.1: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
+</p>
+</div>
 
 </div>
 </div>

@@ -18,14 +18,15 @@ Discuss what is important to see in this chart... TO DO
 ### SQL query
 
 ```sql
--- 110    Population characteristics - Patients in Observation 
-	Period per month (whole month)
+-- 110    Population characteristics - 
+-- Patients in Observation Period per month (whole month)
 SELECT source.name, 
        to_date(stratum_1, 'YYYYMM') as Date,
        count_value as "Nr_patients",
        source.slug
-FROM public.achilles_results AS achilles INNER JOIN 
-	public.data_source AS source ON achilles.data_source_id=source.id
+FROM public.achilles_results AS achilles 
+	INNER JOIN public.data_source AS source ON 
+	  achilles.data_source_id=source.id
 WHERE analysis_id = 110;
 ```
 
@@ -33,7 +34,24 @@ WHERE analysis_id = 110;
 
 The main characteristics of this chart are presented in Figure \@ref(fig:populationCharacteristicsPatientsInObservationPeriodPerMonth), being the following:
 
-- todo
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
 
 <div class="figure">
 <img src="images/populationCharacteristicsPatientsInObservationPeriodPerMonth.png" alt="Settings for creating chart representing patient in observation per month (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
@@ -47,20 +65,39 @@ Discuss what is important to see in this chart... TO DO
 ### SQL query
 
 ```sql
--- 112  Population characteristics - Observation Period End Dates
+-- 112  Population characteristics - 
+-- 		Observation Period End Dates
 SELECT source.name,
        to_date(stratum_1, 'YYYYMM') as year_month,
        count_value as patient_count
-FROM public.achilles_results AS achilles INNER JOIN 
-	public.data_source AS source ON achilles.data_source_id=source.id
-where analysis_id = 112;
+FROM public.achilles_results AS achilles 
+	INNER JOIN public.data_source AS source ON 
+	  achilles.data_source_id=source.id
+WHERE analysis_id = 112;
 ```
 
 ### Chart settings
 
 The main characteristics of this chart are presented in Figure \@ref(fig:populationCharacteristicsObservationPeriodEndDates), being the following:
 
-- todo
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
 
 <div class="figure">
 <img src="images/populationCharacteristicsObservationPeriodEndDates.png" alt="Settings for creating chart representing the number of patients at the end of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
@@ -74,20 +111,39 @@ Discuss what is important to see in this chart... TO DO
 ### SQL query
 
 ```sql
--- 111  Population characteristics - Observation Period Start Dates
+-- 111  Population characteristics - 
+-- 		Observation Period Start Dates
 SELECT source.name,
        to_date(stratum_1, 'YYYYMM') as year_month,
        count_value as patient_count
-FROM public.achilles_results AS achilles INNER JOIN 
-	public.data_source AS source ON achilles.data_source_id=source.id
-where analysis_id = 111;
+FROM public.achilles_results AS achilles 
+	INNER JOIN public.data_source AS source ON 
+	  achilles.data_source_id=source.id
+WHERE analysis_id = 111;
 ```
 
 ### Chart settings
 
 The main characteristics of this chart are presented in Figure \@ref(fig:populationCharacteristicsObservationPeriodStartDates), being the following:
 
-- todo
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
 
 <div class="figure">
 <img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />

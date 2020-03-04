@@ -30,7 +30,24 @@ FROM public.data_source AS source INNER JOIN public.country
 
 The main characteristics of this chart are presented in Figure \@ref(fig:databaseTypeFilter), being the following:
 
-- todo
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
 
 <div class="figure">
 <img src="images/databaseTypeFilter.png" alt="Superset chart creation: Settings for creating the database type filter." width="100%" />
@@ -95,8 +112,8 @@ SELECT data.source,
        data.country AS Country,
        data.database_type AS Type,
        --cast(stratum_1 as INTEGER )*30 AS Days,
-       data.release_date - cast(stratum_1 AS INTEGER) * INTERVAL 
-        '1 month' as Time,
+       data.release_date - cast(stratum_1 AS INTEGER) * 
+       INTERVAL '1 month' as Time,
        count_value                   AS count
 FROM (
      SELECT source.name              AS source,
@@ -175,10 +192,11 @@ SELECT source.name,
        source.database_type AS Type,
        count_value AS patient_count,
        source.slug
-FROM public.achilles_results AS achilles INNER JOIN 
-    public.data_source AS source ON achilles.data_source_id=source.id
+FROM public.achilles_results AS achilles 
+    INNER JOIN public.data_source AS source ON 
+      achilles.data_source_id=source.id
     INNER JOIN public.country AS country ON 
-    source.country_id=country.id
+      source.country_id=country.id
 WHERE analysis_id = 1;
 ```
 
@@ -199,10 +217,11 @@ SELECT source.name,
        database_type AS Type,
        count_value AS "Nr_patients",
        source.slug
-FROM public.achilles_results AS achilles INNER JOIN 
-    public.data_source AS source ON achilles.data_source_id=source.id
+FROM public.achilles_results AS achilles 
+    INNER JOIN public.data_source AS source ON 
+      achilles.data_source_id=source.id
     INNER JOIN public.country AS country ON 
-    source.country_id=country.id
+      source.country_id=country.id
 WHERE analysis_id = 1;
 ```
 
