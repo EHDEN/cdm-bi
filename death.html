@@ -201,12 +201,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="concepts.html"><a href="concepts.html#concepts-domains-tab"><i class="fa fa-check"></i><b>8.2</b> Concepts Domains Tab</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="concepts.html"><a href="concepts.html#sql-query-17"><i class="fa fa-check"></i><b>8.2.1</b> SQL query</a></li>
+<li class="chapter" data-level="8.2.2" data-path="concepts.html"><a href="concepts.html#chart-settings-16"><i class="fa fa-check"></i><b>8.2.2</b> Chart settings</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="data-domains.html"><a href="data-domains.html"><i class="fa fa-check"></i><b>9</b> Data Domains</a><ul>
 <li class="chapter" data-level="9.1" data-path="data-domains.html"><a href="data-domains.html#data-domains---number-of-records-per-peson"><i class="fa fa-check"></i><b>9.1</b> Data Domains - Number of Records per Peson</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="data-domains.html"><a href="data-domains.html#sql-query-18"><i class="fa fa-check"></i><b>9.1.1</b> SQL query</a></li>
-<li class="chapter" data-level="9.1.2" data-path="data-domains.html"><a href="data-domains.html#chart-settings-16"><i class="fa fa-check"></i><b>9.1.2</b> Chart settings</a></li>
+<li class="chapter" data-level="9.1.2" data-path="data-domains.html"><a href="data-domains.html#chart-settings-17"><i class="fa fa-check"></i><b>9.1.2</b> Chart settings</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -228,6 +229,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="death" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> Death</h1>
+<p>Discuss what is important to see in this chart… TO DO In this dashboard is present the ‘’Database Type Filter’’, that was detailed in the Chapter General.</p>
 <div id="death---by-month-per-thousand-people" class="section level2">
 <h2><span class="header-section-number">7.1</span> Death - By Month per Thousand People</h2>
 <p>Discuss what is important to see in this chart… TO DO</p>
@@ -245,35 +247,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="chart-settings-14" class="section level3">
 <h3><span class="header-section-number">7.1.2</span> Chart settings</h3>
-<p>The main characteristics of this chart are presented in Figure <a href="visit.html#fig:visitTypes">6.1</a>, being the following:</p>
+<p>The main characteristics of this chart are presented in Figure <a href="death.html#fig:deathByMonthPerThousandPeople">7.1</a>, being the following:</p>
 <ul>
 <li><strong>Data Tab</strong>:
 <ul>
 <li><strong>Visualization Type</strong>: Bar Chart</li>
 <li><strong>Time range</strong>: No filter</li>
-<li><strong>Metrics</strong>:</li>
+<li><strong>Metrics</strong>: MAX(count) as “Count”</li>
 <li><strong>Filters</strong>: Empty</li>
-<li><strong>Series</strong>:</li>
-<li><strong>Breakdowns</strong>:</li>
+<li><strong>Series</strong>: date</li>
+<li><strong>Breakdowns</strong>: Empty</li>
 <li><strong>Row limit</strong>: Empty</li>
 <li><strong>Contribution</strong>: Not checked</li>
 </ul></li>
 <li><strong>Costumize Tab</strong>:
 <ul>
-<li><strong>Y Axis Label</strong>:</li>
-<li><strong>X Axis Label</strong>:</li>
+<li><strong>Y Axis Label</strong>: Number of Patients (in thousands)</li>
+<li><strong>X Axis Label</strong>: Databases</li>
 <li><strong>Legend</strong>: Checked</li>
-<li><strong>Stacked Bars</strong>:</li>
-<li><strong>Bar Values</strong>:</li>
-<li><strong>Sort Bars</strong>:</li>
-<li><strong>Extra Controls</strong>:</li>
-<li><strong>Reduce X ticks</strong>:</li>
+<li><strong>Stacked Bars</strong>: Not checked</li>
+<li><strong>Bar Values</strong>: Not checked</li>
+<li><strong>Sort Bars</strong>: Checked</li>
+<li><strong>Extra Controls</strong>: Not checked</li>
+<li><strong>Reduce X ticks</strong>: Not checked</li>
 </ul></li>
 </ul>
-<div class="figure"><span id="fig:visitTypes1"></span>
-<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<div class="figure"><span id="fig:deathByMonthPerThousandPeople"></span>
+<img src="images/deathByMonthPerThousandPeople.png" alt="Settings for creating chart show in thousands the number of death patients in the network (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
 <p class="caption">
-Figure 7.1: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
+Figure 7.1: Settings for creating chart show in thousands the number of death patients in the network (bar chart). Image changed to contain information hidden in the customize menu.
 </p>
 </div>
 </div>
@@ -294,35 +296,35 @@ Figure 7.1: Settings for creating chart representing the number of patients at t
 </div>
 <div id="chart-settings-15" class="section level3">
 <h3><span class="header-section-number">7.2.2</span> Chart settings</h3>
-<p>The main characteristics of this chart are presented in Figure <a href="visit.html#fig:visitTypes">6.1</a>, being the following:</p>
+<p>The main characteristics of this chart are presented in Figure <a href="death.html#fig:deathNumberOfRecords">7.2</a>, being the following:</p>
 <ul>
 <li><strong>Data Tab</strong>:
 <ul>
 <li><strong>Visualization Type</strong>: Bar Chart</li>
 <li><strong>Time range</strong>: No filter</li>
-<li><strong>Metrics</strong>:</li>
+<li><strong>Metrics</strong>: MAX(count) as “Count”</li>
 <li><strong>Filters</strong>: Empty</li>
-<li><strong>Series</strong>:</li>
-<li><strong>Breakdowns</strong>:</li>
+<li><strong>Series</strong>: name</li>
+<li><strong>Breakdowns</strong>: Empty</li>
 <li><strong>Row limit</strong>: Empty</li>
 <li><strong>Contribution</strong>: Not checked</li>
 </ul></li>
 <li><strong>Costumize Tab</strong>:
 <ul>
-<li><strong>Y Axis Label</strong>:</li>
-<li><strong>X Axis Label</strong>:</li>
+<li><strong>Y Axis Label</strong>: Number of Patients</li>
+<li><strong>X Axis Label</strong>: Databases</li>
 <li><strong>Legend</strong>: Checked</li>
-<li><strong>Stacked Bars</strong>:</li>
-<li><strong>Bar Values</strong>:</li>
-<li><strong>Sort Bars</strong>:</li>
-<li><strong>Extra Controls</strong>:</li>
-<li><strong>Reduce X ticks</strong>:</li>
+<li><strong>Stacked Bars</strong>: Not checked</li>
+<li><strong>Bar Values</strong>: Not checked</li>
+<li><strong>Sort Bars</strong>: Not checked</li>
+<li><strong>Extra Controls</strong>: Not checked</li>
+<li><strong>Reduce X ticks</strong>: Checked</li>
 </ul></li>
 </ul>
-<div class="figure"><span id="fig:visitTypes2"></span>
-<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<div class="figure"><span id="fig:deathNumberOfRecords"></span>
+<img src="images/deathNumberOfRecords.png" alt="Settings for creating chart show the number of death patients in each database (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
 <p class="caption">
-Figure 7.2: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
+Figure 7.2: Settings for creating chart show the number of death patients in each database (bar chart). Image changed to contain information hidden in the customize menu.
 </p>
 </div>
 

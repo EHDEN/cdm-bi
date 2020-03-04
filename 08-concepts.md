@@ -12,6 +12,8 @@ One tab uses the same query
 
 ## Concepts General Tab
 
+Say the goal of this tab TO DO
+Say that all the charts on this tab have the same query
 
 ### SQL query
            
@@ -72,10 +74,11 @@ GROUP BY q1.concept_id, q1.concept_name, q1.domain_id,source.name;
 
 ### Charts
 
-Here are all the charts presented in this dashboard using the previous query
+Here are all the charts presented in this dashboard using the previous query TO DO
 
 #### Concept Browser Table
 
+Discuss what is important to see in this chart... TO DO
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
 
 - **Data Tab**:
@@ -104,6 +107,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
 
 #### \# of Occurrences
 
+Discuss what is important to see in this chart... TO DO
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
 
 - **Data Tab**:
@@ -132,6 +136,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
 
 #### \# of Patients
 
+Discuss what is important to see in this chart... TO DO
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
 
 - **Data Tab**:
@@ -160,6 +165,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
 
 #### Entity Type Filter
 
+Discuss what is important to see in this chart... TO DO
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
 
 - **Data Tab**:
@@ -188,6 +194,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
 
 #### Concept Filter
 
+Discuss what is important to see in this chart... TO DO
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
 
 - **Data Tab**:
@@ -216,6 +223,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
 
 #### Number of Concepts
 
+Discuss what is important to see in this chart... TO DO
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
 
 - **Data Tab**:
@@ -246,6 +254,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
 ## Concepts Domains Tab
 
 Discuss what is important to see in this chart... TO DO
+Say that we use create 6 similar charts with different filters
 
 ### SQL query
 
@@ -275,3 +284,34 @@ GROUP BY source.name, concept_name,
     WHEN analysis_id = 2105 THEN 'Device'
     ELSE 'Other' END
 ```
+
+
+### Chart settings
+
+FILTER LIST
+
+The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: See filter list
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
+
+<div class="figure">
+<img src="images/visitTypes.png" alt="Settings for creating chart representing the types of visit in the databases (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes33)Settings for creating chart representing the types of visit in the databases (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>

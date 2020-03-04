@@ -8,7 +8,7 @@ output: html_document
 # Population Characteristics
 
 Discuss the goal of this dashboard... TO DO
-Reuses the ''Database Type Filter''
+In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
 
 
 ## Population characteristics - Patients in Observation Period per month (whole month)
@@ -37,21 +37,21 @@ The main characteristics of this chart are presented in Figure \@ref(fig:populat
 - **Data Tab**:
     - **Visualization Type**: Bar Chart
     - **Time range**: No filter
-    - **Metrics**:
+    - **Metrics**: MAX(Nr_patients) as "Num of Patients"
     - **Filters**: Empty
-    - **Series**:
-    - **Breakdowns**:
+    - **Series**: date
+    - **Breakdowns**: name
     - **Row limit**: Empty
     - **Contribution**: Not checked
 - **Costumize Tab**:
-    - **Y Axis Label**: 
-    - **X Axis Label**: 
+    - **Y Axis Label**: Number of Patients
+    - **X Axis Label**: Dates
     - **Legend**: Checked
-    - **Stacked Bars**:
-    - **Bar Values**:
-    - **Sort Bars**:
-    - **Extra Controls**:
-    - **Reduce X ticks**:
+    - **Stacked Bars**: Checked
+    - **Bar Values**: Not checked
+    - **Sort Bars**: Checked
+    - **Extra Controls**: Not checked
+    - **Reduce X ticks**: Checked
 
 <div class="figure">
 <img src="images/populationCharacteristicsPatientsInObservationPeriodPerMonth.png" alt="Settings for creating chart representing patient in observation per month (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
@@ -83,21 +83,21 @@ The main characteristics of this chart are presented in Figure \@ref(fig:populat
 - **Data Tab**:
     - **Visualization Type**: Bar Chart
     - **Time range**: No filter
-    - **Metrics**:
+    - **Metrics**: SUM(patient_count) as "Patients"
     - **Filters**: Empty
-    - **Series**:
-    - **Breakdowns**:
+    - **Series**: year_month
+    - **Breakdowns**: name
     - **Row limit**: Empty
     - **Contribution**: Not checked
 - **Costumize Tab**:
-    - **Y Axis Label**: 
-    - **X Axis Label**: 
+    - **Y Axis Label**: Number of Patients
+    - **X Axis Label**: Year
     - **Legend**: Checked
-    - **Stacked Bars**:
-    - **Bar Values**:
-    - **Sort Bars**:
-    - **Extra Controls**:
-    - **Reduce X ticks**:
+    - **Stacked Bars**: Checked
+    - **Bar Values**: Not checked
+    - **Sort Bars**: Checked
+    - **Extra Controls**: Not checked
+    - **Reduce X ticks**: Checked
 
 <div class="figure">
 <img src="images/populationCharacteristicsObservationPeriodEndDates.png" alt="Settings for creating chart representing the number of patients at the end of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
@@ -129,21 +129,21 @@ The main characteristics of this chart are presented in Figure \@ref(fig:populat
 - **Data Tab**:
     - **Visualization Type**: Bar Chart
     - **Time range**: No filter
-    - **Metrics**:
+    - **Metrics**: SUM(patient_count) as "Patients"
     - **Filters**: Empty
-    - **Series**:
-    - **Breakdowns**:
+    - **Series**: year_month
+    - **Breakdowns**: name
     - **Row limit**: Empty
     - **Contribution**: Not checked
 - **Costumize Tab**:
-    - **Y Axis Label**: 
-    - **X Axis Label**: 
+    - **Y Axis Label**: Number of Patients
+    - **X Axis Label**: Year
     - **Legend**: Checked
-    - **Stacked Bars**:
-    - **Bar Values**:
-    - **Sort Bars**:
-    - **Extra Controls**:
-    - **Reduce X ticks**:
+    - **Stacked Bars**: Checked
+    - **Bar Values**: Not checked
+    - **Sort Bars**: Checked
+    - **Extra Controls**: Not checked
+    - **Reduce X ticks**: Checked
 
 <div class="figure">
 <img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />

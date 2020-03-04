@@ -9,6 +9,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Visit
 
+Discuss what is important to see in this chart... TO DO
+In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
+
 ## Visit - Types
 
 Discuss what is important to see in this chart... TO DO
@@ -36,23 +39,23 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
 - **Data Tab**:
     - **Visualization Type**: Bar Chart
     - **Time range**: No filter
-    - **Metrics**:
+    - **Metrics**: MAX(Nr_Observations) as Observations
     - **Filters**: Empty
-    - **Series**:
-    - **Breakdowns**:
+    - **Series**: name
+    - **Breakdowns**: Observation
     - **Row limit**: Empty
     - **Contribution**: Not checked
 - **Costumize Tab**:
-    - **Y Axis Label**: 
-    - **X Axis Label**: 
+    - **Y Axis Label**: Empty
+    - **X Axis Label**: Databases
     - **Legend**: Checked
-    - **Stacked Bars**:
-    - **Bar Values**:
-    - **Sort Bars**:
-    - **Extra Controls**:
-    - **Reduce X ticks**:
+    - **Stacked Bars**: Checked
+    - **Bar Values**: Not checked
+    - **Sort Bars**: Checked
+    - **Extra Controls**: Checked
+    - **Reduce X ticks**: Checked
 
-```{r visitTypes, fig.cap="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartDates.png")
+```{r visitTypes, fig.cap="Settings for creating chart representing the types of visit in the databases (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/visitTypes.png")
 ```
 

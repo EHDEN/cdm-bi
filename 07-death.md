@@ -7,6 +7,9 @@ output: html_document
 
 # Death
 
+Discuss what is important to see in this chart... TO DO
+In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
+
 ## Death - By Month per Thousand People
 
 Discuss what is important to see in this chart... TO DO
@@ -27,30 +30,30 @@ WHERE analysis_id = 502;
 
 ### Chart settings
 
-The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+The main characteristics of this chart are presented in Figure \@ref(fig:deathByMonthPerThousandPeople), being the following:
 
 - **Data Tab**:
     - **Visualization Type**: Bar Chart
     - **Time range**: No filter
-    - **Metrics**:
+    - **Metrics**: MAX(count) as "Count"
     - **Filters**: Empty
-    - **Series**:
-    - **Breakdowns**:
+    - **Series**: date
+    - **Breakdowns**: Empty
     - **Row limit**: Empty
     - **Contribution**: Not checked
 - **Costumize Tab**:
-    - **Y Axis Label**: 
-    - **X Axis Label**: 
+    - **Y Axis Label**: Number of Patients (in thousands)
+    - **X Axis Label**: Databases
     - **Legend**: Checked
-    - **Stacked Bars**:
-    - **Bar Values**:
-    - **Sort Bars**:
-    - **Extra Controls**:
-    - **Reduce X ticks**:
+    - **Stacked Bars**: Not checked
+    - **Bar Values**: Not checked
+    - **Sort Bars**: Checked
+    - **Extra Controls**: Not checked
+    - **Reduce X ticks**: Not checked
 
 <div class="figure">
-<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
-<p class="caption">(\#fig:visitTypes1)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+<img src="images/deathByMonthPerThousandPeople.png" alt="Settings for creating chart show in thousands the number of death patients in the network (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:deathByMonthPerThousandPeople)Settings for creating chart show in thousands the number of death patients in the network (bar chart). Image changed to contain information hidden in the customize menu.</p>
 </div>
 
 ## Death - Number of Records
@@ -72,29 +75,29 @@ WHERE analysis_id = 501;
 
 ### Chart settings
 
-The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+The main characteristics of this chart are presented in Figure \@ref(fig:deathNumberOfRecords), being the following:
 
 - **Data Tab**:
     - **Visualization Type**: Bar Chart
     - **Time range**: No filter
-    - **Metrics**:
+    - **Metrics**: MAX(count) as "Count"
     - **Filters**: Empty
-    - **Series**:
-    - **Breakdowns**:
+    - **Series**: name
+    - **Breakdowns**: Empty
     - **Row limit**: Empty
     - **Contribution**: Not checked
 - **Costumize Tab**:
-    - **Y Axis Label**: 
-    - **X Axis Label**: 
+    - **Y Axis Label**: Number of Patients
+    - **X Axis Label**: Databases
     - **Legend**: Checked
-    - **Stacked Bars**:
-    - **Bar Values**:
-    - **Sort Bars**:
-    - **Extra Controls**:
-    - **Reduce X ticks**:
+    - **Stacked Bars**: Not checked
+    - **Bar Values**: Not checked
+    - **Sort Bars**: Not checked
+    - **Extra Controls**: Not checked
+    - **Reduce X ticks**: Checked
 
 <div class="figure">
-<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
-<p class="caption">(\#fig:visitTypes2)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+<img src="images/deathNumberOfRecords.png" alt="Settings for creating chart show the number of death patients in each database (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:deathNumberOfRecords)Settings for creating chart show the number of death patients in each database (bar chart). Image changed to contain information hidden in the customize menu.</p>
 </div>
 

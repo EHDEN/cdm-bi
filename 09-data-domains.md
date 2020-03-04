@@ -7,6 +7,9 @@ output: html_document
 
 # Data Domains
 
+Discuss what is important to see in this chart... TO DO
+In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
+
 ## Data Domains - Number of Records per Peson
 
 Discuss what is important to see in this chart... TO DO
@@ -47,28 +50,22 @@ HAVING analysis_id IN (201, 401, 501, 601, 701, 801, 1801, 2101,
 
 ### Chart settings
 
-The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+The main characteristics of this chart are presented in Figure \@ref(fig:dataDomainsNumberOfRecordsPerPeson), being the following:
 
 - **Data Tab**:
-    - **Visualization Type**: Bar Chart
+    - **Visualization Type**: Heatmap
     - **Time range**: No filter
-    - **Metrics**:
+    - **X**: name
+    - **Y**: data_domain
+    - **Metric**: SUM(records_per_person) as "Sum of records per person"
     - **Filters**: Empty
-    - **Series**:
-    - **Breakdowns**:
     - **Row limit**: Empty
-    - **Contribution**: Not checked
-- **Costumize Tab**:
-    - **Y Axis Label**: 
-    - **X Axis Label**: 
     - **Legend**: Checked
-    - **Stacked Bars**:
-    - **Bar Values**:
-    - **Sort Bars**:
-    - **Extra Controls**:
-    - **Reduce X ticks**:
+    - **Show percentage**: Checked
+    - **Show Values**: Not checked
+    - **Normalized**: Not checked
 
 <div class="figure">
-<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
-<p class="caption">(\#fig:visitTypes21)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+<img src="images/dataDomainsNumberOfRecordsPerPeson.png" alt="Settings for creating chart representing the number of records per patient in the different data domains (heatmap). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:dataDomainsNumberOfRecordsPerPeson)Settings for creating chart representing the number of records per patient in the different data domains (heatmap). Image changed to contain information hidden in the customize menu.</p>
 </div>

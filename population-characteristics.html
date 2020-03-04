@@ -201,12 +201,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="concepts.html"><a href="concepts.html#concepts-domains-tab"><i class="fa fa-check"></i><b>8.2</b> Concepts Domains Tab</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="concepts.html"><a href="concepts.html#sql-query-17"><i class="fa fa-check"></i><b>8.2.1</b> SQL query</a></li>
+<li class="chapter" data-level="8.2.2" data-path="concepts.html"><a href="concepts.html#chart-settings-16"><i class="fa fa-check"></i><b>8.2.2</b> Chart settings</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="data-domains.html"><a href="data-domains.html"><i class="fa fa-check"></i><b>9</b> Data Domains</a><ul>
 <li class="chapter" data-level="9.1" data-path="data-domains.html"><a href="data-domains.html#data-domains---number-of-records-per-peson"><i class="fa fa-check"></i><b>9.1</b> Data Domains - Number of Records per Peson</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="data-domains.html"><a href="data-domains.html#sql-query-18"><i class="fa fa-check"></i><b>9.1.1</b> SQL query</a></li>
-<li class="chapter" data-level="9.1.2" data-path="data-domains.html"><a href="data-domains.html#chart-settings-16"><i class="fa fa-check"></i><b>9.1.2</b> Chart settings</a></li>
+<li class="chapter" data-level="9.1.2" data-path="data-domains.html"><a href="data-domains.html#chart-settings-17"><i class="fa fa-check"></i><b>9.1.2</b> Chart settings</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -228,7 +229,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="population-characteristics" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Population Characteristics</h1>
-<p>Discuss the goal of this dashboard… TO DO Reuses the ‘’Database Type Filter’’</p>
+<p>Discuss the goal of this dashboard… TO DO In this dashboard is present the ‘’Database Type Filter’’, that was detailed in the Chapter General.</p>
 <div id="population-characteristics---patients-in-observation-period-per-month-whole-month" class="section level2">
 <h2><span class="header-section-number">5.1</span> Population characteristics - Patients in Observation Period per month (whole month)</h2>
 <p>Discuss what is important to see in this chart… TO DO</p>
@@ -253,23 +254,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li><strong>Visualization Type</strong>: Bar Chart</li>
 <li><strong>Time range</strong>: No filter</li>
-<li><strong>Metrics</strong>:</li>
+<li><strong>Metrics</strong>: MAX(Nr_patients) as “Num of Patients”</li>
 <li><strong>Filters</strong>: Empty</li>
-<li><strong>Series</strong>:</li>
-<li><strong>Breakdowns</strong>:</li>
+<li><strong>Series</strong>: date</li>
+<li><strong>Breakdowns</strong>: name</li>
 <li><strong>Row limit</strong>: Empty</li>
 <li><strong>Contribution</strong>: Not checked</li>
 </ul></li>
 <li><strong>Costumize Tab</strong>:
 <ul>
-<li><strong>Y Axis Label</strong>:</li>
-<li><strong>X Axis Label</strong>:</li>
+<li><strong>Y Axis Label</strong>: Number of Patients</li>
+<li><strong>X Axis Label</strong>: Dates</li>
 <li><strong>Legend</strong>: Checked</li>
-<li><strong>Stacked Bars</strong>:</li>
-<li><strong>Bar Values</strong>:</li>
-<li><strong>Sort Bars</strong>:</li>
-<li><strong>Extra Controls</strong>:</li>
-<li><strong>Reduce X ticks</strong>:</li>
+<li><strong>Stacked Bars</strong>: Checked</li>
+<li><strong>Bar Values</strong>: Not checked</li>
+<li><strong>Sort Bars</strong>: Checked</li>
+<li><strong>Extra Controls</strong>: Not checked</li>
+<li><strong>Reduce X ticks</strong>: Checked</li>
 </ul></li>
 </ul>
 <div class="figure"><span id="fig:populationCharacteristicsPatientsInObservationPeriodPerMonth"></span>
@@ -303,23 +304,23 @@ Figure 5.1: Settings for creating chart representing patient in observation per 
 <ul>
 <li><strong>Visualization Type</strong>: Bar Chart</li>
 <li><strong>Time range</strong>: No filter</li>
-<li><strong>Metrics</strong>:</li>
+<li><strong>Metrics</strong>: SUM(patient_count) as “Patients”</li>
 <li><strong>Filters</strong>: Empty</li>
-<li><strong>Series</strong>:</li>
-<li><strong>Breakdowns</strong>:</li>
+<li><strong>Series</strong>: year_month</li>
+<li><strong>Breakdowns</strong>: name</li>
 <li><strong>Row limit</strong>: Empty</li>
 <li><strong>Contribution</strong>: Not checked</li>
 </ul></li>
 <li><strong>Costumize Tab</strong>:
 <ul>
-<li><strong>Y Axis Label</strong>:</li>
-<li><strong>X Axis Label</strong>:</li>
+<li><strong>Y Axis Label</strong>: Number of Patients</li>
+<li><strong>X Axis Label</strong>: Year</li>
 <li><strong>Legend</strong>: Checked</li>
-<li><strong>Stacked Bars</strong>:</li>
-<li><strong>Bar Values</strong>:</li>
-<li><strong>Sort Bars</strong>:</li>
-<li><strong>Extra Controls</strong>:</li>
-<li><strong>Reduce X ticks</strong>:</li>
+<li><strong>Stacked Bars</strong>: Checked</li>
+<li><strong>Bar Values</strong>: Not checked</li>
+<li><strong>Sort Bars</strong>: Checked</li>
+<li><strong>Extra Controls</strong>: Not checked</li>
+<li><strong>Reduce X ticks</strong>: Checked</li>
 </ul></li>
 </ul>
 <div class="figure"><span id="fig:populationCharacteristicsObservationPeriodEndDates"></span>
@@ -353,23 +354,23 @@ Figure 5.2: Settings for creating chart representing the number of patients at t
 <ul>
 <li><strong>Visualization Type</strong>: Bar Chart</li>
 <li><strong>Time range</strong>: No filter</li>
-<li><strong>Metrics</strong>:</li>
+<li><strong>Metrics</strong>: SUM(patient_count) as “Patients”</li>
 <li><strong>Filters</strong>: Empty</li>
-<li><strong>Series</strong>:</li>
-<li><strong>Breakdowns</strong>:</li>
+<li><strong>Series</strong>: year_month</li>
+<li><strong>Breakdowns</strong>: name</li>
 <li><strong>Row limit</strong>: Empty</li>
 <li><strong>Contribution</strong>: Not checked</li>
 </ul></li>
 <li><strong>Costumize Tab</strong>:
 <ul>
-<li><strong>Y Axis Label</strong>:</li>
-<li><strong>X Axis Label</strong>:</li>
+<li><strong>Y Axis Label</strong>: Number of Patients</li>
+<li><strong>X Axis Label</strong>: Year</li>
 <li><strong>Legend</strong>: Checked</li>
-<li><strong>Stacked Bars</strong>:</li>
-<li><strong>Bar Values</strong>:</li>
-<li><strong>Sort Bars</strong>:</li>
-<li><strong>Extra Controls</strong>:</li>
-<li><strong>Reduce X ticks</strong>:</li>
+<li><strong>Stacked Bars</strong>: Checked</li>
+<li><strong>Bar Values</strong>: Not checked</li>
+<li><strong>Sort Bars</strong>: Checked</li>
+<li><strong>Extra Controls</strong>: Not checked</li>
+<li><strong>Reduce X ticks</strong>: Checked</li>
 </ul></li>
 </ul>
 <div class="figure"><span id="fig:populationCharacteristicsObservationPeriodStartDates"></span>
