@@ -11,9 +11,10 @@ Discuss the goal of this dashboard... TO DO
 In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
 
 
-## Population characteristics - Patients in Observation Period per month (whole month)
+## Population characteristics - Patients in Observation Period per Month
 
 Discuss what is important to see in this chart... TO DO
+Patients in Observation Period per month (whole month)
 
 ### SQL query
 

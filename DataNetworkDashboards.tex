@@ -131,37 +131,28 @@
 \chapter*{Preface}\label{preface}
 \addcontentsline{toc}{chapter}{Preface}
 
-\textbf{This document is currently under construction}
-
 Automated Characterization of Health Information at Large-scale
 Longitudinal Evidence Systems (ACHILLES) is a profiling tool developed
 by the OHDSI community to provide descriptive statistics of databases
 standardized to the OMOP Common Data Model. These characteristics are
 presented graphically in the ATLAS tool. However, this solution does not
-allow for database comparison across the data network. The proposed
-solution aggregates ACHILLES results files from databases in the network
-and displays the descriptive statistics through graphical dashboards.
-The tool is helpful to gain insight in the growth of the data network
-and is useful for the selection of databases for specific research
-questions. In the software demonstration we show a first version of this
-tool that will be further developed in EHDEN in close collaboration with
-all our stakeholders, including OHDSI.
-
-\section*{Goals}\label{goals}
-\addcontentsline{toc}{section}{Goals}
-
-This manual aims to document the procedures to install and configure the
-chasrts and dashboards choosen to compare the OHDSI databases.
-
-\ldots{}.
+allow for database comparison across the data network. The Data Network
+Dashboards aggregates ACHILLES results files from databases in the
+network and displays the descriptive statistics through graphical
+dashboards. This tool is helpful to gain insight in the growth of the
+data network and is useful for the selection of databases for specific
+research questions. In the software demonstration we show a first
+version of this tool that will be further developed in EHDEN in close
+collaboration with all our stakeholders, including OHDSI.
 
 \section*{Contributors}\label{contributors}
 \addcontentsline{toc}{section}{Contributors}
 
 To develop this tool, EHDEN organized a hack-a-thon (Aveiro, December
 2-3, 2019), where we defined and implemented a series of charts and
-dashboards containing the most relevant information about the databases.
-The team involved in this task were composed by the following members:
+dashboards containing the most relevant information about the OMOP CDM
+databases. The team involved in this task were composed by the following
+members:
 
 \begin{itemize}
 \tightlist
@@ -200,10 +191,9 @@ Aveiro, Portugal
 \section*{License}\label{license}
 \addcontentsline{toc}{section}{License}
 
-The system is open-source under the license \ldots{}.
-
-The book is written in \href{https://rmarkdown.rstudio.com}{RMarkdown}
-using the \href{https://bookdown.org}{bookdown} package.
+The system is open-source and this manual was written in
+\href{https://rmarkdown.rstudio.com}{RMarkdown} using the
+\href{https://bookdown.org}{bookdown} package.
 
 \section*{Acknowledges}\label{acknowledges}
 \addcontentsline{toc}{section}{Acknowledges}
@@ -282,6 +272,8 @@ such as:
 \end{itemize}
 
 \chapter{Installation}\label{installation}
+
+TO DO production and dev environments\ldots{}
 
 Make sure that you have docker and docker-compose installed in your
 machine. Then, please follow these steps:
@@ -970,10 +962,10 @@ present the `'Database Type Filter'', that was detailed in the Chapter
 General.
 
 \section{Population characteristics - Patients in Observation Period per
-month (whole
-month)}\label{population-characteristics---patients-in-observation-period-per-month-whole-month}
+Month}\label{population-characteristics---patients-in-observation-period-per-month}
 
-Discuss what is important to see in this chart\ldots{} TO DO
+Discuss what is important to see in this chart\ldots{} TO DO Patients in
+Observation Period per month (whole month)
 
 \subsection{SQL query}\label{sql-query-10}
 
@@ -1455,12 +1447,17 @@ The main characteristics of this chart are presented in Figure
 
 \chapter{Concepts}\label{concepts}
 
-Discuss the organization of this dashboard One tab uses the same query
+Discuss the organization of this dashboard\ldots{} TO DO
+
+This chapter follows a different organization due to the reuse of the
+same query in several charts.
 
 \section{Concepts General Tab}\label{concepts-general-tab}
 
-Say the goal of this tab TO DO Say that all the charts on this tab have
-the same query
+Say the goal of this tab TO DO
+
+This tab uses an unique query and all the filters and charts were
+created using the same output.
 
 \subsection{SQL query}\label{sql-query-16}
 
@@ -1523,180 +1520,6 @@ the same query
 
 Here are all the charts presented in this dashboard using the previous
 query TO DO
-
-\subsubsection{Concept Browser Table}\label{concept-browser-table}
-
-Discuss what is important to see in this chart\ldots{} TO DO The main
-characteristics of this chart are presented in Figure
-\ref{fig:visitTypes}, being the following:
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Data Tab}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \textbf{Visualization Type}: Bar Chart
-  \item
-    \textbf{Time range}: No filter
-  \item
-    \textbf{Metrics}:
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}:
-  \item
-    \textbf{Breakdowns}:
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Not checked
-  \end{itemize}
-\item
-  \textbf{Costumize Tab}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \textbf{Y Axis Label}:
-  \item
-    \textbf{X Axis Label}:
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}:
-  \item
-    \textbf{Bar Values}:
-  \item
-    \textbf{Sort Bars}:
-  \item
-    \textbf{Extra Controls}:
-  \item
-    \textbf{Reduce X ticks}:
-  \end{itemize}
-\end{itemize}
-
-\begin{figure}
-\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes3}
-\end{figure}
-
-\subsubsection{\# of Occurrences}\label{of-occurrences}
-
-Discuss what is important to see in this chart\ldots{} TO DO The main
-characteristics of this chart are presented in Figure
-\ref{fig:visitTypes}, being the following:
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Data Tab}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \textbf{Visualization Type}: Bar Chart
-  \item
-    \textbf{Time range}: No filter
-  \item
-    \textbf{Metrics}:
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}:
-  \item
-    \textbf{Breakdowns}:
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Not checked
-  \end{itemize}
-\item
-  \textbf{Costumize Tab}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \textbf{Y Axis Label}:
-  \item
-    \textbf{X Axis Label}:
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}:
-  \item
-    \textbf{Bar Values}:
-  \item
-    \textbf{Sort Bars}:
-  \item
-    \textbf{Extra Controls}:
-  \item
-    \textbf{Reduce X ticks}:
-  \end{itemize}
-\end{itemize}
-
-\begin{figure}
-\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes4}
-\end{figure}
-
-\subsubsection{\# of Patients}\label{of-patients}
-
-Discuss what is important to see in this chart\ldots{} TO DO The main
-characteristics of this chart are presented in Figure
-\ref{fig:visitTypes}, being the following:
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Data Tab}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \textbf{Visualization Type}: Bar Chart
-  \item
-    \textbf{Time range}: No filter
-  \item
-    \textbf{Metrics}:
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}:
-  \item
-    \textbf{Breakdowns}:
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Not checked
-  \end{itemize}
-\item
-  \textbf{Costumize Tab}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \textbf{Y Axis Label}:
-  \item
-    \textbf{X Axis Label}:
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}:
-  \item
-    \textbf{Bar Values}:
-  \item
-    \textbf{Sort Bars}:
-  \item
-    \textbf{Extra Controls}:
-  \item
-    \textbf{Reduce X ticks}:
-  \end{itemize}
-\end{itemize}
-
-\begin{figure}
-\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes5}
-\end{figure}
 
 \subsubsection{Entity Type Filter}\label{entity-type-filter}
 
@@ -1872,47 +1695,10 @@ characteristics of this chart are presented in Figure
 \includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes8}
 \end{figure}
 
-\section{Concepts Domains Tab}\label{concepts-domains-tab}
+\subsubsection{Concept Browser Table}\label{concept-browser-table}
 
-Discuss what is important to see in this chart\ldots{} TO DO Say that we
-use create 6 similar charts with different filters
-
-\subsection{SQL query}\label{sql-query-17}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{-- Concepts Domains}
-\KeywordTok{SELECT}\NormalTok{ source.name,}
-    \KeywordTok{CASE} \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{405} \KeywordTok{THEN} \StringTok{'Condition'}
-    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{605} \KeywordTok{THEN} \StringTok{'Procedure'}
-    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{705} \KeywordTok{THEN} \StringTok{'Drug'}
-    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{805} \KeywordTok{THEN} \StringTok{'Observation'}
-    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{1805} \KeywordTok{THEN} \StringTok{'Measurement'}
-    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{2105} \KeywordTok{THEN} \StringTok{'Device'}
-    \KeywordTok{ELSE} \StringTok{'Other'} \KeywordTok{END} \KeywordTok{AS}\NormalTok{ domain_name,}
-\NormalTok{    concept_name, }\FunctionTok{sum}\NormalTok{(count_value) }\KeywordTok{AS}\NormalTok{ num_records}
-\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
-    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{      achilles.data_source_id=source.id}
-    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.concept }\KeywordTok{AS}\NormalTok{ c1 }\KeywordTok{ON} 
-\NormalTok{      stratum_2 = }\FunctionTok{CAST}\NormalTok{(concept_id }\KeywordTok{AS}\NormalTok{ text)}
-\KeywordTok{WHERE}\NormalTok{ analysis_id }\KeywordTok{IN}\NormalTok{ (}\DecValTok{405}\NormalTok{, }\DecValTok{605}\NormalTok{, }\DecValTok{705}\NormalTok{, }\DecValTok{805}\NormalTok{, }\DecValTok{1805}\NormalTok{, }\DecValTok{2105}\NormalTok{)}
-\KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ source.name, concept_name, }
-    \KeywordTok{CASE} \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{405} \KeywordTok{THEN} \StringTok{'Condition'}
-    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{605} \KeywordTok{THEN} \StringTok{'Procedure'}
-    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{705} \KeywordTok{THEN} \StringTok{'Drug'}
-    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{805} \KeywordTok{THEN} \StringTok{'Observation'}
-    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{1805} \KeywordTok{THEN} \StringTok{'Measurement'}
-    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{2105} \KeywordTok{THEN} \StringTok{'Device'}
-    \KeywordTok{ELSE} \StringTok{'Other'} \KeywordTok{END}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Chart settings}\label{chart-settings-16}
-
-FILTER LIST
-
-The main characteristics of this chart are presented in Figure
+Discuss what is important to see in this chart\ldots{} TO DO The main
+characteristics of this chart are presented in Figure
 \ref{fig:visitTypes}, being the following:
 
 \begin{itemize}
@@ -1929,7 +1715,7 @@ The main characteristics of this chart are presented in Figure
   \item
     \textbf{Metrics}:
   \item
-    \textbf{Filters}: See filter list
+    \textbf{Filters}: Empty
   \item
     \textbf{Series}:
   \item
@@ -1964,7 +1750,242 @@ The main characteristics of this chart are presented in Figure
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/visitTypes} \caption{Settings for creating chart representing the types of visit in the databases (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes33}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes3}
+\end{figure}
+
+\subsubsection{\# of Occurrences}\label{of-occurrences}
+
+Discuss what is important to see in this chart\ldots{} TO DO The main
+characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes4}
+\end{figure}
+
+\subsubsection{\# of Patients}\label{of-patients}
+
+Discuss what is important to see in this chart\ldots{} TO DO The main
+characteristics of this chart are presented in Figure
+\ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes5}
+\end{figure}
+
+\section{Concepts Domains Tab}\label{concepts-domains-tab}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+
+This tab is composed of six bar charts that show the percentage of
+existent concepts in each database. These charts are similar but divided
+by the concept domains existent in the standard vocabularies, which are
+the conditions, procedures, drugs, observations, measurements and
+devices.
+
+\subsection{SQL query}\label{sql-query-17}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{-- Concepts Domains}
+\KeywordTok{SELECT}\NormalTok{ source.name,}
+    \KeywordTok{CASE} \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{405} \KeywordTok{THEN} \StringTok{'Condition'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{605} \KeywordTok{THEN} \StringTok{'Procedure'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{705} \KeywordTok{THEN} \StringTok{'Drug'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{805} \KeywordTok{THEN} \StringTok{'Observation'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{1805} \KeywordTok{THEN} \StringTok{'Measurement'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{2105} \KeywordTok{THEN} \StringTok{'Device'}
+    \KeywordTok{ELSE} \StringTok{'Other'} \KeywordTok{END} \KeywordTok{AS}\NormalTok{ domain_name,}
+\NormalTok{    concept_name, }\FunctionTok{sum}\NormalTok{(count_value) }\KeywordTok{AS}\NormalTok{ num_records}
+\KeywordTok{FROM}\NormalTok{ public.achilles_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data_source_id=source.id}
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.concept }\KeywordTok{AS}\NormalTok{ c1 }\KeywordTok{ON} 
+\NormalTok{      stratum_2 = }\FunctionTok{CAST}\NormalTok{(concept_id }\KeywordTok{AS}\NormalTok{ text)}
+\KeywordTok{WHERE}\NormalTok{ analysis_id }\KeywordTok{IN}\NormalTok{ (}\DecValTok{405}\NormalTok{, }\DecValTok{605}\NormalTok{, }\DecValTok{705}\NormalTok{, }\DecValTok{805}\NormalTok{, }\DecValTok{1805}\NormalTok{, }\DecValTok{2105}\NormalTok{)}
+\KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ source.name, concept_name, }
+    \KeywordTok{CASE} \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{405} \KeywordTok{THEN} \StringTok{'Condition'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{605} \KeywordTok{THEN} \StringTok{'Procedure'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{705} \KeywordTok{THEN} \StringTok{'Drug'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{805} \KeywordTok{THEN} \StringTok{'Observation'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{1805} \KeywordTok{THEN} \StringTok{'Measurement'}
+    \KeywordTok{WHEN}\NormalTok{ analysis_id = }\DecValTok{2105} \KeywordTok{THEN} \StringTok{'Device'}
+    \KeywordTok{ELSE} \StringTok{'Other'} \KeywordTok{END}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Chart settings}\label{chart-settings-16}
+
+The difference between the six charts related to concept domains is the
+condition in the filter. Therefore, to create all the charts of this
+dashboard, it is necessary to follow the main characteristics presented
+in Figure \ref{fig:conceptsDomainTypes} and the list of possible values
+for the filter. Those characteristics are the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}: SUM(num\_records) as ``Nr Records''
+  \item
+    \textbf{Filters}: domain = \textbf{See filter list}
+  \item
+    \textbf{Series}: name
+  \item
+    \textbf{Breakdowns}: concept\_name
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}: Checked
+  \item
+    \textbf{Bar Values}: Not checked
+  \item
+    \textbf{Sort Bars}: Not checked
+  \item
+    \textbf{Extra Controls}: Not checked
+  \item
+    \textbf{Reduce X ticks}: Not checked
+  \end{itemize}
+\item
+  \textbf{Filter List}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Concepts - Condition Types}: Condition
+  \item
+    \textbf{Concepts - Procedure Types}: Procedure
+  \item
+    \textbf{Concepts - Drug Types}: Drug
+  \item
+    \textbf{Concepts - Observation Types}: Observation
+  \item
+    \textbf{Concepts - Measurement Types}: Measurement
+  \item
+    \textbf{Concepts - Device Types}: Device
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/conceptsDomainTypes} \caption{Settings for creating all the charts related with the concept domains for each databases (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:conceptsDomainTypes}
 \end{figure}
 
 \chapter{Data Domains}\label{data-domains}

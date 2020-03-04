@@ -9,6 +9,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Installation
 
+TO DO production and dev environments...
+
 Make sure that you have docker and docker-compose installed in your machine. Then, please follow these steps:
 
 - Please enter in the ''docker'' directory and create your `.env` file here, using `.env-example` as reference. For local installation, you can just copy the `.env-example` content to a new file. Note: In case of port errors in the next steps, the problem could be related to a port already in use by your system that you defined here and it is busy, chose other.
