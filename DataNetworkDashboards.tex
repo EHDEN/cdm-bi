@@ -119,7 +119,7 @@
 
 \title{Data Network Dashboards}
 \author{This document is currently under construction}
-\date{2020-03-04}
+\date{2020-03-05}
 
 \begin{document}
 \maketitle
@@ -187,6 +187,24 @@ Aveiro, Portugal
 3 - Janssen Pharmaceutica NV, Beerse, Belgium
 
 4 - The Hyve, Utrecht, Netherlands
+
+\section*{Considerations}\label{considerations}
+\addcontentsline{toc}{section}{Considerations}
+
+This manual was written to be a guide for a clean installation of this
+system with all the dashboards that we defined during the project. The
+first chapter describes the goal of the system and the second how to
+install the system. The remaining chapters are dedicated to the
+dashboards, in which chapters describes one dashboard and all its
+charts. To simplify the representation of the dashboard's layout, we
+used similar schemas as it is presented in Figure
+\ref{fig:dashboardsLayout}. The white box is the dashboard and the
+inside boxes are charts. The colour changes in relation to the type of
+chart.
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/dashboardsLayout} \caption{Example of a dashboards tool presenting the databases available in the network (simulated data)}\label{fig:dashboardsLayout}
+\end{figure}
 
 \section*{License}\label{license}
 \addcontentsline{toc}{section}{License}
@@ -273,7 +291,7 @@ such as:
 
 \chapter{Installation}\label{installation}
 
-TO DO production and dev environments\ldots{}
+NOTE: This instructions are outdated
 
 Make sure that you have docker and docker-compose installed in your
 machine. Then, please follow these steps:
@@ -431,14 +449,14 @@ TO DO
 
 \chapter{General}\label{general}
 
-VERY INCOMPLETE Discuss the goal of this dashboard\ldots{} TO DO
+NOTE: This chapter is very incomplete and some queries have been changed
 
 \section{Database Type Filter}\label{database-type-filter}
 
-This filter which is a type of chart in Superset was designed to be used
-in the dashboard aiming the filtering of the data based on the field
-`'database\_type'`from the table'`data\_source'`. It is important to
-give the alias'`Type'' to this field in the select operations because
+This filter, which is a type of chart in Superset, was designed to be
+used in the dashboard aiming the filtering of the data based on the
+field `'database\_type'`from the table'`data\_source'`. It is important
+to give the alias'`Type'' to this field in the select operations because
 Superset does not recognize as the same field otherwise.
 
 \subsection{SQL query}\label{sql-query}
@@ -509,12 +527,10 @@ The main characteristics of this chart are presented in Figure
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/databaseTypeFilter} \caption{Superset chart creation: Settings for creating the database type filter.}\label{fig:databaseTypeFilter}
+\includegraphics[width=1\linewidth]{images/databaseTypeFilter} \caption{Settings for creating the database type filter.}\label{fig:databaseTypeFilter}
 \end{figure}
 
 \section{Country Filter}\label{country-filter}
-
-Discuss what is important to see in this chart\ldots{} TO DO
 
 \subsection{SQL query}\label{sql-query-1}
 
@@ -535,8 +551,6 @@ Discuss what is important to see in this chart\ldots{} TO DO
 TO DO
 
 \section{General - World Map}\label{general---world-map}
-
-Discuss what is important to see in this chart\ldots{} TO DO
 
 \subsection{SQL query}\label{sql-query-2}
 
@@ -563,8 +577,6 @@ TO DO
 
 \section{General - Network Growth
 (Summary)}\label{general---network-growth-summary}
-
-Discuss what is important to see in this chart\ldots{} TO DO
 
 \subsection{SQL query}\label{sql-query-3}
 
@@ -607,8 +619,6 @@ TO DO
 \section{General - Network Growth by
 Date}\label{general---network-growth-by-date}
 
-Discuss what is important to see in this chart\ldots{} TO DO
-
 \subsection{SQL query}\label{sql-query-4}
 
 \begin{Shaded}
@@ -647,8 +657,6 @@ TO DO
 \section{General - Patients per
 Country}\label{general---patients-per-country}
 
-Discuss what is important to see in this chart\ldots{} TO DO
-
 \subsection{SQL query}\label{sql-query-5}
 
 \begin{Shaded}
@@ -675,8 +683,6 @@ TO DO
 \section{General - Database Types per
 Country}\label{general---database-types-per-country}
 
-Discuss what is important to see in this chart\ldots{} TO DO
-
 \subsection{SQL query}\label{sql-query-6}
 
 \begin{Shaded}
@@ -702,8 +708,6 @@ TO DO
 
 \chapter{Person}\label{person}
 
-Discuss the goal of this dashboard\ldots{} TO DO
-
 In this dashboard is present the `'Database Type Filter'', that was
 detailed in the Chapter General. Besides, it was necessary to customize
 the dashboard JSON Metadata in order to obtain the colours blue and rose
@@ -720,8 +724,6 @@ following entry should be added in the settings of this dashboard:
 \end{Shaded}
 
 \section{Person - Patients by age}\label{person---patients-by-age}
-
-Discuss what is important to see in this chart\ldots{} TO DO
 
 \subsection{SQL query}\label{sql-query-7}
 
@@ -798,8 +800,6 @@ The main characteristics of this chart are presented in Figure
 
 \section{Person - Births by Year}\label{person---births-by-year}
 
-Discuss what is important to see in this chart\ldots{} TO DO
-
 \subsection{SQL query}\label{sql-query-8}
 
 \begin{Shaded}
@@ -875,8 +875,6 @@ The main characteristics of this chart are presented in Figure
 
 \section{Person - Gender
 Distribution}\label{person---gender-distribution}
-
-Discuss what is important to see in this chart\ldots{} TO DO
 
 \subsection{SQL query}\label{sql-query-9}
 
@@ -957,15 +955,13 @@ The main characteristics of this chart are presented in Figure
 
 \chapter{Population Characteristics}\label{population-characteristics}
 
-Discuss the goal of this dashboard\ldots{} TO DO In this dashboard is
-present the `'Database Type Filter'', that was detailed in the Chapter
-General.
+In this dashboard is present the `'Database Type Filter'', that was
+detailed in the Chapter General.
 
 \section{Population characteristics - Patients in Observation Period per
 Month}\label{population-characteristics---patients-in-observation-period-per-month}
 
-Discuss what is important to see in this chart\ldots{} TO DO Patients in
-Observation Period per month (whole month)
+Patients in Observation Period per month (whole month)
 
 \subsection{SQL query}\label{sql-query-10}
 
@@ -1045,8 +1041,6 @@ being the following:
 \section{Population characteristics - Observation Period End
 Dates}\label{population-characteristics---observation-period-end-dates}
 
-Discuss what is important to see in this chart\ldots{} TO DO
-
 \subsection{SQL query}\label{sql-query-11}
 
 \begin{Shaded}
@@ -1124,8 +1118,6 @@ following:
 \section{Population characteristics - Observation Period Start
 Dates}\label{population-characteristics---observation-period-start-dates}
 
-Discuss what is important to see in this chart\ldots{} TO DO
-
 \subsection{SQL query}\label{sql-query-12}
 
 \begin{Shaded}
@@ -1202,13 +1194,10 @@ the following:
 
 \chapter{Visit}\label{visit}
 
-Discuss what is important to see in this chart\ldots{} TO DO In this
-dashboard is present the `'Database Type Filter'', that was detailed in
-the Chapter General.
+In this dashboard is present the `'Database Type Filter'', that was
+detailed in the Chapter General.
 
 \section{Visit - Types}\label{visit---types}
-
-Discuss what is important to see in this chart\ldots{} TO DO
 
 \subsection{SQL query}\label{sql-query-13}
 
@@ -1287,14 +1276,11 @@ The main characteristics of this chart are presented in Figure
 
 \chapter{Death}\label{death}
 
-Discuss what is important to see in this chart\ldots{} TO DO In this
-dashboard is present the `'Database Type Filter'', that was detailed in
-the Chapter General.
+In this dashboard is present the `'Database Type Filter'', that was
+detailed in the Chapter General.
 
 \section{Death - By Month per Thousand
 People}\label{death---by-month-per-thousand-people}
-
-Discuss what is important to see in this chart\ldots{} TO DO
 
 \subsection{SQL query}\label{sql-query-14}
 
@@ -1371,8 +1357,6 @@ The main characteristics of this chart are presented in Figure
 
 \section{Death - Number of Records}\label{death---number-of-records}
 
-Discuss what is important to see in this chart\ldots{} TO DO
-
 \subsection{SQL query}\label{sql-query-15}
 
 \begin{Shaded}
@@ -1447,17 +1431,20 @@ The main characteristics of this chart are presented in Figure
 
 \chapter{Concepts}\label{concepts}
 
-Discuss the organization of this dashboard\ldots{} TO DO
-
 This chapter follows a different organization due to the reuse of the
 same query in several charts.
 
 \section{Concepts General Tab}\label{concepts-general-tab}
 
-Say the goal of this tab TO DO
-
 This tab uses an unique query and all the filters and charts were
-created using the same output.
+created using the same output. Therefore, this dashboard is composed by
+two filters, one big number, two bar charts and one table. The filters
+were splitted in order to apply the filtering of one over the other one.
+Figure \ref{fig:conceptsGeneralLayout} shows this dashboard's layout.
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/conceptsGeneralLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsGeneralLayout}
+\end{figure}
 
 \subsection{SQL query}\label{sql-query-16}
 
@@ -1511,21 +1498,21 @@ created using the same output.
                 \DecValTok{1001}\NormalTok{, }\DecValTok{1801}\NormalTok{)}
             \KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ analysis_id, stratum_1, data_source_id, }
 \NormalTok{                concept_name, domain_id) ) }\KeywordTok{AS}\NormalTok{ q1}
-    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ q1.data_source_id=source.id}
+    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ public.data_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{        q1.data_source_id=source.id}
 \KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ q1.concept_id, q1.concept_name, q1.domain_id,source.name;}
 \end{Highlighting}
 \end{Shaded}
 
 \subsection{Charts}\label{charts}
 
-Here are all the charts presented in this dashboard using the previous
-query TO DO
-
 \subsubsection{Entity Type Filter}\label{entity-type-filter}
 
-Discuss what is important to see in this chart\ldots{} TO DO The main
-characteristics of this chart are presented in Figure
-\ref{fig:visitTypes}, being the following:
+This filter, which is a type of chart in Superset, was designed to be
+used in the dashboard aiming the filtering of the data based on the
+field `'domain\_id'`from the table'`concept''. The main characteristics
+of this filter are presented in Figure \ref{fig:entityTypeFilter}, being
+the following:
 
 \begin{itemize}
 \tightlist
@@ -1535,55 +1522,47 @@ characteristics of this chart are presented in Figure
   \begin{itemize}
   \tightlist
   \item
-    \textbf{Visualization Type}: Bar Chart
+    \textbf{Visualization Type}: Filter Box
   \item
     \textbf{Time range}: No filter
   \item
     \textbf{Metrics}:
   \item
-    \textbf{Filters}: Empty
+    \textbf{Filters - Column}: domain\_id
   \item
-    \textbf{Series}:
+    \textbf{Filters - Label}: Entity Type
   \item
-    \textbf{Breakdowns}:
+    \textbf{Data Filter}: Not checked
   \item
     \textbf{Row limit}: Empty
   \item
     \textbf{Contribution}: Not checked
-  \end{itemize}
-\item
-  \textbf{Costumize Tab}:
-
-  \begin{itemize}
-  \tightlist
   \item
-    \textbf{Y Axis Label}:
+    \textbf{Instant Filtering}: Checked
   \item
-    \textbf{X Axis Label}:
+    \textbf{Show SQL Granularity Dropdown}: Not checked
   \item
-    \textbf{Legend}: Checked
+    \textbf{Show Druid Granularity Dropdown}: Not checked
   \item
-    \textbf{Stacked Bars}:
+    \textbf{Show SQL Time Column}: Not checked
   \item
-    \textbf{Bar Values}:
+    \textbf{Show Druid Time Origin}: Not checked
   \item
-    \textbf{Sort Bars}:
-  \item
-    \textbf{Extra Controls}:
-  \item
-    \textbf{Reduce X ticks}:
+    \textbf{Limit Selector Values}: Empty
   \end{itemize}
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes6}
+\includegraphics[width=1\linewidth]{images/entityTypeFilter} \caption{Settings for creating the database entity type filter.}\label{fig:entityTypeFilter}
 \end{figure}
 
 \subsubsection{Concept Filter}\label{concept-filter}
 
-Discuss what is important to see in this chart\ldots{} TO DO The main
-characteristics of this chart are presented in Figure
-\ref{fig:visitTypes}, being the following:
+Similar to the previous filter, this was designed to be used in the
+dashboard aiming the filtering of the data based on the field
+`'concept\_name'`from the table'`concept''. The main characteristics of
+this filter are presented in Figure \ref{fig:conceptFilter}, being the
+following:
 
 \begin{itemize}
 \tightlist
@@ -1593,48 +1572,38 @@ characteristics of this chart are presented in Figure
   \begin{itemize}
   \tightlist
   \item
-    \textbf{Visualization Type}: Bar Chart
+    \textbf{Visualization Type}: Filter Box
   \item
     \textbf{Time range}: No filter
   \item
     \textbf{Metrics}:
   \item
-    \textbf{Filters}: Empty
+    \textbf{Filters - Column}: concept\_name
   \item
-    \textbf{Series}:
+    \textbf{Filters - Label}: Concept
   \item
-    \textbf{Breakdowns}:
+    \textbf{Data Filter}: Not checked
   \item
     \textbf{Row limit}: Empty
   \item
     \textbf{Contribution}: Not checked
-  \end{itemize}
-\item
-  \textbf{Costumize Tab}:
-
-  \begin{itemize}
-  \tightlist
   \item
-    \textbf{Y Axis Label}:
+    \textbf{Instant Filtering}: Checked
   \item
-    \textbf{X Axis Label}:
+    \textbf{Show SQL Granularity Dropdown}: Not checked
   \item
-    \textbf{Legend}: Checked
+    \textbf{Show Druid Granularity Dropdown}: Not checked
   \item
-    \textbf{Stacked Bars}:
+    \textbf{Show SQL Time Column}: Not checked
   \item
-    \textbf{Bar Values}:
+    \textbf{Show Druid Time Origin}: Not checked
   \item
-    \textbf{Sort Bars}:
-  \item
-    \textbf{Extra Controls}:
-  \item
-    \textbf{Reduce X ticks}:
+    \textbf{Limit Selector Values}: Empty
   \end{itemize}
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes7}
+\includegraphics[width=1\linewidth]{images/conceptFilter} \caption{Settings for creating the concept filter.}\label{fig:conceptFilter}
 \end{figure}
 
 \subsubsection{Number of Concepts}\label{number-of-concepts}
@@ -1697,8 +1666,7 @@ characteristics of this chart are presented in Figure
 
 \subsubsection{Concept Browser Table}\label{concept-browser-table}
 
-Discuss what is important to see in this chart\ldots{} TO DO The main
-characteristics of this chart are presented in Figure
+The main characteristics of this chart are presented in Figure
 \ref{fig:visitTypes}, being the following:
 
 \begin{itemize}
@@ -1755,8 +1723,7 @@ characteristics of this chart are presented in Figure
 
 \subsubsection{\# of Occurrences}\label{of-occurrences}
 
-Discuss what is important to see in this chart\ldots{} TO DO The main
-characteristics of this chart are presented in Figure
+The main characteristics of this chart are presented in Figure
 \ref{fig:visitTypes}, being the following:
 
 \begin{itemize}
@@ -1813,8 +1780,7 @@ characteristics of this chart are presented in Figure
 
 \subsubsection{\# of Patients}\label{of-patients}
 
-Discuss what is important to see in this chart\ldots{} TO DO The main
-characteristics of this chart are presented in Figure
+The main characteristics of this chart are presented in Figure
 \ref{fig:visitTypes}, being the following:
 
 \begin{itemize}
@@ -1871,13 +1837,16 @@ characteristics of this chart are presented in Figure
 
 \section{Concepts Domains Tab}\label{concepts-domains-tab}
 
-Discuss what is important to see in this chart\ldots{} TO DO
-
 This tab is composed of six bar charts that show the percentage of
 existent concepts in each database. These charts are similar but divided
 by the concept domains existent in the standard vocabularies, which are
 the conditions, procedures, drugs, observations, measurements and
-devices.
+devices. Figure \ref{fig:conceptsDomainsLayout} shows this dashboard's
+layout.
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/conceptsDomainsLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsDomainsLayout}
+\end{figure}
 
 \subsection{SQL query}\label{sql-query-17}
 
@@ -1990,14 +1959,11 @@ for the filter. Those characteristics are the following:
 
 \chapter{Data Domains}\label{data-domains}
 
-Discuss what is important to see in this chart\ldots{} TO DO In this
-dashboard is present the `'Database Type Filter'', that was detailed in
-the Chapter General.
+In this dashboard is present the `'Database Type Filter'', that was
+detailed in the Chapter General.
 
 \section{Data Domains - Number of Records per
 Peson}\label{data-domains---number-of-records-per-peson}
-
-Discuss what is important to see in this chart\ldots{} TO DO
 
 \subsection{SQL query}\label{sql-query-18}
 

@@ -8,7 +8,7 @@ output: html_document
 # Person
 
 
-Discuss the goal of this dashboard... TO DO
+<!-- Discuss the goal of this dashboard... TO DO -->
 
 In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General. Besides, it was necessary to customize the dashboard JSON Metadata in order to obtain the colours blue and rose in the chart representing the gender distribution. Therefore, the following entry should be added in the settings of this dashboard:
 
@@ -22,7 +22,7 @@ In this dashboard is present the ''Database Type Filter'', that was detailed in 
 
 ## Person - Patients by age
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
@@ -68,7 +68,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:personP
 
 ## Person - Births by Year
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
@@ -115,7 +115,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:personB
 
 ## Person - Gender Distribution
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 

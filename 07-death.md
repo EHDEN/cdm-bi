@@ -7,12 +7,13 @@ output: html_document
 
 # Death
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss the goal of this dashboard... TO DO -->
+
 In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
 
 ## Death - By Month per Thousand People
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
@@ -58,7 +59,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:deathBy
 
 ## Death - Number of Records
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 

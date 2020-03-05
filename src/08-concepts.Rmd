@@ -9,15 +9,20 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Concepts
 
-Discuss the organization of this dashboard... TO DO
+<!-- Discuss the goal of this dashboard... TO DO -->
 
 This chapter follows a different organization due to the reuse of the same query in several charts.
 
 ## Concepts General Tab
 
-Say the goal of this tab TO DO
+<!-- Say the goal of this tab TO DO -->
 
-This tab uses an unique query and all the filters and charts were created using the same output.
+This tab uses an unique query and all the filters and charts were created using the same output. Therefore, this dashboard is composed by two filters, one big number, two bar charts and one table. The filters were splitted in order to apply the filtering of one over the other one. Figure \@ref(fig:conceptsGeneralLayout) shows this dashboard's layout. 
+
+
+```{r conceptsGeneralLayout, fig.cap="Distribution of charts on the dashboard.",echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/conceptsGeneralLayout.png")
+```
 
 ### SQL query
            
@@ -70,69 +75,62 @@ FROM (SELECT analysis_id,
                 1001, 1801)
             GROUP BY analysis_id, stratum_1, data_source_id, 
                 concept_name, domain_id) ) AS q1
-    INNER JOIN public.data_source AS source ON q1.data_source_id=source.id
+    INNER JOIN public.data_source AS source ON 
+        q1.data_source_id=source.id
 GROUP BY q1.concept_id, q1.concept_name, q1.domain_id,source.name;
 ```
 
 
 ### Charts
 
-Here are all the charts presented in this dashboard using the previous query TO DO
+<!-- Here are all the charts presented in this dashboard using the previous query TO DO -->
 
 #### Entity Type Filter
 
-Discuss what is important to see in this chart... TO DO
-The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+This filter, which is a type of chart in Superset, was designed to be used in the dashboard aiming the filtering of the data based on the field ''domain_id'' from the table ''concept''. The main characteristics of this filter are presented in Figure \@ref(fig:entityTypeFilter), being the following:
 
 - **Data Tab**:
-    - **Visualization Type**: Bar Chart
+    - **Visualization Type**: Filter Box
     - **Time range**: No filter
     - **Metrics**:
-    - **Filters**: Empty
-    - **Series**:
-    - **Breakdowns**:
+    - **Filters - Column**: domain_id
+    - **Filters - Label**: Entity Type
+    - **Data Filter**: Not checked
     - **Row limit**: Empty
     - **Contribution**: Not checked
-- **Costumize Tab**:
-    - **Y Axis Label**: 
-    - **X Axis Label**: 
-    - **Legend**: Checked
-    - **Stacked Bars**:
-    - **Bar Values**:
-    - **Sort Bars**:
-    - **Extra Controls**:
-    - **Reduce X ticks**:
+    - **Instant Filtering**: Checked
+    - **Show SQL Granularity Dropdown**: Not checked
+    - **Show Druid Granularity Dropdown**: Not checked
+    - **Show SQL Time Column**: Not checked
+    - **Show Druid Time Origin**: Not checked
+    - **Limit Selector Values**: Empty
 
-```{r visitTypes6, fig.cap="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartDates.png")
+```{r entityTypeFilter, fig.cap="Settings for creating the database entity type filter.",echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/entityTypeFilter.png")
 ```
 
 #### Concept Filter
 
-Discuss what is important to see in this chart... TO DO
-The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+Similar to the previous filter, this was designed to be used in the dashboard aiming the filtering of the data based on the field ''concept_name'' from the table ''concept''. The main characteristics of this filter are presented in Figure \@ref(fig:conceptFilter), being the following:
 
 - **Data Tab**:
-    - **Visualization Type**: Bar Chart
+    - **Visualization Type**: Filter Box
     - **Time range**: No filter
     - **Metrics**:
-    - **Filters**: Empty
-    - **Series**:
-    - **Breakdowns**:
+    - **Filters - Column**: concept_name
+    - **Filters - Label**: Concept
+    - **Data Filter**: Not checked
     - **Row limit**: Empty
     - **Contribution**: Not checked
-- **Costumize Tab**:
-    - **Y Axis Label**: 
-    - **X Axis Label**: 
-    - **Legend**: Checked
-    - **Stacked Bars**:
-    - **Bar Values**:
-    - **Sort Bars**:
-    - **Extra Controls**:
-    - **Reduce X ticks**:
+    - **Instant Filtering**: Checked
+    - **Show SQL Granularity Dropdown**: Not checked
+    - **Show Druid Granularity Dropdown**: Not checked
+    - **Show SQL Time Column**: Not checked
+    - **Show Druid Time Origin**: Not checked
+    - **Limit Selector Values**: Empty
 
-```{r visitTypes7, fig.cap="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartDates.png")
+```{r conceptFilter, fig.cap="Settings for creating the concept filter.",echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/conceptFilter.png")
 ```
 
 #### Number of Concepts
@@ -165,7 +163,8 @@ knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartD
 
 #### Concept Browser Table
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
+
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
 
 - **Data Tab**:
@@ -193,7 +192,8 @@ knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartD
 
 #### \# of Occurrences
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
+
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
 
 - **Data Tab**:
@@ -221,7 +221,8 @@ knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartD
 
 #### \# of Patients
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
+
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
 
 - **Data Tab**:
@@ -251,9 +252,14 @@ knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartD
 
 ## Concepts Domains Tab
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
-This tab is composed of six bar charts that show the percentage of existent concepts in each database. These charts are similar but divided by the concept domains existent in the standard vocabularies, which are the conditions, procedures, drugs, observations, measurements and devices.
+This tab is composed of six bar charts that show the percentage of existent concepts in each database. These charts are similar but divided by the concept domains existent in the standard vocabularies, which are the conditions, procedures, drugs, observations, measurements and devices. Figure \@ref(fig:conceptsDomainsLayout) shows this dashboard's layout. 
+
+
+```{r conceptsDomainsLayout, fig.cap="Distribution of charts on the dashboard.",echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/conceptsDomainsLayout.png")
+```
 
 ### SQL query
 

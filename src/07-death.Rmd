@@ -9,12 +9,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Death
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss the goal of this dashboard... TO DO -->
+
 In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
 
 ## Death - By Month per Thousand People
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
@@ -59,7 +60,7 @@ knitr::include_graphics("images/deathByMonthPerThousandPeople.png")
 
 ## Death - Number of Records
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 

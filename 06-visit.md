@@ -7,12 +7,13 @@ output: html_document
 
 # Visit
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss the goal of this dashboard... TO DO -->
+
 In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
 
 ## Visit - Types
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 

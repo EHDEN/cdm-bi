@@ -24,7 +24,7 @@
 <meta name="author" content="This document is currently under construction" />
 
 
-<meta name="date" content="2020-03-04" />
+<meta name="date" content="2020-03-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -108,6 +108,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i>Contributors</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#considerations"><i class="fa fa-check"></i>Considerations</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledges"><i class="fa fa-check"></i>Acknowledges</a></li>
 </ul></li>
@@ -228,12 +229,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="concepts" class="section level1">
 <h1><span class="header-section-number">Chapter 8</span> Concepts</h1>
-<p>Discuss the organization of this dashboard… TO DO</p>
+<!-- Discuss the goal of this dashboard... TO DO -->
 <p>This chapter follows a different organization due to the reuse of the same query in several charts.</p>
 <div id="concepts-general-tab" class="section level2">
 <h2><span class="header-section-number">8.1</span> Concepts General Tab</h2>
-<p>Say the goal of this tab TO DO</p>
-<p>This tab uses an unique query and all the filters and charts were created using the same output.</p>
+<!-- Say the goal of this tab TO DO -->
+<p>This tab uses an unique query and all the filters and charts were created using the same output. Therefore, this dashboard is composed by two filters, one big number, two bar charts and one table. The filters were splitted in order to apply the filtering of one over the other one. Figure <a href="concepts.html#fig:conceptsGeneralLayout">8.1</a> shows this dashboard’s layout.</p>
+<div class="figure"><span id="fig:conceptsGeneralLayout"></span>
+<img src="images/conceptsGeneralLayout.png" alt="Distribution of charts on the dashboard." width="100%" />
+<p class="caption">
+Figure 8.1: Distribution of charts on the dashboard.
+</p>
+</div>
 <div id="sql-query-16" class="section level3">
 <h3><span class="header-section-number">8.1.1</span> SQL query</h3>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span>
@@ -284,77 +291,68 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
                 <span class="dv">1001</span>, <span class="dv">1801</span>)
             <span class="kw">GROUP</span> <span class="kw">BY</span> analysis_id, stratum_1, data_source_id, 
                 concept_name, domain_id) ) <span class="kw">AS</span> q1
-    <span class="kw">INNER</span> <span class="kw">JOIN</span> public.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> q1.data_source_id=source.id
+    <span class="kw">INNER</span> <span class="kw">JOIN</span> public.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> 
+        q1.data_source_id=source.id
 <span class="kw">GROUP</span> <span class="kw">BY</span> q1.concept_id, q1.concept_name, q1.domain_id,source.name;</code></pre></div>
 </div>
 <div id="charts" class="section level3">
 <h3><span class="header-section-number">8.1.2</span> Charts</h3>
-<p>Here are all the charts presented in this dashboard using the previous query TO DO</p>
+<!-- Here are all the charts presented in this dashboard using the previous query TO DO -->
 <div id="entity-type-filter" class="section level4">
 <h4><span class="header-section-number">8.1.2.1</span> Entity Type Filter</h4>
-<p>Discuss what is important to see in this chart… TO DO The main characteristics of this chart are presented in Figure <a href="visit.html#fig:visitTypes">6.1</a>, being the following:</p>
+<p>This filter, which is a type of chart in Superset, was designed to be used in the dashboard aiming the filtering of the data based on the field ‘’domain_id’‘from the table’‘concept’’. The main characteristics of this filter are presented in Figure <a href="concepts.html#fig:entityTypeFilter">8.2</a>, being the following:</p>
 <ul>
 <li><strong>Data Tab</strong>:
 <ul>
-<li><strong>Visualization Type</strong>: Bar Chart</li>
+<li><strong>Visualization Type</strong>: Filter Box</li>
 <li><strong>Time range</strong>: No filter</li>
 <li><strong>Metrics</strong>:</li>
-<li><strong>Filters</strong>: Empty</li>
-<li><strong>Series</strong>:</li>
-<li><strong>Breakdowns</strong>:</li>
+<li><strong>Filters - Column</strong>: domain_id</li>
+<li><strong>Filters - Label</strong>: Entity Type</li>
+<li><strong>Data Filter</strong>: Not checked</li>
 <li><strong>Row limit</strong>: Empty</li>
 <li><strong>Contribution</strong>: Not checked</li>
-</ul></li>
-<li><strong>Costumize Tab</strong>:
-<ul>
-<li><strong>Y Axis Label</strong>:</li>
-<li><strong>X Axis Label</strong>:</li>
-<li><strong>Legend</strong>: Checked</li>
-<li><strong>Stacked Bars</strong>:</li>
-<li><strong>Bar Values</strong>:</li>
-<li><strong>Sort Bars</strong>:</li>
-<li><strong>Extra Controls</strong>:</li>
-<li><strong>Reduce X ticks</strong>:</li>
+<li><strong>Instant Filtering</strong>: Checked</li>
+<li><strong>Show SQL Granularity Dropdown</strong>: Not checked</li>
+<li><strong>Show Druid Granularity Dropdown</strong>: Not checked</li>
+<li><strong>Show SQL Time Column</strong>: Not checked</li>
+<li><strong>Show Druid Time Origin</strong>: Not checked</li>
+<li><strong>Limit Selector Values</strong>: Empty</li>
 </ul></li>
 </ul>
-<div class="figure"><span id="fig:visitTypes6"></span>
-<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<div class="figure"><span id="fig:entityTypeFilter"></span>
+<img src="images/entityTypeFilter.png" alt="Settings for creating the database entity type filter." width="100%" />
 <p class="caption">
-Figure 8.1: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
+Figure 8.2: Settings for creating the database entity type filter.
 </p>
 </div>
 </div>
 <div id="concept-filter" class="section level4">
 <h4><span class="header-section-number">8.1.2.2</span> Concept Filter</h4>
-<p>Discuss what is important to see in this chart… TO DO The main characteristics of this chart are presented in Figure <a href="visit.html#fig:visitTypes">6.1</a>, being the following:</p>
+<p>Similar to the previous filter, this was designed to be used in the dashboard aiming the filtering of the data based on the field ‘’concept_name’‘from the table’‘concept’’. The main characteristics of this filter are presented in Figure <a href="concepts.html#fig:conceptFilter">8.3</a>, being the following:</p>
 <ul>
 <li><strong>Data Tab</strong>:
 <ul>
-<li><strong>Visualization Type</strong>: Bar Chart</li>
+<li><strong>Visualization Type</strong>: Filter Box</li>
 <li><strong>Time range</strong>: No filter</li>
 <li><strong>Metrics</strong>:</li>
-<li><strong>Filters</strong>: Empty</li>
-<li><strong>Series</strong>:</li>
-<li><strong>Breakdowns</strong>:</li>
+<li><strong>Filters - Column</strong>: concept_name</li>
+<li><strong>Filters - Label</strong>: Concept</li>
+<li><strong>Data Filter</strong>: Not checked</li>
 <li><strong>Row limit</strong>: Empty</li>
 <li><strong>Contribution</strong>: Not checked</li>
-</ul></li>
-<li><strong>Costumize Tab</strong>:
-<ul>
-<li><strong>Y Axis Label</strong>:</li>
-<li><strong>X Axis Label</strong>:</li>
-<li><strong>Legend</strong>: Checked</li>
-<li><strong>Stacked Bars</strong>:</li>
-<li><strong>Bar Values</strong>:</li>
-<li><strong>Sort Bars</strong>:</li>
-<li><strong>Extra Controls</strong>:</li>
-<li><strong>Reduce X ticks</strong>:</li>
+<li><strong>Instant Filtering</strong>: Checked</li>
+<li><strong>Show SQL Granularity Dropdown</strong>: Not checked</li>
+<li><strong>Show Druid Granularity Dropdown</strong>: Not checked</li>
+<li><strong>Show SQL Time Column</strong>: Not checked</li>
+<li><strong>Show Druid Time Origin</strong>: Not checked</li>
+<li><strong>Limit Selector Values</strong>: Empty</li>
 </ul></li>
 </ul>
-<div class="figure"><span id="fig:visitTypes7"></span>
-<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<div class="figure"><span id="fig:conceptFilter"></span>
+<img src="images/conceptFilter.png" alt="Settings for creating the concept filter." width="100%" />
 <p class="caption">
-Figure 8.2: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
+Figure 8.3: Settings for creating the concept filter.
 </p>
 </div>
 </div>
@@ -388,13 +386,14 @@ Figure 8.2: Settings for creating chart representing the number of patients at t
 <div class="figure"><span id="fig:visitTypes8"></span>
 <img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
 <p class="caption">
-Figure 8.3: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
+Figure 8.4: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
 </p>
 </div>
 </div>
 <div id="concept-browser-table" class="section level4">
 <h4><span class="header-section-number">8.1.2.4</span> Concept Browser Table</h4>
-<p>Discuss what is important to see in this chart… TO DO The main characteristics of this chart are presented in Figure <a href="visit.html#fig:visitTypes">6.1</a>, being the following:</p>
+<!-- Discuss what is important to see in this chart... TO DO -->
+<p>The main characteristics of this chart are presented in Figure <a href="visit.html#fig:visitTypes">6.1</a>, being the following:</p>
 <ul>
 <li><strong>Data Tab</strong>:
 <ul>
@@ -422,13 +421,14 @@ Figure 8.3: Settings for creating chart representing the number of patients at t
 <div class="figure"><span id="fig:visitTypes3"></span>
 <img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
 <p class="caption">
-Figure 8.4: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
+Figure 8.5: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
 </p>
 </div>
 </div>
 <div id="of-occurrences" class="section level4">
 <h4><span class="header-section-number">8.1.2.5</span> # of Occurrences</h4>
-<p>Discuss what is important to see in this chart… TO DO The main characteristics of this chart are presented in Figure <a href="visit.html#fig:visitTypes">6.1</a>, being the following:</p>
+<!-- Discuss what is important to see in this chart... TO DO -->
+<p>The main characteristics of this chart are presented in Figure <a href="visit.html#fig:visitTypes">6.1</a>, being the following:</p>
 <ul>
 <li><strong>Data Tab</strong>:
 <ul>
@@ -456,13 +456,14 @@ Figure 8.4: Settings for creating chart representing the number of patients at t
 <div class="figure"><span id="fig:visitTypes4"></span>
 <img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
 <p class="caption">
-Figure 8.5: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
+Figure 8.6: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
 </p>
 </div>
 </div>
 <div id="of-patients" class="section level4">
 <h4><span class="header-section-number">8.1.2.6</span> # of Patients</h4>
-<p>Discuss what is important to see in this chart… TO DO The main characteristics of this chart are presented in Figure <a href="visit.html#fig:visitTypes">6.1</a>, being the following:</p>
+<!-- Discuss what is important to see in this chart... TO DO -->
+<p>The main characteristics of this chart are presented in Figure <a href="visit.html#fig:visitTypes">6.1</a>, being the following:</p>
 <ul>
 <li><strong>Data Tab</strong>:
 <ul>
@@ -490,7 +491,7 @@ Figure 8.5: Settings for creating chart representing the number of patients at t
 <div class="figure"><span id="fig:visitTypes5"></span>
 <img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
 <p class="caption">
-Figure 8.6: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
+Figure 8.7: Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.
 </p>
 </div>
 </div>
@@ -498,8 +499,14 @@ Figure 8.6: Settings for creating chart representing the number of patients at t
 </div>
 <div id="concepts-domains-tab" class="section level2">
 <h2><span class="header-section-number">8.2</span> Concepts Domains Tab</h2>
-<p>Discuss what is important to see in this chart… TO DO</p>
-<p>This tab is composed of six bar charts that show the percentage of existent concepts in each database. These charts are similar but divided by the concept domains existent in the standard vocabularies, which are the conditions, procedures, drugs, observations, measurements and devices.</p>
+<!-- Discuss what is important to see in this chart... TO DO -->
+<p>This tab is composed of six bar charts that show the percentage of existent concepts in each database. These charts are similar but divided by the concept domains existent in the standard vocabularies, which are the conditions, procedures, drugs, observations, measurements and devices. Figure <a href="concepts.html#fig:conceptsDomainsLayout">8.8</a> shows this dashboard’s layout.</p>
+<div class="figure"><span id="fig:conceptsDomainsLayout"></span>
+<img src="images/conceptsDomainsLayout.png" alt="Distribution of charts on the dashboard." width="100%" />
+<p class="caption">
+Figure 8.8: Distribution of charts on the dashboard.
+</p>
+</div>
 <div id="sql-query-17" class="section level3">
 <h3><span class="header-section-number">8.2.1</span> SQL query</h3>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- Concepts Domains</span>
@@ -529,7 +536,7 @@ Figure 8.6: Settings for creating chart representing the number of patients at t
 </div>
 <div id="chart-settings-16" class="section level3">
 <h3><span class="header-section-number">8.2.2</span> Chart settings</h3>
-<p>The difference between the six charts related to concept domains is the condition in the filter. Therefore, to create all the charts of this dashboard, it is necessary to follow the main characteristics presented in Figure <a href="concepts.html#fig:conceptsDomainTypes">8.7</a> and the list of possible values for the filter. Those characteristics are the following:</p>
+<p>The difference between the six charts related to concept domains is the condition in the filter. Therefore, to create all the charts of this dashboard, it is necessary to follow the main characteristics presented in Figure <a href="concepts.html#fig:conceptsDomainTypes">8.9</a> and the list of possible values for the filter. Those characteristics are the following:</p>
 <ul>
 <li><strong>Data Tab</strong>:
 <ul>
@@ -566,7 +573,7 @@ Figure 8.6: Settings for creating chart representing the number of patients at t
 <div class="figure"><span id="fig:conceptsDomainTypes"></span>
 <img src="images/conceptsDomainTypes.png" alt="Settings for creating all the charts related with the concept domains for each databases (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
 <p class="caption">
-Figure 8.7: Settings for creating all the charts related with the concept domains for each databases (bar chart). Image changed to contain information hidden in the customize menu.
+Figure 8.9: Settings for creating all the charts related with the concept domains for each databases (bar chart). Image changed to contain information hidden in the customize menu.
 </p>
 </div>
 

@@ -42,6 +42,14 @@ To develop this tool, EHDEN organized a hack-a-thon (Aveiro, December 2-3, 2019)
 
 4 - The Hyve, Utrecht, Netherlands
 
+## Considerations {-}
+
+This manual was written to be a guide for a clean installation of this system with all the dashboards that we defined during the project. The first chapter describes the goal of the system and the second how to install the system. The remaining chapters are dedicated to the dashboards, in which chapters describes one dashboard and all its charts. To simplify the representation of the dashboard's layout, we used similar schemas as it is presented in Figure \@ref(fig:dashboardsLayout). The white box is the dashboard and the inside boxes are charts. The colour changes in relation to the type of chart.
+
+```{r dashboardsLayout, fig.cap="Example of a dashboards tool presenting the databases available in the network (simulated data)",echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/dashboardsLayout.png")
+```
+
 ## License {-}
 
 The system is open-source <!--under the license ....-->

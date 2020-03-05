@@ -7,7 +7,9 @@ output: html_document
 
 # Installation
 
-TO DO production and dev environments...
+NOTE: This instructions are outdated
+
+<!-- TO DO production and dev environments... -->
 
 Make sure that you have docker and docker-compose installed in your machine. Then, please follow these steps:
 

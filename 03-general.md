@@ -7,12 +7,13 @@ output: html_document
 
 # General
 
-VERY INCOMPLETE
-Discuss the goal of this dashboard... TO DO
+NOTE: This chapter is very incomplete and some queries have been changed
+
+<!-- Discuss the goal of this dashboard... TO DO -->
 
 ## Database Type Filter
 
-This filter which is a type of chart in Superset was designed to be used in the dashboard aiming the filtering of the data based on the field ''database_type'' from the table ''data_source''. It is important to give the alias ''Type'' to this field in the select operations because Superset does not recognize as the same field otherwise.
+This filter, which is a type of chart in Superset, was designed to be used in the dashboard aiming the filtering of the data based on the field ''database_type'' from the table ''data_source''. It is important to give the alias ''Type'' to this field in the select operations because Superset does not recognize as the same field otherwise.
 
 ### SQL query
 
@@ -50,13 +51,13 @@ The main characteristics of this chart are presented in Figure \@ref(fig:databas
     - **Reduce X ticks**:
 
 <div class="figure">
-<img src="images/databaseTypeFilter.png" alt="Superset chart creation: Settings for creating the database type filter." width="100%" />
-<p class="caption">(\#fig:databaseTypeFilter)Superset chart creation: Settings for creating the database type filter.</p>
+<img src="images/databaseTypeFilter.png" alt="Settings for creating the database type filter." width="100%" />
+<p class="caption">(\#fig:databaseTypeFilter)Settings for creating the database type filter.</p>
 </div>
 
 ## Country Filter
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
@@ -77,7 +78,7 @@ TO DO
 
 ## General - World Map
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
@@ -102,7 +103,7 @@ TO DO
 
 ## General - Network Growth (Summary)
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
@@ -144,7 +145,7 @@ TO DO
 
 ## General - Network Growth by Date
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
@@ -181,7 +182,7 @@ TO DO
 
 ## General - Patients per Country
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
@@ -206,7 +207,7 @@ TO DO
 
 ## General - Database Types per Country
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 

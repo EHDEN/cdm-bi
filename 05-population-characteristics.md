@@ -7,13 +7,15 @@ output: html_document
 
 # Population Characteristics
 
-Discuss the goal of this dashboard... TO DO
+<!-- Discuss the goal of this dashboard... TO DO -->
+
 In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
 
 
 ## Population characteristics - Patients in Observation Period per Month
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
+
 Patients in Observation Period per month (whole month)
 
 ### SQL query
@@ -61,7 +63,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:populat
 
 ## Population characteristics - Observation Period End Dates
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
@@ -107,7 +109,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:populat
 
 ## Population characteristics - Observation Period Start Dates
 
-Discuss what is important to see in this chart... TO DO
+<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
