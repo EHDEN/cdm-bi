@@ -23,7 +23,131 @@ This tab uses an unique query and all the filters and charts were created using 
 <p class="caption">(\#fig:conceptsGeneralLayout)Distribution of charts on the dashboard.</p>
 </div>
 
-### SQL query
+### Charts
+
+
+##### SQL query for the top row charts
+           
+```sql
+SELECT concept_name,
+       domain_id,
+       source.name AS source_name
+FROM achilles_results
+JOIN concept ON cast(stratum_1 AS BIGINT) = concept_id
+INNER JOIN public.data_source AS source ON data_source_id=source.id
+WHERE analysis_id in (201, 401, 601, 701, 801, 901, 1001, 1801, 200, 400, 600, 700, 800, 1800)
+```
+
+<!-- Here are all the charts presented in this dashboard using the previous query TO DO -->
+
+#### Entity Type Filter
+
+This filter, which is a type of chart in Superset, was designed to be used in the dashboard aiming the filtering of the data based on the field ''domain_id'' from the table ''concept''. The main characteristics of this filter are presented in Figure \@ref(fig:entityTypeFilter), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Filter Box
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters - Column**: domain_id
+    - **Filters - Label**: Entity Type
+    - **Data Filter**: Not checked
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+    - **Instant Filtering**: Checked
+    - **Show SQL Granularity Dropdown**: Not checked
+    - **Show Druid Granularity Dropdown**: Not checked
+    - **Show SQL Time Column**: Not checked
+    - **Show Druid Time Origin**: Not checked
+    - **Limit Selector Values**: Empty
+
+<div class="figure">
+<img src="images/entityTypeFilter.png" alt="Settings for creating the database entity type filter." width="100%" />
+<p class="caption">(\#fig:entityTypeFilter)Settings for creating the database entity type filter.</p>
+</div>
+
+#### Concept Filter
+
+Similar to the previous filter, this was designed to be used in the dashboard aiming the filtering of the data based on the field ''concept_name'' from the table ''concept''. The main characteristics of this filter are presented in Figure \@ref(fig:conceptFilter), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Filter Box
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters - Column**: concept_name
+    - **Filters - Label**: Concept
+    - **Data Filter**: Not checked
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+    - **Instant Filtering**: Checked
+    - **Show SQL Granularity Dropdown**: Not checked
+    - **Show Druid Granularity Dropdown**: Not checked
+    - **Show SQL Time Column**: Not checked
+    - **Show Druid Time Origin**: Not checked
+    - **Limit Selector Values**: Empty
+
+<div class="figure">
+<img src="images/conceptFilter.png" alt="Settings for creating the concept filter." width="100%" />
+<p class="caption">(\#fig:conceptFilter)Settings for creating the concept filter.</p>
+</div>
+
+#### Datasource Filter
+
+Similar to the previous filter, this was designed to be used in the dashboard aiming the filtering of the data based on the field ''name'' from the table ''data_source''. The main characteristics of this filter are presented in Figure \@ref(fig:datasourceFilter), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Filter Box
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters - Column**: source_name
+    - **Filters - Label**: Concept
+    - **Data Filter**: Not checked
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+    - **Instant Filtering**: Checked
+    - **Show SQL Granularity Dropdown**: Not checked
+    - **Show Druid Granularity Dropdown**: Not checked
+    - **Show SQL Time Column**: Not checked
+    - **Show Druid Time Origin**: Not checked
+    - **Limit Selector Values**: Empty
+
+<div class="figure">
+<img src="images/datasourceFilter.png" alt="Settings for creating the datasource filter." width="100%" />
+<p class="caption">(\#fig:datasourceFilter)Settings for creating the datasource filter.</p>
+</div>
+
+
+#### Number of Concepts
+
+Discuss what is important to see in this chart... TO DO
+The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+
+- **Data Tab**:
+    - **Visualization Type**: Bar Chart
+    - **Time range**: No filter
+    - **Metrics**:
+    - **Filters**: Empty
+    - **Series**:
+    - **Breakdowns**:
+    - **Row limit**: Empty
+    - **Contribution**: Not checked
+- **Costumize Tab**:
+    - **Y Axis Label**: 
+    - **X Axis Label**: 
+    - **Legend**: Checked
+    - **Stacked Bars**:
+    - **Bar Values**:
+    - **Sort Bars**:
+    - **Extra Controls**:
+    - **Reduce X ticks**:
+
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes8)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
+
+#### Concept Browser Table
+
+##### SQL query
            
 ```sql
 SELECT
@@ -79,92 +203,6 @@ FROM (SELECT analysis_id,
 GROUP BY q1.concept_id, q1.concept_name, q1.domain_id,source.name;
 ```
 
-
-### Charts
-
-<!-- Here are all the charts presented in this dashboard using the previous query TO DO -->
-
-#### Entity Type Filter
-
-This filter, which is a type of chart in Superset, was designed to be used in the dashboard aiming the filtering of the data based on the field ''domain_id'' from the table ''concept''. The main characteristics of this filter are presented in Figure \@ref(fig:entityTypeFilter), being the following:
-
-- **Data Tab**:
-    - **Visualization Type**: Filter Box
-    - **Time range**: No filter
-    - **Metrics**:
-    - **Filters - Column**: domain_id
-    - **Filters - Label**: Entity Type
-    - **Data Filter**: Not checked
-    - **Row limit**: Empty
-    - **Contribution**: Not checked
-    - **Instant Filtering**: Checked
-    - **Show SQL Granularity Dropdown**: Not checked
-    - **Show Druid Granularity Dropdown**: Not checked
-    - **Show SQL Time Column**: Not checked
-    - **Show Druid Time Origin**: Not checked
-    - **Limit Selector Values**: Empty
-
-<div class="figure">
-<img src="images/entityTypeFilter.png" alt="Settings for creating the database entity type filter." width="100%" />
-<p class="caption">(\#fig:entityTypeFilter)Settings for creating the database entity type filter.</p>
-</div>
-
-#### Concept Filter
-
-Similar to the previous filter, this was designed to be used in the dashboard aiming the filtering of the data based on the field ''concept_name'' from the table ''concept''. The main characteristics of this filter are presented in Figure \@ref(fig:conceptFilter), being the following:
-
-- **Data Tab**:
-    - **Visualization Type**: Filter Box
-    - **Time range**: No filter
-    - **Metrics**:
-    - **Filters - Column**: concept_name
-    - **Filters - Label**: Concept
-    - **Data Filter**: Not checked
-    - **Row limit**: Empty
-    - **Contribution**: Not checked
-    - **Instant Filtering**: Checked
-    - **Show SQL Granularity Dropdown**: Not checked
-    - **Show Druid Granularity Dropdown**: Not checked
-    - **Show SQL Time Column**: Not checked
-    - **Show Druid Time Origin**: Not checked
-    - **Limit Selector Values**: Empty
-
-<div class="figure">
-<img src="images/conceptFilter.png" alt="Settings for creating the concept filter." width="100%" />
-<p class="caption">(\#fig:conceptFilter)Settings for creating the concept filter.</p>
-</div>
-
-#### Number of Concepts
-
-Discuss what is important to see in this chart... TO DO
-The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
-
-- **Data Tab**:
-    - **Visualization Type**: Bar Chart
-    - **Time range**: No filter
-    - **Metrics**:
-    - **Filters**: Empty
-    - **Series**:
-    - **Breakdowns**:
-    - **Row limit**: Empty
-    - **Contribution**: Not checked
-- **Costumize Tab**:
-    - **Y Axis Label**: 
-    - **X Axis Label**: 
-    - **Legend**: Checked
-    - **Stacked Bars**:
-    - **Bar Values**:
-    - **Sort Bars**:
-    - **Extra Controls**:
-    - **Reduce X ticks**:
-
-<div class="figure">
-<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
-<p class="caption">(\#fig:visitTypes8)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
-</div>
-
-#### Concept Browser Table
-
 <!-- Discuss what is important to see in this chart... TO DO -->
 
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
@@ -176,7 +214,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
     - **Filters**: Empty
     - **Series**:
     - **Breakdowns**:
-    - **Row limit**: Empty
+    - **Row limit**: 100
     - **Contribution**: Not checked
 - **Costumize Tab**:
     - **Y Axis Label**: 
@@ -195,6 +233,20 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
 
 #### \# of Occurrences
 
+##### SQL query
+```sql
+SELECT concept_name,
+     domain_id,
+     source.name AS source_name,
+     sum(count_value) AS "Occurrence_count"
+FROM achilles_results
+JOIN concept ON cast(stratum_1 AS BIGINT)=concept_id
+INNER JOIN public.data_source AS source ON data_source_id=source.id
+WHERE analysis_id in (201, 401, 601, 701, 801, 901, 1001, 1801)
+GROUP BY concept_name, domain_id, source_name
+ORDER BY "Occurrence_count" DESC
+```
+
 <!-- Discuss what is important to see in this chart... TO DO -->
 
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
@@ -206,7 +258,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
     - **Filters**: Empty
     - **Series**:
     - **Breakdowns**:
-    - **Row limit**: Empty
+    - **Row limit**: 100
     - **Contribution**: Not checked
 - **Costumize Tab**:
     - **Y Axis Label**: 
@@ -219,12 +271,26 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
     - **Reduce X ticks**:
 
 <div class="figure">
-<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<img src="images/conceptGeneral_occurrences.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
 <p class="caption">(\#fig:visitTypes4)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
 </div>
 
 #### \# of Patients
 
+##### SQL query
+```sql
+SELECT concept_name,
+     domain_id,
+     source.name AS source_name,
+     sum(count_value) AS "Person_count"
+FROM achilles_results
+JOIN concept ON cast(stratum_1 AS BIGINT) = concept_id
+INNER JOIN public.data_source AS source ON data_source_id=source.id
+WHERE analysis_id in (200, 400, 600, 700, 800, 1800)
+GROUP BY concept_name, domain_id, source.name
+ORDER BY "Person_count" DESC
+```
+
 <!-- Discuss what is important to see in this chart... TO DO -->
 
 The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
@@ -236,7 +302,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
     - **Filters**: Empty
     - **Series**:
     - **Breakdowns**:
-    - **Row limit**: Empty
+    - **Row limit**: 100
     - **Contribution**: Not checked
 - **Costumize Tab**:
     - **Y Axis Label**: 
@@ -249,7 +315,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
     - **Reduce X ticks**:
 
 <div class="figure">
-<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<img src="images/conceptGeneral_patients.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
 <p class="caption">(\#fig:visitTypes5)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
 </div>
 
