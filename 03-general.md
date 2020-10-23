@@ -3,230 +3,359 @@ title: "03-general.Rmd"
 output: html_document
 ---
 
-
-
 # General
-
-NOTE: This chapter is very incomplete and some queries have been changed
 
 <!-- Discuss the goal of this dashboard... TO DO -->
 
-## Database Type Filter
-
-This filter, which is a type of chart in Superset, was designed to be used in the dashboard aiming the filtering of the data based on the field ''database_type'' from the table ''data_source''. It is important to give the alias ''Type'' to this field in the select operations because Superset does not recognize as the same field otherwise.
-
-### SQL query
-
-```sql
---  Country and database type filters
-SELECT source.name, 
-       country.country AS Country, 
-       database_type AS Type,
-       source.slug
-FROM public.data_source AS source INNER JOIN public.country 
-    AS country ON source.country_id=country.id;
-```
-
-### Chart settings
-
-The main characteristics of this chart are presented in Figure \@ref(fig:databaseTypeFilter), being the following:
-
-- **Data Tab**:
-    - **Visualization Type**: Bar Chart
-    - **Time range**: No filter
-    - **Metrics**:
-    - **Filters**: Empty
-    - **Series**:
-    - **Breakdowns**:
-    - **Row limit**: Empty
-    - **Contribution**: Not checked
-- **Costumize Tab**:
-    - **Y Axis Label**: 
-    - **X Axis Label**: 
-    - **Legend**: Checked
-    - **Stacked Bars**:
-    - **Bar Values**:
-    - **Sort Bars**:
-    - **Extra Controls**:
-    - **Reduce X ticks**:
+## Database Type and Country Filter
 
 <div class="figure">
-<img src="images/databaseTypeFilter.png" alt="Settings for creating the database type filter." width="100%" />
-<p class="caption">(\#fig:databaseTypeFilter)Settings for creating the database type filter.</p>
+<img src="images/03-general/01-filters.png" alt="Settings for creating filters charts" width="100%" />
+<p class="caption">(\#fig:03-general/01-filters.png) Settings for creating the filters charts</p>
 </div>
 
-## Country Filter
+Theses filter were designed to be used in the dashboard aiming the filtering of the data based on the field ''database_type'' and "country" from the table ''data_source''.
 
-<!-- Discuss what is important to see in this chart... TO DO -->
+**For the filters to work the name of the fields to filter should match in all tables used on the charts of this dashboard.**
 
 ### SQL query
 
 ```sql
---  Country and database type filters
 SELECT source.name, 
-       country.country AS Country, 
-       database_type AS Type,
-       source.slug
+       country.country,
+       source.database_type,
+       source.acronym
 FROM public.data_source AS source INNER JOIN public.country 
-    AS country ON source.country_id=country.id;
+  AS country ON source.country_id=country.id
 ```
 
 ### Chart settings
 
-TO DO
+- Data Tab
+  
+  - Datasource & Chart Type
+    
+    - Visualization Type: Filter Box
+  
+  - Time
+    
+    - Time range: No filter
+  
+  - Filters Configuration
+    
+    - Filters:
+      
+      - database_type or country
+    
+    - Date Filter: off
+    
+    - Instant Filtering: on
 
+## Total Number of Patients
 
-## General - World Map
+<div class="figure">
+<img src="images/03-general/02-total_number_of_patients.png" alt="Settings for creating the Total Number of Patients chart" width="100%" />
+<p class="caption">(\#fig:03-general/02-total_number_of_patients.png) Settings for creating the Total Number of Patients chart</p>
+</div>
+
+### SQL query
+
+```sql
+SELECT
+ country,
+ database_type,
+ release_date,
+ SUM(count_value) OVER (ORDER BY release_date ASC)
+FROM achilles_results
+JOIN data_source ON data_source_id = data_source.id
+JOIN country ON data_source.country_id = country.id
+WHERE analysis_id = 1
+```
+
+### Chart settings
+
+- Data Tab
+  
+  - Datasource & Chart Type
+    
+    - Visualization Type: Big Number with Trendline
+  
+  - Time
+    
+    - Time range: No filter
+  
+  - Query
+    
+    - Metrics: MAX(sum)
+    
+    - Series: release_date
+    
+    - Breakdowns: source
+
+- Customize Tab
+  
+  - Chart Options
+    
+    - Big Number Font Size: Small
+    
+    - Subheader Font Size: Tiny
+
+## Network Growth by Date
+
+<div class="figure">
+<img src="images/03-general/03-network_growth_by_date.png" alt="Settings for creating the Network Growth by Date chart" width="100%" />
+<p class="caption">(\#fig:03-general/03-network_growth_by_date.png) Settings for creating the Network Growth by Date chart</p>
+</div>
+
+### SQL query
+
+```sql
+SELECT  data.source,
+        data.country,
+        data.database_type,
+        data.release_date,
+        concept_name AS gender,
+        count_value AS count
+FROM  (
+        SELECT  source.name             AS source,
+                achilles.analysis_id    AS analysis_id,
+                achilles.count_value,
+                country.country,
+                source.database_type, 
+                source.release_date
+        FROM public.achilles_results AS achilles INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+        INNER JOIN public.country AS country ON source.country_id=country.id
+        ) data
+JOIN (SELECT '8507' AS concept_id, 'Male' AS concept_name UNION SELECT '8532' AS concept_id, 'Female' AS concept_name) AS concepts ON data.stratum_1 = concept_id
+WHERE analysis_id =2
+```
+
+### Chart settings
+
+- Data Tab
+  
+  - Datasource & Chart Type
+    
+    - Visualization Type: Bar Chart
+  
+  - Time
+    
+    - Time range: No filter
+  
+  - Query
+    
+    - Metrics: SUM(count_value)
+    
+    - Series: release_date
+    
+    - Breakdowns: source
+
+- Customize Tab
+  
+  - Chart Options
+    
+    - Stacked Bars: on
+    
+    - Sort Bars: on
+    
+    - Extra Controls: on
+  
+  - X Axis
+    
+    - Reduce X ticks
+
+## Patients per Country
+
+<div class="figure">
+<img src="images/03-general/04-patients_per_country.png" alt="Settings for creating the Patients per Country chart" width="100%" />
+<p class="caption">(\#fig:03-general/04-patients_per_country.png) Settings for creating the Patients per Country chart</p>
+</div>
+
+### SQL query
+
+```sql
+SELECT country.country,
+       source.database_type,
+       count_value
+FROM public.achilles_results AS achilles 
+    INNER JOIN public.data_source AS source ON 
+      achilles.data_source_id=source.id
+    INNER JOIN public.country AS country ON 
+      source.country_id=country.id
+WHERE analysis_id = 1
+```
+
+### Chart settings
+
+- Data Tab
+  
+  - Datasource & Chart Type
+    
+    - Visualization Type: Bar Chart
+  
+  - Time
+    
+    - Time range: No filter
+  
+  - Query
+    
+    - Metrics: SUM(count_value)
+    
+    - Series: country
+
+- Customize Tab
+  
+  - Chart Options
+    
+    - Legend: off
+    
+    - Y Axis Label: Nº of Patients
+  
+  - X Axis
+    
+    - X Axis Label: Country
+
+## Database Types per Country
+
+<div class="figure">
+<img src="images/03-general/05-database_types_per_country.png" alt="Settings for creating the Database Type per Country chart" width="100%" />
+<p class="caption">(\#fig:03-general/05-database_types_per_country.png) Settings for creating the Database Type per Country chart</p>
+</div>
+
+### SQL query
+
+Same as [Patients per Country](#patients-per-country) query
+
+```sql
+SELECT country.country,
+       source.database_type,
+       count_value
+FROM public.achilles_results AS achilles 
+    INNER JOIN public.data_source AS source ON 
+      achilles.data_source_id=source.id
+    INNER JOIN public.country AS country ON 
+      source.country_id=country.id
+WHERE analysis_id = 1
+```
+
+### Chart settings
+
+- Data Tab
+  
+  - Datasource & Chart Type
+    
+    - Visualization Type: Heatmap
+  
+  - Time
+    
+    - Time range: No filter
+  
+  - Query
+    
+    - X: country
+    
+    - Y: database_type
+    
+    - Metric: SUM(countr_value)
+  
+  - Heatmap Options
+    
+    - Left Margin: 75
+    - Show Percentage: off
+
+## World Map
+
+<div class="figure">
+<img src="images/03-general/06-world_map.png" alt="Settings for creating the World Map chart" width="100%" />
+<p class="caption">(\#fig:03-general/06-world_map.png) Settings for creating the World Map chart</p>
+</div>
 
 <!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
 ```sql
---    General - World Map
 SELECT  name,
-        slug,
-        release_date,
-        database_type AS Type,
+        acronym,
+        database_type,
         latitude,
         longitude,
-        link,
-        country AS Country,
-        continent
+        country
 FROM public.data_source AS source INNER JOIN public.country 
-    AS country ON source.country_id=country.id;
+  AS country ON source.country_id=country.id
 ```
 
 ### Chart settings
 
-TO DO
+- Data Tab
+  
+  - Datasource & Chart Type
+    
+    - Visualization Type: MapBox
+  
+  - Time
+    
+    - Time range: No filter
+  
+  - Query
+    
+    - Longitude: longitude
+    
+    - Latitude: latitude
+  
+  - Visual Tweaks
+    
+    - Map Style: Streets or Light or Outdoors
 
-## General - Network Growth (Summary)
+## Meta Data
 
-<!-- Discuss what is important to see in this chart... TO DO -->
+<div class="figure">
+<img src="images/03-general/07-meta_data.png" alt="Settings for creating the Meta Data chart" width="100%" />
+<p class="caption">(\#fig:03-general/07-meta_data.png) Settings for creating the Meta Data chart</p>
+</div>
 
 ### SQL query
 
 ```sql
--- 108    General - Network Growth (Summary)
-SELECT data.source,
-       data.country AS Country,
-       data.database_type AS Type,
-       --cast(stratum_1 as INTEGER )*30 AS Days,
-       data.release_date - cast(stratum_1 AS INTEGER) * 
-       INTERVAL '1 month' as Time,
-       count_value                   AS count
-FROM (
-     SELECT source.name              AS source,
-            achilles.analysis_id     AS analysis_id,
-            achilles.stratum_1,
-            achilles.stratum_2,
-            achilles.stratum_3,
-            achilles.stratum_4,
-            achilles.stratum_5,
-            achilles.count_value,
-            country.country,
-            source.database_type, 
-            source.release_date
-     FROM public.achilles_results AS achilles INNER JOIN 
-        public.data_source AS source ON
-        achilles.data_source_id=source.id
-     INNER JOIN public.country AS country ON 
-        source.country_id=country.id
-     ) data
-WHERE analysis_id = 108;
+SELECT
+  acronym,
+  stratum_1 as "name",
+  database_type,
+  country,
+  stratum_2 as "source_release_date",
+  stratum_3 as "cdm_release_date",
+  stratum_4 as "cdm_version",
+  stratum_5 as "vocabulary_version"
+FROM achilles_results
+JOIN data_source ON achilles_results.data_source_id = data_source.id
+JOIN country ON data_source.country_id = country.id
+WHERE analysis_id=5000
 ```
 
 ### Chart settings
 
-TO DO
+- Data Tab
+  
+  - Datasource & Chart Type
+    
+    - Visualization Type: Table
+  
+  - Time
+    
+    - Time range: No filter
+  
+  - Query
+    
+    - Query Mode: Raw Records
+    
+    - Columns: name, source_release_date, cdm_release_date, cdm_version, vocabulary_version
 
+## CSS
 
-
-## General - Network Growth by Date
-
-<!-- Discuss what is important to see in this chart... TO DO -->
-
-### SQL query
-
-```sql
--- 108    General - Network Growth by Date
-SELECT data.source,
-       data.country AS Country,
-       data.database_type AS Type,
-       cast(stratum_1 as Integer)*30 AS DAY,
-       count_value                   AS count
-FROM (
-     SELECT source.name              AS source,
-            achilles.analysis_id     AS analysis_id,
-            achilles.stratum_1,
-            achilles.stratum_2,
-            achilles.stratum_3,
-            achilles.stratum_4,
-            achilles.stratum_5,
-            achilles.count_value,
-            country.country,
-            source.database_type
-     FROM public.achilles_results AS achilles INNER JOIN 
-        public.data_source AS source ON 
-        achilles.data_source_id=source.id
-     INNER JOIN public.country AS country ON 
-        source.country_id=country.id
-     ) data
-WHERE analysis_id = 108;
+```css
+.dashboard > div:not(.dashboard-content) {  /* dashboard header */
+  display: none;
+}
 ```
 
-### Chart settings
-
-TO DO
-
-## General - Patients per Country
-
-<!-- Discuss what is important to see in this chart... TO DO -->
-
-### SQL query
-
-```sql
--- 1    General - Patients per Country
-SELECT source.name,
-       country.country AS Country,
-       source.database_type AS Type,
-       count_value AS patient_count,
-       source.slug
-FROM public.achilles_results AS achilles 
-    INNER JOIN public.data_source AS source ON 
-      achilles.data_source_id=source.id
-    INNER JOIN public.country AS country ON 
-      source.country_id=country.id
-WHERE analysis_id = 1;
-```
-
-### Chart settings
-
-TO DO
-
-## General - Database Types per Country
-
-<!-- Discuss what is important to see in this chart... TO DO -->
-
-### SQL query
-
-```sql
--- 1    General - Database types per Country
-SELECT source.name, 
-       country.country AS Country, 
-       database_type AS Type,
-       count_value AS "Nr_patients",
-       source.slug
-FROM public.achilles_results AS achilles 
-    INNER JOIN public.data_source AS source ON 
-      achilles.data_source_id=source.id
-    INNER JOIN public.country AS country ON 
-      source.country_id=country.id
-WHERE analysis_id = 1;
-```
-
-### Chart settings
-
-TO DO
 
