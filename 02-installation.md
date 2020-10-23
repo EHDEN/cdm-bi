@@ -3,129 +3,106 @@ title: "02-installation.Rmd"
 output: html_document
 ---
 
-
-
 # Installation
 
-NOTE: This instructions are outdated
+Currently, we use docker to deploy our environment
 
-<!-- TO DO production and dev environments... -->
+## First Steps
 
-Make sure that you have docker and docker-compose installed in your machine. Then, please follow these steps:
+1. Clone the repository with the command `git clone --recurse-submodules https://github.com/EHDEN/NetworkDashboards`. If you already cloned the repository without the `--recurse-submodules` option, run `git submodule update --init` to fetch the superset submodule.
 
-- Please enter in the ''docker'' directory and create your `.env` file here, using `.env-example` as reference. For local installation, you can just copy the `.env-example` content to a new file. Note: In case of port errors in the next steps, the problem could be related to a port already in use by your system that you defined here and it is busy, chose other.
+2. Create a `.env` file on the `docker` directory, using `.env-example` as a reference, setting all necessary environment variables (`SUPERSET\_MAPBOX\_API\_KEY` and `DASHBOARD\_VIEWER\_SECRET\_KEY`).
 
-- Tip the following commands in the command line:
+## Dashboard Viewer setup
 
-    1. Clone the Apache Superset repository:
-    
-        ```
-        git clone https://github.com/apache/incubator-superset
-         ../superset
-        cp ../superset/contrib/docker/superset_config.py ../superset
-        ```
-        
-    2. Init the Apache Superset (This creates a user, so it is necessary to interact with the console):
-    
-        ```
-        docker-compose run --rm superset ./docker-init.sh
-        ```
-        
-    3. Init the Dashboard Layout  (This creates a user, so it is necessary to interact with the console):
-    
-        ```
-        docker-compose run --rm dashboard_viewer ./docker-init.sh
-        ```
-        
-    4. Finally, bring up the containers 
-    
-        ```
-        docker-compose up -d
-        ```
-        
-To check if everything is ok, please wait 2 minutes and tip `docker ps` and the following containers need to be running: 
-```
-... 0.0.0.0:8088->8088/tcp   dashboard_viewer_superset_1
-... 0.0.0.0:8000->8000/tcp   dashboard_viewer_dashboard_viewer_1
-... 0.0.0.0:6379->6379/tcp   dashboard_viewer_redis_1
-... 5432/tcp                 dashboard_viewer_postgres_1
-```
+1. If you wish to expose the dashboard viewer app through a specific domain(s) you must add it/them to the `ALLOWED_HOSTS` list on file `dashboard_viewer/dashboard_viewer/settings.py` and remove the `'*'` entry.
 
-Now, you have a clean setup running in your machine. To try the application using synthetic data, please continue to follow the steps in the ''Demo'' section.
+2. Build containers' images: `docker-compose build`. This might take several minutes.
+
+3. Set up the database and create an admin account for the dashboard viewer app: `docker-compose run --rm dashboard ./docker-init.sh`.
 
 ## Insert Concepts
 
-The concepts table are not in the repository due to its dimension. Therefore, to insert this table in the installation, you should perform the following steps:
+The concepts table is not in the repository due to its dimension, therefore we use directly the Postgres console to insert this table in the installation.
 
-1. Download concept.csv file from here (todo)
+1. Get your concept csv file from [Athena](https://athena.ohdsi.org/)
 
-2. Copy the file to the /tmp directory inside of the postgres container
+2. Copy the file into postgres container
+   
+   ```sh
+   docker cp concept.csv dashboard_viewer_postgres_1:/tmp/
+   ```
 
-    ```sh
-    docker cp concept.csv dashboard_viewer_postgres_1:/tmp/
-    ```
-    
-3. Enter in the dashboard_viewer_postgres_1 container:
+3. Enter in the postgres container:
+   
+   ```sh
+   docker exec -it dashboard_viewer_postgres_1 bash
+   ```
 
-    ```sh
-    docker exec -it dashboard_viewer_postgres_1 bash
-    ```
-    
-4. Enter in the achilles database:
+4. Enter in the `achilles`  database (value of the variable `POSTGRES_ACHILLES_DB` on the .env file) with the `root` user (value of the variable `POSTGRES_ROOT_USER` on the .env file):
+   
+   ```
+   psql achilles root
+   ```
 
-    ```
-    psql achilles
-    ```
-    
-5. Create the table in the database using this command:
+5. Create the `concept` table
+   
+   ```sql
+   CREATE TABLE concept (
+     concept_id         INTEGER        NOT NULL,
+     concept_name       VARCHAR(255)   NOT NULL,
+     domain_id          VARCHAR(20)    NOT NULL,
+     vocabulary_id      VARCHAR(20)    NOT NULL,
+     concept_class_id   VARCHAR(20)    NOT NULL,
+     standard_concept   VARCHAR(1)     NULL,
+     concept_code       VARCHAR(50)    NOT NULL,
+     valid_start_date   DATE           NOT NULL,
+     valid_end_date     DATE           NOT NULL,
+     invalid_reason     VARCHAR(1)     NULL
+   );
+   ```
 
-    ```sql
-        CREATE TABLE concept (
-          concept_id         INTEGER        NOT NULL,
-          concept_name       VARCHAR(255)   NOT NULL,
-          domain_id          VARCHAR(20)    NOT NULL,
-          vocabulary_id      VARCHAR(20)    NOT NULL,
-          concept_class_id   VARCHAR(20)    NOT NULL,
-          standard_concept   VARCHAR(1)     NULL,
-          concept_code       VARCHAR(50)    NOT NULL,
-          valid_start_date   DATE           NOT NULL,
-          valid_end_date     DATE           NOT NULL,
-          invalid_reason     VARCHAR(1)     NULL
-        );
-    ```
-    
-6. Copy the CSV file content to the table (this could take a while):
+6. Copy the CSV file content to the table (this could take a while)
+   
+   To get both `'` (single quotes) and `"` (double quotes) on the `concept_name` column we use a workaround by setting the quote character to one that should never be in the text. Here we used `\b` (backslash).
+   
+   ```sql
+   COPY public.concept FROM '/tmp/concept.csv' WITH CSV HEADER
+     DELIMITER E'\t' QUOTE E'\b';
+   ```
 
-    ```sql
-    COPY public.concept from '/tmp/concept.csv' WITH DELIMITER ','
-        CSV HEADER;
-    ```
+7. Create index in table (this could take a while):
+   
+   ```sql
+   CREATE INDEX concept_concept_id_index ON concept (concept_id);
+   CREATE INDEX concept_concept_name_index ON concept (concept_name);
+   ```
 
-7. Alter table ownership:
+8. Bring up the containers: `docker-compose up -d`.
 
-    ```sql
-    -- <user> : defined in the .env file
-    ALTER TABLE public.concept OWNER TO <user>;
-    ```
+9. Run the command `TODO` to create the materialized views on Postgres.
 
-8. Create index in table:
+## Superset setup
 
-    ```sql
-    CREATE INDEX achilles_results_analysis_id_index ON 
-        achilles_results (analysis_id);
-    CREATE INDEX achilles_results_source_index ON achilles_results 
-        (data_source_id);
-    CREATE INDEX concept_concept_id_index ON concept (concept_id);
-    CREATE INDEX concept_concept_name_index ON concept 
-        (concept_name);
-    ```
-    
+1. Make sure that the container `superset-init` has finished before continuing. It is creating the necessary tables on the database and creating permissions and roles.
 
-## Import dashboards
+2. Execute the script `./superset/one_time_run_scripts/superset-init.sh`. This will create an admin account and associate the `achilles` database to Superset. **Attention:** You must be in the docker directory to execute this script.
 
-TO DO
+3. We have already built some dashboards so if you want to import them run the script `./superset/one_time_run_scripts/load_dashboards.sh`. **Attention:** You must be in the docker directory to execute this script.
 
-## Dummy data
+4. If you used the default ports:
+   
+   - Go to `http://localhost` to access the dashboard viewer app.
+   - Go to `http://localhost:8088` to access superset.
 
-TO DO
-    
+5. On release 0.37 of Superset, there is a bug related to the public role and because of that, we had to set `PUBLIC_ROLE_LIKE_GAMMA = True` on Superset settings. This leads the public role with permissions that he shouldn't have. To solve this, so any anonymous user can view dashboards, you should remove all its permissions and then add the following:
+   
+   - can explore JSON on Superset
+   - can dashboard on Superset
+   - all datasource access on all_datasource_access
+   - can csrf token on Superset
+   - can list on CssTemplateAsyncModelView
+
+# Dummy data
+
+On a fresh installation, there are no achilles_results data so Superset's dashboards will display "No results". On the root of this repository, you can find the `demo` directory where we have an ACHILLES results file with synthetic data that you can upload to a data source on the uploader app of the dashboard viewer (localhost/uploader). If you wish to compare multiple data sources, on the `demo` directory the is also a python script that allows you to generate new ACHILLES results files, where it generates random count values based on the ranges of values for each set of analysis_id and stratums present on a base ACHILLES results file. So, from the one ACHILLES results fill we provided, you can have multiple data sources with different data.
