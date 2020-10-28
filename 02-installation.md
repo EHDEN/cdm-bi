@@ -1,7 +1,8 @@
 ---
-title: "02-installation.Rmd"
 output: html_document
 ---
+
+
 
 # Installation
 
@@ -28,25 +29,25 @@ The concepts table is not in the repository due to its dimension, therefore we u
 1. Get your concept csv file from [Athena](https://athena.ohdsi.org/)
 
 2. Copy the file into postgres container
-   
+
    ```sh
    docker cp concept.csv dashboard_viewer_postgres_1:/tmp/
    ```
 
 3. Enter in the postgres container:
-   
+
    ```sh
    docker exec -it dashboard_viewer_postgres_1 bash
    ```
 
 4. Enter in the `achilles`  database (value of the variable `POSTGRES_ACHILLES_DB` on the .env file) with the `root` user (value of the variable `POSTGRES_ROOT_USER` on the .env file):
-   
+
    ```
    psql achilles root
    ```
 
 5. Create the `concept` table
-   
+
    ```sql
    CREATE TABLE concept (
      concept_id         INTEGER        NOT NULL,
@@ -63,24 +64,30 @@ The concepts table is not in the repository due to its dimension, therefore we u
    ```
 
 6. Copy the CSV file content to the table (this could take a while)
-   
+
    To get both `'` (single quotes) and `"` (double quotes) on the `concept_name` column we use a workaround by setting the quote character to one that should never be in the text. Here we used `\b` (backslash).
-   
+
    ```sql
    COPY public.concept FROM '/tmp/concept.csv' WITH CSV HEADER
      DELIMITER E'\t' QUOTE E'\b';
    ```
 
 7. Create index in table (this could take a while):
-   
+
    ```sql
    CREATE INDEX concept_concept_id_index ON concept (concept_id);
    CREATE INDEX concept_concept_name_index ON concept (concept_name);
    ```
 
-8. Bring up the containers: `docker-compose up -d`.
+8. Set the owner of the `concept` table to the `achilles` user (value of the variable `POSTGRES_ACHILLES_USER` on the .env file):
 
-9. Run the command `TODO` to create the materialized views on Postgres.
+   ```
+   ALTER TABLE concept OWNER TO achiller
+   ```
+
+9. Bring up the containers: `docker-compose up -d`.
+
+10. Run the command `docker-compose run --rm dashboard python manage.py generate_materialized_views` to create the materialized views on Postgres.
 
 ## Superset setup
 
@@ -91,18 +98,18 @@ The concepts table is not in the repository due to its dimension, therefore we u
 3. We have already built some dashboards so if you want to import them run the script `./superset/one_time_run_scripts/load_dashboards.sh`. **Attention:** You must be in the docker directory to execute this script.
 
 4. If you used the default ports:
-   
+
    - Go to `http://localhost` to access the dashboard viewer app.
    - Go to `http://localhost:8088` to access superset.
 
 5. On release 0.37 of Superset, there is a bug related to the public role and because of that, we had to set `PUBLIC_ROLE_LIKE_GAMMA = True` on Superset settings. This leads the public role with permissions that he shouldn't have. To solve this, so any anonymous user can view dashboards, you should remove all its permissions and then add the following:
-   
+
    - can explore JSON on Superset
    - can dashboard on Superset
    - all datasource access on all_datasource_access
    - can csrf token on Superset
    - can list on CssTemplateAsyncModelView
 
-# Dummy data
+## Dummy data
 
 On a fresh installation, there are no achilles_results data so Superset's dashboards will display "No results". On the root of this repository, you can find the `demo` directory where we have an ACHILLES results file with synthetic data that you can upload to a data source on the uploader app of the dashboard viewer (localhost/uploader). If you wish to compare multiple data sources, on the `demo` directory the is also a python script that allows you to generate new ACHILLES results files, where it generates random count values based on the ranges of values for each set of analysis_id and stratums present on a base ACHILLES results file. So, from the one ACHILLES results fill we provided, you can have multiple data sources with different data.

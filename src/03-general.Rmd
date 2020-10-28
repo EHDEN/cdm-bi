@@ -1,5 +1,4 @@
 ---
-title: "03-general.Rmd"
 output: html_document
 ---
 
@@ -56,7 +55,7 @@ FROM public.data_source AS source INNER JOIN public.country
 
 ## Total Number of Patients
 
-```{r total_number_of_patients, fig.cap="Settings for creating the Total Number of Patients chart",echo=FALSE, out.width="100%"}
+```{r totalNumberOfPatients, fig.cap="Settings for creating the Total Number of Patients chart",echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/03-general/02-total_number_of_patients.png")
 ```
 
@@ -104,7 +103,7 @@ WHERE analysis_id = 1
 
 ## Network Growth by Date
 
-```{r network_growth_by_date, fig.cap="Settings for creating the Network Growth by Date chart",echo=FALSE, out.width="100%"}
+```{r networkGrowthByDate, fig.cap="Settings for creating the Network Growth by Date chart",echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/03-general/03-network_growth_by_date.png")
 ```
 
@@ -169,7 +168,7 @@ WHERE analysis_id =2
 
 ## Patients per Country
 
-```{r patients_per_country, fig.cap="Settings for creating the Patients per Country chart",echo=FALSE, out.width="100%"}
+```{r patientsPerCountry, fig.cap="Settings for creating the Patients per Country chart",echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/03-general/04-patients_per_country.png")
 ```
 
@@ -221,7 +220,7 @@ WHERE analysis_id = 1
 
 ## Database Types per Country
 
-```{r dbs_types_per_country, fig.cap="Settings for creating the Database Type per Country chart",echo=FALSE, out.width="100%"}
+```{r dbsTypesPerCountry, fig.cap="Settings for creating the Database Type per Country chart",echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/03-general/05-database_types_per_country.png")
 ```
 
@@ -268,7 +267,7 @@ WHERE analysis_id = 1
 
 ## World Map
 
-```{r world_map, fig.cap="Settings for creating the World Map chart",echo=FALSE, out.width="100%"}
+```{r worldMap, fig.cap="Settings for creating the World Map chart",echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/03-general/06-world_map.png")
 ```
 
@@ -311,7 +310,7 @@ FROM public.data_source AS source INNER JOIN public.country
 
 ## Meta Data
 
-```{r meta_data, fig.cap="Settings for creating the Meta Data chart",echo=FALSE, out.width="100%"}
+```{r metaData, fig.cap="Settings for creating the Meta Data chart",echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/03-general/07-meta_data.png")
 ```
 

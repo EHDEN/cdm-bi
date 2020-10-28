@@ -1,5 +1,4 @@
 ---
-title: "02-installation.Rmd"
 output: html_document
 ---
 
@@ -113,6 +112,6 @@ The concepts table is not in the repository due to its dimension, therefore we u
    - can csrf token on Superset
    - can list on CssTemplateAsyncModelView
 
-# Dummy data
+## Dummy data
 
 On a fresh installation, there are no achilles_results data so Superset's dashboards will display "No results". On the root of this repository, you can find the `demo` directory where we have an ACHILLES results file with synthetic data that you can upload to a data source on the uploader app of the dashboard viewer (localhost/uploader). If you wish to compare multiple data sources, on the `demo` directory the is also a python script that allows you to generate new ACHILLES results files, where it generates random count values based on the ranges of values for each set of analysis_id and stratums present on a base ACHILLES results file. So, from the one ACHILLES results fill we provided, you can have multiple data sources with different data.
