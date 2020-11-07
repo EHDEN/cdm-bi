@@ -8,64 +8,89 @@ output: html_document
 
 <!-- Discuss the goal of this dashboard... TO DO -->
 
-In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
+## CSS
 
-## Data Domains - Number of Records per Peson
+To hide the dashboard header insert the following css code to the `CSS` field on the edit page:
 
-<!-- Discuss what is important to see in this chart... TO DO -->
+```css
+.dashboard > div:not(.dashboard-content) {  /* dashboard header */
+  display: none;
+}
+```
+
+## Data Source Filter
+
+<div class="figure">
+<img src="images/shared/data_source_filter.png" alt="Settings for creating the Data Source filter chart" width="100%" />
+<p class="caption">(\#fig:dataSourceFilter)Settings for creating the Data Source filter chart</p>
+</div>
+
+**For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.**
+
+### SQL query
+
+No SQL query, use the sql table `data_source` of the `achilles` database.
+
+### Chart settings
+
+- Data Tab
+  - Datasource & Chart Type
+    - Visualization Type: Filter Box
+  - Time
+    - Time range: No filter
+  - Filters Configuration
+    - Filters:
+      - name
+    - Date Filter: off
+    - Instant Filtering: on
+
+## Average Number of Records per Person
+
+<div class="figure">
+<img src="images/10-data_domain/02-avg_records_per_person.png" alt="Settings for creating the Data Source filter chart" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-1)Settings for creating the Data Source filter chart</p>
+</div>
 
 ### SQL query
 
 ```sql
--- 201, 401, 501, 601, 701, 801, 1801, 2101, 2201   
--- Data domains - Number of records per peson
 SELECT 
     source.name,
+    source.acronym,
     CASE 
-      WHEN analysis_id = 201 THEN 'Visit'
-      WHEN analysis_id = 401 THEN 'Condition'
-      WHEN analysis_id = 501 THEN 'Death'
-      WHEN analysis_id = 601 THEN 'Procedure'
-      WHEN analysis_id = 701 THEN 'Drug Exposure'
-      WHEN analysis_id = 801 THEN 'Observation'
-      WHEN analysis_id = 1801 THEN 'Measurement'
-      WHEN analysis_id = 2101 THEN 'Device'
-      WHEN analysis_id = 2201 THEN 'Note'
+    WHEN analysis_id = 201 THEN 'Visit'
+    WHEN analysis_id = 401 THEN 'Condition'
+    WHEN analysis_id = 501 THEN 'Death'
+    WHEN analysis_id = 601 THEN 'Procedure'
+    WHEN analysis_id = 701 THEN 'Drug Exposure'
+    WHEN analysis_id = 801 THEN 'Observation'
+    WHEN analysis_id = 1801 THEN 'Measurement'
+    WHEN analysis_id = 2101 THEN 'Device'
+    WHEN analysis_id = 2201 THEN 'Note'
     END AS Data_Domain,
-    SUM(count_value) /AVG(num_persons) AS "Records per person",
-    source.slug
-FROM public.achilles_results AS achilles 
-    INNER JOIN public.data_source AS source ON 
-      achilles.data_source_id=source.id
-    INNER JOIN (
-        SELECT data_source_id , count_value AS num_persons 
-        FROM achilles_results 
-        WHERE analysis_id = 1
-        ) counts ON 
-      achilles.data_source_id = counts.data_source_id 
-GROUP BY analysis_id, source.name, source.slug
-HAVING analysis_id IN (201, 401, 501, 601, 701, 801, 1801, 2101, 
-    2201)
+    SUM(count_value) /AVG(num_persons) AS "records_per_person"
+FROM public.achilles_results AS achilles
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+INNER JOIN (
+  SELECT data_source_id , count_value as num_persons
+  FROM achilles_results
+  WHERE analysis_id = 1) counts ON achilles.data_source_id = counts.data_source_id 
+GROUP BY analysis_id, source.name, source.acronym
+HAVING analysis_id IN (201, 401, 501, 601, 701, 801, 1801, 2101, 2201)
 ```
 
 ### Chart settings
 
-The main characteristics of this chart are presented in Figure \@ref(fig:dataDomainsNumberOfRecordsPerPeson), being the following:
-
-- **Data Tab**:
-    - **Visualization Type**: Heatmap
-    - **Time range**: No filter
-    - **X**: name
-    - **Y**: data_domain
-    - **Metric**: SUM(records_per_person) as "Sum of records per person"
-    - **Filters**: Empty
-    - **Row limit**: Empty
-    - **Legend**: Checked
-    - **Show percentage**: Checked
-    - **Show Values**: Not checked
-    - **Normalized**: Not checked
-
-<div class="figure">
-<img src="images/dataDomainsNumberOfRecordsPerPeson.png" alt="Settings for creating chart representing the number of records per patient in the different data domains (heatmap). Image changed to contain information hidden in the customize menu." width="100%" />
-<p class="caption">(\#fig:dataDomainsNumberOfRecordsPerPeson)Settings for creating chart representing the number of records per patient in the different data domains (heatmap). Image changed to contain information hidden in the customize menu.</p>
-</div>
+- Data Tab
+  - Datasource & Chart Type
+    - Visualization Type: Heatmap
+  - Time
+    - Time range: No filter
+  - Query
+    - X: name
+    - Y: data_domain
+    - Metric: AVG(records_per_person) with a label avg records per person
+    - Row limit: None
+  - Heatmap Options
+    - Left Margin: 100
+    - Show Percentage: off

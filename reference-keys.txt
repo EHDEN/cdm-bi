@@ -22,7 +22,7 @@ fig:deathByYearPerThousandPeople
 fig:numOfConcepts
 fig:conceptsTable
 fig:conditionDrugProcedureDeviceMeasurementObservationTypes
-fig:dataDomainsNumberOfRecordsPerPeson
+fig:unnamed-chunk-1
 introduction
 data-network-dashboard
 installation
@@ -127,6 +127,10 @@ condition-drug-procedure-device-measurement-observation-types
 sql-query-25
 chart-settings-26
 data-domains
-data-domains---number-of-records-per-peson
+css-7
+data-source-filter-5
 sql-query-26
 chart-settings-27
+average-number-of-records-per-person
+sql-query-27
+chart-settings-28

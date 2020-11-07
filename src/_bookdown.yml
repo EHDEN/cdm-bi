@@ -34,5 +34,6 @@ rmd_files: [
   "07-death.Rmd",
   "08-concepts_browser.Rmd",
   "09-provenance.Rmd",
-  "10-data_domains.Rmd"
+  "10-data_domains.Rmd",
+  "11-per_database.Rmd"
 ]

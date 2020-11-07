@@ -2618,88 +2618,170 @@ All 6 charts use the same sql query.
 \hypertarget{data-domains}{%
 \chapter{Data Domains}\label{data-domains}}
 
-In this dashboard is present the `'Database Type Filter'', that was detailed in the Chapter General.
+\hypertarget{css-7}{%
+\section{CSS}\label{css-7}}
 
-\hypertarget{data-domains---number-of-records-per-peson}{%
-\section{Data Domains - Number of Records per Peson}\label{data-domains---number-of-records-per-peson}}
+To hide the dashboard header insert the following css code to the \texttt{CSS} field on the edit page:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{.dashboard} \OperatorTok{\textgreater{}}\NormalTok{ div}\InformationTok{:not(}\FunctionTok{.dashboard{-}content}\InformationTok{)}\NormalTok{ \{  }\CommentTok{/* dashboard header */}
+  \KeywordTok{display}\NormalTok{: }\DecValTok{none}\OperatorTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-source-filter-5}{%
+\section{Data Source Filter}\label{data-source-filter-5}}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/shared/data_source_filter} \caption{Settings for creating the Data Source filter chart}\label{fig:dataSourceFilter}
+\end{figure}
+
+\textbf{For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.}
 
 \hypertarget{sql-query-26}{%
 \subsection{SQL query}\label{sql-query-26}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{{-}{-} 201, 401, 501, 601, 701, 801, 1801, 2101, 2201   }
-\CommentTok{{-}{-} Data domains {-} Number of records per peson}
-\KeywordTok{SELECT} 
-    \KeywordTok{source}\NormalTok{.name,}
-    \ControlFlowTok{CASE} 
-      \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{201} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Visit\textquotesingle{}}
-      \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{401} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Condition\textquotesingle{}}
-      \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{501} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Death\textquotesingle{}}
-      \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{601} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Procedure\textquotesingle{}}
-      \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{701} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Drug Exposure\textquotesingle{}}
-      \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{801} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Observation\textquotesingle{}}
-      \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{1801} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Measurement\textquotesingle{}}
-      \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{2101} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Device\textquotesingle{}}
-      \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{2201} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Note\textquotesingle{}}
-    \ControlFlowTok{END} \KeywordTok{AS}\NormalTok{ Data\_Domain,}
-    \FunctionTok{SUM}\NormalTok{(count\_value) }\OperatorTok{/}\FunctionTok{AVG}\NormalTok{(num\_persons) }\KeywordTok{AS} \OtherTok{"Records per person"}\NormalTok{,}
-    \KeywordTok{source}\NormalTok{.slug}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{      achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-    \KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ (}
-        \KeywordTok{SELECT}\NormalTok{ data\_source\_id , count\_value }\KeywordTok{AS}\NormalTok{ num\_persons }
-        \KeywordTok{FROM}\NormalTok{ achilles\_results }
-        \KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{1}
-\NormalTok{        ) counts }\KeywordTok{ON} 
-\NormalTok{      achilles.data\_source\_id }\OperatorTok{=}\NormalTok{ counts.data\_source\_id }
-\KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ analysis\_id, }\KeywordTok{source}\NormalTok{.name, }\KeywordTok{source}\NormalTok{.slug}
-\KeywordTok{HAVING}\NormalTok{ analysis\_id }\KeywordTok{IN}\NormalTok{ (}\DecValTok{201}\NormalTok{, }\DecValTok{401}\NormalTok{, }\DecValTok{501}\NormalTok{, }\DecValTok{601}\NormalTok{, }\DecValTok{701}\NormalTok{, }\DecValTok{801}\NormalTok{, }\DecValTok{1801}\NormalTok{, }\DecValTok{2101}\NormalTok{, }
-    \DecValTok{2201}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+No SQL query, use the sql table \texttt{data\_source} of the \texttt{achilles} database.
 
 \hypertarget{chart-settings-27}{%
 \subsection{Chart settings}\label{chart-settings-27}}
 
-The main characteristics of this chart are presented in Figure \ref{fig:dataDomainsNumberOfRecordsPerPeson}, being the following:
-
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Data Tab}:
+  Data Tab
 
   \begin{itemize}
   \tightlist
   \item
-    \textbf{Visualization Type}: Heatmap
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Filter Box
+    \end{itemize}
   \item
-    \textbf{Time range}: No filter
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
   \item
-    \textbf{X}: name
-  \item
-    \textbf{Y}: data\_domain
-  \item
-    \textbf{Metric}: SUM(records\_per\_person) as ``Sum of records per person''
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Show percentage}: Checked
-  \item
-    \textbf{Show Values}: Not checked
-  \item
-    \textbf{Normalized}: Not checked
+    Filters Configuration
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Filters:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        name
+      \end{itemize}
+    \item
+      Date Filter: off
+    \item
+      Instant Filtering: on
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
+\hypertarget{average-number-of-records-per-person}{%
+\section{Average Number of Records per Person}\label{average-number-of-records-per-person}}
+
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/dataDomainsNumberOfRecordsPerPeson} \caption{Settings for creating chart representing the number of records per patient in the different data domains (heatmap). Image changed to contain information hidden in the customize menu.}\label{fig:dataDomainsNumberOfRecordsPerPeson}
+\includegraphics[width=1\linewidth]{images/10-data_domain/02-avg_records_per_person} \caption{Settings for creating the Data Source filter chart}\label{fig:unnamed-chunk-1}
 \end{figure}
+
+\hypertarget{sql-query-27}{%
+\subsection{SQL query}\label{sql-query-27}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} 
+    \KeywordTok{source}\NormalTok{.name,}
+    \KeywordTok{source}\NormalTok{.acronym,}
+    \ControlFlowTok{CASE} 
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{201} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Visit\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{401} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Condition\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{501} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Death\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{601} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Procedure\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{701} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Drug Exposure\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{801} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Observation\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{1801} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Measurement\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{2101} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Device\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{2201} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Note\textquotesingle{}}
+    \ControlFlowTok{END} \KeywordTok{AS}\NormalTok{ Data\_Domain,}
+    \FunctionTok{SUM}\NormalTok{(count\_value) }\OperatorTok{/}\FunctionTok{AVG}\NormalTok{(num\_persons) }\KeywordTok{AS} \OtherTok{"records\_per\_person"}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{INNER} \KeywordTok{JOIN}\NormalTok{ (}
+  \KeywordTok{SELECT}\NormalTok{ data\_source\_id , count\_value }\KeywordTok{as}\NormalTok{ num\_persons}
+  \KeywordTok{FROM}\NormalTok{ achilles\_results}
+  \KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{1}\NormalTok{) counts }\KeywordTok{ON}\NormalTok{ achilles.data\_source\_id }\OperatorTok{=}\NormalTok{ counts.data\_source\_id }
+\KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ analysis\_id, }\KeywordTok{source}\NormalTok{.name, }\KeywordTok{source}\NormalTok{.acronym}
+\KeywordTok{HAVING}\NormalTok{ analysis\_id }\KeywordTok{IN}\NormalTok{ (}\DecValTok{201}\NormalTok{, }\DecValTok{401}\NormalTok{, }\DecValTok{501}\NormalTok{, }\DecValTok{601}\NormalTok{, }\DecValTok{701}\NormalTok{, }\DecValTok{801}\NormalTok{, }\DecValTok{1801}\NormalTok{, }\DecValTok{2101}\NormalTok{, }\DecValTok{2201}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{chart-settings-28}{%
+\subsection{Chart settings}\label{chart-settings-28}}
+
+\begin{itemize}
+\tightlist
+\item
+  Data Tab
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Heatmap
+    \end{itemize}
+  \item
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
+  \item
+    Query
+
+    \begin{itemize}
+    \tightlist
+    \item
+      X: name
+    \item
+      Y: data\_domain
+    \item
+      Metric: AVG(records\_per\_person) with a label avg records per person
+    \item
+      Row limit: None
+    \end{itemize}
+  \item
+    Heatmap Options
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Left Margin: 100
+    \item
+      Show Percentage: off
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
 
   \bibliography{refs.bib}
 
