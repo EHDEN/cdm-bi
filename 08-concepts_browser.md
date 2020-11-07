@@ -8,6 +8,16 @@ output: html_document
 
 The concepts browser allows you to search for concepts by name or concept_id in all the data sources you select. No exact number of patients or occurrences are provided but the magnitude of both.
 
+## CSS
+
+To hide the dashboard header insert the following css code to the `CSS` field on the edit page:
+
+```css
+.dashboard > div:not(.dashboard-content) {  /* dashboard header */
+  display: none;
+}
+```
+
 ## Data Source and Domain Filters
 
 <div class="figure">
@@ -33,25 +43,15 @@ WHERE analysis_id in (201, 401, 601, 701, 801, 901, 1001, 1801, 200, 400, 600, 7
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Filter Box
-
   - Time
-
     - Time range: No filter
-
   - Filters Configuration
-
     - Filters:
-
       - source_name or domain_id
-
     - Date Filter: off
-
     - Instant Filtering: on
-
 
 
 ## Number of Concepts
@@ -151,29 +151,16 @@ ORDER BY "Person_count" desc
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Table
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Query Mode: Raw Records
-
     - Columns: source_name, concept_id, concept_name, domain_id, magnitude_persons, magnitude_occurrences
-
 - Customize Tab
-
   - Options
-
     - Table Timestamps Format: %Y-%m-%d %H:%M:%S | 2019-01-14 01:32:10
-
     - Page Length: 50
-
     - Search Box: on
-
     - Emit Filter Events: on

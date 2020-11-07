@@ -35,23 +35,14 @@ No SQL query, use the sql table `data_source` of the `achilles` database.
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Filter Box
-
   - Time
-
     - Time range: No filter
-
   - Filters Configuration
-
     - Filters:
-
       - name
-
     - Date Filter: off
-
     - Instant Filtering: on
 
 ## Number of Records
@@ -74,31 +65,18 @@ WHERE analysis_id = 501
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Bar Chart
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Metrics: MAX(count_value) with label Count
-
     - Series: name
-
 - Customize Tab
-
   - Chart Options
-    
     - Y Axis Label: Number of Patients
-
   - X Axis
-
     - X Axis Label: Databases
-
     - Reduce X ticks: on
 
 ## Death By Year per Thousand People
@@ -122,35 +100,19 @@ WHERE analysis_id = 502
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Bar Chart
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Metrics: MAX(count_value) with label Count
-
     - Series: date
-
     - Breakdowns: name
-
 - Customize Tab
-
   - Chart Options
-    
     - Stacked Bars: on
-
     - Sort Bars: on
-
     - Y Axis Label:Number of Patients (in thousands)
-
   - X Axis
-
     - X Axis Label: Years
-
     - Reduce X ticks: on
