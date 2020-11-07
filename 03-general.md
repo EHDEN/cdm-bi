@@ -8,6 +8,16 @@ output: html_document
 
 <!-- Discuss the goal of this dashboard... TO DO -->
 
+## CSS
+
+To hide the dashboard header insert the following css code to the `CSS` field on the edit page:
+
+```css
+.dashboard > div:not(.dashboard-content) {  /* dashboard header */
+  display: none;
+}
+```
+
 ## Database Type and Country Filter
 
 <div class="figure">
@@ -26,8 +36,8 @@ SELECT source.name,
        country.country,
        source.database_type,
        source.acronym
-FROM public.data_source AS source INNER JOIN public.country
-  AS country ON source.country_id=country.id
+FROM public.data_source AS source
+INNER JOIN public.country AS country ON source.country_id=country.id
 ```
 
 ### Chart settings
@@ -111,26 +121,22 @@ WHERE analysis_id = 1
 ### SQL query
 
 ```sql
-SELECT  data.source,
-        data.country,
-        data.database_type,
-        data.release_date,
-        concept_name AS gender,
-        count_value AS count
-FROM  (
-        SELECT  source.name             AS source,
-                achilles.analysis_id    AS analysis_id,
-                achilles.count_value,
-                country.country,
-                source.database_type,
-            source.database_type,
-                source.database_type,
-                source.release_date
-        FROM public.achilles_results AS achilles INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
-        INNER JOIN public.country AS country ON source.country_id=country.id
-        ) data
-JOIN (SELECT '8507' AS concept_id, 'Male' AS concept_name UNION SELECT '8532' AS concept_id, 'Female' AS concept_name) AS concepts ON data.stratum_1 = concept_id
-WHERE analysis_id =2
+SELECT  source.name AS source,
+        country.country,
+        source.database_type,
+        source.release_date,
+        concepts.concept_name AS gender,
+        achilles.count_value as count
+FROM public.achilles_results AS achilles
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+INNER JOIN public.country AS country ON source.country_id=country.id
+JOIN (
+  SELECT '8507' AS concept_id, 'Male' AS concept_name
+  UNION
+  SELECT '8532', 'Female'
+) AS concepts ON achilles.stratum_1 = concept_id
+WHERE analysis_id = 2
+
 ```
 
 ### Chart settings
@@ -165,7 +171,7 @@ WHERE analysis_id =2
 
   - X Axis
 
-    - Reduce X ticks
+    - Reduce X ticks: on
 
 ## Patients per Country
 
@@ -180,13 +186,9 @@ WHERE analysis_id =2
 SELECT country.country,
        source.database_type,
        count_value
-FROM public.achilles_results AS achilles
-    INNER JOIN public.data_source AS source ON
-      achilles.data_source_id=source.id
-    INNER JOIN public.country AS country ON
-     INNER JOIN public.country AS country ON
-    INNER JOIN public.country AS country ON
-      source.country_id=country.id
+FROM public.achilles_results AS achilles 
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+INNER JOIN public.country AS country ON source.country_id=country.id
 WHERE analysis_id = 1
 ```
 
@@ -235,11 +237,9 @@ Same as [Patients per Country](#patients-per-country) query
 SELECT country.country,
        source.database_type,
        count_value
-FROM public.achilles_results AS achilles
-    INNER JOIN public.data_source AS source ON
-      achilles.data_source_id=source.id
-    INNER JOIN public.country AS country ON
-      source.country_id=country.id
+FROM public.achilles_results AS achilles 
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+INNER JOIN public.country AS country ON source.country_id=country.id
 WHERE analysis_id = 1
 ```
 
@@ -286,8 +286,8 @@ SELECT  name,
         latitude,
         longitude,
         country
-FROM public.data_source AS source INNER JOIN public.country
-  AS country ON source.country_id=country.id
+FROM public.data_source AS source
+INNER JOIN public.country AS country ON source.country_id=country.id
 ```
 
 ### Chart settings
@@ -354,13 +354,3 @@ WHERE analysis_id=5000
     - Query Mode: Raw Records
 
     - Columns: name, source_release_date, cdm_release_date, cdm_version, vocabulary_version
-
-## CSS
-
-```css
-.dashboard > div:not(.dashboard-content) {  /* dashboard header */
-  display: none;
-}
-```
-
-

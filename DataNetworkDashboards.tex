@@ -120,7 +120,7 @@
 
 \title{Data Network Dashboards}
 \author{This document is currently under construction}
-\date{2020-10-28}
+\date{2020-11-07}
 
 \begin{document}
 \maketitle
@@ -390,6 +390,19 @@ On a fresh installation, there are no achilles\_results data so Superset's dashb
 \hypertarget{general}{%
 \chapter{General}\label{general}}
 
+\hypertarget{css}{%
+\section{CSS}\label{css}}
+
+To hide the dashboard header insert the following css code to the \texttt{CSS} field on the edit page:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{.dashboard} \OperatorTok{\textgreater{}}\NormalTok{ div}\InformationTok{:not(}\FunctionTok{.dashboard{-}content}\InformationTok{)}\NormalTok{ \{  }\CommentTok{/* dashboard header */}
+  \KeywordTok{display}\NormalTok{: }\DecValTok{none}\OperatorTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{database-type-and-country-filter}{%
 \section{Database Type and Country Filter}\label{database-type-and-country-filter}}
 
@@ -410,8 +423,8 @@ Theses filter were designed to be used in the dashboard aiming the filtering of 
 \NormalTok{       country.country,}
        \KeywordTok{source}\NormalTok{.database\_type,}
        \KeywordTok{source}\NormalTok{.acronym}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country}
-  \KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} \KeywordTok{source}\NormalTok{.country\_id}\OperatorTok{=}\NormalTok{country.}\KeywordTok{id}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} \KeywordTok{source}\NormalTok{.country\_id}\OperatorTok{=}\NormalTok{country.}\KeywordTok{id}
 \end{Highlighting}
 \end{Shaded}
 
@@ -547,26 +560,21 @@ Theses filter were designed to be used in the dashboard aiming the filtering of 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{SELECT}  \KeywordTok{data}\NormalTok{.}\KeywordTok{source}\NormalTok{,}
-        \KeywordTok{data}\NormalTok{.country,}
-        \KeywordTok{data}\NormalTok{.database\_type,}
-        \KeywordTok{data}\NormalTok{.release\_date,}
-\NormalTok{        concept\_name }\KeywordTok{AS}\NormalTok{ gender,}
-\NormalTok{        count\_value }\KeywordTok{AS} \FunctionTok{count}
-\KeywordTok{FROM}\NormalTok{  (}
-        \KeywordTok{SELECT}  \KeywordTok{source}\NormalTok{.name             }\KeywordTok{AS} \KeywordTok{source}\NormalTok{,}
-\NormalTok{                achilles.analysis\_id    }\KeywordTok{AS}\NormalTok{ analysis\_id,}
-\NormalTok{                achilles.count\_value,}
-\NormalTok{                country.country,}
-                \KeywordTok{source}\NormalTok{.database\_type,}
-            \KeywordTok{source}\NormalTok{.database\_type,}
-                \KeywordTok{source}\NormalTok{.database\_type,}
-                \KeywordTok{source}\NormalTok{.release\_date}
-        \KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-        \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} \KeywordTok{source}\NormalTok{.country\_id}\OperatorTok{=}\NormalTok{country.}\KeywordTok{id}
-\NormalTok{        ) }\KeywordTok{data}
-\KeywordTok{JOIN}\NormalTok{ (}\KeywordTok{SELECT} \StringTok{\textquotesingle{}8507\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_id, }\StringTok{\textquotesingle{}Male\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_name }\KeywordTok{UNION} \KeywordTok{SELECT} \StringTok{\textquotesingle{}8532\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_id, }\StringTok{\textquotesingle{}Female\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_name) }\KeywordTok{AS}\NormalTok{ concepts }\KeywordTok{ON} \KeywordTok{data}\NormalTok{.stratum\_1 }\OperatorTok{=}\NormalTok{ concept\_id}
-\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=}\DecValTok{2}
+\KeywordTok{SELECT}  \KeywordTok{source}\NormalTok{.name }\KeywordTok{AS} \KeywordTok{source}\NormalTok{,}
+\NormalTok{        country.country,}
+        \KeywordTok{source}\NormalTok{.database\_type,}
+        \KeywordTok{source}\NormalTok{.release\_date,}
+\NormalTok{        concepts.concept\_name }\KeywordTok{AS}\NormalTok{ gender,}
+\NormalTok{        achilles.count\_value }\KeywordTok{as} \FunctionTok{count}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} \KeywordTok{source}\NormalTok{.country\_id}\OperatorTok{=}\NormalTok{country.}\KeywordTok{id}
+\KeywordTok{JOIN}\NormalTok{ (}
+  \KeywordTok{SELECT} \StringTok{\textquotesingle{}8507\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_id, }\StringTok{\textquotesingle{}Male\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_name}
+  \KeywordTok{UNION}
+  \KeywordTok{SELECT} \StringTok{\textquotesingle{}8532\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Female\textquotesingle{}}
+\NormalTok{) }\KeywordTok{AS}\NormalTok{ concepts }\KeywordTok{ON}\NormalTok{ achilles.stratum\_1 }\OperatorTok{=}\NormalTok{ concept\_id}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -627,7 +635,7 @@ Theses filter were designed to be used in the dashboard aiming the filtering of 
     \begin{itemize}
     \tightlist
     \item
-      Reduce X ticks
+      Reduce X ticks: on
     \end{itemize}
   \end{itemize}
 \end{itemize}
@@ -647,13 +655,9 @@ Theses filter were designed to be used in the dashboard aiming the filtering of 
 \KeywordTok{SELECT}\NormalTok{ country.country,}
        \KeywordTok{source}\NormalTok{.database\_type,}
 \NormalTok{       count\_value}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}
-\NormalTok{      achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}
-     \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}
-      \KeywordTok{source}\NormalTok{.country\_id}\OperatorTok{=}\NormalTok{country.}\KeywordTok{id}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} \KeywordTok{source}\NormalTok{.country\_id}\OperatorTok{=}\NormalTok{country.}\KeywordTok{id}
 \KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{1}
 \end{Highlighting}
 \end{Shaded}
@@ -733,11 +737,9 @@ Same as \protect\hyperlink{patients-per-country}{Patients per Country} query
 \KeywordTok{SELECT}\NormalTok{ country.country,}
        \KeywordTok{source}\NormalTok{.database\_type,}
 \NormalTok{       count\_value}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}
-\NormalTok{      achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON}
-      \KeywordTok{source}\NormalTok{.country\_id}\OperatorTok{=}\NormalTok{country.}\KeywordTok{id}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} \KeywordTok{source}\NormalTok{.country\_id}\OperatorTok{=}\NormalTok{country.}\KeywordTok{id}
 \KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{1}
 \end{Highlighting}
 \end{Shaded}
@@ -808,8 +810,8 @@ Same as \protect\hyperlink{patients-per-country}{Patients per Country} query
 \NormalTok{        latitude,}
 \NormalTok{        longitude,}
 \NormalTok{        country}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country}
-  \KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} \KeywordTok{source}\NormalTok{.country\_id}\OperatorTok{=}\NormalTok{country.}\KeywordTok{id}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.country }\KeywordTok{AS}\NormalTok{ country }\KeywordTok{ON} \KeywordTok{source}\NormalTok{.country\_id}\OperatorTok{=}\NormalTok{country.}\KeywordTok{id}
 \end{Highlighting}
 \end{Shaded}
 
@@ -921,21 +923,14 @@ Same as \protect\hyperlink{patients-per-country}{Patients per Country} query
   \end{itemize}
 \end{itemize}
 
-\hypertarget{css}{%
-\section{CSS}\label{css}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{.dashboard} \OperatorTok{\textgreater{}}\NormalTok{ div}\InformationTok{:not(}\FunctionTok{.dashboard{-}content}\InformationTok{)}\NormalTok{ \{  }\CommentTok{/* dashboard header */}
-  \KeywordTok{display}\NormalTok{: }\DecValTok{none}\OperatorTok{;}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{person}{%
 \chapter{Person}\label{person}}
 
-In this dashboard is present the `'Database Type Filter'', that was detailed in the Chapter General. Besides, it was necessary to customize the dashboard JSON Metadata in order to obtain the colours blue and rose in the chart representing the gender distribution. Therefore, the following entry should be added in the settings of this dashboard:
+\hypertarget{label-colors}{%
+\section{Label Colors}\label{label-colors}}
+
+In order to obtain the colours blue and rose in the chart representing the gender distribution,
+add the following JSON entry to the JSON object of the \texttt{JSON\ Metadata} field on the edit dashboard page:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -946,240 +941,422 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{person---patients-by-age}{%
-\section{Person - Patients by age}\label{person---patients-by-age}}
+\hypertarget{css-1}{%
+\section{CSS}\label{css-1}}
+
+To hide the dashboard header insert the following css code to the \texttt{CSS} field on the edit page:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{.dashboard} \OperatorTok{\textgreater{}}\NormalTok{ div}\InformationTok{:not(}\FunctionTok{.dashboard{-}content}\InformationTok{)}\NormalTok{ \{  }\CommentTok{/* dashboard header */}
+  \KeywordTok{display}\NormalTok{: }\DecValTok{none}\OperatorTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-source-filter}{%
+\section{Data Source Filter}\label{data-source-filter}}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/04-person/01-filter} \caption{Settings for creating the Data Source filter chart}\label{fig:dataSourceFilter}
+\end{figure}
+
+\textbf{For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.}
 
 \hypertarget{sql-query-7}{%
 \subsection{SQL query}\label{sql-query-7}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{{-}{-} 101  Person {-} Patients by age}
-\KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
-       \FunctionTok{cast}\NormalTok{(stratum\_1 }\KeywordTok{as} \DataTypeTok{int}\NormalTok{) }\KeywordTok{as}\NormalTok{ Age,}
-\NormalTok{       count\_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
-       \KeywordTok{source}\NormalTok{.slug}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-    \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{    achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{101}\NormalTok{;}
-\end{Highlighting}
-\end{Shaded}
+No SQL query, use the sql table \texttt{data\_source} of the \texttt{achilles} database.
 
 \hypertarget{chart-settings-7}{%
 \subsection{Chart settings}\label{chart-settings-7}}
 
-The main characteristics of this chart are presented in Figure \ref{fig:personPatientsByAge}, being the following:
-
 \begin{itemize}
-\tightlist
 \item
-  \textbf{Data Tab}:
+  Data Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Visualization Type}: Bar Chart
-  \item
-    \textbf{Time range}: No filter
-  \item
-    \textbf{Metrics}: MAX(count)
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}: age
-  \item
-    \textbf{Breakdowns}: name
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Not checked
-  \end{itemize}
-\item
-  \textbf{Costumize Tab}:
+    Datasource \& Chart Type
 
-  \begin{itemize}
-  \tightlist
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Filter Box
+    \end{itemize}
   \item
-    \textbf{Y Axis Label}: Count
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
   \item
-    \textbf{X Axis Label}: Age
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}: Checked
-  \item
-    \textbf{Bar Values}: Not checked
-  \item
-    \textbf{Sort Bars}: Checked
-  \item
-    \textbf{Extra Controls}: Not checked
-  \item
-    \textbf{Reduce X ticks}: Checked
+    Filters Configuration
+
+    \begin{itemize}
+    \item
+      Filters:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        name
+      \end{itemize}
+    \item
+      Date Filter: off
+    \item
+      Instant Filtering: on
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{images/personPatientsByAge} \caption{Settings for creating chart representing patient by age (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:personPatientsByAge}
-\end{figure}
+\hypertarget{age-at-first-observation---table}{%
+\section{Age at first observation - Table}\label{age-at-first-observation---table}}
 
-\hypertarget{person---births-by-year}{%
-\section{Person - Births by Year}\label{person---births-by-year}}
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/04-person/02-age_at_first_observation_table} \caption{Settings for creating the Age at First Observation Table chart}\label{fig:ageFirstObservationTable}
+\end{figure}
 
 \hypertarget{sql-query-8}{%
 \subsection{SQL query}\label{sql-query-8}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{{-}{-} 3  Person {-} Births by year}
 \KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
-\NormalTok{       stratum\_1 }\KeywordTok{AS} \OtherTok{"Birth\_year"}\NormalTok{,}
-\NormalTok{       count\_value }\KeywordTok{AS} \FunctionTok{count}\NormalTok{, }
-       \KeywordTok{source}\NormalTok{.slug}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-      \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{    achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{3}\NormalTok{;}
+       \KeywordTok{source}\NormalTok{.acronym,}
+       \FunctionTok{SUM}\NormalTok{(}\ControlFlowTok{CASE} \ControlFlowTok{WHEN} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textless{}} \DecValTok{10} \ControlFlowTok{THEN}\NormalTok{ count\_value }\ControlFlowTok{END}\NormalTok{) }\KeywordTok{AS} \OtherTok{"0{-}10"}\NormalTok{,}
+       \FunctionTok{SUM}\NormalTok{(}\ControlFlowTok{CASE} \ControlFlowTok{WHEN} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textgreater{}=} \DecValTok{10} \KeywordTok{AND} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textless{}} \DecValTok{20} \ControlFlowTok{THEN}\NormalTok{ count\_value }\ControlFlowTok{END}\NormalTok{) }\KeywordTok{AS} \OtherTok{"10{-}20"}\NormalTok{,}
+       \FunctionTok{SUM}\NormalTok{(}\ControlFlowTok{CASE} \ControlFlowTok{WHEN} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textgreater{}=} \DecValTok{20} \KeywordTok{AND} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textless{}} \DecValTok{30} \ControlFlowTok{THEN}\NormalTok{ count\_value }\ControlFlowTok{END}\NormalTok{) }\KeywordTok{AS} \OtherTok{"20{-}30"}\NormalTok{,}
+       \FunctionTok{SUM}\NormalTok{(}\ControlFlowTok{CASE} \ControlFlowTok{WHEN} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textgreater{}=} \DecValTok{30} \KeywordTok{AND} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textless{}} \DecValTok{40} \ControlFlowTok{THEN}\NormalTok{ count\_value }\ControlFlowTok{END}\NormalTok{) }\KeywordTok{AS} \OtherTok{"30{-}40"}\NormalTok{,}
+       \FunctionTok{SUM}\NormalTok{(}\ControlFlowTok{CASE} \ControlFlowTok{WHEN} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textgreater{}=} \DecValTok{40} \KeywordTok{AND} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textless{}} \DecValTok{50} \ControlFlowTok{THEN}\NormalTok{ count\_value }\ControlFlowTok{END}\NormalTok{) }\KeywordTok{AS} \OtherTok{"40{-}50"}\NormalTok{,}
+       \FunctionTok{SUM}\NormalTok{(}\ControlFlowTok{CASE} \ControlFlowTok{WHEN} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textgreater{}=} \DecValTok{50} \KeywordTok{AND} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textless{}} \DecValTok{60} \ControlFlowTok{THEN}\NormalTok{ count\_value }\ControlFlowTok{END}\NormalTok{) }\KeywordTok{AS} \OtherTok{"50{-}60"}\NormalTok{,}
+       \FunctionTok{SUM}\NormalTok{(}\ControlFlowTok{CASE} \ControlFlowTok{WHEN} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textgreater{}=} \DecValTok{60} \KeywordTok{AND} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textless{}} \DecValTok{70} \ControlFlowTok{THEN}\NormalTok{ count\_value }\ControlFlowTok{END}\NormalTok{) }\KeywordTok{AS} \OtherTok{"60{-}70"}\NormalTok{,}
+       \FunctionTok{SUM}\NormalTok{(}\ControlFlowTok{CASE} \ControlFlowTok{WHEN} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textgreater{}=} \DecValTok{70} \KeywordTok{AND} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textless{}} \DecValTok{80} \ControlFlowTok{THEN}\NormalTok{ count\_value }\ControlFlowTok{END}\NormalTok{) }\KeywordTok{AS} \OtherTok{"70{-}80"}\NormalTok{,}
+       \FunctionTok{SUM}\NormalTok{(}\ControlFlowTok{CASE} \ControlFlowTok{WHEN} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textgreater{}=} \DecValTok{80} \KeywordTok{AND} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textless{}} \DecValTok{90} \ControlFlowTok{THEN}\NormalTok{ count\_value }\ControlFlowTok{END}\NormalTok{) }\KeywordTok{AS} \OtherTok{"80{-}90"}\NormalTok{,}
+       \FunctionTok{SUM}\NormalTok{(}\ControlFlowTok{CASE} \ControlFlowTok{WHEN} \FunctionTok{CAST}\NormalTok{(stratum\_2 }\KeywordTok{AS} \DataTypeTok{INTEGER}\NormalTok{) }\OperatorTok{\textgreater{}=} \DecValTok{90} \ControlFlowTok{THEN}\NormalTok{ count\_value }\ControlFlowTok{END}\NormalTok{) }\KeywordTok{AS} \OtherTok{"90+"}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.concept }\KeywordTok{ON}\NormalTok{ stratum\_1 }\OperatorTok{=} \FunctionTok{CAST}\NormalTok{(concept\_id }\KeywordTok{AS}\NormalTok{ text)}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{102}
+\KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ name, acronym}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{chart-settings-8}{%
 \subsection{Chart settings}\label{chart-settings-8}}
 
-The main characteristics of this chart are presented in Figure \ref{fig:personBirthsByYear}, being the following:
+The main characteristics of this chart are presented in Figure \ref{fig:personPatientsByAge}, being the following:
 
 \begin{itemize}
-\tightlist
 \item
-  \textbf{Data Tab}:
+  Data Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Visualization Type}: Bar Chart
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Table
+    \end{itemize}
   \item
-    \textbf{Time range}: No filter
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
   \item
-    \textbf{Metrics}: SUM(count)
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}: Birth\_year
-  \item
-    \textbf{Breakdowns}: name
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Not checked
+    Query
+
+    \begin{itemize}
+    \item
+      Query Mode: Raw Records
+    \item
+      Columns: name, 0-10, 10-20, 20-30, 30-40, 40-50, 50-60, 60-70, 70-80, 80-90, 90+
+    \end{itemize}
   \end{itemize}
 \item
-  \textbf{Costumize Tab}:
+  Customize Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Y Axis Label}: Count
-  \item
-    \textbf{X Axis Label}: Age
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}: Checked
-  \item
-    \textbf{Bar Values}: Not checked
-  \item
-    \textbf{Sort Bars}: Checked
-  \item
-    \textbf{Extra Controls}: Not checked
-  \item
-    \textbf{Reduce X ticks}: Checked
+    Options
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Show Cell Bars
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{images/personBirthsByYear} \caption{Settings for creating chart representing births by year (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:personBirthsByYear}
-\end{figure}
+\hypertarget{age-at-first-observation---bars}{%
+\section{Age at first observation - Bars}\label{age-at-first-observation---bars}}
 
-\hypertarget{person---gender-distribution}{%
-\section{Person - Gender Distribution}\label{person---gender-distribution}}
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/04-person/03-age_at_first_observation_bar} \caption{Settings for creating the Age at First Observation Bar chart}\label{fig:ageFirstObservationBar}
+\end{figure}
 
 \hypertarget{sql-query-9}{%
 \subsection{SQL query}\label{sql-query-9}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{{-}{-} 2  Person {-} Gender distribution}
 \KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
-\NormalTok{       concept\_name }\KeywordTok{AS}\NormalTok{ Gender, }
-\NormalTok{       count\_value }\KeywordTok{AS}\NormalTok{ Number\_of\_persons,}
-       \KeywordTok{source}\NormalTok{.slug}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }\KeywordTok{INNER} \KeywordTok{JOIN} 
-      \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{    achilles.data\_source\_id }\OperatorTok{=} \KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-    \KeywordTok{JOIN}\NormalTok{ (}
-        \KeywordTok{SELECT} \StringTok{\textquotesingle{}8507\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_id, }\StringTok{\textquotesingle{}Male\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_name }\KeywordTok{UNION} 
-        \KeywordTok{SELECT} \StringTok{\textquotesingle{}8532\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_id, }\StringTok{\textquotesingle{}Female\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_name) }\KeywordTok{AS} 
-\NormalTok{        concepts }\KeywordTok{ON}\NormalTok{ achilles.stratum\_1}\OperatorTok{=}\NormalTok{concept\_id}
-\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{2}\NormalTok{;}
+    \FunctionTok{cast}\NormalTok{(stratum\_1 }\KeywordTok{AS} \DataTypeTok{int}\NormalTok{) }\KeywordTok{AS}\NormalTok{ Age,}
+\NormalTok{    count\_value }\KeywordTok{AS} \FunctionTok{count}\NormalTok{, }
+    \KeywordTok{source}\NormalTok{.acronym}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{101}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{chart-settings-9}{%
 \subsection{Chart settings}\label{chart-settings-9}}
 
-The main characteristics of this chart are presented in Figure \ref{fig:personGenderDistribution}, being the following:
-
 \begin{itemize}
-\tightlist
 \item
-  \textbf{Data Tab}:
+  Data Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Visualization Type}: Bar Chart
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Bar Chart
+    \end{itemize}
   \item
-    \textbf{Time range}: No filter
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
   \item
-    \textbf{Metrics}: Max(number\_of\_persons)
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}: name
-  \item
-    \textbf{Breakdowns}: gender
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Checked
+    Query
+
+    \begin{itemize}
+    \item
+      Metrics: MAX(count)
+    \item
+      Series: age
+    \item
+      Breakdowns: name
+    \end{itemize}
   \end{itemize}
 \item
-  \textbf{Costumize Tab}:
+  Customize Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Y Axis Label}: Empty
+    Chart Options
+
+    \begin{itemize}
+    \item
+      Stacked Bars: on
+    \item
+      Sort Bars: on
+    \item
+      Y Axis Label: Count
+    \end{itemize}
   \item
-    \textbf{X Axis Label}: Databases
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}: Checked
-  \item
-    \textbf{Bar Values}: Not checked
-  \item
-    \textbf{Sort Bars}: Checked
-  \item
-    \textbf{Extra Controls}: Checked
-  \item
-    \textbf{Reduce X ticks}: Checked
+    X Axis
+
+    \begin{itemize}
+    \item
+      X Axis Label: Age
+    \item
+      Reduce X ticks: on
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
+\hypertarget{year-of-birth}{%
+\section{Year of Birth}\label{year-of-birth}}
+
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/personGenderDistribution} \caption{Settings for creating chart representing the gender distribution (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:personGenderDistribution}
+\includegraphics[width=1\linewidth]{images/04-person/04-year_of_birth} \caption{Settings for creating the Year of Birth chart}\label{fig:yearOfBirth}
 \end{figure}
+
+\hypertarget{sql-query-10}{%
+\subsection{SQL query}\label{sql-query-10}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
+       \KeywordTok{source}\NormalTok{.acronym,}
+\NormalTok{       stratum\_1 }\KeywordTok{AS} \OtherTok{"Birth\_year"}\NormalTok{,}
+\NormalTok{       count\_value }\KeywordTok{AS} \FunctionTok{count}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{chart-settings-10}{%
+\subsection{Chart settings}\label{chart-settings-10}}
+
+\begin{itemize}
+\item
+  Data Tab
+
+  \begin{itemize}
+  \item
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Bar Chart
+    \end{itemize}
+  \item
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
+  \item
+    Query
+
+    \begin{itemize}
+    \item
+      Metrics: SUM(count)
+    \item
+      Series: Birth\_year
+    \item
+      Breakdowns: name
+    \end{itemize}
+  \end{itemize}
+\item
+  Customize Tab
+
+  \begin{itemize}
+  \item
+    Chart Options
+
+    \begin{itemize}
+    \item
+      Stacked Bars: on
+    \item
+      Sort Bars: on
+    \item
+      Y Axis Label: Count
+    \item
+      Extra Controls: on
+    \end{itemize}
+  \item
+    X Axis
+
+    \begin{itemize}
+    \item
+      X Axis Label: Year
+    \item
+      Reduce X ticks: on
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{gender}{%
+\section{Gender}\label{gender}}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/04-person/05-gender} \caption{Settings for creating the Gender chart}\label{fig:gender}
+\end{figure}
+
+\hypertarget{sql-query-11}{%
+\subsection{SQL query}\label{sql-query-11}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
+\NormalTok{       concept\_name }\KeywordTok{AS}\NormalTok{ Gender, }
+\NormalTok{       count\_value }\KeywordTok{AS}\NormalTok{ Number\_of\_persons,}
+       \KeywordTok{source}\NormalTok{.acronym}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{JOIN}\NormalTok{ (}
+  \KeywordTok{SELECT} \StringTok{\textquotesingle{}8507\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_id, }\StringTok{\textquotesingle{}Male\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_name}
+  \KeywordTok{UNION}
+  \KeywordTok{SELECT} \StringTok{\textquotesingle{}8532\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_id, }\StringTok{\textquotesingle{}Female\textquotesingle{}} \KeywordTok{AS}\NormalTok{ concept\_name}
+\NormalTok{) }\KeywordTok{AS}\NormalTok{ concepts }\KeywordTok{ON}\NormalTok{ achilles.stratum\_1 }\OperatorTok{=}\NormalTok{ concept\_id}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{chart-settings-11}{%
+\subsection{Chart settings}\label{chart-settings-11}}
+
+\begin{itemize}
+\item
+  Data Tab
+
+  \begin{itemize}
+  \item
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Bar Chart
+    \end{itemize}
+  \item
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
+  \item
+    Query
+
+    \begin{itemize}
+    \item
+      Metrics: MAX(Number\_of\_persons)
+    \item
+      Series: acronym
+    \item
+      Breakdowns: gender
+    \item
+      Contribution: on
+    \end{itemize}
+  \end{itemize}
+\item
+  Customize Tab
+
+  \begin{itemize}
+  \item
+    Chart Options
+
+    \begin{itemize}
+    \item
+      Stacked Bars: on
+    \item
+      Sort Bars: on
+    \item
+      Extra Controls: on
+    \end{itemize}
+  \item
+    X Axis
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Reduce X ticks: on
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{population-characteristics}{%
 \chapter{Population Characteristics}\label{population-characteristics}}
@@ -1191,8 +1368,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 
 Patients in Observation Period per month (whole month)
 
-\hypertarget{sql-query-10}{%
-\subsection{SQL query}\label{sql-query-10}}
+\hypertarget{sql-query-12}{%
+\subsection{SQL query}\label{sql-query-12}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1209,8 +1386,8 @@ Patients in Observation Period per month (whole month)
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-10}{%
-\subsection{Chart settings}\label{chart-settings-10}}
+\hypertarget{chart-settings-12}{%
+\subsection{Chart settings}\label{chart-settings-12}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:populationCharacteristicsPatientsInObservationPeriodPerMonth}, being the following:
 
@@ -1269,8 +1446,8 @@ The main characteristics of this chart are presented in Figure \ref{fig:populati
 \hypertarget{population-characteristics---observation-period-end-dates}{%
 \section{Population characteristics - Observation Period End Dates}\label{population-characteristics---observation-period-end-dates}}
 
-\hypertarget{sql-query-11}{%
-\subsection{SQL query}\label{sql-query-11}}
+\hypertarget{sql-query-13}{%
+\subsection{SQL query}\label{sql-query-13}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1286,8 +1463,8 @@ The main characteristics of this chart are presented in Figure \ref{fig:populati
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-11}{%
-\subsection{Chart settings}\label{chart-settings-11}}
+\hypertarget{chart-settings-13}{%
+\subsection{Chart settings}\label{chart-settings-13}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:populationCharacteristicsObservationPeriodEndDates}, being the following:
 
@@ -1346,8 +1523,8 @@ The main characteristics of this chart are presented in Figure \ref{fig:populati
 \hypertarget{population-characteristics---observation-period-start-dates}{%
 \section{Population characteristics - Observation Period Start Dates}\label{population-characteristics---observation-period-start-dates}}
 
-\hypertarget{sql-query-12}{%
-\subsection{SQL query}\label{sql-query-12}}
+\hypertarget{sql-query-14}{%
+\subsection{SQL query}\label{sql-query-14}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1363,8 +1540,8 @@ The main characteristics of this chart are presented in Figure \ref{fig:populati
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-12}{%
-\subsection{Chart settings}\label{chart-settings-12}}
+\hypertarget{chart-settings-14}{%
+\subsection{Chart settings}\label{chart-settings-14}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:populationCharacteristicsObservationPeriodStartDates}, being the following:
 
@@ -1428,8 +1605,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \hypertarget{visit---types}{%
 \section{Visit - Types}\label{visit---types}}
 
-\hypertarget{sql-query-13}{%
-\subsection{SQL query}\label{sql-query-13}}
+\hypertarget{sql-query-15}{%
+\subsection{SQL query}\label{sql-query-15}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1447,8 +1624,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-13}{%
-\subsection{Chart settings}\label{chart-settings-13}}
+\hypertarget{chart-settings-15}{%
+\subsection{Chart settings}\label{chart-settings-15}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:visitTypes}, being the following:
 
@@ -1512,8 +1689,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \hypertarget{death---by-month-per-thousand-people}{%
 \section{Death - By Month per Thousand People}\label{death---by-month-per-thousand-people}}
 
-\hypertarget{sql-query-14}{%
-\subsection{SQL query}\label{sql-query-14}}
+\hypertarget{sql-query-16}{%
+\subsection{SQL query}\label{sql-query-16}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1529,8 +1706,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-14}{%
-\subsection{Chart settings}\label{chart-settings-14}}
+\hypertarget{chart-settings-16}{%
+\subsection{Chart settings}\label{chart-settings-16}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:deathByMonthPerThousandPeople}, being the following:
 
@@ -1589,8 +1766,8 @@ The main characteristics of this chart are presented in Figure \ref{fig:deathByM
 \hypertarget{death---number-of-records}{%
 \section{Death - Number of Records}\label{death---number-of-records}}
 
-\hypertarget{sql-query-15}{%
-\subsection{SQL query}\label{sql-query-15}}
+\hypertarget{sql-query-17}{%
+\subsection{SQL query}\label{sql-query-17}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1605,8 +1782,8 @@ The main characteristics of this chart are presented in Figure \ref{fig:deathByM
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-15}{%
-\subsection{Chart settings}\label{chart-settings-15}}
+\hypertarget{chart-settings-17}{%
+\subsection{Chart settings}\label{chart-settings-17}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:deathNumberOfRecords}, being the following:
 
@@ -1676,8 +1853,8 @@ This tab uses an unique query and all the filters and charts were created using 
 \includegraphics[width=1\linewidth]{images/conceptsGeneralLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsGeneralLayout}
 \end{figure}
 
-\hypertarget{sql-query-16}{%
-\subsection{SQL query}\label{sql-query-16}}
+\hypertarget{sql-query-18}{%
+\subsection{SQL query}\label{sql-query-18}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2070,8 +2247,8 @@ This tab is composed of six bar charts that show the percentage of existent conc
 \includegraphics[width=1\linewidth]{images/conceptsDomainsLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsDomainsLayout}
 \end{figure}
 
-\hypertarget{sql-query-17}{%
-\subsection{SQL query}\label{sql-query-17}}
+\hypertarget{sql-query-19}{%
+\subsection{SQL query}\label{sql-query-19}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2102,8 +2279,8 @@ This tab is composed of six bar charts that show the percentage of existent conc
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-16}{%
-\subsection{Chart settings}\label{chart-settings-16}}
+\hypertarget{chart-settings-18}{%
+\subsection{Chart settings}\label{chart-settings-18}}
 
 The difference between the six charts related to concept domains is the condition in the filter. Therefore, to create all the charts of this dashboard, it is necessary to follow the main characteristics presented in Figure \ref{fig:conceptsDomainTypes} and the list of possible values for the filter. Those characteristics are the following:
 
@@ -2185,8 +2362,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \hypertarget{data-domains---number-of-records-per-peson}{%
 \section{Data Domains - Number of Records per Peson}\label{data-domains---number-of-records-per-peson}}
 
-\hypertarget{sql-query-18}{%
-\subsection{SQL query}\label{sql-query-18}}
+\hypertarget{sql-query-20}{%
+\subsection{SQL query}\label{sql-query-20}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2222,8 +2399,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-17}{%
-\subsection{Chart settings}\label{chart-settings-17}}
+\hypertarget{chart-settings-19}{%
+\subsection{Chart settings}\label{chart-settings-19}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:dataDomainsNumberOfRecordsPerPeson}, being the following:
 

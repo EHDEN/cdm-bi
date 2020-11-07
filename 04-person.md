@@ -6,10 +6,10 @@ output: html_document
 
 # Person
 
+## Label Colors 
 
-<!-- Discuss the goal of this dashboard... TO DO -->
-
-In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General. Besides, it was necessary to customize the dashboard JSON Metadata in order to obtain the colours blue and rose in the chart representing the gender distribution. Therefore, the following entry should be added in the settings of this dashboard:
+In order to obtain the colours blue and rose in the chart representing the gender distribution,
+add the following JSON entry to the JSON object of the `JSON Metadata` field on the edit dashboard page:
 
 ```json
 "label_colors": {
@@ -18,146 +18,276 @@ In this dashboard is present the ''Database Type Filter'', that was detailed in 
 }
 ```
 
+## CSS
 
-## Person - Patients by age
+To hide the dashboard header insert the following css code to the `CSS` field on the edit page:
 
-<!-- Discuss what is important to see in this chart... TO DO -->
+```css
+.dashboard > div:not(.dashboard-content) {  /* dashboard header */
+  display: none;
+}
+```
+
+## Data Source Filter
+
+<div class="figure">
+<img src="images/04-person/01-filter.png" alt="Settings for creating the Data Source filter chart" width="100%" />
+<p class="caption">(\#fig:dataSourceFilter)Settings for creating the Data Source filter chart</p>
+</div>
+
+**For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.**
+
+### SQL query
+
+No SQL query, use the sql table `data_source` of the `achilles` database.
+
+### Chart settings
+
+- Data Tab
+
+  - Datasource & Chart Type
+
+    - Visualization Type: Filter Box
+
+  - Time
+
+    - Time range: No filter
+
+  - Filters Configuration
+
+    - Filters:
+
+      - name
+
+    - Date Filter: off
+
+    - Instant Filtering: on
+
+## Age at first observation - Table
+
+<div class="figure">
+<img src="images/04-person/02-age_at_first_observation_table.png" alt="Settings for creating the Age at First Observation Table chart" width="100%" />
+<p class="caption">(\#fig:ageFirstObservationTable)Settings for creating the Age at First Observation Table chart</p>
+</div>
 
 ### SQL query
 
 ```sql
--- 101  Person - Patients by age
 SELECT source.name,
-       cast(stratum_1 as int) as Age,
-       count_value as count, 
-       source.slug
-FROM public.achilles_results AS achilles INNER JOIN 
-    public.data_source AS source ON 
-    achilles.data_source_id=source.id
-WHERE analysis_id = 101;
+       source.acronym,
+       SUM(CASE WHEN CAST(stratum_2 AS INTEGER) < 10 THEN count_value END) AS "0-10",
+       SUM(CASE WHEN CAST(stratum_2 AS INTEGER) >= 10 AND CAST(stratum_2 AS INTEGER) < 20 THEN count_value END) AS "10-20",
+       SUM(CASE WHEN CAST(stratum_2 AS INTEGER) >= 20 AND CAST(stratum_2 AS INTEGER) < 30 THEN count_value END) AS "20-30",
+       SUM(CASE WHEN CAST(stratum_2 AS INTEGER) >= 30 AND CAST(stratum_2 AS INTEGER) < 40 THEN count_value END) AS "30-40",
+       SUM(CASE WHEN CAST(stratum_2 AS INTEGER) >= 40 AND CAST(stratum_2 AS INTEGER) < 50 THEN count_value END) AS "40-50",
+       SUM(CASE WHEN CAST(stratum_2 AS INTEGER) >= 50 AND CAST(stratum_2 AS INTEGER) < 60 THEN count_value END) AS "50-60",
+       SUM(CASE WHEN CAST(stratum_2 AS INTEGER) >= 60 AND CAST(stratum_2 AS INTEGER) < 70 THEN count_value END) AS "60-70",
+       SUM(CASE WHEN CAST(stratum_2 AS INTEGER) >= 70 AND CAST(stratum_2 AS INTEGER) < 80 THEN count_value END) AS "70-80",
+       SUM(CASE WHEN CAST(stratum_2 AS INTEGER) >= 80 AND CAST(stratum_2 AS INTEGER) < 90 THEN count_value END) AS "80-90",
+       SUM(CASE WHEN CAST(stratum_2 AS INTEGER) >= 90 THEN count_value END) AS "90+"
+FROM public.achilles_results AS achilles
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+INNER JOIN public.concept ON stratum_1 = CAST(concept_id AS text)
+WHERE analysis_id = 102
+GROUP BY name, acronym
 ```
 
 ### Chart settings
   
 The main characteristics of this chart are presented in Figure \@ref(fig:personPatientsByAge), being the following:
 
-- **Data Tab**:
-    - **Visualization Type**: Bar Chart
-    - **Time range**: No filter
-    - **Metrics**: MAX(count)
-    - **Filters**: Empty
-    - **Series**: age
-    - **Breakdowns**: name
-    - **Row limit**: Empty
-    - **Contribution**: Not checked
-- **Costumize Tab**:
-    - **Y Axis Label**: Count
-    - **X Axis Label**: Age
-    - **Legend**: Checked
-    - **Stacked Bars**: Checked
-    - **Bar Values**: Not checked
-    - **Sort Bars**: Checked
-    - **Extra Controls**: Not checked
-    - **Reduce X ticks**: Checked
+- Data Tab
+
+  - Datasource & Chart Type
+
+    - Visualization Type: Table
+
+  - Time
+
+    - Time range: No filter
+
+  - Query
+
+    - Query Mode: Raw Records
+
+    - Columns: name, 0-10, 10-20, 20-30, 30-40, 40-50, 50-60, 60-70, 70-80, 80-90, 90+
+
+- Customize Tab
+
+  - Options
+
+    - Show Cell Bars
+
+## Age at first observation - Bars
 
 <div class="figure">
-<img src="images/personPatientsByAge.png" alt="Settings for creating chart representing patient by age (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
-<p class="caption">(\#fig:personPatientsByAge)Settings for creating chart representing patient by age (bar chart). Image changed to contain information hidden in the customize menu.</p>
+<img src="images/04-person/03-age_at_first_observation_bar.png" alt="Settings for creating the Age at First Observation Bar chart" width="100%" />
+<p class="caption">(\#fig:ageFirstObservationBar)Settings for creating the Age at First Observation Bar chart</p>
 </div>
-
-## Person - Births by Year
-
-<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
 ```sql
--- 3  Person - Births by year
 SELECT source.name,
-       stratum_1 AS "Birth_year",
-       count_value AS count, 
-       source.slug
-FROM public.achilles_results AS achilles INNER JOIN 
-	  public.data_source AS source ON 
-    achilles.data_source_id=source.id
-WHERE analysis_id = 3;
+    cast(stratum_1 AS int) AS Age,
+    count_value AS count, 
+    source.acronym
+FROM public.achilles_results AS achilles
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+WHERE analysis_id = 101
 ```
 
 ### Chart settings
 
-The main characteristics of this chart are presented in Figure \@ref(fig:personBirthsByYear), being the following:
+- Data Tab
 
-- **Data Tab**:
-    - **Visualization Type**: Bar Chart
-    - **Time range**: No filter
-    - **Metrics**: SUM(count)
-    - **Filters**: Empty
-    - **Series**: Birth_year
-    - **Breakdowns**: name
-    - **Row limit**: Empty
-    - **Contribution**: Not checked
-- **Costumize Tab**:
-    - **Y Axis Label**: Count
-    - **X Axis Label**: Age
-    - **Legend**: Checked
-    - **Stacked Bars**: Checked
-    - **Bar Values**: Not checked
-    - **Sort Bars**: Checked
-    - **Extra Controls**: Not checked
-    - **Reduce X ticks**: Checked
+  - Datasource & Chart Type
+
+    - Visualization Type: Bar Chart
+
+  - Time
+
+    - Time range: No filter
+
+  - Query
+
+    - Metrics: MAX(count)
+
+    - Series: age
+
+    - Breakdowns: name
+
+- Customize Tab
+
+  - Chart Options
+
+    - Stacked Bars: on
+
+    - Sort Bars: on
+
+    - Y Axis Label: Count
+
+  - X Axis
+
+    - X Axis Label: Age
+
+    - Reduce X ticks: on
+
+
+## Year of Birth
 
 <div class="figure">
-<img src="images/personBirthsByYear.png" alt="Settings for creating chart representing births by year (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
-<p class="caption">(\#fig:personBirthsByYear)Settings for creating chart representing births by year (bar chart). Image changed to contain information hidden in the customize menu.</p>
+<img src="images/04-person/04-year_of_birth.png" alt="Settings for creating the Year of Birth chart" width="100%" />
+<p class="caption">(\#fig:yearOfBirth)Settings for creating the Year of Birth chart</p>
 </div>
-
-
-## Person - Gender Distribution
-
-<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
 ```sql
--- 2  Person - Gender distribution
+SELECT source.name,
+       source.acronym,
+       stratum_1 AS "Birth_year",
+       count_value AS count
+FROM public.achilles_results AS achilles
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+WHERE analysis_id = 3
+```
+
+### Chart settings
+
+- Data Tab
+
+  - Datasource & Chart Type
+
+    - Visualization Type: Bar Chart
+
+  - Time
+
+    - Time range: No filter
+
+  - Query
+
+    - Metrics: SUM(count)
+
+    - Series: Birth_year
+
+    - Breakdowns: name
+
+- Customize Tab
+
+  - Chart Options
+
+    - Stacked Bars: on
+
+    - Sort Bars: on
+
+    - Y Axis Label: Count
+
+    - Extra Controls: on
+
+  - X Axis
+
+    - X Axis Label: Year
+
+    - Reduce X ticks: on
+
+
+## Gender
+
+<div class="figure">
+<img src="images/04-person/05-gender.png" alt="Settings for creating the Gender chart" width="100%" />
+<p class="caption">(\#fig:gender)Settings for creating the Gender chart</p>
+</div>
+
+### SQL query
+
+```sql
 SELECT source.name,
        concept_name AS Gender, 
        count_value AS Number_of_persons,
-       source.slug
-FROM public.achilles_results AS achilles INNER JOIN 
-	  public.data_source AS source ON 
-    achilles.data_source_id = source.id
-	JOIN (
-		SELECT '8507' AS concept_id, 'Male' AS concept_name UNION 
-		SELECT '8532' AS concept_id, 'Female' AS concept_name) AS 
-		concepts ON achilles.stratum_1=concept_id
-WHERE analysis_id = 2;
+       source.acronym
+FROM public.achilles_results AS achilles
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+JOIN (
+  SELECT '8507' AS concept_id, 'Male' AS concept_name
+  UNION
+  SELECT '8532' AS concept_id, 'Female' AS concept_name
+) AS concepts ON achilles.stratum_1 = concept_id
+WHERE analysis_id = 2
 ```
 
 ### Chart settings
 
-The main characteristics of this chart are presented in Figure \@ref(fig:personGenderDistribution), being the following:
+- Data Tab
 
-- **Data Tab**:
-    - **Visualization Type**: Bar Chart
-    - **Time range**: No filter
-    - **Metrics**: Max(number_of_persons)
-    - **Filters**: Empty
-    - **Series**: name
-    - **Breakdowns**: gender
-    - **Row limit**: Empty
-    - **Contribution**: Checked
-- **Costumize Tab**:
-    - **Y Axis Label**: Empty
-    - **X Axis Label**: Databases
-    - **Legend**: Checked
-    - **Stacked Bars**: Checked
-    - **Bar Values**: Not checked
-    - **Sort Bars**: Checked
-    - **Extra Controls**: Checked
-    - **Reduce X ticks**: Checked
+  - Datasource & Chart Type
 
-<div class="figure">
-<img src="images/personGenderDistribution.png" alt="Settings for creating chart representing the gender distribution (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
-<p class="caption">(\#fig:personGenderDistribution)Settings for creating chart representing the gender distribution (bar chart). Image changed to contain information hidden in the customize menu.</p>
-</div>
+    - Visualization Type: Bar Chart
+
+  - Time
+
+    - Time range: No filter
+
+  - Query
+
+    - Metrics: MAX(Number_of_persons)
+
+    - Series: acronym
+
+    - Breakdowns: gender
+
+    - Contribution: on
+
+- Customize Tab
+
+  - Chart Options
+
+    - Stacked Bars: on
+
+    - Sort Bars: on
+
+    - Extra Controls: on
+
+  - X Axis
+
+    - Reduce X ticks: on
