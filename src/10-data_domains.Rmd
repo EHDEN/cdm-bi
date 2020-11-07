@@ -45,7 +45,7 @@ No SQL query, use the sql table `data_source` of the `achilles` database.
     - Date Filter: off
     - Instant Filtering: on
 
-## Average Number of Records per Person
+## Average Number of Records per Person {#avgRecordsPerPerson}
 
 ```{r , fig.cap="Settings for creating the Data Source filter chart",echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/10-data_domain/02-avg_records_per_person.png")

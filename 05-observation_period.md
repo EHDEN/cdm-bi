@@ -54,7 +54,9 @@ No SQL query, use the sql table `data_source` of the `achilles` database.
     - Instant Filtering: on
 
 
-## Number of Patients in Observation Period
+## Number of Patients in Observation Period {#numInObservationPeriod}
+
+The Number of Patients in Observation Period plot shows the number of patients that contribute at least one day in a specific month.
 
 <div class="figure">
 <img src="images/05-observation_period/02-number_of_patients_in_observation_period.png" alt="Settings for creating the Number of Patients in Observation Period chart" width="100%" />

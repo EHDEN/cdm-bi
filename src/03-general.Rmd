@@ -178,7 +178,7 @@ WHERE analysis_id = 2
 knitr::include_graphics("images/03-general/04-patients_per_country.png")
 ```
 
-### SQL query
+### SQL query {#patientsPerCountryQuery}
 
 ```sql
 SELECT country.country,
@@ -228,7 +228,7 @@ knitr::include_graphics("images/03-general/05-database_types_per_country.png")
 
 ### SQL query
 
-Same as [Patients per Country](#patients-per-country) query
+Same as [Patients per Country](#patientsPerCountryQuery) query
 
 ```sql
 SELECT country.country,
@@ -308,7 +308,7 @@ INNER JOIN public.country AS country ON source.country_id=country.id
 
     - Map Style: Streets or Light or Outdoors
 
-## Meta Data
+## Meta Data {#metaDataTable}
 
 ```{r metaData, fig.cap="Settings for creating the Meta Data chart",echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/03-general/07-meta_data.png")

@@ -56,7 +56,7 @@ No SQL query, use the sql table `data_source` of the `achilles` database.
 
     - Instant Filtering: on
 
-## Visit Type Table
+## Visit Type Table {#visitTypeTable}
 
 ```{r visitTypeTable, fig.cap="Settings for creating the Visit Type Table chart",echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/06-visit/02-visit_types_table.png")

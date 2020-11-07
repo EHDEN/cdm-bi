@@ -63,7 +63,7 @@ No SQL query, use the sql table `data_source` of the `achilles` database.
 
     - Instant Filtering: on
 
-## Age at first observation - Table
+## Age at first observation - Table {#age1ObservationTable}
 
 <div class="figure">
 <img src="images/04-person/02-age_at_first_observation_table.png" alt="Settings for creating the Age at First Observation Table chart" width="100%" />
@@ -116,7 +116,7 @@ GROUP BY name, acronym
 
     - Show Cell Bars: off
 
-## Age at first observation - Bars
+## Age at first observation - Bars {#age1ObservationBars}
 
 <div class="figure">
 <img src="images/04-person/03-age_at_first_observation_bar.png" alt="Settings for creating the Age at First Observation Bar chart" width="100%" />
@@ -172,7 +172,7 @@ WHERE analysis_id = 101
     - Reduce X ticks: on
 
 
-## Year of Birth
+## Year of Birth {#yearOfBirth}
 
 <div class="figure">
 <img src="images/04-person/04-year_of_birth.png" alt="Settings for creating the Year of Birth chart" width="100%" />

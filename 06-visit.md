@@ -55,7 +55,7 @@ No SQL query, use the sql table `data_source` of the `achilles` database.
 
     - Instant Filtering: on
 
-## Visit Type Table
+## Visit Type Table {#visitTypeTable}
 
 <div class="figure">
 <img src="images/06-visit/02-visit_types_table.png" alt="Settings for creating the Visit Type Table chart" width="100%" />

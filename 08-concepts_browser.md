@@ -65,17 +65,6 @@ WHERE analysis_id in (201, 401, 601, 701, 801, 901, 1001, 1801, 200, 400, 600, 7
 
 Same as [Data Source and Domain filters](#Data Source and Domain Filters) query
 
-```sql
-SELECT concept_name,
-     domain_id,
-     source.name AS source_name,
-     source.acronym
-FROM achilles_results
-JOIN concept ON cast(stratum_1 AS BIGINT) = concept_id
-INNER JOIN public.data_source AS source ON data_source_id=source.id
-WHERE analysis_id in (201, 401, 601, 701, 801, 901, 1001, 1801, 200, 400, 600, 700, 800, 1800)
-```
-
 ### Chart settings
 
 - Data Tab
@@ -89,7 +78,7 @@ WHERE analysis_id in (201, 401, 601, 701, 801, 901, 1001, 1801, 200, 400, 600, 7
   - Big Number Font Size: Small
   - Subheader Font Size: Tiny
 
-## Concept Browser Table
+## Concept Browser Table {#conceptBrowserTable}
 
 <div class="figure">
 <img src="images/08-concepts_browser/03-concepts_table.png" alt="Settings for creating the Concepts Table chart" width="100%" />

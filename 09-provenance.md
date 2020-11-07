@@ -44,7 +44,7 @@ No SQL query, use the sql table `data_source` of the `achilles` database.
     - Date Filter: off
     - Instant Filtering: on
 
-## Condition & Drug & Procedure & Device & Measurement & Observation Types
+## Condition & Drug & Procedure & Device & Measurement & Observation Types {#dataProvenanceCharts}
 
 <div class="figure">
 <img src="images/09-provenance/02-condition_drug_procedure_device_measurement_observation_types.png" alt="Settings for creating the Condition, Drug, Procedure, Device, Measurement and Observation charts" width="100%" />

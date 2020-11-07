@@ -180,7 +180,7 @@ WHERE analysis_id = 2
 <p class="caption">(\#fig:patientsPerCountry)Settings for creating the Patients per Country chart</p>
 </div>
 
-### SQL query
+### SQL query {#patientsPerCountryQuery}
 
 ```sql
 SELECT country.country,
@@ -231,7 +231,7 @@ WHERE analysis_id = 1
 
 ### SQL query
 
-Same as [Patients per Country](#patients-per-country) query
+Same as [Patients per Country](#patientsPerCountryQuery) query
 
 ```sql
 SELECT country.country,
@@ -312,7 +312,7 @@ INNER JOIN public.country AS country ON source.country_id=country.id
 
     - Map Style: Streets or Light or Outdoors
 
-## Meta Data
+## Meta Data {#metaDataTable}
 
 <div class="figure">
 <img src="images/03-general/07-meta_data.png" alt="Settings for creating the Meta Data chart" width="100%" />
