@@ -148,6 +148,6 @@ WHERE analysis_id = 201
 
   - X Axis
 
-    - Y Axis Label: Databases
+    - X Axis Label: Databases
 
     - Reduce X ticks: on

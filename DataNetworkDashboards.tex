@@ -1903,7 +1903,7 @@ No SQL query, use the sql table \texttt{data\_source} of the \texttt{achilles} d
 
     \begin{itemize}
     \item
-      Y Axis Label: Databases
+      X Axis Label: Databases
     \item
       Reduce X ticks: on
     \end{itemize}
@@ -1913,160 +1913,240 @@ No SQL query, use the sql table \texttt{data\_source} of the \texttt{achilles} d
 \hypertarget{death}{%
 \chapter{Death}\label{death}}
 
-In this dashboard is present the `'Database Type Filter'', that was detailed in the Chapter General.
+\hypertarget{css-4}{%
+\section{CSS}\label{css-4}}
 
-\hypertarget{death---by-month-per-thousand-people}{%
-\section{Death - By Month per Thousand People}\label{death---by-month-per-thousand-people}}
+To hide the dashboard header insert the following css code to the \texttt{CSS} field on the edit page:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{.dashboard} \OperatorTok{\textgreater{}}\NormalTok{ div}\InformationTok{:not(}\FunctionTok{.dashboard{-}content}\InformationTok{)}\NormalTok{ \{  }\CommentTok{/* dashboard header */}
+  \KeywordTok{display}\NormalTok{: }\DecValTok{none}\OperatorTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-source-filter-3}{%
+\section{Data Source Filter}\label{data-source-filter-3}}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/shared/data_source_filter} \caption{Settings for creating the Data Source filter chart}\label{fig:dataSourceFilter}
+\end{figure}
+
+\textbf{For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.}
 
 \hypertarget{sql-query-19}{%
 \subsection{SQL query}\label{sql-query-19}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{{-}{-} 502  Death {-} By Month per Thousand People}
-\KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
-       \FunctionTok{to\_date}\NormalTok{(stratum\_1, }\StringTok{\textquotesingle{}YYYYMM\textquotesingle{}}\NormalTok{) }\KeywordTok{as} \DataTypeTok{Date}\NormalTok{,}
-\NormalTok{       count\_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
-       \KeywordTok{source}\NormalTok{.slug}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{      achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{502}\NormalTok{;}
-\end{Highlighting}
-\end{Shaded}
+No SQL query, use the sql table \texttt{data\_source} of the \texttt{achilles} database.
 
 \hypertarget{chart-settings-19}{%
 \subsection{Chart settings}\label{chart-settings-19}}
 
-The main characteristics of this chart are presented in Figure \ref{fig:deathByMonthPerThousandPeople}, being the following:
-
 \begin{itemize}
-\tightlist
 \item
-  \textbf{Data Tab}:
+  Data Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Visualization Type}: Bar Chart
-  \item
-    \textbf{Time range}: No filter
-  \item
-    \textbf{Metrics}: MAX(count) as ``Count''
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}: date
-  \item
-    \textbf{Breakdowns}: Empty
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Not checked
-  \end{itemize}
-\item
-  \textbf{Costumize Tab}:
+    Datasource \& Chart Type
 
-  \begin{itemize}
-  \tightlist
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Filter Box
+    \end{itemize}
   \item
-    \textbf{Y Axis Label}: Number of Patients (in thousands)
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
   \item
-    \textbf{X Axis Label}: Databases
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}: Not checked
-  \item
-    \textbf{Bar Values}: Not checked
-  \item
-    \textbf{Sort Bars}: Checked
-  \item
-    \textbf{Extra Controls}: Not checked
-  \item
-    \textbf{Reduce X ticks}: Not checked
+    Filters Configuration
+
+    \begin{itemize}
+    \item
+      Filters:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        name
+      \end{itemize}
+    \item
+      Date Filter: off
+    \item
+      Instant Filtering: on
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{images/deathByMonthPerThousandPeople} \caption{Settings for creating chart show in thousands the number of death patients in the network (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:deathByMonthPerThousandPeople}
-\end{figure}
+\hypertarget{number-of-records}{%
+\section{Number of Records}\label{number-of-records}}
 
-\hypertarget{death---number-of-records}{%
-\section{Death - Number of Records}\label{death---number-of-records}}
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/07-death/02-number_of_records} \caption{Settings for creating the Number of Records chart}\label{fig:numberOfRecords}
+\end{figure}
 
 \hypertarget{sql-query-20}{%
 \subsection{SQL query}\label{sql-query-20}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{{-}{-} 501  Death {-} Number of Records}
 \KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
-\NormalTok{       count\_value }\KeywordTok{as} \FunctionTok{count}\NormalTok{, }
-       \KeywordTok{source}\NormalTok{.slug}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{      achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{501}\NormalTok{;}
+\NormalTok{    count\_value,}
+    \KeywordTok{source}\NormalTok{.acronym}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{501}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{chart-settings-20}{%
 \subsection{Chart settings}\label{chart-settings-20}}
 
-The main characteristics of this chart are presented in Figure \ref{fig:deathNumberOfRecords}, being the following:
-
 \begin{itemize}
-\tightlist
 \item
-  \textbf{Data Tab}:
+  Data Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Visualization Type}: Bar Chart
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Bar Chart
+    \end{itemize}
   \item
-    \textbf{Time range}: No filter
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
   \item
-    \textbf{Metrics}: MAX(count) as ``Count''
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}: name
-  \item
-    \textbf{Breakdowns}: Empty
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Not checked
+    Query
+
+    \begin{itemize}
+    \item
+      Metrics: MAX(count\_value) with label Count
+    \item
+      Series: name
+    \end{itemize}
   \end{itemize}
 \item
-  \textbf{Costumize Tab}:
+  Customize Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Y Axis Label}: Number of Patients
+    Chart Options
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Y Axis Label: Number of Patients
+    \end{itemize}
   \item
-    \textbf{X Axis Label}: Databases
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}: Not checked
-  \item
-    \textbf{Bar Values}: Not checked
-  \item
-    \textbf{Sort Bars}: Not checked
-  \item
-    \textbf{Extra Controls}: Not checked
-  \item
-    \textbf{Reduce X ticks}: Checked
+    X Axis
+
+    \begin{itemize}
+    \item
+      X Axis Label: Databases
+    \item
+      Reduce X ticks: on
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
+\hypertarget{death-by-year-per-thousand-people}{%
+\section{Death By Year per Thousand People}\label{death-by-year-per-thousand-people}}
+
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/deathNumberOfRecords} \caption{Settings for creating chart show the number of death patients in each database (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:deathNumberOfRecords}
+\includegraphics[width=1\linewidth]{images/07-death/03-deaths_by_year_per_thousand_people} \caption{Settings for creating the Death by Year per Thousand People chart}\label{fig:deathByYearPerThousandPeople}
 \end{figure}
+
+\hypertarget{sql-query-21}{%
+\subsection{SQL query}\label{sql-query-21}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
+    \KeywordTok{source}\NormalTok{.acronym,}
+    \FunctionTok{EXTRACT}\NormalTok{(}\DataTypeTok{year} \KeywordTok{FROM} \FunctionTok{TO\_DATE}\NormalTok{(stratum\_1, }\StringTok{\textquotesingle{}YYYYMM\textquotesingle{}}\NormalTok{)) }\KeywordTok{AS} \DataTypeTok{Date}\NormalTok{,}
+\NormalTok{    count\_value}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{as}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{as} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{502}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{chart-settings-21}{%
+\subsection{Chart settings}\label{chart-settings-21}}
+
+\begin{itemize}
+\item
+  Data Tab
+
+  \begin{itemize}
+  \item
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Bar Chart
+    \end{itemize}
+  \item
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
+  \item
+    Query
+
+    \begin{itemize}
+    \item
+      Metrics: MAX(count\_value) with label Count
+    \item
+      Series: date
+    \item
+      Breakdowns: name
+    \end{itemize}
+  \end{itemize}
+\item
+  Customize Tab
+
+  \begin{itemize}
+  \item
+    Chart Options
+
+    \begin{itemize}
+    \item
+      Stacked Bars: on
+    \item
+      Sort Bars: on
+    \item
+      Y Axis Label:Number of Patients (in thousands)
+    \end{itemize}
+  \item
+    X Axis
+
+    \begin{itemize}
+    \item
+      X Axis Label: Years
+    \item
+      Reduce X ticks: on
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{concepts}{%
 \chapter{Concepts}\label{concepts}}
@@ -2082,8 +2162,8 @@ This tab uses an unique query and all the filters and charts were created using 
 \includegraphics[width=1\linewidth]{images/conceptsGeneralLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsGeneralLayout}
 \end{figure}
 
-\hypertarget{sql-query-21}{%
-\subsection{SQL query}\label{sql-query-21}}
+\hypertarget{sql-query-22}{%
+\subsection{SQL query}\label{sql-query-22}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2476,8 +2556,8 @@ This tab is composed of six bar charts that show the percentage of existent conc
 \includegraphics[width=1\linewidth]{images/conceptsDomainsLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsDomainsLayout}
 \end{figure}
 
-\hypertarget{sql-query-22}{%
-\subsection{SQL query}\label{sql-query-22}}
+\hypertarget{sql-query-23}{%
+\subsection{SQL query}\label{sql-query-23}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2508,8 +2588,8 @@ This tab is composed of six bar charts that show the percentage of existent conc
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-21}{%
-\subsection{Chart settings}\label{chart-settings-21}}
+\hypertarget{chart-settings-22}{%
+\subsection{Chart settings}\label{chart-settings-22}}
 
 The difference between the six charts related to concept domains is the condition in the filter. Therefore, to create all the charts of this dashboard, it is necessary to follow the main characteristics presented in Figure \ref{fig:conceptsDomainTypes} and the list of possible values for the filter. Those characteristics are the following:
 
@@ -2591,8 +2671,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \hypertarget{data-domains---number-of-records-per-peson}{%
 \section{Data Domains - Number of Records per Peson}\label{data-domains---number-of-records-per-peson}}
 
-\hypertarget{sql-query-23}{%
-\subsection{SQL query}\label{sql-query-23}}
+\hypertarget{sql-query-24}{%
+\subsection{SQL query}\label{sql-query-24}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2628,8 +2708,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-22}{%
-\subsection{Chart settings}\label{chart-settings-22}}
+\hypertarget{chart-settings-23}{%
+\subsection{Chart settings}\label{chart-settings-23}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:dataDomainsNumberOfRecordsPerPeson}, being the following:
 
