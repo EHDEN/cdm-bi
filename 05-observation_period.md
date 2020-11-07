@@ -8,8 +8,6 @@ output: html_document
 
 <!-- Discuss the goal of this dashboard... TO DO -->
 
-In this dashboard is present the ''Data Source Filter'', that was detailed in the Chapter Person.
-
 ## CSS
 
 To hide the dashboard header insert the following css code to the `CSS` field on the edit page:

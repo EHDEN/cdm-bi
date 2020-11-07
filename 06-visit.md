@@ -8,53 +8,146 @@ output: html_document
 
 <!-- Discuss the goal of this dashboard... TO DO -->
 
-In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
+This dashboard shows the different types of visits per data source (see [Visit Occurence Table](https://ohdsi.github.io/CommonDataModel/cdm531.html#visit_occurrence))
 
-## Visit - Types
+## CSS
 
-<!-- Discuss what is important to see in this chart... TO DO -->
+To hide the dashboard header insert the following css code to the `CSS` field on the edit page:
+
+```css
+.dashboard > div:not(.dashboard-content) {  /* dashboard header */
+  display: none;
+}
+```
+
+## Data Source Filter
+
+<div class="figure">
+<img src="images/shared/data_source_filter.png" alt="Settings for creating the Data Source filter chart" width="100%" />
+<p class="caption">(\#fig:dataSourceFilter)Settings for creating the Data Source filter chart</p>
+</div>
+
+**For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.**
+
+### SQL query
+
+No SQL query, use the sql table `data_source` of the `achilles` database.
+
+### Chart settings
+
+- Data Tab
+
+  - Datasource & Chart Type
+
+    - Visualization Type: Filter Box
+
+  - Time
+
+    - Time range: No filter
+
+  - Filters Configuration
+
+    - Filters:
+
+      - name
+
+    - Date Filter: off
+
+    - Instant Filtering: on
+
+## Visit Type Table
+
+<div class="figure">
+<img src="images/06-visit/02-visit_types_table.png" alt="Settings for creating the Visit Type Table chart" width="100%" />
+<p class="caption">(\#fig:visitTypeTable)Settings for creating the Visit Type Table chart</p>
+</div>
 
 ### SQL query
 
 ```sql
--- 201  Visit - Types
-SELECT source.name, 
-       concept_name AS "Observation", 
-       count_value AS "Nr_Observations",
-       source.slug
-FROM public.achilles_results AS achilles 
-	INNER JOIN public.data_source AS source ON 
-	  achilles.data_source_id=source.id
-	INNER JOIN public.concept ON 
-	  stratum_1 = CAST(concept_id AS text)
-WHERE analysis_id = 201;
+SELECT source.name,
+       source.acronym,
+       concept_name AS "Type",
+       MAX(count_value) AS "Count"
+FROM public.achilles_results AS achilles
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+INNER JOIN public.concept ON CAST(stratum_1 AS INT) = concept_id
+WHERE analysis_id = 201
+GROUP BY name, acronym, "Type"
+ORDER BY "Count" DESC
 ```
 
 ### Chart settings
 
-The main characteristics of this chart are presented in Figure \@ref(fig:visitTypes), being the following:
+- Data Tab
 
-- **Data Tab**:
-    - **Visualization Type**: Bar Chart
-    - **Time range**: No filter
-    - **Metrics**: MAX(Nr_Observations) as Observations
-    - **Filters**: Empty
-    - **Series**: name
-    - **Breakdowns**: Observation
-    - **Row limit**: Empty
-    - **Contribution**: Not checked
-- **Costumize Tab**:
-    - **Y Axis Label**: Empty
-    - **X Axis Label**: Databases
-    - **Legend**: Checked
-    - **Stacked Bars**: Checked
-    - **Bar Values**: Not checked
-    - **Sort Bars**: Checked
-    - **Extra Controls**: Checked
-    - **Reduce X ticks**: Checked
+  - Datasource & Chart Type
+
+    - Visualization Type: Table
+
+  - Time
+
+    - Time range: No filter
+
+  - Query
+
+    - Query Mode: Raw Records
+
+    - Columns: name with label "Data Source", Type, Count
+
+
+## Visit Types Bars
 
 <div class="figure">
-<img src="images/visitTypes.png" alt="Settings for creating chart representing the types of visit in the databases (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
-<p class="caption">(\#fig:visitTypes)Settings for creating chart representing the types of visit in the databases (bar chart). Image changed to contain information hidden in the customize menu.</p>
+<img src="images/06-visit/03-visit_types_bars.png" alt="Settings for creating the Visit Types bar chart" width="100%" />
+<p class="caption">(\#fig:visitTypeBars)Settings for creating the Visit Types bar chart</p>
 </div>
 
+### SQL query
+
+```sql
+SELECT source.name, 
+       source.acronym,
+       concept_name AS "Observation", 
+       count_value
+FROM public.achilles_results AS achilles 
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+INNER JOIN public.concept ON CAST(stratum_1 AS INT) = concept_id
+WHERE analysis_id = 201
+```
+
+### Chart settings
+
+- Data Tab
+
+  - Datasource & Chart Type
+
+    - Visualization Type: Bar Chart
+
+  - Time
+
+    - Time range: No filter
+
+  - Query
+
+    - Metrics: MAX(count_value) with label Observations
+
+    - Series: name
+
+    - Breakdowns: Observation
+
+- Customize Tab
+
+  - Chart Options
+
+    - Stacked Bars: on
+
+    - Sort Bars: on
+
+    - Extra Controls: on
+
+  - X Axis
+
+    - Y Axis Label: Databases
+
+    - Reduce X ticks: on

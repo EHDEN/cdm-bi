@@ -1361,8 +1361,6 @@ The main characteristics of this chart are presented in Figure \ref{fig:personPa
 \hypertarget{observation-period}{%
 \chapter{Observation Period}\label{observation-period}}
 
-In this dashboard is present the `'Data Source Filter'', that was detailed in the Chapter Person.
-
 \hypertarget{css-2}{%
 \section{CSS}\label{css-2}}
 
@@ -1692,86 +1690,225 @@ No SQL query, use the sql table \texttt{data\_source} of the \texttt{achilles} d
 \hypertarget{visit}{%
 \chapter{Visit}\label{visit}}
 
-In this dashboard is present the `'Database Type Filter'', that was detailed in the Chapter General.
+This dashboard shows the different types of visits per data source (see \href{https://ohdsi.github.io/CommonDataModel/cdm531.html\#visit_occurrence}{Visit Occurence Table})
 
-\hypertarget{visit---types}{%
-\section{Visit - Types}\label{visit---types}}
+\hypertarget{css-3}{%
+\section{CSS}\label{css-3}}
+
+To hide the dashboard header insert the following css code to the \texttt{CSS} field on the edit page:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{.dashboard} \OperatorTok{\textgreater{}}\NormalTok{ div}\InformationTok{:not(}\FunctionTok{.dashboard{-}content}\InformationTok{)}\NormalTok{ \{  }\CommentTok{/* dashboard header */}
+  \KeywordTok{display}\NormalTok{: }\DecValTok{none}\OperatorTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-source-filter-2}{%
+\section{Data Source Filter}\label{data-source-filter-2}}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/shared/data_source_filter} \caption{Settings for creating the Data Source filter chart}\label{fig:dataSourceFilter}
+\end{figure}
+
+\textbf{For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.}
 
 \hypertarget{sql-query-16}{%
 \subsection{SQL query}\label{sql-query-16}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{{-}{-} 201  Visit {-} Types}
-\KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name, }
-\NormalTok{       concept\_name }\KeywordTok{AS} \OtherTok{"Observation"}\NormalTok{, }
-\NormalTok{       count\_value }\KeywordTok{AS} \OtherTok{"Nr\_Observations"}\NormalTok{,}
-       \KeywordTok{source}\NormalTok{.slug}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{      achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.concept }\KeywordTok{ON} 
-\NormalTok{      stratum\_1 }\OperatorTok{=} \FunctionTok{CAST}\NormalTok{(concept\_id }\KeywordTok{AS}\NormalTok{ text)}
-\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{201}\NormalTok{;}
-\end{Highlighting}
-\end{Shaded}
+No SQL query, use the sql table \texttt{data\_source} of the \texttt{achilles} database.
 
 \hypertarget{chart-settings-16}{%
 \subsection{Chart settings}\label{chart-settings-16}}
 
-The main characteristics of this chart are presented in Figure \ref{fig:visitTypes}, being the following:
-
 \begin{itemize}
-\tightlist
 \item
-  \textbf{Data Tab}:
+  Data Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Visualization Type}: Bar Chart
-  \item
-    \textbf{Time range}: No filter
-  \item
-    \textbf{Metrics}: MAX(Nr\_Observations) as Observations
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}: name
-  \item
-    \textbf{Breakdowns}: Observation
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Not checked
-  \end{itemize}
-\item
-  \textbf{Costumize Tab}:
+    Datasource \& Chart Type
 
-  \begin{itemize}
-  \tightlist
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Filter Box
+    \end{itemize}
   \item
-    \textbf{Y Axis Label}: Empty
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
   \item
-    \textbf{X Axis Label}: Databases
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}: Checked
-  \item
-    \textbf{Bar Values}: Not checked
-  \item
-    \textbf{Sort Bars}: Checked
-  \item
-    \textbf{Extra Controls}: Checked
-  \item
-    \textbf{Reduce X ticks}: Checked
+    Filters Configuration
+
+    \begin{itemize}
+    \item
+      Filters:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        name
+      \end{itemize}
+    \item
+      Date Filter: off
+    \item
+      Instant Filtering: on
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
+\hypertarget{visit-type-table}{%
+\section{Visit Type Table}\label{visit-type-table}}
+
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/visitTypes} \caption{Settings for creating chart representing the types of visit in the databases (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes}
+\includegraphics[width=1\linewidth]{images/06-visit/02-visit_types_table} \caption{Settings for creating the Visit Type Table chart}\label{fig:visitTypeTable}
 \end{figure}
+
+\hypertarget{sql-query-17}{%
+\subsection{SQL query}\label{sql-query-17}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
+       \KeywordTok{source}\NormalTok{.acronym,}
+\NormalTok{       concept\_name }\KeywordTok{AS} \OtherTok{"Type"}\NormalTok{,}
+       \FunctionTok{MAX}\NormalTok{(count\_value) }\KeywordTok{AS} \OtherTok{"Count"}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.concept }\KeywordTok{ON} \FunctionTok{CAST}\NormalTok{(stratum\_1 }\KeywordTok{AS} \DataTypeTok{INT}\NormalTok{) }\OperatorTok{=}\NormalTok{ concept\_id}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{201}
+\KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ name, acronym, }\OtherTok{"Type"}
+\KeywordTok{ORDER} \KeywordTok{BY} \OtherTok{"Count"} \KeywordTok{DESC}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{chart-settings-17}{%
+\subsection{Chart settings}\label{chart-settings-17}}
+
+\begin{itemize}
+\item
+  Data Tab
+
+  \begin{itemize}
+  \item
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Table
+    \end{itemize}
+  \item
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
+  \item
+    Query
+
+    \begin{itemize}
+    \item
+      Query Mode: Raw Records
+    \item
+      Columns: name with label ``Data Source'', Type, Count
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{visit-types-bars}{%
+\section{Visit Types Bars}\label{visit-types-bars}}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/06-visit/03-visit_types_bars} \caption{Settings for creating the Visit Types bar chart}\label{fig:visitTypeBars}
+\end{figure}
+
+\hypertarget{sql-query-18}{%
+\subsection{SQL query}\label{sql-query-18}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name, }
+       \KeywordTok{source}\NormalTok{.acronym,}
+\NormalTok{       concept\_name }\KeywordTok{AS} \OtherTok{"Observation"}\NormalTok{, }
+\NormalTok{       count\_value}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.concept }\KeywordTok{ON} \FunctionTok{CAST}\NormalTok{(stratum\_1 }\KeywordTok{AS} \DataTypeTok{INT}\NormalTok{) }\OperatorTok{=}\NormalTok{ concept\_id}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{201}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{chart-settings-18}{%
+\subsection{Chart settings}\label{chart-settings-18}}
+
+\begin{itemize}
+\item
+  Data Tab
+
+  \begin{itemize}
+  \item
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Bar Chart
+    \end{itemize}
+  \item
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
+  \item
+    Query
+
+    \begin{itemize}
+    \item
+      Metrics: MAX(count\_value) with label Observations
+    \item
+      Series: name
+    \item
+      Breakdowns: Observation
+    \end{itemize}
+  \end{itemize}
+\item
+  Customize Tab
+
+  \begin{itemize}
+  \item
+    Chart Options
+
+    \begin{itemize}
+    \item
+      Stacked Bars: on
+    \item
+      Sort Bars: on
+    \item
+      Extra Controls: on
+    \end{itemize}
+  \item
+    X Axis
+
+    \begin{itemize}
+    \item
+      Y Axis Label: Databases
+    \item
+      Reduce X ticks: on
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{death}{%
 \chapter{Death}\label{death}}
@@ -1781,8 +1918,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \hypertarget{death---by-month-per-thousand-people}{%
 \section{Death - By Month per Thousand People}\label{death---by-month-per-thousand-people}}
 
-\hypertarget{sql-query-17}{%
-\subsection{SQL query}\label{sql-query-17}}
+\hypertarget{sql-query-19}{%
+\subsection{SQL query}\label{sql-query-19}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1798,8 +1935,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-17}{%
-\subsection{Chart settings}\label{chart-settings-17}}
+\hypertarget{chart-settings-19}{%
+\subsection{Chart settings}\label{chart-settings-19}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:deathByMonthPerThousandPeople}, being the following:
 
@@ -1858,8 +1995,8 @@ The main characteristics of this chart are presented in Figure \ref{fig:deathByM
 \hypertarget{death---number-of-records}{%
 \section{Death - Number of Records}\label{death---number-of-records}}
 
-\hypertarget{sql-query-18}{%
-\subsection{SQL query}\label{sql-query-18}}
+\hypertarget{sql-query-20}{%
+\subsection{SQL query}\label{sql-query-20}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1874,8 +2011,8 @@ The main characteristics of this chart are presented in Figure \ref{fig:deathByM
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-18}{%
-\subsection{Chart settings}\label{chart-settings-18}}
+\hypertarget{chart-settings-20}{%
+\subsection{Chart settings}\label{chart-settings-20}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:deathNumberOfRecords}, being the following:
 
@@ -1945,8 +2082,8 @@ This tab uses an unique query and all the filters and charts were created using 
 \includegraphics[width=1\linewidth]{images/conceptsGeneralLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsGeneralLayout}
 \end{figure}
 
-\hypertarget{sql-query-19}{%
-\subsection{SQL query}\label{sql-query-19}}
+\hypertarget{sql-query-21}{%
+\subsection{SQL query}\label{sql-query-21}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2339,8 +2476,8 @@ This tab is composed of six bar charts that show the percentage of existent conc
 \includegraphics[width=1\linewidth]{images/conceptsDomainsLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsDomainsLayout}
 \end{figure}
 
-\hypertarget{sql-query-20}{%
-\subsection{SQL query}\label{sql-query-20}}
+\hypertarget{sql-query-22}{%
+\subsection{SQL query}\label{sql-query-22}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2371,8 +2508,8 @@ This tab is composed of six bar charts that show the percentage of existent conc
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-19}{%
-\subsection{Chart settings}\label{chart-settings-19}}
+\hypertarget{chart-settings-21}{%
+\subsection{Chart settings}\label{chart-settings-21}}
 
 The difference between the six charts related to concept domains is the condition in the filter. Therefore, to create all the charts of this dashboard, it is necessary to follow the main characteristics presented in Figure \ref{fig:conceptsDomainTypes} and the list of possible values for the filter. Those characteristics are the following:
 
@@ -2454,8 +2591,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \hypertarget{data-domains---number-of-records-per-peson}{%
 \section{Data Domains - Number of Records per Peson}\label{data-domains---number-of-records-per-peson}}
 
-\hypertarget{sql-query-21}{%
-\subsection{SQL query}\label{sql-query-21}}
+\hypertarget{sql-query-23}{%
+\subsection{SQL query}\label{sql-query-23}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2491,8 +2628,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-20}{%
-\subsection{Chart settings}\label{chart-settings-20}}
+\hypertarget{chart-settings-22}{%
+\subsection{Chart settings}\label{chart-settings-22}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:dataDomainsNumberOfRecordsPerPeson}, being the following:
 
