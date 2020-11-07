@@ -87,15 +87,13 @@ SELECT source.name,
        SUM(CASE WHEN CAST(stratum_2 AS INTEGER) >= 90 THEN count_value END) AS "90+"
 FROM public.achilles_results AS achilles
 INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
-INNER JOIN public.concept ON stratum_1 = CAST(concept_id AS text)
+INNER JOIN public.concept ON CAST(stratum_1 AS BIGINT) = concept_id
 WHERE analysis_id = 102
 GROUP BY name, acronym
 ```
 
 ### Chart settings
   
-The main characteristics of this chart are presented in Figure \@ref(fig:personPatientsByAge), being the following:
-
 - Data Tab
 
   - Datasource & Chart Type
@@ -116,7 +114,7 @@ The main characteristics of this chart are presented in Figure \@ref(fig:personP
 
   - Options
 
-    - Show Cell Bars
+    - Show Cell Bars: off
 
 ## Age at first observation - Bars
 

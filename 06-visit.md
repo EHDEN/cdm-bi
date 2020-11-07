@@ -71,7 +71,7 @@ SELECT source.name,
        MAX(count_value) AS "Count"
 FROM public.achilles_results AS achilles
 INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
-INNER JOIN public.concept ON CAST(stratum_1 AS INT) = concept_id
+INNER JOIN public.concept ON CAST(stratum_1 AS BIGINT) = concept_id
 WHERE analysis_id = 201
 GROUP BY name, acronym, "Type"
 ORDER BY "Count" DESC
@@ -112,7 +112,7 @@ SELECT source.name,
        count_value
 FROM public.achilles_results AS achilles 
 INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
-INNER JOIN public.concept ON CAST(stratum_1 AS INT) = concept_id
+INNER JOIN public.concept ON CAST(stratum_1 AS BIGINT) = concept_id
 WHERE analysis_id = 201
 ```
 
