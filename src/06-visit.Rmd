@@ -80,21 +80,13 @@ ORDER BY "Count" DESC
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Table
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Query Mode: Raw Records
-
     - Columns: name with label "Data Source", Type, Count
-
 
 ## Visit Types Bars
 

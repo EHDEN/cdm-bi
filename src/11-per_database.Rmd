@@ -6,13 +6,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Per Database
+# Per Database {#PerDatabaseDashboard}
 
 <!-- Discuss the goal of this dashboard... TO DO -->
 
 ## Label Colors 
 
-In order to obtain the colours blue and rose in the chart representing the gender distribution,
+In order to obtain the colors blue and rose in the chart representing the gender distribution,
 add the following JSON entry to the JSON object of the `JSON Metadata` field on the edit dashboard page:
 
 ```json
@@ -309,7 +309,50 @@ JOIN concept ON CAST(achilles_results.stratum_1 AS BIGINT) = concept.concept_id
 
 ### Visit Type Table
 
-Same chart used on the [Visit](#visitTypeTable) dashboard.
+```{r visitTypeTable, fig.cap="Settings for creating the Visit Type Table chart",echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/11-per_database/05-visit/02-visit_type_table.png")
+```
+
+#### SQL Query
+
+```sql
+SELECT
+  name,
+  acronym,
+  concept.concept_name,
+  ar1.count_value AS num_persons,
+  round(100.0 * ar1.count_value / denom.count_value, 2) AS percent_persons,
+  round(1.0 * ar2.count_value / ar1.count_value, 2) AS records_per_person
+FROM (
+  SELECT *
+  FROM achilles_results WHERE analysis_id = 200) AS ar1
+  JOIN (
+    SELECT *
+    FROM achilles_results WHERE analysis_id = 201) AS ar2
+    ON ar1.stratum_1 = ar2.stratum_1 AND ar1.data_source_id = ar2.data_source_id
+  JOIN (
+    SELECT *
+    FROM achilles_results WHERE analysis_id = 1) AS denom
+    ON ar1.data_source_id = denom.data_source_id
+  JOIN data_source ON data_source.id = ar1.data_source_id
+  JOIN concept ON CAST(ar1.stratum_1 AS INTEGER) = concept_id
+ORDER BY ar1.data_source_id, ar1.count_value DESC
+```
+
+#### Chart Settings
+
+- Data Tab
+  - Datasource & Chart Type
+    - Visualization Type: Table
+  - Time
+    - Time range: No filter
+  - Query
+    - Query Mode: Raw Records
+    - Columns: name, visit_type, num_persons, percent_persons with label persons (%), records_per_person
+    - Row limit: None
+- Customize Tab
+  - Options
+    - Show Cell Bars: off
 
 ## Concept Browser Tab
 

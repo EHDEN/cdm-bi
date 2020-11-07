@@ -4,13 +4,13 @@ output: html_document
 
 
 
-# Per Database
+# Per Database {#PerDatabaseDashboard}
 
 <!-- Discuss the goal of this dashboard... TO DO -->
 
 ## Label Colors 
 
-In order to obtain the colours blue and rose in the chart representing the gender distribution,
+In order to obtain the colors blue and rose in the chart representing the gender distribution,
 add the following JSON entry to the JSON object of the `JSON Metadata` field on the edit dashboard page:
 
 ```json
@@ -56,16 +56,16 @@ No SQL query, use the sql table `data_source` of the `achilles` database.
     - Date Filter: off
     - Instant Filtering: on
 
-### Demographics Tab
+## Demographics Tab
 
-#### Number of Patients
+### Number of Patients
 
 <div class="figure">
 <img src="images/11-per_database/01-demographics/01-num_patients.png" alt="Settings for creating the Number of Patients chart" width="100%" />
 <p class="caption">(\#fig:numPatients)Settings for creating the Number of Patients chart</p>
 </div>
 
-##### SQL query
+#### SQL query
 
 ```sql
 SELECT
@@ -77,7 +77,7 @@ JOIN data_source ON achilles_results.data_source_id=data_source.id
 WHERE analysis_id = 1
 ```
 
-##### Chart settings
+#### Chart settings
 
 - Data Tab
   - Datasource & Chart Type
@@ -90,14 +90,14 @@ WHERE analysis_id = 1
   - Big Number Font Size: Small
   - Subheader Font Size: Tiny
 
-#### Gender Table
+### Gender Table
 
 <div class="figure">
 <img src="images/11-per_database/01-demographics/02-gender_table.png" alt="Settings for creating the Gender Table chart" width="100%" />
 <p class="caption">(\#fig:genderTable)Settings for creating the Gender Table chart</p>
 </div>
 
-##### SQL Query {#genderTableQuery}
+#### SQL Query {#genderTableQuery}
 
 ```sql
 SELECT source.name as name,
@@ -110,7 +110,7 @@ INNER JOIN public.concept ON CAST(stratum_1 AS BIGINT) = concept_id
 WHERE analysis_id = 2
 ```
 
-##### Chart settings
+#### Chart settings
 
 - Data Tab
   - Datasource & Chart Type
@@ -126,18 +126,18 @@ WHERE analysis_id = 2
   - Options
     - Show Cells Bars: off
 
-#### Gender Pie
+### Gender Pie
 
 <div class="figure">
 <img src="images/11-per_database/01-demographics/03-gender_pie.png" alt="Settings for creating the Gender Pie chart" width="100%" />
 <p class="caption">(\#fig:genderPie)Settings for creating the Gender Pie chart</p>
 </div>
 
-##### SQL query
+#### SQL query
 
 Same as [Gender Table](#genderTableQuery) query
 
-##### Chart settings
+#### Chart settings
 
 - Data Tab
   - Datasource & Chart Type
@@ -153,32 +153,32 @@ Same as [Gender Table](#genderTableQuery) query
     - Legend: off
 
 
-#### Age at first observation - Table
+### Age at first observation - Table
 
 Same chart as the one used on the [Person](#age1ObservationTable) dashboard.
 
-#### Age at first observation - Bars
+### Age at first observation - Bars
 
 Same chart as the one used on the [Person](#age1ObservationBars) dashboard.
 
-#### Year of Birth
+### Year of Birth
 
 Same chart as the one used on the [Person](#yearOfBirth) dashboard.
 
-### Data Domains Tab
+## Data Domains Tab
 
-#### Average Number of Records per Person
+### Average Number of Records per Person
 
 Same chart as the one used on the [Data Domains](#avgRecordsPerPerson) dashboard.
 
-#### Total Number of Records
+### Total Number of Records
 
 <div class="figure">
 <img src="images/11-per_database/02-data_domains/02-total_num_records.png" alt="Settings for creating the Total Number of Records chart" width="100%" />
 <p class="caption">(\#fig:totalNumRecords)Settings for creating the Total Number of Records chart</p>
 </div>
 
-##### SQL query
+#### SQL query
 
 ```sql
 SELECT
@@ -202,7 +202,7 @@ GROUP BY name, acronym, analysis_id
 HAVING analysis_id IN (201, 401, 501, 601, 701, 801, 1801, 2101, 2201)
 ```
 
-##### Chart settings
+#### Chart settings
 
 - Data Tab
   - Datasource & Chart Type
@@ -214,17 +214,17 @@ HAVING analysis_id IN (201, 401, 501, 601, 701, 801, 1801, 2101, 2201)
     - Group by: data_domain
     - Row limit: None
 
-### Data Provenance Tab
+## Data Provenance Tab
 
-Same 6 charts used on the [Provenance](#dataProvenanceCharts) dashboard.
+Same six charts used on the [Provenance](#dataProvenanceCharts) dashboard.
 
-### Observation Period Tab
+## Observation Period Tab
 
-#### Number of Patitents in Observation Period
+### Number of Patitents in Observation Period
 
-Same 6 charts used on the [Observation Period](#numInObservationPeriod) dashboard.
+Same chart used on the [Observation Period](#numInObservationPeriod) dashboard.
 
-#### Cumulative Observation Period
+### Cumulative Observation Period
 
 The cumulative observation time plot shows the percentage of patients that have more that X days of observation time.
 
@@ -233,7 +233,7 @@ The cumulative observation time plot shows the percentage of patients that have 
 <p class="caption">(\#fig:cumObservationTime)Settings for creating the Total Number of Records chart</p>
 </div>
 
-##### SQL Query
+#### SQL Query
 
 ```sql
 SELECT
@@ -256,7 +256,7 @@ JOIN data_source ON cumulative_sums.data_source_id = data_source.id
 ORDER BY name, xLengthOfObservation
 ```
 
-##### Chart settings
+#### Chart settings
 
 - Data Tab
   - Datasource & Chart Type
@@ -277,16 +277,16 @@ ORDER BY name, xLengthOfObservation
     - X Axis Label: Days
     - Reduce X ticks: on
 
-### Visit Tab
+## Visit Tab
 
-#### Visit Type Graph
+### Visit Type Graph
 
 <div class="figure">
 <img src="images/11-per_database/05-visit/01-visit_type_graph.png" alt="Settings for creating the Visit Type Graph chart" width="100%" />
 <p class="caption">(\#fig:visitTypeGraph)Settings for creating the Visit Type Graph chart</p>
 </div>
 
-##### SQL Query
+#### SQL Query
 
 ```sql
 SELECT
@@ -299,7 +299,7 @@ JOIN data_source ON achilles_results.data_source_id = data_source.id
 JOIN concept ON CAST(achilles_results.stratum_1 AS BIGINT) = concept.concept_id
 ```
 
-##### Chart settings
+#### Chart settings
 
 - Data Tab
   - Datasource & Chart Type
@@ -312,18 +312,62 @@ JOIN concept ON CAST(achilles_results.stratum_1 AS BIGINT) = concept.concept_id
     - Breakdowns: name
     - Row limit: None
 
-#### Visit Type Table
+### Visit Type Table
 
-Same chart used on the [Visit](#visitTypeTable) dashboard.
+<div class="figure">
+<img src="images/11-per_database/05-visit/02-visit_type_table.png" alt="Settings for creating the Visit Type Table chart" width="100%" />
+<p class="caption">(\#fig:visitTypeTable)Settings for creating the Visit Type Table chart</p>
+</div>
 
-### Concept Browser Tab
+#### SQL Query
 
-#### Concept Browser Table
+```sql
+SELECT
+  name,
+  acronym,
+  concept.concept_name,
+  ar1.count_value AS num_persons,
+  round(100.0 * ar1.count_value / denom.count_value, 2) AS percent_persons,
+  round(1.0 * ar2.count_value / ar1.count_value, 2) AS records_per_person
+FROM (
+  SELECT *
+  FROM achilles_results WHERE analysis_id = 200) AS ar1
+  JOIN (
+    SELECT *
+    FROM achilles_results WHERE analysis_id = 201) AS ar2
+    ON ar1.stratum_1 = ar2.stratum_1 AND ar1.data_source_id = ar2.data_source_id
+  JOIN (
+    SELECT *
+    FROM achilles_results WHERE analysis_id = 1) AS denom
+    ON ar1.data_source_id = denom.data_source_id
+  JOIN data_source ON data_source.id = ar1.data_source_id
+  JOIN concept ON CAST(ar1.stratum_1 AS INTEGER) = concept_id
+ORDER BY ar1.data_source_id, ar1.count_value DESC
+```
+
+#### Chart Settings
+
+- Data Tab
+  - Datasource & Chart Type
+    - Visualization Type: Table
+  - Time
+    - Time range: No filter
+  - Query
+    - Query Mode: Raw Records
+    - Columns: name, visit_type, num_persons, percent_persons with label persons (%), records_per_person
+    - Row limit: None
+- Customize Tab
+  - Options
+    - Show Cell Bars: off
+
+## Concept Browser Tab
+
+### Concept Browser Table
 
 Same chart used on the [Concept Browser](#conceptBrowserTable) dashboard.
 
-### Meta Data Tab
+## Meta Data Tab
 
-#### Meta Data Table
+### Meta Data Table
 
 Same chart used on the [General](#metaDataTable) dashboard.
