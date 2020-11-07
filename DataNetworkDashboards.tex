@@ -2148,8 +2148,8 @@ No SQL query, use the sql table \texttt{data\_source} of the \texttt{achilles} d
   \end{itemize}
 \end{itemize}
 
-\hypertarget{concepts}{%
-\chapter{Concepts}\label{concepts}}
+\hypertarget{concepts-browser}{%
+\chapter{Concepts Browser}\label{concepts-browser}}
 
 This chapter follows a different organization due to the reuse of the same query in several charts.
 
@@ -2663,6 +2663,521 @@ The difference between the six charts related to concept domains is the conditio
 \includegraphics[width=1\linewidth]{images/conceptsDomainTypes} \caption{Settings for creating all the charts related with the concept domains for each databases (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:conceptsDomainTypes}
 \end{figure}
 
+\hypertarget{provenance}{%
+\chapter{Provenance}\label{provenance}}
+
+This chapter follows a different organization due to the reuse of the same query in several charts.
+
+\hypertarget{concepts-general-tab-1}{%
+\section{Concepts General Tab}\label{concepts-general-tab-1}}
+
+This tab uses an unique query and all the filters and charts were created using the same output. Therefore, this dashboard is composed by two filters, one big number, two bar charts and one table. The filters were splitted in order to apply the filtering of one over the other one. Figure \ref{fig:conceptsGeneralLayout} shows this dashboard's layout.
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/conceptsGeneralLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsGeneralLayout}
+\end{figure}
+
+\hypertarget{sql-query-24}{%
+\subsection{SQL query}\label{sql-query-24}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT}
+\NormalTok{    q1.concept\_id }\KeywordTok{AS}\NormalTok{ concept\_id,}
+\NormalTok{    q1.concept\_name }\KeywordTok{AS}\NormalTok{ concept\_name,}
+\NormalTok{    q1.domain\_id,}
+    \KeywordTok{source}\NormalTok{.name,}
+    \FunctionTok{sum}\NormalTok{(q1.count\_value) }\KeywordTok{AS} \OtherTok{"Occurrence\_count"}\NormalTok{,}
+    \FunctionTok{sum}\NormalTok{(q1.count\_person) }\KeywordTok{AS} \OtherTok{"Person\_count"}\NormalTok{,}
+    \ControlFlowTok{CASE} 
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_value)}\OperatorTok{\textless{}=}\DecValTok{10} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}\textless{}=10\textquotesingle{}}
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_value)}\OperatorTok{\textless{}=}\DecValTok{100} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}11{-}10ˆ2\textquotesingle{}}
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_value)}\OperatorTok{\textless{}=}\DecValTok{1000} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}10ˆ2{-}10ˆ3\textquotesingle{}}
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_value)}\OperatorTok{\textless{}=}\DecValTok{10000} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}10ˆ3{-}10ˆ4\textquotesingle{}}
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_value)}\OperatorTok{\textless{}=}\DecValTok{100000} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}10ˆ4{-}10ˆ5\textquotesingle{}}
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_value)}\OperatorTok{\textless{}=}\DecValTok{1000000} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}10ˆ5{-}10ˆ6\textquotesingle{}}
+        \ControlFlowTok{ELSE} \StringTok{\textquotesingle{}\textgreater{}10ˆ6\textquotesingle{}}
+    \ControlFlowTok{END} \KeywordTok{AS} \OtherTok{"magnitude\_occurrences"}\NormalTok{,}
+    \ControlFlowTok{CASE} 
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_person)}\OperatorTok{\textless{}=}\DecValTok{10} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}\textless{}=10\textquotesingle{}}
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_person)}\OperatorTok{\textless{}=}\DecValTok{100} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}11{-}10ˆ2\textquotesingle{}}
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_person)}\OperatorTok{\textless{}=}\DecValTok{1000} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}10ˆ2{-}10ˆ3\textquotesingle{}}
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_person)}\OperatorTok{\textless{}=}\DecValTok{10000} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}10ˆ3{-}10ˆ4\textquotesingle{}}
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_person)}\OperatorTok{\textless{}=}\DecValTok{100000} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}10ˆ4{-}10ˆ5\textquotesingle{}}
+        \ControlFlowTok{WHEN} \FunctionTok{sum}\NormalTok{(q1.count\_person)}\OperatorTok{\textless{}=}\DecValTok{1000000} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}10ˆ5{-}10ˆ6\textquotesingle{}}
+        \ControlFlowTok{ELSE} \StringTok{\textquotesingle{}\textgreater{}10ˆ6\textquotesingle{}}
+    \ControlFlowTok{END} \KeywordTok{AS} \OtherTok{"magnitude\_persons"}
+\KeywordTok{FROM}\NormalTok{ (}\KeywordTok{SELECT}\NormalTok{ analysis\_id,}
+\NormalTok{             stratum\_1 concept\_id,}
+\NormalTok{             data\_source\_id,}
+\NormalTok{             concept\_name,}
+\NormalTok{             domain\_id,}
+\NormalTok{             count\_value, }\DecValTok{0} \KeywordTok{AS}\NormalTok{ count\_person}
+    \KeywordTok{FROM}\NormalTok{ achilles\_results}
+    \KeywordTok{JOIN}\NormalTok{ concept }\KeywordTok{ON} \FunctionTok{cast}\NormalTok{(stratum\_1 }\KeywordTok{AS}\NormalTok{ BIGINT)}\OperatorTok{=}\NormalTok{concept\_id}
+    \KeywordTok{WHERE}\NormalTok{ analysis\_id }\KeywordTok{in}\NormalTok{ (}\DecValTok{201}\NormalTok{, }\DecValTok{301}\NormalTok{, }\DecValTok{401}\NormalTok{, }\DecValTok{601}\NormalTok{, }\DecValTok{701}\NormalTok{, }\DecValTok{801}\NormalTok{, }\DecValTok{901}\NormalTok{, }\DecValTok{1001}\NormalTok{, }
+        \DecValTok{1801}\NormalTok{)}
+    \KeywordTok{UNION}\NormalTok{ (}\KeywordTok{SELECT}\NormalTok{  analysis\_id,}
+\NormalTok{                   stratum\_1 concept\_id,}
+\NormalTok{                   data\_source\_id,}
+\NormalTok{                   concept\_name,}
+\NormalTok{                   domain\_id,}
+                   \DecValTok{0} \KeywordTok{AS}\NormalTok{ count\_value,}
+                   \FunctionTok{sum}\NormalTok{(count\_value) }\KeywordTok{AS}\NormalTok{ count\_person}
+            \KeywordTok{FROM}\NormalTok{  achilles\_results}
+            \KeywordTok{JOIN}\NormalTok{ concept }\KeywordTok{on} \FunctionTok{cast}\NormalTok{(stratum\_1 }\KeywordTok{AS}\NormalTok{ BIGINT)}\OperatorTok{=}\NormalTok{concept\_id}
+            \KeywordTok{WHERE}\NormalTok{ analysis\_id }\KeywordTok{in}\NormalTok{ (}\DecValTok{202}\NormalTok{, }\DecValTok{401}\NormalTok{, }\DecValTok{601}\NormalTok{, }\DecValTok{701}\NormalTok{, }\DecValTok{801}\NormalTok{, }\DecValTok{901}\NormalTok{, }
+                \DecValTok{1001}\NormalTok{, }\DecValTok{1801}\NormalTok{)}
+            \KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ analysis\_id, stratum\_1, data\_source\_id, }
+\NormalTok{                concept\_name, domain\_id) ) }\KeywordTok{AS}\NormalTok{ q1}
+    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{        q1.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ q1.concept\_id, q1.concept\_name, q1.domain\_id,}\KeywordTok{source}\NormalTok{.name;}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{charts-1}{%
+\subsection{Charts}\label{charts-1}}
+
+\hypertarget{entity-type-filter-1}{%
+\subsubsection{Entity Type Filter}\label{entity-type-filter-1}}
+
+This filter, which is a type of chart in Superset, was designed to be used in the dashboard aiming the filtering of the data based on the field `'domain\_id'' from the table `'concept''. The main characteristics of this filter are presented in Figure \ref{fig:entityTypeFilter}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Filter Box
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters - Column}: domain\_id
+  \item
+    \textbf{Filters - Label}: Entity Type
+  \item
+    \textbf{Data Filter}: Not checked
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \item
+    \textbf{Instant Filtering}: Checked
+  \item
+    \textbf{Show SQL Granularity Dropdown}: Not checked
+  \item
+    \textbf{Show Druid Granularity Dropdown}: Not checked
+  \item
+    \textbf{Show SQL Time Column}: Not checked
+  \item
+    \textbf{Show Druid Time Origin}: Not checked
+  \item
+    \textbf{Limit Selector Values}: Empty
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/entityTypeFilter} \caption{Settings for creating the database entity type filter.}\label{fig:entityTypeFilter}
+\end{figure}
+
+\hypertarget{concept-filter-1}{%
+\subsubsection{Concept Filter}\label{concept-filter-1}}
+
+Similar to the previous filter, this was designed to be used in the dashboard aiming the filtering of the data based on the field `'concept\_name'' from the table `'concept''. The main characteristics of this filter are presented in Figure \ref{fig:conceptFilter}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Filter Box
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters - Column}: concept\_name
+  \item
+    \textbf{Filters - Label}: Concept
+  \item
+    \textbf{Data Filter}: Not checked
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \item
+    \textbf{Instant Filtering}: Checked
+  \item
+    \textbf{Show SQL Granularity Dropdown}: Not checked
+  \item
+    \textbf{Show Druid Granularity Dropdown}: Not checked
+  \item
+    \textbf{Show SQL Time Column}: Not checked
+  \item
+    \textbf{Show Druid Time Origin}: Not checked
+  \item
+    \textbf{Limit Selector Values}: Empty
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/conceptFilter} \caption{Settings for creating the concept filter.}\label{fig:conceptFilter}
+\end{figure}
+
+\hypertarget{number-of-concepts-1}{%
+\subsubsection{Number of Concepts}\label{number-of-concepts-1}}
+
+Discuss what is important to see in this chart\ldots{} TO DO
+The main characteristics of this chart are presented in Figure \ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes8}
+\end{figure}
+
+\hypertarget{concept-browser-table-1}{%
+\subsubsection{Concept Browser Table}\label{concept-browser-table-1}}
+
+The main characteristics of this chart are presented in Figure \ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes3}
+\end{figure}
+
+\hypertarget{of-occurrences-1}{%
+\subsubsection{\# of Occurrences}\label{of-occurrences-1}}
+
+The main characteristics of this chart are presented in Figure \ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes4}
+\end{figure}
+
+\hypertarget{of-patients-1}{%
+\subsubsection{\# of Patients}\label{of-patients-1}}
+
+The main characteristics of this chart are presented in Figure \ref{fig:visitTypes}, being the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}:
+  \item
+    \textbf{Filters}: Empty
+  \item
+    \textbf{Series}:
+  \item
+    \textbf{Breakdowns}:
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Not checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}:
+  \item
+    \textbf{Bar Values}:
+  \item
+    \textbf{Sort Bars}:
+  \item
+    \textbf{Extra Controls}:
+  \item
+    \textbf{Reduce X ticks}:
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:visitTypes5}
+\end{figure}
+
+\hypertarget{concepts-domains-tab-1}{%
+\section{Concepts Domains Tab}\label{concepts-domains-tab-1}}
+
+This tab is composed of six bar charts that show the percentage of existent concepts in each database. These charts are similar but divided by the concept domains existent in the standard vocabularies, which are the conditions, procedures, drugs, observations, measurements and devices. Figure \ref{fig:conceptsDomainsLayout} shows this dashboard's layout.
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/conceptsDomainsLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsDomainsLayout}
+\end{figure}
+
+\hypertarget{sql-query-25}{%
+\subsection{SQL query}\label{sql-query-25}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{{-}{-} Concepts Domains}
+\KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
+    \ControlFlowTok{CASE} \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{405} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Condition\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{605} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Procedure\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{705} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Drug\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{805} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Observation\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{1805} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Measurement\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{2105} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Device\textquotesingle{}}
+    \ControlFlowTok{ELSE} \StringTok{\textquotesingle{}Other\textquotesingle{}} \ControlFlowTok{END} \KeywordTok{AS}\NormalTok{ domain\_name,}
+\NormalTok{    concept\_name, }\FunctionTok{sum}\NormalTok{(count\_value) }\KeywordTok{AS}\NormalTok{ num\_records}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }
+    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
+\NormalTok{      achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.concept }\KeywordTok{AS}\NormalTok{ c1 }\KeywordTok{ON} 
+\NormalTok{      stratum\_2 }\OperatorTok{=} \FunctionTok{CAST}\NormalTok{(concept\_id }\KeywordTok{AS}\NormalTok{ text)}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\KeywordTok{IN}\NormalTok{ (}\DecValTok{405}\NormalTok{, }\DecValTok{605}\NormalTok{, }\DecValTok{705}\NormalTok{, }\DecValTok{805}\NormalTok{, }\DecValTok{1805}\NormalTok{, }\DecValTok{2105}\NormalTok{)}
+\KeywordTok{GROUP} \KeywordTok{BY} \KeywordTok{source}\NormalTok{.name, concept\_name, }
+    \ControlFlowTok{CASE} \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{405} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Condition\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{605} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Procedure\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{705} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Drug\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{805} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Observation\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{1805} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Measurement\textquotesingle{}}
+    \ControlFlowTok{WHEN}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{2105} \ControlFlowTok{THEN} \StringTok{\textquotesingle{}Device\textquotesingle{}}
+    \ControlFlowTok{ELSE} \StringTok{\textquotesingle{}Other\textquotesingle{}} \ControlFlowTok{END}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{chart-settings-23}{%
+\subsection{Chart settings}\label{chart-settings-23}}
+
+The difference between the six charts related to concept domains is the condition in the filter. Therefore, to create all the charts of this dashboard, it is necessary to follow the main characteristics presented in Figure \ref{fig:conceptsDomainTypes} and the list of possible values for the filter. Those characteristics are the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Data Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Visualization Type}: Bar Chart
+  \item
+    \textbf{Time range}: No filter
+  \item
+    \textbf{Metrics}: SUM(num\_records) as ``Nr Records''
+  \item
+    \textbf{Filters}: domain = \textbf{See filter list}
+  \item
+    \textbf{Series}: name
+  \item
+    \textbf{Breakdowns}: concept\_name
+  \item
+    \textbf{Row limit}: Empty
+  \item
+    \textbf{Contribution}: Checked
+  \end{itemize}
+\item
+  \textbf{Costumize Tab}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Y Axis Label}:
+  \item
+    \textbf{X Axis Label}:
+  \item
+    \textbf{Legend}: Checked
+  \item
+    \textbf{Stacked Bars}: Checked
+  \item
+    \textbf{Bar Values}: Not checked
+  \item
+    \textbf{Sort Bars}: Not checked
+  \item
+    \textbf{Extra Controls}: Not checked
+  \item
+    \textbf{Reduce X ticks}: Not checked
+  \end{itemize}
+\item
+  \textbf{Filter List}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Concepts - Condition Types}: Condition
+  \item
+    \textbf{Concepts - Procedure Types}: Procedure
+  \item
+    \textbf{Concepts - Drug Types}: Drug
+  \item
+    \textbf{Concepts - Observation Types}: Observation
+  \item
+    \textbf{Concepts - Measurement Types}: Measurement
+  \item
+    \textbf{Concepts - Device Types}: Device
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/conceptsDomainTypes} \caption{Settings for creating all the charts related with the concept domains for each databases (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:conceptsDomainTypes}
+\end{figure}
+
 \hypertarget{data-domains}{%
 \chapter{Data Domains}\label{data-domains}}
 
@@ -2671,8 +3186,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \hypertarget{data-domains---number-of-records-per-peson}{%
 \section{Data Domains - Number of Records per Peson}\label{data-domains---number-of-records-per-peson}}
 
-\hypertarget{sql-query-24}{%
-\subsection{SQL query}\label{sql-query-24}}
+\hypertarget{sql-query-26}{%
+\subsection{SQL query}\label{sql-query-26}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2708,8 +3223,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-23}{%
-\subsection{Chart settings}\label{chart-settings-23}}
+\hypertarget{chart-settings-24}{%
+\subsection{Chart settings}\label{chart-settings-24}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:dataDomainsNumberOfRecordsPerPeson}, being the following:
 

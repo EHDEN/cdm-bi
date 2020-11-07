@@ -2,11 +2,9 @@
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-# Concepts
+
+# Concepts Browser
 
 <!-- Discuss the goal of this dashboard... TO DO -->
 
@@ -19,9 +17,10 @@ This chapter follows a different organization due to the reuse of the same query
 This tab uses an unique query and all the filters and charts were created using the same output. Therefore, this dashboard is composed by two filters, one big number, two bar charts and one table. The filters were splitted in order to apply the filtering of one over the other one. Figure \@ref(fig:conceptsGeneralLayout) shows this dashboard's layout. 
 
 
-```{r conceptsGeneralLayout, fig.cap="Distribution of charts on the dashboard.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/conceptsGeneralLayout.png")
-```
+<div class="figure">
+<img src="images/conceptsGeneralLayout.png" alt="Distribution of charts on the dashboard." width="100%" />
+<p class="caption">(\#fig:conceptsGeneralLayout)Distribution of charts on the dashboard.</p>
+</div>
 
 ### SQL query
            
@@ -104,9 +103,10 @@ This filter, which is a type of chart in Superset, was designed to be used in th
     - **Show Druid Time Origin**: Not checked
     - **Limit Selector Values**: Empty
 
-```{r entityTypeFilter, fig.cap="Settings for creating the database entity type filter.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/entityTypeFilter.png")
-```
+<div class="figure">
+<img src="images/entityTypeFilter.png" alt="Settings for creating the database entity type filter." width="100%" />
+<p class="caption">(\#fig:entityTypeFilter)Settings for creating the database entity type filter.</p>
+</div>
 
 #### Concept Filter
 
@@ -128,9 +128,10 @@ Similar to the previous filter, this was designed to be used in the dashboard ai
     - **Show Druid Time Origin**: Not checked
     - **Limit Selector Values**: Empty
 
-```{r conceptFilter, fig.cap="Settings for creating the concept filter.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/conceptFilter.png")
-```
+<div class="figure">
+<img src="images/conceptFilter.png" alt="Settings for creating the concept filter." width="100%" />
+<p class="caption">(\#fig:conceptFilter)Settings for creating the concept filter.</p>
+</div>
 
 #### Number of Concepts
 
@@ -156,9 +157,10 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
     - **Extra Controls**:
     - **Reduce X ticks**:
 
-```{r visitTypes8, fig.cap="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartDates.png")
-```
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes8)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
 
 #### Concept Browser Table
 
@@ -185,9 +187,10 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
     - **Extra Controls**:
     - **Reduce X ticks**:
 
-```{r visitTypes3, fig.cap="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartDates.png")
-```
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes3)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
 
 #### \# of Occurrences
 
@@ -214,9 +217,10 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
     - **Extra Controls**:
     - **Reduce X ticks**:
 
-```{r visitTypes4, fig.cap="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartDates.png")
-```
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes4)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
 
 #### \# of Patients
 
@@ -243,9 +247,10 @@ The main characteristics of this chart are presented in Figure \@ref(fig:visitTy
     - **Extra Controls**:
     - **Reduce X ticks**:
 
-```{r visitTypes5, fig.cap="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartDates.png")
-```
+<div class="figure">
+<img src="images/populationCharacteristicsObservationPeriodStartDates.png" alt="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:visitTypes5)Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
 
 
 
@@ -256,9 +261,10 @@ knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartD
 This tab is composed of six bar charts that show the percentage of existent concepts in each database. These charts are similar but divided by the concept domains existent in the standard vocabularies, which are the conditions, procedures, drugs, observations, measurements and devices. Figure \@ref(fig:conceptsDomainsLayout) shows this dashboard's layout. 
 
 
-```{r conceptsDomainsLayout, fig.cap="Distribution of charts on the dashboard.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/conceptsDomainsLayout.png")
-```
+<div class="figure">
+<img src="images/conceptsDomainsLayout.png" alt="Distribution of charts on the dashboard." width="100%" />
+<p class="caption">(\#fig:conceptsDomainsLayout)Distribution of charts on the dashboard.</p>
+</div>
 
 ### SQL query
 
@@ -319,6 +325,7 @@ The difference between the six charts related to concept domains is the conditio
     - **Concepts - Measurement Types**: Measurement
     - **Concepts - Device Types**: Device
 
-```{r conceptsDomainTypes, fig.cap="Settings for creating all the charts related with the concept domains for each databases (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/conceptsDomainTypes.png")
-```
+<div class="figure">
+<img src="images/conceptsDomainTypes.png" alt="Settings for creating all the charts related with the concept domains for each databases (bar chart). Image changed to contain information hidden in the customize menu." width="100%" />
+<p class="caption">(\#fig:conceptsDomainTypes)Settings for creating all the charts related with the concept domains for each databases (bar chart). Image changed to contain information hidden in the customize menu.</p>
+</div>
