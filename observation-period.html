@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Installation | Data Network Dashboards</title>
+  <title>Chapter 5 Observation Period | Data Network Dashboards</title>
   <meta name="description" content="This is the manual for setting up a clean installation of the dashboards used in the EHDEN project." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Installation | Data Network Dashboards" />
+  <meta property="og:title" content="Chapter 5 Observation Period | Data Network Dashboards" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Installation | Data Network Dashboards" />
+  <meta name="twitter:title" content="Chapter 5 Observation Period | Data Network Dashboards" />
   
   <meta name="twitter:description" content="This is the manual for setting up a clean installation of the dashboards used in the EHDEN project." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html"/>
-<link rel="next" href="general.html"/>
+<link rel="prev" href="person.html"/>
+<link rel="next" href="visit.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -307,86 +307,221 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="installation" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Installation</h1>
-<p>Currently, we use docker to deploy our environment</p>
-<div id="first-steps" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> First Steps</h2>
-<ol style="list-style-type: decimal">
-<li><p>Clone the repository with the command <code>git clone --recurse-submodules https://github.com/EHDEN/NetworkDashboards</code>. If you already cloned the repository without the <code>--recurse-submodules</code> option, run <code>git submodule update --init</code> to fetch the superset submodule.</p></li>
-<li><p>Create a <code>.env</code> file on the <code>docker</code> directory, using <code>.env-example</code> as a reference, setting all necessary environment variables (<code>SUPERSET\_MAPBOX\_API\_KEY</code> and <code>DASHBOARD\_VIEWER\_SECRET\_KEY</code>).</p></li>
-</ol>
+<div id="observation-period" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Observation Period</h1>
+<!-- Discuss the goal of this dashboard... TO DO -->
+<p>In this dashboard is present the ‘’Data Source Filter’’, that was detailed in the Chapter Person.</p>
+<div id="css-2" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> CSS</h2>
+<p>To hide the dashboard header insert the following css code to the <code>CSS</code> field on the edit page:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb22-1"><a href="observation-period.html#cb22-1" aria-hidden="true"></a><span class="fu">.dashboard</span> <span class="op">&gt;</span> div<span class="in">:not(</span><span class="fu">.dashboard-content</span><span class="in">)</span> {  <span class="co">/* dashboard header */</span></span>
+<span id="cb22-2"><a href="observation-period.html#cb22-2" aria-hidden="true"></a>  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb22-3"><a href="observation-period.html#cb22-3" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
-<div id="dashboard-viewer-setup" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Dashboard Viewer setup</h2>
-<ol style="list-style-type: decimal">
-<li><p>If you wish to expose the dashboard viewer app through a specific domain(s) you must add it/them to the <code>ALLOWED_HOSTS</code> list on file <code>dashboard_viewer/dashboard_viewer/settings.py</code> and remove the <code>'*'</code> entry.</p></li>
-<li><p>Build containers’ images: <code>docker-compose build</code>. This might take several minutes.</p></li>
-<li><p>Set up the database and create an admin account for the dashboard viewer app: <code>docker-compose run --rm dashboard ./docker-init.sh</code>.</p></li>
-</ol>
+<div id="data-source-filter-1" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Data Source Filter</h2>
+<div class="figure"><span id="fig:dataSourceFilter"></span>
+<img src="images/shared/data_source_filter.png" alt="Settings for creating the Data Source filter chart" width="100%" />
+<p class="caption">
+Figure 4.1: Settings for creating the Data Source filter chart
+</p>
 </div>
-<div id="insert-concepts" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Insert Concepts</h2>
-<p>The concepts table is not in the repository due to its dimension, therefore we use directly the Postgres console to insert this table in the installation.</p>
-<ol style="list-style-type: decimal">
-<li><p>Get your concept csv file from <a href="https://athena.ohdsi.org/">Athena</a></p></li>
-<li><p>Copy the file into postgres container</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="installation.html#cb1-1" aria-hidden="true"></a><span class="ex">docker</span> cp concept.csv dashboard_viewer_postgres_1:/tmp/</span></code></pre></div></li>
-<li><p>Enter in the postgres container:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="installation.html#cb2-1" aria-hidden="true"></a><span class="ex">docker</span> exec -it dashboard_viewer_postgres_1 bash</span></code></pre></div></li>
-<li><p>Enter in the <code>achilles</code> database (value of the variable <code>POSTGRES_ACHILLES_DB</code> on the .env file) with the <code>root</code> user (value of the variable <code>POSTGRES_ROOT_USER</code> on the .env file):</p>
-<pre><code>psql achilles root</code></pre></li>
-<li><p>Create the <code>concept</code> table</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="installation.html#cb4-1" aria-hidden="true"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> concept (</span>
-<span id="cb4-2"><a href="installation.html#cb4-2" aria-hidden="true"></a>  concept_id         <span class="dt">INTEGER</span>        <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
-<span id="cb4-3"><a href="installation.html#cb4-3" aria-hidden="true"></a>  concept_name       <span class="dt">VARCHAR</span>(<span class="dv">255</span>)   <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
-<span id="cb4-4"><a href="installation.html#cb4-4" aria-hidden="true"></a>  domain_id          <span class="dt">VARCHAR</span>(<span class="dv">20</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
-<span id="cb4-5"><a href="installation.html#cb4-5" aria-hidden="true"></a>  vocabulary_id      <span class="dt">VARCHAR</span>(<span class="dv">20</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
-<span id="cb4-6"><a href="installation.html#cb4-6" aria-hidden="true"></a>  concept_class_id   <span class="dt">VARCHAR</span>(<span class="dv">20</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
-<span id="cb4-7"><a href="installation.html#cb4-7" aria-hidden="true"></a>  standard_concept   <span class="dt">VARCHAR</span>(<span class="dv">1</span>)     <span class="kw">NULL</span>,</span>
-<span id="cb4-8"><a href="installation.html#cb4-8" aria-hidden="true"></a>  concept_code       <span class="dt">VARCHAR</span>(<span class="dv">50</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
-<span id="cb4-9"><a href="installation.html#cb4-9" aria-hidden="true"></a>  valid_start_date   <span class="dt">DATE</span>           <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
-<span id="cb4-10"><a href="installation.html#cb4-10" aria-hidden="true"></a>  valid_end_date     <span class="dt">DATE</span>           <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
-<span id="cb4-11"><a href="installation.html#cb4-11" aria-hidden="true"></a>  invalid_reason     <span class="dt">VARCHAR</span>(<span class="dv">1</span>)     <span class="kw">NULL</span></span>
-<span id="cb4-12"><a href="installation.html#cb4-12" aria-hidden="true"></a>);</span></code></pre></div></li>
-<li><p>Copy the CSV file content to the table (this could take a while)</p>
-<p>To get both <code>'</code> (single quotes) and <code>"</code> (double quotes) on the <code>concept_name</code> column we use a workaround by setting the quote character to one that should never be in the text. Here we used <code>\b</code> (backslash).</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="installation.html#cb5-1" aria-hidden="true"></a><span class="kw">COPY</span> <span class="kw">public</span>.concept <span class="kw">FROM</span> <span class="st">&#39;/tmp/concept.csv&#39;</span> <span class="kw">WITH</span> CSV <span class="kw">HEADER</span></span>
-<span id="cb5-2"><a href="installation.html#cb5-2" aria-hidden="true"></a>  DELIMITER E<span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span> QUOTE E<span class="st">&#39;</span><span class="ch">\b</span><span class="st">&#39;</span>;</span></code></pre></div></li>
-<li><p>Create index in table (this could take a while):</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="installation.html#cb6-1" aria-hidden="true"></a><span class="kw">CREATE</span> <span class="kw">INDEX</span> concept_concept_id_index <span class="kw">ON</span> concept (concept_id);</span>
-<span id="cb6-2"><a href="installation.html#cb6-2" aria-hidden="true"></a><span class="kw">CREATE</span> <span class="kw">INDEX</span> concept_concept_name_index <span class="kw">ON</span> concept (concept_name);</span></code></pre></div></li>
-<li><p>Set the owner of the <code>concept</code> table to the <code>achilles</code> user (value of the variable <code>POSTGRES_ACHILLES_USER</code> on the .env file):</p>
-<pre><code>ALTER TABLE concept OWNER TO achiller</code></pre></li>
-<li><p>Bring up the containers: <code>docker-compose up -d</code>.</p></li>
-<li><p>Run the command <code>docker-compose run --rm dashboard python manage.py generate_materialized_views</code> to create the materialized views on Postgres.</p></li>
-</ol>
+<p><strong>For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.</strong></p>
+<div id="sql-query-12" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> SQL query</h3>
+<p>No SQL query, use the sql table <code>data_source</code> of the <code>achilles</code> database.</p>
 </div>
-<div id="superset-setup" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Superset setup</h2>
-<ol style="list-style-type: decimal">
-<li><p>Make sure that the container <code>superset-init</code> has finished before continuing. It is creating the necessary tables on the database and creating permissions and roles.</p></li>
-<li><p>Execute the script <code>./superset/one_time_run_scripts/superset-init.sh</code>. This will create an admin account and associate the <code>achilles</code> database to Superset. <strong>Attention:</strong> You must be in the docker directory to execute this script.</p></li>
-<li><p>We have already built some dashboards so if you want to import them run the script <code>./superset/one_time_run_scripts/load_dashboards.sh</code>. <strong>Attention:</strong> You must be in the docker directory to execute this script.</p></li>
-<li><p>If you used the default ports:</p>
+<div id="chart-settings-12" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Chart settings</h3>
 <ul>
-<li>Go to <code>http://localhost</code> to access the dashboard viewer app.</li>
-<li>Go to <code>http://localhost:8088</code> to access superset.</li>
-</ul></li>
-<li><p>On release 0.37 of Superset, there is a bug related to the public role and because of that, we had to set <code>PUBLIC_ROLE_LIKE_GAMMA = True</code> on Superset settings. This leads the public role with permissions that he shouldn’t have. To solve this, so any anonymous user can view dashboards, you should remove all its permissions and then add the following:</p>
+<li><p>Data Tab</p>
 <ul>
-<li>can explore JSON on Superset</li>
-<li>can dashboard on Superset</li>
-<li>all datasource access on all_datasource_access</li>
-<li>can csrf token on Superset</li>
-<li>can list on CssTemplateAsyncModelView</li>
+<li><p>Datasource &amp; Chart Type</p>
+<ul>
+<li>Visualization Type: Filter Box</li>
 </ul></li>
-</ol>
+<li><p>Time</p>
+<ul>
+<li>Time range: No filter</li>
+</ul></li>
+<li><p>Filters Configuration</p>
+<ul>
+<li><p>Filters:</p>
+<ul>
+<li>name</li>
+</ul></li>
+<li><p>Date Filter: off</p></li>
+<li><p>Instant Filtering: on</p></li>
+</ul></li>
+</ul></li>
+</ul>
 </div>
-<div id="dummy-data" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> Dummy data</h2>
-<p>On a fresh installation, there are no achilles_results data so Superset’s dashboards will display “No results”. On the root of this repository, you can find the <code>demo</code> directory where we have an ACHILLES results file with synthetic data that you can upload to a data source on the uploader app of the dashboard viewer (localhost/uploader). If you wish to compare multiple data sources, on the <code>demo</code> directory the is also a python script that allows you to generate new ACHILLES results files, where it generates random count values based on the ranges of values for each set of analysis_id and stratums present on a base ACHILLES results file. So, from the one ACHILLES results fill we provided, you can have multiple data sources with different data.</p>
+</div>
+<div id="number-of-patients-in-observation-period" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Number of Patients in Observation Period</h2>
+<div class="figure"><span id="fig:numPatientsInObserPeriod"></span>
+<img src="images/05-observation_period/02-number_of_patients_in_observation_period.png" alt="Settings for creating the Number of Patients in Observation Period chart" width="100%" />
+<p class="caption">
+Figure 5.1: Settings for creating the Number of Patients in Observation Period chart
+</p>
+</div>
+<div id="sql-query-13" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> SQL query</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb23-1"><a href="observation-period.html#cb23-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
+<span id="cb23-2"><a href="observation-period.html#cb23-2" aria-hidden="true"></a>       <span class="kw">source</span>.acronym,</span>
+<span id="cb23-3"><a href="observation-period.html#cb23-3" aria-hidden="true"></a>       <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">as</span> <span class="dt">Date</span>,</span>
+<span id="cb23-4"><a href="observation-period.html#cb23-4" aria-hidden="true"></a>       count_value</span>
+<span id="cb23-5"><a href="observation-period.html#cb23-5" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles</span>
+<span id="cb23-6"><a href="observation-period.html#cb23-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
+<span id="cb23-7"><a href="observation-period.html#cb23-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">110</span></span></code></pre></div>
+</div>
+<div id="chart-settings-13" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Chart settings</h3>
+<ul>
+<li><p>Data Tab</p>
+<ul>
+<li><p>Datasource &amp; Chart Type</p>
+<ul>
+<li>Visualization Type: Bar Chart</li>
+</ul></li>
+<li><p>Time</p>
+<ul>
+<li>Time range: No filter</li>
+</ul></li>
+<li><p>Query</p>
+<ul>
+<li><p>Metrics: MAX(count_value) with label “Num of Patients”</p></li>
+<li><p>Series: date</p></li>
+<li><p>Breakdowns: name</p></li>
+</ul></li>
+</ul></li>
+<li><p>Customize Tab</p>
+<ul>
+<li><p>Chart Options</p>
+<ul>
+<li><p>Stacked Bars: on</p></li>
+<li><p>Sort Bars: on</p></li>
+<li><p>Y Axis Label: Number of Patients</p></li>
+</ul></li>
+<li><p>X Axis</p>
+<ul>
+<li><p>X Axis Label: Dates</p></li>
+<li><p>Reduce X ticks: on</p></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="observation-period-start-dates" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Observation Period Start Dates</h2>
+<div class="figure"><span id="fig:observationPeriodStartDates"></span>
+<img src="images/05-observation_period/03-observation_period_start_dates.png" alt="Settings for creating the Observation Period Start Dates chart" width="100%" />
+<p class="caption">
+Figure 5.2: Settings for creating the Observation Period Start Dates chart
+</p>
+</div>
+<div id="sql-query-14" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> SQL query</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb24-1"><a href="observation-period.html#cb24-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
+<span id="cb24-2"><a href="observation-period.html#cb24-2" aria-hidden="true"></a>       <span class="kw">source</span>.acronym,</span>
+<span id="cb24-3"><a href="observation-period.html#cb24-3" aria-hidden="true"></a>       <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">AS</span> year_month,</span>
+<span id="cb24-4"><a href="observation-period.html#cb24-4" aria-hidden="true"></a>       count_value</span>
+<span id="cb24-5"><a href="observation-period.html#cb24-5" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles</span>
+<span id="cb24-6"><a href="observation-period.html#cb24-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
+<span id="cb24-7"><a href="observation-period.html#cb24-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">111</span></span></code></pre></div>
+</div>
+<div id="chart-settings-14" class="section level3" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Chart settings</h3>
+<ul>
+<li><p>Data Tab</p>
+<ul>
+<li><p>Datasource &amp; Chart Type</p>
+<ul>
+<li>Visualization Type: Bar Chart</li>
+</ul></li>
+<li><p>Time</p>
+<ul>
+<li>Time range: No filter</li>
+</ul></li>
+<li><p>Query</p>
+<ul>
+<li><p>Metrics: SUM(count_value) with label “Patients”</p></li>
+<li><p>Series: year_month</p></li>
+<li><p>Breakdowns: name</p></li>
+</ul></li>
+</ul></li>
+<li><p>Customize Tab</p>
+<ul>
+<li><p>Chart Options</p>
+<ul>
+<li><p>Stacked Bars: on</p></li>
+<li><p>Sort Bars: on</p></li>
+<li><p>Y Axis Label: Number of Patients</p></li>
+</ul></li>
+<li><p>X Axis</p>
+<ul>
+<li><p>X Axis Label: Year</p></li>
+<li><p>Reduce X ticks: on</p></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="observation-period-end-dates" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Observation Period End Dates</h2>
+<div class="figure"><span id="fig:observationPeriodEndDates"></span>
+<img src="images/05-observation_period/04-observation_period_end_dates.png" alt="Settings for creating the Observation Period End Dates chart" width="100%" />
+<p class="caption">
+Figure 5.3: Settings for creating the Observation Period End Dates chart
+</p>
+</div>
+<div id="sql-query-15" class="section level3" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> SQL query</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb25-1"><a href="observation-period.html#cb25-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
+<span id="cb25-2"><a href="observation-period.html#cb25-2" aria-hidden="true"></a>       <span class="kw">source</span>.acronym,</span>
+<span id="cb25-3"><a href="observation-period.html#cb25-3" aria-hidden="true"></a>       <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">AS</span> year_month,</span>
+<span id="cb25-4"><a href="observation-period.html#cb25-4" aria-hidden="true"></a>       count_value</span>
+<span id="cb25-5"><a href="observation-period.html#cb25-5" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles</span>
+<span id="cb25-6"><a href="observation-period.html#cb25-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
+<span id="cb25-7"><a href="observation-period.html#cb25-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">112</span></span></code></pre></div>
+</div>
+<div id="chart-settings-15" class="section level3" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Chart settings</h3>
+<ul>
+<li><p>Data Tab</p>
+<ul>
+<li><p>Datasource &amp; Chart Type</p>
+<ul>
+<li>Visualization Type: Bar Chart</li>
+</ul></li>
+<li><p>Time</p>
+<ul>
+<li>Time range: No filter</li>
+</ul></li>
+<li><p>Query</p>
+<ul>
+<li><p>Metrics: SUM(count_value) with label “Patients”</p></li>
+<li><p>Series: year_month</p></li>
+<li><p>Breakdowns: name</p></li>
+</ul></li>
+</ul></li>
+<li><p>Customize Tab</p>
+<ul>
+<li><p>Chart Options</p>
+<ul>
+<li><p>Stacked Bars: on</p></li>
+<li><p>Sort Bars: on</p></li>
+<li><p>Y Axis Label: Number of Patients</p></li>
+</ul></li>
+<li><p>X Axis</p>
+<ul>
+<li><p>X Axis Label: Year</p></li>
+<li><p>Reduce X ticks: on</p></li>
+</ul></li>
+</ul></li>
+</ul>
 
+</div>
 </div>
 </div>
             </section>
@@ -394,8 +529,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="general.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="person.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visit.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -426,7 +561,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-installation.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-observation_period.Rmd",
 "text": "Edit"
 },
 "history": {

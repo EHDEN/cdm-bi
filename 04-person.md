@@ -31,7 +31,7 @@ To hide the dashboard header insert the following css code to the `CSS` field on
 ## Data Source Filter
 
 <div class="figure">
-<img src="images/04-person/01-filter.png" alt="Settings for creating the Data Source filter chart" width="100%" />
+<img src="images/shared/data_source_filter.png" alt="Settings for creating the Data Source filter chart" width="100%" />
 <p class="caption">(\#fig:dataSourceFilter)Settings for creating the Data Source filter chart</p>
 </div>
 

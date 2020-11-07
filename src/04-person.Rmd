@@ -33,7 +33,7 @@ To hide the dashboard header insert the following css code to the `CSS` field on
 ## Data Source Filter
 
 ```{r dataSourceFilter, fig.cap="Settings for creating the Data Source filter chart",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/04-person/01-filter.png")
+knitr::include_graphics("images/shared/data_source_filter.png")
 ```
 
 **For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.**

@@ -958,7 +958,7 @@ To hide the dashboard header insert the following css code to the \texttt{CSS} f
 \section{Data Source Filter}\label{data-source-filter}}
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/04-person/01-filter} \caption{Settings for creating the Data Source filter chart}\label{fig:dataSourceFilter}
+\includegraphics[width=1\linewidth]{images/shared/data_source_filter} \caption{Settings for creating the Data Source filter chart}\label{fig:dataSourceFilter}
 \end{figure}
 
 \textbf{For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.}
@@ -1358,244 +1358,336 @@ The main characteristics of this chart are presented in Figure \ref{fig:personPa
   \end{itemize}
 \end{itemize}
 
-\hypertarget{population-characteristics}{%
-\chapter{Population Characteristics}\label{population-characteristics}}
+\hypertarget{observation-period}{%
+\chapter{Observation Period}\label{observation-period}}
 
-In this dashboard is present the `'Database Type Filter'', that was detailed in the Chapter General.
+In this dashboard is present the `'Data Source Filter'', that was detailed in the Chapter Person.
 
-\hypertarget{population-characteristics---patients-in-observation-period-per-month}{%
-\section{Population characteristics - Patients in Observation Period per Month}\label{population-characteristics---patients-in-observation-period-per-month}}
+\hypertarget{css-2}{%
+\section{CSS}\label{css-2}}
 
-Patients in Observation Period per month (whole month)
+To hide the dashboard header insert the following css code to the \texttt{CSS} field on the edit page:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{.dashboard} \OperatorTok{\textgreater{}}\NormalTok{ div}\InformationTok{:not(}\FunctionTok{.dashboard{-}content}\InformationTok{)}\NormalTok{ \{  }\CommentTok{/* dashboard header */}
+  \KeywordTok{display}\NormalTok{: }\DecValTok{none}\OperatorTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-source-filter-1}{%
+\section{Data Source Filter}\label{data-source-filter-1}}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/shared/data_source_filter} \caption{Settings for creating the Data Source filter chart}\label{fig:dataSourceFilter}
+\end{figure}
+
+\textbf{For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.}
 
 \hypertarget{sql-query-12}{%
 \subsection{SQL query}\label{sql-query-12}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{{-}{-} 110    Population characteristics {-} }
-\CommentTok{{-}{-} Patients in Observation Period per month (whole month)}
-\KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name, }
-       \FunctionTok{to\_date}\NormalTok{(stratum\_1, }\StringTok{\textquotesingle{}YYYYMM\textquotesingle{}}\NormalTok{) }\KeywordTok{as} \DataTypeTok{Date}\NormalTok{,}
-\NormalTok{       count\_value }\KeywordTok{as} \OtherTok{"Nr\_patients"}\NormalTok{,}
-       \KeywordTok{source}\NormalTok{.slug}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{      achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{110}\NormalTok{;}
-\end{Highlighting}
-\end{Shaded}
+No SQL query, use the sql table \texttt{data\_source} of the \texttt{achilles} database.
 
 \hypertarget{chart-settings-12}{%
 \subsection{Chart settings}\label{chart-settings-12}}
 
-The main characteristics of this chart are presented in Figure \ref{fig:populationCharacteristicsPatientsInObservationPeriodPerMonth}, being the following:
-
 \begin{itemize}
-\tightlist
 \item
-  \textbf{Data Tab}:
+  Data Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Visualization Type}: Bar Chart
-  \item
-    \textbf{Time range}: No filter
-  \item
-    \textbf{Metrics}: MAX(Nr\_patients) as ``Num of Patients''
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}: date
-  \item
-    \textbf{Breakdowns}: name
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Not checked
-  \end{itemize}
-\item
-  \textbf{Costumize Tab}:
+    Datasource \& Chart Type
 
-  \begin{itemize}
-  \tightlist
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Filter Box
+    \end{itemize}
   \item
-    \textbf{Y Axis Label}: Number of Patients
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
   \item
-    \textbf{X Axis Label}: Dates
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}: Checked
-  \item
-    \textbf{Bar Values}: Not checked
-  \item
-    \textbf{Sort Bars}: Checked
-  \item
-    \textbf{Extra Controls}: Not checked
-  \item
-    \textbf{Reduce X ticks}: Checked
+    Filters Configuration
+
+    \begin{itemize}
+    \item
+      Filters:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        name
+      \end{itemize}
+    \item
+      Date Filter: off
+    \item
+      Instant Filtering: on
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{images/populationCharacteristicsPatientsInObservationPeriodPerMonth} \caption{Settings for creating chart representing patient in observation per month (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:populationCharacteristicsPatientsInObservationPeriodPerMonth}
-\end{figure}
+\hypertarget{number-of-patients-in-observation-period}{%
+\section{Number of Patients in Observation Period}\label{number-of-patients-in-observation-period}}
 
-\hypertarget{population-characteristics---observation-period-end-dates}{%
-\section{Population characteristics - Observation Period End Dates}\label{population-characteristics---observation-period-end-dates}}
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/05-observation_period/02-number_of_patients_in_observation_period} \caption{Settings for creating the Number of Patients in Observation Period chart}\label{fig:numPatientsInObserPeriod}
+\end{figure}
 
 \hypertarget{sql-query-13}{%
 \subsection{SQL query}\label{sql-query-13}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{{-}{-} 112  Population characteristics {-} }
-\CommentTok{{-}{-}      Observation Period End Dates}
 \KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
-       \FunctionTok{to\_date}\NormalTok{(stratum\_1, }\StringTok{\textquotesingle{}YYYYMM\textquotesingle{}}\NormalTok{) }\KeywordTok{as}\NormalTok{ year\_month,}
-\NormalTok{       count\_value }\KeywordTok{as}\NormalTok{ patient\_count}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{      achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{112}\NormalTok{;}
+       \KeywordTok{source}\NormalTok{.acronym,}
+       \FunctionTok{to\_date}\NormalTok{(stratum\_1, }\StringTok{\textquotesingle{}YYYYMM\textquotesingle{}}\NormalTok{) }\KeywordTok{as} \DataTypeTok{Date}\NormalTok{,}
+\NormalTok{       count\_value}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{110}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{chart-settings-13}{%
 \subsection{Chart settings}\label{chart-settings-13}}
 
-The main characteristics of this chart are presented in Figure \ref{fig:populationCharacteristicsObservationPeriodEndDates}, being the following:
-
 \begin{itemize}
-\tightlist
 \item
-  \textbf{Data Tab}:
+  Data Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Visualization Type}: Bar Chart
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Bar Chart
+    \end{itemize}
   \item
-    \textbf{Time range}: No filter
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
   \item
-    \textbf{Metrics}: SUM(patient\_count) as ``Patients''
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}: year\_month
-  \item
-    \textbf{Breakdowns}: name
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Not checked
+    Query
+
+    \begin{itemize}
+    \item
+      Metrics: MAX(count\_value) with label ``Num of Patients''
+    \item
+      Series: date
+    \item
+      Breakdowns: name
+    \end{itemize}
   \end{itemize}
 \item
-  \textbf{Costumize Tab}:
+  Customize Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Y Axis Label}: Number of Patients
+    Chart Options
+
+    \begin{itemize}
+    \item
+      Stacked Bars: on
+    \item
+      Sort Bars: on
+    \item
+      Y Axis Label: Number of Patients
+    \end{itemize}
   \item
-    \textbf{X Axis Label}: Year
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}: Checked
-  \item
-    \textbf{Bar Values}: Not checked
-  \item
-    \textbf{Sort Bars}: Checked
-  \item
-    \textbf{Extra Controls}: Not checked
-  \item
-    \textbf{Reduce X ticks}: Checked
+    X Axis
+
+    \begin{itemize}
+    \item
+      X Axis Label: Dates
+    \item
+      Reduce X ticks: on
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodEndDates} \caption{Settings for creating chart representing the number of patients at the end of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:populationCharacteristicsObservationPeriodEndDates}
-\end{figure}
+\hypertarget{observation-period-start-dates}{%
+\section{Observation Period Start Dates}\label{observation-period-start-dates}}
 
-\hypertarget{population-characteristics---observation-period-start-dates}{%
-\section{Population characteristics - Observation Period Start Dates}\label{population-characteristics---observation-period-start-dates}}
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/05-observation_period/03-observation_period_start_dates} \caption{Settings for creating the Observation Period Start Dates chart}\label{fig:observationPeriodStartDates}
+\end{figure}
 
 \hypertarget{sql-query-14}{%
 \subsection{SQL query}\label{sql-query-14}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{{-}{-} 111  Population characteristics {-} }
-\CommentTok{{-}{-}      Observation Period Start Dates}
 \KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
-       \FunctionTok{to\_date}\NormalTok{(stratum\_1, }\StringTok{\textquotesingle{}YYYYMM\textquotesingle{}}\NormalTok{) }\KeywordTok{as}\NormalTok{ year\_month,}
-\NormalTok{       count\_value }\KeywordTok{as}\NormalTok{ patient\_count}
-\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles }
-    \KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON} 
-\NormalTok{      achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
-\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{111}\NormalTok{;}
+       \KeywordTok{source}\NormalTok{.acronym,}
+       \FunctionTok{to\_date}\NormalTok{(stratum\_1, }\StringTok{\textquotesingle{}YYYYMM\textquotesingle{}}\NormalTok{) }\KeywordTok{AS}\NormalTok{ year\_month,}
+\NormalTok{       count\_value}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{111}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{chart-settings-14}{%
 \subsection{Chart settings}\label{chart-settings-14}}
 
-The main characteristics of this chart are presented in Figure \ref{fig:populationCharacteristicsObservationPeriodStartDates}, being the following:
-
 \begin{itemize}
-\tightlist
 \item
-  \textbf{Data Tab}:
+  Data Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Visualization Type}: Bar Chart
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Bar Chart
+    \end{itemize}
   \item
-    \textbf{Time range}: No filter
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
   \item
-    \textbf{Metrics}: SUM(patient\_count) as ``Patients''
-  \item
-    \textbf{Filters}: Empty
-  \item
-    \textbf{Series}: year\_month
-  \item
-    \textbf{Breakdowns}: name
-  \item
-    \textbf{Row limit}: Empty
-  \item
-    \textbf{Contribution}: Not checked
+    Query
+
+    \begin{itemize}
+    \item
+      Metrics: SUM(count\_value) with label ``Patients''
+    \item
+      Series: year\_month
+    \item
+      Breakdowns: name
+    \end{itemize}
   \end{itemize}
 \item
-  \textbf{Costumize Tab}:
+  Customize Tab
 
   \begin{itemize}
-  \tightlist
   \item
-    \textbf{Y Axis Label}: Number of Patients
+    Chart Options
+
+    \begin{itemize}
+    \item
+      Stacked Bars: on
+    \item
+      Sort Bars: on
+    \item
+      Y Axis Label: Number of Patients
+    \end{itemize}
   \item
-    \textbf{X Axis Label}: Year
-  \item
-    \textbf{Legend}: Checked
-  \item
-    \textbf{Stacked Bars}: Checked
-  \item
-    \textbf{Bar Values}: Not checked
-  \item
-    \textbf{Sort Bars}: Checked
-  \item
-    \textbf{Extra Controls}: Not checked
-  \item
-    \textbf{Reduce X ticks}: Checked
+    X Axis
+
+    \begin{itemize}
+    \item
+      X Axis Label: Year
+    \item
+      Reduce X ticks: on
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
+\hypertarget{observation-period-end-dates}{%
+\section{Observation Period End Dates}\label{observation-period-end-dates}}
+
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/populationCharacteristicsObservationPeriodStartDates} \caption{Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.}\label{fig:populationCharacteristicsObservationPeriodStartDates}
+\includegraphics[width=1\linewidth]{images/05-observation_period/04-observation_period_end_dates} \caption{Settings for creating the Observation Period End Dates chart}\label{fig:observationPeriodEndDates}
 \end{figure}
+
+\hypertarget{sql-query-15}{%
+\subsection{SQL query}\label{sql-query-15}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \KeywordTok{source}\NormalTok{.name,}
+       \KeywordTok{source}\NormalTok{.acronym,}
+       \FunctionTok{to\_date}\NormalTok{(stratum\_1, }\StringTok{\textquotesingle{}YYYYMM\textquotesingle{}}\NormalTok{) }\KeywordTok{AS}\NormalTok{ year\_month,}
+\NormalTok{       count\_value}
+\KeywordTok{FROM} \KeywordTok{public}\NormalTok{.achilles\_results }\KeywordTok{AS}\NormalTok{ achilles}
+\KeywordTok{INNER} \KeywordTok{JOIN} \KeywordTok{public}\NormalTok{.data\_source }\KeywordTok{AS} \KeywordTok{source} \KeywordTok{ON}\NormalTok{ achilles.data\_source\_id}\OperatorTok{=}\KeywordTok{source}\NormalTok{.}\KeywordTok{id}
+\KeywordTok{WHERE}\NormalTok{ analysis\_id }\OperatorTok{=} \DecValTok{112}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{chart-settings-15}{%
+\subsection{Chart settings}\label{chart-settings-15}}
+
+\begin{itemize}
+\item
+  Data Tab
+
+  \begin{itemize}
+  \item
+    Datasource \& Chart Type
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Visualization Type: Bar Chart
+    \end{itemize}
+  \item
+    Time
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Time range: No filter
+    \end{itemize}
+  \item
+    Query
+
+    \begin{itemize}
+    \item
+      Metrics: SUM(count\_value) with label ``Patients''
+    \item
+      Series: year\_month
+    \item
+      Breakdowns: name
+    \end{itemize}
+  \end{itemize}
+\item
+  Customize Tab
+
+  \begin{itemize}
+  \item
+    Chart Options
+
+    \begin{itemize}
+    \item
+      Stacked Bars: on
+    \item
+      Sort Bars: on
+    \item
+      Y Axis Label: Number of Patients
+    \end{itemize}
+  \item
+    X Axis
+
+    \begin{itemize}
+    \item
+      X Axis Label: Year
+    \item
+      Reduce X ticks: on
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{visit}{%
 \chapter{Visit}\label{visit}}
@@ -1605,8 +1697,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \hypertarget{visit---types}{%
 \section{Visit - Types}\label{visit---types}}
 
-\hypertarget{sql-query-15}{%
-\subsection{SQL query}\label{sql-query-15}}
+\hypertarget{sql-query-16}{%
+\subsection{SQL query}\label{sql-query-16}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1624,8 +1716,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-15}{%
-\subsection{Chart settings}\label{chart-settings-15}}
+\hypertarget{chart-settings-16}{%
+\subsection{Chart settings}\label{chart-settings-16}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:visitTypes}, being the following:
 
@@ -1689,8 +1781,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \hypertarget{death---by-month-per-thousand-people}{%
 \section{Death - By Month per Thousand People}\label{death---by-month-per-thousand-people}}
 
-\hypertarget{sql-query-16}{%
-\subsection{SQL query}\label{sql-query-16}}
+\hypertarget{sql-query-17}{%
+\subsection{SQL query}\label{sql-query-17}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1706,8 +1798,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-16}{%
-\subsection{Chart settings}\label{chart-settings-16}}
+\hypertarget{chart-settings-17}{%
+\subsection{Chart settings}\label{chart-settings-17}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:deathByMonthPerThousandPeople}, being the following:
 
@@ -1766,8 +1858,8 @@ The main characteristics of this chart are presented in Figure \ref{fig:deathByM
 \hypertarget{death---number-of-records}{%
 \section{Death - Number of Records}\label{death---number-of-records}}
 
-\hypertarget{sql-query-17}{%
-\subsection{SQL query}\label{sql-query-17}}
+\hypertarget{sql-query-18}{%
+\subsection{SQL query}\label{sql-query-18}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1782,8 +1874,8 @@ The main characteristics of this chart are presented in Figure \ref{fig:deathByM
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-17}{%
-\subsection{Chart settings}\label{chart-settings-17}}
+\hypertarget{chart-settings-18}{%
+\subsection{Chart settings}\label{chart-settings-18}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:deathNumberOfRecords}, being the following:
 
@@ -1853,8 +1945,8 @@ This tab uses an unique query and all the filters and charts were created using 
 \includegraphics[width=1\linewidth]{images/conceptsGeneralLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsGeneralLayout}
 \end{figure}
 
-\hypertarget{sql-query-18}{%
-\subsection{SQL query}\label{sql-query-18}}
+\hypertarget{sql-query-19}{%
+\subsection{SQL query}\label{sql-query-19}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2247,8 +2339,8 @@ This tab is composed of six bar charts that show the percentage of existent conc
 \includegraphics[width=1\linewidth]{images/conceptsDomainsLayout} \caption{Distribution of charts on the dashboard.}\label{fig:conceptsDomainsLayout}
 \end{figure}
 
-\hypertarget{sql-query-19}{%
-\subsection{SQL query}\label{sql-query-19}}
+\hypertarget{sql-query-20}{%
+\subsection{SQL query}\label{sql-query-20}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2279,8 +2371,8 @@ This tab is composed of six bar charts that show the percentage of existent conc
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-18}{%
-\subsection{Chart settings}\label{chart-settings-18}}
+\hypertarget{chart-settings-19}{%
+\subsection{Chart settings}\label{chart-settings-19}}
 
 The difference between the six charts related to concept domains is the condition in the filter. Therefore, to create all the charts of this dashboard, it is necessary to follow the main characteristics presented in Figure \ref{fig:conceptsDomainTypes} and the list of possible values for the filter. Those characteristics are the following:
 
@@ -2362,8 +2454,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \hypertarget{data-domains---number-of-records-per-peson}{%
 \section{Data Domains - Number of Records per Peson}\label{data-domains---number-of-records-per-peson}}
 
-\hypertarget{sql-query-20}{%
-\subsection{SQL query}\label{sql-query-20}}
+\hypertarget{sql-query-21}{%
+\subsection{SQL query}\label{sql-query-21}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2399,8 +2491,8 @@ In this dashboard is present the `'Database Type Filter'', that was detailed in 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{chart-settings-19}{%
-\subsection{Chart settings}\label{chart-settings-19}}
+\hypertarget{chart-settings-20}{%
+\subsection{Chart settings}\label{chart-settings-20}}
 
 The main characteristics of this chart are presented in Figure \ref{fig:dataDomainsNumberOfRecordsPerPeson}, being the following:
 

@@ -6,148 +6,217 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Population Characteristics
+# Observation Period
 
 <!-- Discuss the goal of this dashboard... TO DO -->
 
-In this dashboard is present the ''Database Type Filter'', that was detailed in the Chapter General.
+In this dashboard is present the ''Data Source Filter'', that was detailed in the Chapter Person.
+
+## CSS
+
+To hide the dashboard header insert the following css code to the `CSS` field on the edit page:
+
+```css
+.dashboard > div:not(.dashboard-content) {  /* dashboard header */
+  display: none;
+}
+```
+
+## Data Source Filter
+
+```{r dataSourceFilter, fig.cap="Settings for creating the Data Source filter chart",echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/shared/data_source_filter.png")
+```
+
+**For the filter to work the name of the fields to filter should match in all tables used on the charts of this dashboard.**
+
+### SQL query
+
+No SQL query, use the sql table `data_source` of the `achilles` database.
+
+### Chart settings
+
+- Data Tab
+
+  - Datasource & Chart Type
+
+    - Visualization Type: Filter Box
+
+  - Time
+
+    - Time range: No filter
+
+  - Filters Configuration
+
+    - Filters:
+
+      - name
+
+    - Date Filter: off
+
+    - Instant Filtering: on
 
 
-## Population characteristics - Patients in Observation Period per Month
+## Number of Patients in Observation Period
 
-<!-- Discuss what is important to see in this chart... TO DO -->
-
-Patients in Observation Period per month (whole month)
+```{r numPatientsInObserPeriod, fig.cap="Settings for creating the Number of Patients in Observation Period chart",echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/05-observation_period/02-number_of_patients_in_observation_period.png")
+```
 
 ### SQL query
 
 ```sql
--- 110    Population characteristics - 
--- Patients in Observation Period per month (whole month)
-SELECT source.name, 
+SELECT source.name,
+       source.acronym,
        to_date(stratum_1, 'YYYYMM') as Date,
-       count_value as "Nr_patients",
-       source.slug
-FROM public.achilles_results AS achilles 
-	INNER JOIN public.data_source AS source ON 
-	  achilles.data_source_id=source.id
-WHERE analysis_id = 110;
+       count_value
+FROM public.achilles_results AS achilles
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+WHERE analysis_id = 110
 ```
 
 ### Chart settings
 
-The main characteristics of this chart are presented in Figure \@ref(fig:populationCharacteristicsPatientsInObservationPeriodPerMonth), being the following:
+- Data Tab
 
-- **Data Tab**:
-    - **Visualization Type**: Bar Chart
-    - **Time range**: No filter
-    - **Metrics**: MAX(Nr_patients) as "Num of Patients"
-    - **Filters**: Empty
-    - **Series**: date
-    - **Breakdowns**: name
-    - **Row limit**: Empty
-    - **Contribution**: Not checked
-- **Costumize Tab**:
-    - **Y Axis Label**: Number of Patients
-    - **X Axis Label**: Dates
-    - **Legend**: Checked
-    - **Stacked Bars**: Checked
-    - **Bar Values**: Not checked
-    - **Sort Bars**: Checked
-    - **Extra Controls**: Not checked
-    - **Reduce X ticks**: Checked
+  - Datasource & Chart Type
 
-```{r populationCharacteristicsPatientsInObservationPeriodPerMonth, fig.cap="Settings for creating chart representing patient in observation per month (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/populationCharacteristicsPatientsInObservationPeriodPerMonth.png")
+    - Visualization Type: Bar Chart
+
+  - Time
+
+    - Time range: No filter
+
+  - Query
+
+    - Metrics: MAX(count_value) with label "Num of Patients"
+
+    - Series: date
+
+    - Breakdowns: name
+
+- Customize Tab
+
+  - Chart Options
+
+    - Stacked Bars: on
+
+    - Sort Bars: on
+
+    - Y Axis Label: Number of Patients
+
+  - X Axis
+
+    - X Axis Label: Dates
+
+    - Reduce X ticks: on
+
+
+## Observation Period Start Dates
+
+```{r observationPeriodStartDates, fig.cap="Settings for creating the Observation Period Start Dates chart",echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/05-observation_period/03-observation_period_start_dates.png")
 ```
-
-## Population characteristics - Observation Period End Dates
-
-<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
 ```sql
--- 112  Population characteristics - 
--- 		Observation Period End Dates
 SELECT source.name,
-       to_date(stratum_1, 'YYYYMM') as year_month,
-       count_value as patient_count
-FROM public.achilles_results AS achilles 
-	INNER JOIN public.data_source AS source ON 
-	  achilles.data_source_id=source.id
-WHERE analysis_id = 112;
+       source.acronym,
+       to_date(stratum_1, 'YYYYMM') AS year_month,
+       count_value
+FROM public.achilles_results AS achilles
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+WHERE analysis_id = 111
 ```
 
 ### Chart settings
 
-The main characteristics of this chart are presented in Figure \@ref(fig:populationCharacteristicsObservationPeriodEndDates), being the following:
+- Data Tab
 
-- **Data Tab**:
-    - **Visualization Type**: Bar Chart
-    - **Time range**: No filter
-    - **Metrics**: SUM(patient_count) as "Patients"
-    - **Filters**: Empty
-    - **Series**: year_month
-    - **Breakdowns**: name
-    - **Row limit**: Empty
-    - **Contribution**: Not checked
-- **Costumize Tab**:
-    - **Y Axis Label**: Number of Patients
-    - **X Axis Label**: Year
-    - **Legend**: Checked
-    - **Stacked Bars**: Checked
-    - **Bar Values**: Not checked
-    - **Sort Bars**: Checked
-    - **Extra Controls**: Not checked
-    - **Reduce X ticks**: Checked
+  - Datasource & Chart Type
 
-```{r populationCharacteristicsObservationPeriodEndDates, fig.cap="Settings for creating chart representing the number of patients at the end of their observation period (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/populationCharacteristicsObservationPeriodEndDates.png")
+    - Visualization Type: Bar Chart
+
+  - Time
+
+    - Time range: No filter
+
+  - Query
+
+    - Metrics: SUM(count_value) with label "Patients"
+
+    - Series: year_month
+
+    - Breakdowns: name
+
+- Customize Tab
+
+  - Chart Options
+
+    - Stacked Bars: on
+
+    - Sort Bars: on
+
+    - Y Axis Label: Number of Patients
+
+  - X Axis
+
+    - X Axis Label: Year
+
+    - Reduce X ticks: on
+
+
+## Observation Period End Dates
+
+```{r observationPeriodEndDates, fig.cap="Settings for creating the Observation Period End Dates chart",echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/05-observation_period/04-observation_period_end_dates.png")
 ```
-
-## Population characteristics - Observation Period Start Dates
-
-<!-- Discuss what is important to see in this chart... TO DO -->
 
 ### SQL query
 
 ```sql
--- 111  Population characteristics - 
--- 		Observation Period Start Dates
 SELECT source.name,
-       to_date(stratum_1, 'YYYYMM') as year_month,
-       count_value as patient_count
-FROM public.achilles_results AS achilles 
-	INNER JOIN public.data_source AS source ON 
-	  achilles.data_source_id=source.id
-WHERE analysis_id = 111;
+       source.acronym,
+       to_date(stratum_1, 'YYYYMM') AS year_month,
+       count_value
+FROM public.achilles_results AS achilles
+INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
+WHERE analysis_id = 112
 ```
 
 ### Chart settings
 
-The main characteristics of this chart are presented in Figure \@ref(fig:populationCharacteristicsObservationPeriodStartDates), being the following:
+- Data Tab
 
-- **Data Tab**:
-    - **Visualization Type**: Bar Chart
-    - **Time range**: No filter
-    - **Metrics**: SUM(patient_count) as "Patients"
-    - **Filters**: Empty
-    - **Series**: year_month
-    - **Breakdowns**: name
-    - **Row limit**: Empty
-    - **Contribution**: Not checked
-- **Costumize Tab**:
-    - **Y Axis Label**: Number of Patients
-    - **X Axis Label**: Year
-    - **Legend**: Checked
-    - **Stacked Bars**: Checked
-    - **Bar Values**: Not checked
-    - **Sort Bars**: Checked
-    - **Extra Controls**: Not checked
-    - **Reduce X ticks**: Checked
+  - Datasource & Chart Type
 
-```{r populationCharacteristicsObservationPeriodStartDates, fig.cap="Settings for creating chart representing the number of patients at the start of their observation period (bar chart). Image changed to contain information hidden in the customize menu.",echo=FALSE, out.width="100%"}
-knitr::include_graphics("images/populationCharacteristicsObservationPeriodStartDates.png")
-```
+    - Visualization Type: Bar Chart
 
+  - Time
+
+    - Time range: No filter
+
+  - Query
+
+    - Metrics: SUM(count_value) with label "Patients"
+
+    - Series: year_month
+
+    - Breakdowns: name
+
+- Customize Tab
+
+  - Chart Options
+
+    - Stacked Bars: on
+
+    - Sort Bars: on
+
+    - Y Axis Label: Number of Patients
+
+  - X Axis
+
+    - X Axis Label: Year
+
+    - Reduce X ticks: on
