@@ -8,3 +8,4 @@ Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::epub_book')"
 
 rm -r ../libs/ ../0* ../images/ || echo "nothing to remove"
 mv _book/* ../
+rmdir _book

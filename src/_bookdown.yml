@@ -29,7 +29,7 @@ rmd_files: [
   "02-installation.Rmd",
   "03-general.Rmd",
   "04-person.Rmd",
-  "05-population-characteristics.Rmd",
+  "05-observation_period.Rmd",
   "06-visit.Rmd",
   "07-death.Rmd",
   "08-concepts.Rmd",
