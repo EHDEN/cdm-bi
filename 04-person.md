@@ -28,6 +28,9 @@ To hide the dashboard header insert the following css code to the `CSS` field on
 }
 ```
 
+With this every time you want to edit the dashboard layout you have to either comment the CSS inserted
+or remove it so the "Edit Dashboard" button can show again.
+
 ## Data Source Filter
 
 <div class="figure">
@@ -44,23 +47,14 @@ No SQL query, use the sql table `data_source` of the `achilles` database.
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Filter Box
-
   - Time
-
     - Time range: No filter
-
   - Filters Configuration
-
     - Filters:
-
       - name
-
     - Date Filter: off
-
     - Instant Filtering: on
 
 ## Age at first observation - Table {#age1ObservationTable}
@@ -167,39 +161,22 @@ WHERE analysis_id = 3
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Bar Chart
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Metrics: SUM(count)
-
     - Series: Birth_year
-
     - Breakdowns: name
-
 - Customize Tab
-
   - Chart Options
-
     - Stacked Bars: on
-
     - Sort Bars: on
-
     - Y Axis Label: Count
-
     - Extra Controls: on
-
   - X Axis
-
     - X Axis Label: Year
-
     - Reduce X ticks: on
 
 
@@ -230,35 +207,19 @@ WHERE analysis_id = 2
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Bar Chart
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Metrics: MAX(Number_of_persons)
-
     - Series: acronym
-
     - Breakdowns: gender
-
     - Contribution: on
-
 - Customize Tab
-
   - Chart Options
-
     - Stacked Bars: on
-
     - Sort Bars: on
-
     - Extra Controls: on
-
   - X Axis
-
     - Reduce X ticks: on

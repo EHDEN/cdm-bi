@@ -441,41 +441,43 @@ On the following sections we will only present the things to change on the origi
 <h2><span class="header-section-number">12.1</span> Label Colors</h2>
 <p>In order to obtain the colors blue and rose in the chart representing the gender distribution,
 add the following JSON entry to the JSON object of the <code>JSON Metadata</code> field on the edit dashboard page:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb47-1"><a href="database-level-dashboard.html#cb47-1" aria-hidden="true"></a><span class="er">&quot;label_colors&quot;:</span> <span class="fu">{</span></span>
-<span id="cb47-2"><a href="database-level-dashboard.html#cb47-2" aria-hidden="true"></a>    <span class="dt">&quot;Male&quot;</span><span class="fu">:</span> <span class="st">&quot;#3366FF&quot;</span><span class="fu">,</span></span>
-<span id="cb47-3"><a href="database-level-dashboard.html#cb47-3" aria-hidden="true"></a>    <span class="dt">&quot;Female&quot;</span><span class="fu">:</span> <span class="st">&quot;#FF3399&quot;</span></span>
-<span id="cb47-4"><a href="database-level-dashboard.html#cb47-4" aria-hidden="true"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb46-1"><a href="database-level-dashboard.html#cb46-1" aria-hidden="true"></a><span class="er">&quot;label_colors&quot;:</span> <span class="fu">{</span></span>
+<span id="cb46-2"><a href="database-level-dashboard.html#cb46-2" aria-hidden="true"></a>    <span class="dt">&quot;Male&quot;</span><span class="fu">:</span> <span class="st">&quot;#3366FF&quot;</span><span class="fu">,</span></span>
+<span id="cb46-3"><a href="database-level-dashboard.html#cb46-3" aria-hidden="true"></a>    <span class="dt">&quot;Female&quot;</span><span class="fu">:</span> <span class="st">&quot;#FF3399&quot;</span></span>
+<span id="cb46-4"><a href="database-level-dashboard.html#cb46-4" aria-hidden="true"></a><span class="fu">}</span></span></code></pre></div>
 </div>
 <div id="css-9" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> CSS</h2>
 <p>To hide the dashboard header insert the following css code to the <code>CSS</code> field on the edit page:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb48-1"><a href="database-level-dashboard.html#cb48-1" aria-hidden="true"></a><span class="co">/* hides the filter badges on right side of charts */</span></span>
-<span id="cb48-2"><a href="database-level-dashboard.html#cb48-2" aria-hidden="true"></a><span class="fu">.dashboard-filter-indicators-container</span> {</span>
-<span id="cb48-3"><a href="database-level-dashboard.html#cb48-3" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb48-4"><a href="database-level-dashboard.html#cb48-4" aria-hidden="true"></a>}</span>
-<span id="cb48-5"><a href="database-level-dashboard.html#cb48-5" aria-hidden="true"></a><span class="co">/* hides the acronym filter */</span></span>
-<span id="cb48-6"><a href="database-level-dashboard.html#cb48-6" aria-hidden="true"></a><span class="fu">.grid-content</span> <span class="op">&gt;</span> <span class="fu">.dragdroppable.dragdroppable-row</span> <span class="op">&gt;</span> <span class="fu">.with-popover-menu</span> {</span>
-<span id="cb48-7"><a href="database-level-dashboard.html#cb48-7" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb48-8"><a href="database-level-dashboard.html#cb48-8" aria-hidden="true"></a>}</span>
-<span id="cb48-9"><a href="database-level-dashboard.html#cb48-9" aria-hidden="true"></a><span class="co">/*</span></span>
-<span id="cb48-10"><a href="database-level-dashboard.html#cb48-10" aria-hidden="true"></a><span class="al">WARNING</span><span class="co"> panel 1 id hardcoded</span></span>
-<span id="cb48-11"><a href="database-level-dashboard.html#cb48-11" aria-hidden="true"></a><span class="co">Hides the X Axis Label of the heatmap on the Data Domains tab</span></span>
-<span id="cb48-12"><a href="database-level-dashboard.html#cb48-12" aria-hidden="true"></a><span class="co">*/</span></span>
-<span id="cb48-13"><a href="database-level-dashboard.html#cb48-13" aria-hidden="true"></a><span class="pp">#TABS-nlIU6H5mcT-pane-1</span> g<span class="fu">.x.axis</span> <span class="op">&gt;</span> g<span class="fu">.tick</span> text {</span>
-<span id="cb48-14"><a href="database-level-dashboard.html#cb48-14" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb48-15"><a href="database-level-dashboard.html#cb48-15" aria-hidden="true"></a>}</span>
-<span id="cb48-16"><a href="database-level-dashboard.html#cb48-16" aria-hidden="true"></a><span class="co">/*</span></span>
-<span id="cb48-17"><a href="database-level-dashboard.html#cb48-17" aria-hidden="true"></a><span class="al">WARNING</span><span class="co"> panel 2 id hardcoded</span></span>
-<span id="cb48-18"><a href="database-level-dashboard.html#cb48-18" aria-hidden="true"></a><span class="co">Hides the X Axis Labels of the bar charts on the Data Provenance tab</span></span>
-<span id="cb48-19"><a href="database-level-dashboard.html#cb48-19" aria-hidden="true"></a><span class="co">*/</span></span>
-<span id="cb48-20"><a href="database-level-dashboard.html#cb48-20" aria-hidden="true"></a><span class="pp">#TABS-nlIU6H5mcT-pane-2</span> g<span class="fu">.nv-x.nv-axis.nvd3-svg</span> <span class="op">&gt;</span> g<span class="fu">.nvd3.nv-wrap.nv-axis</span> <span class="op">&gt;</span> g <span class="op">&gt;</span> g<span class="fu">.tick.zero</span> <span class="op">&gt;</span> text {</span>
-<span id="cb48-21"><a href="database-level-dashboard.html#cb48-21" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb48-22"><a href="database-level-dashboard.html#cb48-22" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb47-1"><a href="database-level-dashboard.html#cb47-1" aria-hidden="true"></a><span class="co">/* hides the filter badges on right side of charts */</span></span>
+<span id="cb47-2"><a href="database-level-dashboard.html#cb47-2" aria-hidden="true"></a><span class="fu">.dashboard-filter-indicators-container</span> {</span>
+<span id="cb47-3"><a href="database-level-dashboard.html#cb47-3" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb47-4"><a href="database-level-dashboard.html#cb47-4" aria-hidden="true"></a>}</span>
+<span id="cb47-5"><a href="database-level-dashboard.html#cb47-5" aria-hidden="true"></a><span class="co">/* hides the acronym filter */</span></span>
+<span id="cb47-6"><a href="database-level-dashboard.html#cb47-6" aria-hidden="true"></a><span class="fu">.grid-content</span> <span class="op">&gt;</span> <span class="fu">.dragdroppable.dragdroppable-row</span> <span class="op">&gt;</span> <span class="fu">.with-popover-menu</span> {</span>
+<span id="cb47-7"><a href="database-level-dashboard.html#cb47-7" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb47-8"><a href="database-level-dashboard.html#cb47-8" aria-hidden="true"></a>}</span>
+<span id="cb47-9"><a href="database-level-dashboard.html#cb47-9" aria-hidden="true"></a><span class="co">/*</span></span>
+<span id="cb47-10"><a href="database-level-dashboard.html#cb47-10" aria-hidden="true"></a><span class="al">WARNING</span><span class="co"> panel 1 id hardcoded</span></span>
+<span id="cb47-11"><a href="database-level-dashboard.html#cb47-11" aria-hidden="true"></a><span class="co">Hides the X Axis Label of the heatmap on the Data Domains tab</span></span>
+<span id="cb47-12"><a href="database-level-dashboard.html#cb47-12" aria-hidden="true"></a><span class="co">*/</span></span>
+<span id="cb47-13"><a href="database-level-dashboard.html#cb47-13" aria-hidden="true"></a><span class="pp">#TABS-nlIU6H5mcT-pane-1</span> g<span class="fu">.x.axis</span> <span class="op">&gt;</span> g<span class="fu">.tick</span> text {</span>
+<span id="cb47-14"><a href="database-level-dashboard.html#cb47-14" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb47-15"><a href="database-level-dashboard.html#cb47-15" aria-hidden="true"></a>}</span>
+<span id="cb47-16"><a href="database-level-dashboard.html#cb47-16" aria-hidden="true"></a><span class="co">/*</span></span>
+<span id="cb47-17"><a href="database-level-dashboard.html#cb47-17" aria-hidden="true"></a><span class="al">WARNING</span><span class="co"> panel 2 id hardcoded</span></span>
+<span id="cb47-18"><a href="database-level-dashboard.html#cb47-18" aria-hidden="true"></a><span class="co">Hides the X Axis Labels of the bar charts on the Data Provenance tab</span></span>
+<span id="cb47-19"><a href="database-level-dashboard.html#cb47-19" aria-hidden="true"></a><span class="co">*/</span></span>
+<span id="cb47-20"><a href="database-level-dashboard.html#cb47-20" aria-hidden="true"></a><span class="pp">#TABS-nlIU6H5mcT-pane-2</span> g<span class="fu">.nv-x.nv-axis.nvd3-svg</span> <span class="op">&gt;</span> g<span class="fu">.nvd3.nv-wrap.nv-axis</span> <span class="op">&gt;</span> g <span class="op">&gt;</span> g<span class="fu">.tick.zero</span> <span class="op">&gt;</span> text {</span>
+<span id="cb47-21"><a href="database-level-dashboard.html#cb47-21" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb47-22"><a href="database-level-dashboard.html#cb47-22" aria-hidden="true"></a>}</span></code></pre></div>
+<p>With this every time you want to edit the dashboard layout you have to either comment the CSS inserted
+or remove it so the “Edit Dashboard” button can show again.</p>
 </div>
 <div id="data-source-filter---hidden" class="section level2" number="12.3">
 <h2><span class="header-section-number">12.3</span> Data Source Filter - hidden</h2>
 <div class="figure"><span id="fig:dataSourceFilter"></span>
-<img src="images/shared/data_source_filter.png" alt="Settings for creating the Data Source filter chart" width="100%" />
+<img src="images/12-acronym_filter.png" alt="Settings for creating the Data Source filter chart" width="100%" />
 <p class="caption">
 Figure 4.1: Settings for creating the Data Source filter chart
 </p>

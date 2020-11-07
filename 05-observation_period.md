@@ -18,6 +18,9 @@ To hide the dashboard header insert the following css code to the `CSS` field on
 }
 ```
 
+With this every time you want to edit the dashboard layout you have to either comment the CSS inserted
+or remove it so the "Edit Dashboard" button can show again.
+
 ## Data Source Filter
 
 <div class="figure">
@@ -34,25 +37,15 @@ No SQL query, use the sql table `data_source` of the `achilles` database.
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Filter Box
-
   - Time
-
     - Time range: No filter
-
   - Filters Configuration
-
     - Filters:
-
       - name
-
     - Date Filter: off
-
     - Instant Filtering: on
-
 
 ## Number of Patients in Observation Period {#numInObservationPeriod}
 
@@ -78,39 +71,22 @@ WHERE analysis_id = 110
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Bar Chart
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Metrics: MAX(count_value) with label "Num of Patients"
-
     - Series: date
-
     - Breakdowns: name
-
 - Customize Tab
-
   - Chart Options
-
     - Stacked Bars: on
-
     - Sort Bars: on
-
     - Y Axis Label: Number of Patients
-
   - X Axis
-
     - X Axis Label: Dates
-
     - Reduce X ticks: on
-
 
 ## Observation Period Start Dates
 
@@ -134,39 +110,22 @@ WHERE analysis_id = 111
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Bar Chart
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Metrics: SUM(count_value) with label "Patients"
-
     - Series: year_month
-
     - Breakdowns: name
-
 - Customize Tab
-
   - Chart Options
-
     - Stacked Bars: on
-
     - Sort Bars: on
-
     - Y Axis Label: Number of Patients
-
   - X Axis
-
     - X Axis Label: Year
-
     - Reduce X ticks: on
-
 
 ## Observation Period End Dates
 
@@ -190,35 +149,19 @@ WHERE analysis_id = 112
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Bar Chart
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Metrics: SUM(count_value) with label "Patients"
-
     - Series: year_month
-
     - Breakdowns: name
-
 - Customize Tab
-
   - Chart Options
-
     - Stacked Bars: on
-
     - Sort Bars: on
-
     - Y Axis Label: Number of Patients
-
   - X Axis
-
     - X Axis Label: Year
-
     - Reduce X ticks: on

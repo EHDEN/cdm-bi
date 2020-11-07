@@ -437,9 +437,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="css-5" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> CSS</h2>
 <p>To hide the dashboard header insert the following css code to the <code>CSS</code> field on the edit page:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb32-1"><a href="concepts-browser.html#cb32-1" aria-hidden="true"></a><span class="fu">.dashboard</span> <span class="op">&gt;</span> div<span class="in">:not(</span><span class="fu">.dashboard-content</span><span class="in">)</span> {  <span class="co">/* dashboard header */</span></span>
-<span id="cb32-2"><a href="concepts-browser.html#cb32-2" aria-hidden="true"></a>  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb32-3"><a href="concepts-browser.html#cb32-3" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb31-1"><a href="concepts-browser.html#cb31-1" aria-hidden="true"></a><span class="fu">.dashboard</span> <span class="op">&gt;</span> div<span class="in">:not(</span><span class="fu">.dashboard-content</span><span class="in">)</span> {  <span class="co">/* dashboard header */</span></span>
+<span id="cb31-2"><a href="concepts-browser.html#cb31-2" aria-hidden="true"></a>  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb31-3"><a href="concepts-browser.html#cb31-3" aria-hidden="true"></a>}</span></code></pre></div>
+<p>With this every time you want to edit the dashboard layout you have to either comment the CSS inserted
+or remove it so the “Edit Dashboard” button can show again.</p>
 </div>
 <div id="data-source-and-domain-filters" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> Data Source and Domain Filters</h2>
@@ -452,14 +454,14 @@ Figure 3.1: Settings for creating the Data Source and Domain filter charts
 <p><strong>For the filters to work the name of the fields to filter should match in all tables used on the charts of this dashboard.</strong></p>
 <div id="sql-query-21" class="section level3" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> SQL query</h3>
-<div class="sourceCode" id="cb33"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb33-1"><a href="concepts-browser.html#cb33-1" aria-hidden="true"></a><span class="kw">SELECT</span> concept_name,</span>
-<span id="cb33-2"><a href="concepts-browser.html#cb33-2" aria-hidden="true"></a>     domain_id,</span>
-<span id="cb33-3"><a href="concepts-browser.html#cb33-3" aria-hidden="true"></a>     <span class="kw">source</span>.name <span class="kw">AS</span> source_name,</span>
-<span id="cb33-4"><a href="concepts-browser.html#cb33-4" aria-hidden="true"></a>     <span class="kw">source</span>.acronym</span>
-<span id="cb33-5"><a href="concepts-browser.html#cb33-5" aria-hidden="true"></a><span class="kw">FROM</span> achilles_results</span>
-<span id="cb33-6"><a href="concepts-browser.html#cb33-6" aria-hidden="true"></a><span class="kw">JOIN</span> concept <span class="kw">ON</span> <span class="fu">cast</span>(stratum_1 <span class="kw">AS</span> BIGINT) <span class="op">=</span> concept_id</span>
-<span id="cb33-7"><a href="concepts-browser.html#cb33-7" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
-<span id="cb33-8"><a href="concepts-browser.html#cb33-8" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="kw">in</span> (<span class="dv">201</span>, <span class="dv">401</span>, <span class="dv">601</span>, <span class="dv">701</span>, <span class="dv">801</span>, <span class="dv">901</span>, <span class="dv">1001</span>, <span class="dv">1801</span>, <span class="dv">200</span>, <span class="dv">400</span>, <span class="dv">600</span>, <span class="dv">700</span>, <span class="dv">800</span>, <span class="dv">1800</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb32-1"><a href="concepts-browser.html#cb32-1" aria-hidden="true"></a><span class="kw">SELECT</span> concept_name,</span>
+<span id="cb32-2"><a href="concepts-browser.html#cb32-2" aria-hidden="true"></a>     domain_id,</span>
+<span id="cb32-3"><a href="concepts-browser.html#cb32-3" aria-hidden="true"></a>     <span class="kw">source</span>.name <span class="kw">AS</span> source_name,</span>
+<span id="cb32-4"><a href="concepts-browser.html#cb32-4" aria-hidden="true"></a>     <span class="kw">source</span>.acronym</span>
+<span id="cb32-5"><a href="concepts-browser.html#cb32-5" aria-hidden="true"></a><span class="kw">FROM</span> achilles_results</span>
+<span id="cb32-6"><a href="concepts-browser.html#cb32-6" aria-hidden="true"></a><span class="kw">JOIN</span> concept <span class="kw">ON</span> <span class="fu">cast</span>(stratum_1 <span class="kw">AS</span> BIGINT) <span class="op">=</span> concept_id</span>
+<span id="cb32-7"><a href="concepts-browser.html#cb32-7" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
+<span id="cb32-8"><a href="concepts-browser.html#cb32-8" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="kw">in</span> (<span class="dv">201</span>, <span class="dv">401</span>, <span class="dv">601</span>, <span class="dv">701</span>, <span class="dv">801</span>, <span class="dv">901</span>, <span class="dv">1001</span>, <span class="dv">1801</span>, <span class="dv">200</span>, <span class="dv">400</span>, <span class="dv">600</span>, <span class="dv">700</span>, <span class="dv">800</span>, <span class="dv">1800</span>)</span></code></pre></div>
 </div>
 <div id="chart-settings-22" class="section level3" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Chart settings</h3>
@@ -531,55 +533,55 @@ Time range: No filter</li>
 Figure 8.2: Settings for creating the Concepts Table chart
 </p>
 </div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb34-1"><a href="concepts-browser.html#cb34-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
-<span id="cb34-2"><a href="concepts-browser.html#cb34-2" aria-hidden="true"></a>    q1.concept_id <span class="kw">AS</span> concept_id,</span>
-<span id="cb34-3"><a href="concepts-browser.html#cb34-3" aria-hidden="true"></a>    q1.concept_name <span class="kw">AS</span> concept_name,</span>
-<span id="cb34-4"><a href="concepts-browser.html#cb34-4" aria-hidden="true"></a>    q1.domain_id,</span>
-<span id="cb34-5"><a href="concepts-browser.html#cb34-5" aria-hidden="true"></a>    <span class="kw">source</span>.name <span class="kw">AS</span> source_name,</span>
-<span id="cb34-6"><a href="concepts-browser.html#cb34-6" aria-hidden="true"></a>    <span class="kw">source</span>.acronym,</span>
-<span id="cb34-7"><a href="concepts-browser.html#cb34-7" aria-hidden="true"></a>    <span class="fu">sum</span>(q1.count_value) <span class="kw">as</span> <span class="ot">&quot;Occurrence_count&quot;</span>,</span>
-<span id="cb34-8"><a href="concepts-browser.html#cb34-8" aria-hidden="true"></a>    <span class="fu">sum</span>(q1.count_person) <span class="kw">as</span> <span class="ot">&quot;Person_count&quot;</span>,</span>
-<span id="cb34-9"><a href="concepts-browser.html#cb34-9" aria-hidden="true"></a>    <span class="cf">CASE</span> </span>
-<span id="cb34-10"><a href="concepts-browser.html#cb34-10" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">10</span> <span class="cf">THEN</span> <span class="st">&#39;&lt;=10&#39;</span></span>
-<span id="cb34-11"><a href="concepts-browser.html#cb34-11" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">100</span> <span class="cf">THEN</span> <span class="st">&#39;11-10ˆ2&#39;</span></span>
-<span id="cb34-12"><a href="concepts-browser.html#cb34-12" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">1000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ2-10ˆ3&#39;</span></span>
-<span id="cb34-13"><a href="concepts-browser.html#cb34-13" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">10000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ3-10ˆ4&#39;</span></span>
-<span id="cb34-14"><a href="concepts-browser.html#cb34-14" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">100000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ4-10ˆ5&#39;</span></span>
-<span id="cb34-15"><a href="concepts-browser.html#cb34-15" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">1000000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ5-10ˆ6&#39;</span></span>
-<span id="cb34-16"><a href="concepts-browser.html#cb34-16" aria-hidden="true"></a>        <span class="cf">ELSE</span> <span class="st">&#39;&gt;10ˆ6&#39;</span></span>
-<span id="cb34-17"><a href="concepts-browser.html#cb34-17" aria-hidden="true"></a>    <span class="cf">END</span> <span class="kw">as</span> <span class="ot">&quot;magnitude_occurrences&quot;</span>,</span>
-<span id="cb34-18"><a href="concepts-browser.html#cb34-18" aria-hidden="true"></a>    <span class="cf">CASE</span> </span>
-<span id="cb34-19"><a href="concepts-browser.html#cb34-19" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">10</span> <span class="cf">THEN</span> <span class="st">&#39;&lt;=10&#39;</span></span>
-<span id="cb34-20"><a href="concepts-browser.html#cb34-20" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">100</span> <span class="cf">THEN</span> <span class="st">&#39;11-10ˆ2&#39;</span></span>
-<span id="cb34-21"><a href="concepts-browser.html#cb34-21" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">1000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ2-10ˆ3&#39;</span></span>
-<span id="cb34-22"><a href="concepts-browser.html#cb34-22" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">10000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ3-10ˆ4&#39;</span></span>
-<span id="cb34-23"><a href="concepts-browser.html#cb34-23" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">100000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ4-10ˆ5&#39;</span></span>
-<span id="cb34-24"><a href="concepts-browser.html#cb34-24" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">1000000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ5-10ˆ6&#39;</span></span>
-<span id="cb34-25"><a href="concepts-browser.html#cb34-25" aria-hidden="true"></a>        <span class="cf">ELSE</span> <span class="st">&#39;&gt;10ˆ6&#39;</span></span>
-<span id="cb34-26"><a href="concepts-browser.html#cb34-26" aria-hidden="true"></a>    <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;magnitude_persons&quot;</span></span>
-<span id="cb34-27"><a href="concepts-browser.html#cb34-27" aria-hidden="true"></a><span class="kw">FROM</span> (<span class="kw">SELECT</span> analysis_id,</span>
-<span id="cb34-28"><a href="concepts-browser.html#cb34-28" aria-hidden="true"></a>             stratum_1 concept_id,</span>
-<span id="cb34-29"><a href="concepts-browser.html#cb34-29" aria-hidden="true"></a>             data_source_id,</span>
-<span id="cb34-30"><a href="concepts-browser.html#cb34-30" aria-hidden="true"></a>             concept_name,</span>
-<span id="cb34-31"><a href="concepts-browser.html#cb34-31" aria-hidden="true"></a>             domain_id,</span>
-<span id="cb34-32"><a href="concepts-browser.html#cb34-32" aria-hidden="true"></a>             count_value, <span class="dv">0</span> <span class="kw">as</span> count_person</span>
-<span id="cb34-33"><a href="concepts-browser.html#cb34-33" aria-hidden="true"></a>    <span class="kw">FROM</span> achilles_results</span>
-<span id="cb34-34"><a href="concepts-browser.html#cb34-34" aria-hidden="true"></a>    <span class="kw">JOIN</span> concept <span class="kw">ON</span> <span class="fu">cast</span>(stratum_1 <span class="kw">AS</span> BIGINT)<span class="op">=</span>concept_id</span>
-<span id="cb34-35"><a href="concepts-browser.html#cb34-35" aria-hidden="true"></a>    <span class="kw">WHERE</span> analysis_id <span class="kw">in</span> (<span class="dv">201</span>, <span class="dv">301</span>, <span class="dv">401</span>, <span class="dv">601</span>, <span class="dv">701</span>, <span class="dv">801</span>, <span class="dv">901</span>, <span class="dv">1001</span>, <span class="dv">1801</span>)</span>
-<span id="cb34-36"><a href="concepts-browser.html#cb34-36" aria-hidden="true"></a>    <span class="kw">UNION</span> (<span class="kw">SELECT</span>  analysis_id,</span>
-<span id="cb34-37"><a href="concepts-browser.html#cb34-37" aria-hidden="true"></a>                   stratum_1 concept_id,</span>
-<span id="cb34-38"><a href="concepts-browser.html#cb34-38" aria-hidden="true"></a>                   data_source_id,</span>
-<span id="cb34-39"><a href="concepts-browser.html#cb34-39" aria-hidden="true"></a>                   concept_name,</span>
-<span id="cb34-40"><a href="concepts-browser.html#cb34-40" aria-hidden="true"></a>                   domain_id,</span>
-<span id="cb34-41"><a href="concepts-browser.html#cb34-41" aria-hidden="true"></a>                   <span class="dv">0</span> <span class="kw">as</span> count_value,</span>
-<span id="cb34-42"><a href="concepts-browser.html#cb34-42" aria-hidden="true"></a>                   <span class="fu">sum</span>(count_value) <span class="kw">as</span> count_person</span>
-<span id="cb34-43"><a href="concepts-browser.html#cb34-43" aria-hidden="true"></a>            <span class="kw">FROM</span>  achilles_results</span>
-<span id="cb34-44"><a href="concepts-browser.html#cb34-44" aria-hidden="true"></a>            <span class="kw">JOIN</span> concept <span class="kw">on</span> <span class="fu">cast</span>(stratum_1 <span class="kw">as</span> BIGINT)<span class="op">=</span>concept_id</span>
-<span id="cb34-45"><a href="concepts-browser.html#cb34-45" aria-hidden="true"></a>            <span class="kw">WHERE</span> analysis_id <span class="kw">in</span> (<span class="dv">202</span>, <span class="dv">401</span>, <span class="dv">601</span>, <span class="dv">701</span>, <span class="dv">801</span>, <span class="dv">901</span>, <span class="dv">1001</span>, <span class="dv">1801</span>)</span>
-<span id="cb34-46"><a href="concepts-browser.html#cb34-46" aria-hidden="true"></a>            <span class="kw">GROUP</span> <span class="kw">BY</span> analysis_id,stratum_1,data_source_id,concept_name,domain_id) ) <span class="kw">as</span> q1</span>
-<span id="cb34-47"><a href="concepts-browser.html#cb34-47" aria-hidden="true"></a>    <span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> q1.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
-<span id="cb34-48"><a href="concepts-browser.html#cb34-48" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span> q1.concept_id,q1.concept_name,q1.domain_id,<span class="kw">source</span>.name, acronym</span>
-<span id="cb34-49"><a href="concepts-browser.html#cb34-49" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="ot">&quot;Person_count&quot;</span> <span class="kw">desc</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb33-1"><a href="concepts-browser.html#cb33-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb33-2"><a href="concepts-browser.html#cb33-2" aria-hidden="true"></a>    q1.concept_id <span class="kw">AS</span> concept_id,</span>
+<span id="cb33-3"><a href="concepts-browser.html#cb33-3" aria-hidden="true"></a>    q1.concept_name <span class="kw">AS</span> concept_name,</span>
+<span id="cb33-4"><a href="concepts-browser.html#cb33-4" aria-hidden="true"></a>    q1.domain_id,</span>
+<span id="cb33-5"><a href="concepts-browser.html#cb33-5" aria-hidden="true"></a>    <span class="kw">source</span>.name <span class="kw">AS</span> source_name,</span>
+<span id="cb33-6"><a href="concepts-browser.html#cb33-6" aria-hidden="true"></a>    <span class="kw">source</span>.acronym,</span>
+<span id="cb33-7"><a href="concepts-browser.html#cb33-7" aria-hidden="true"></a>    <span class="fu">sum</span>(q1.count_value) <span class="kw">as</span> <span class="ot">&quot;Occurrence_count&quot;</span>,</span>
+<span id="cb33-8"><a href="concepts-browser.html#cb33-8" aria-hidden="true"></a>    <span class="fu">sum</span>(q1.count_person) <span class="kw">as</span> <span class="ot">&quot;Person_count&quot;</span>,</span>
+<span id="cb33-9"><a href="concepts-browser.html#cb33-9" aria-hidden="true"></a>    <span class="cf">CASE</span> </span>
+<span id="cb33-10"><a href="concepts-browser.html#cb33-10" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">10</span> <span class="cf">THEN</span> <span class="st">&#39;&lt;=10&#39;</span></span>
+<span id="cb33-11"><a href="concepts-browser.html#cb33-11" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">100</span> <span class="cf">THEN</span> <span class="st">&#39;11-10ˆ2&#39;</span></span>
+<span id="cb33-12"><a href="concepts-browser.html#cb33-12" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">1000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ2-10ˆ3&#39;</span></span>
+<span id="cb33-13"><a href="concepts-browser.html#cb33-13" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">10000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ3-10ˆ4&#39;</span></span>
+<span id="cb33-14"><a href="concepts-browser.html#cb33-14" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">100000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ4-10ˆ5&#39;</span></span>
+<span id="cb33-15"><a href="concepts-browser.html#cb33-15" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_value)<span class="op">&lt;=</span><span class="dv">1000000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ5-10ˆ6&#39;</span></span>
+<span id="cb33-16"><a href="concepts-browser.html#cb33-16" aria-hidden="true"></a>        <span class="cf">ELSE</span> <span class="st">&#39;&gt;10ˆ6&#39;</span></span>
+<span id="cb33-17"><a href="concepts-browser.html#cb33-17" aria-hidden="true"></a>    <span class="cf">END</span> <span class="kw">as</span> <span class="ot">&quot;magnitude_occurrences&quot;</span>,</span>
+<span id="cb33-18"><a href="concepts-browser.html#cb33-18" aria-hidden="true"></a>    <span class="cf">CASE</span> </span>
+<span id="cb33-19"><a href="concepts-browser.html#cb33-19" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">10</span> <span class="cf">THEN</span> <span class="st">&#39;&lt;=10&#39;</span></span>
+<span id="cb33-20"><a href="concepts-browser.html#cb33-20" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">100</span> <span class="cf">THEN</span> <span class="st">&#39;11-10ˆ2&#39;</span></span>
+<span id="cb33-21"><a href="concepts-browser.html#cb33-21" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">1000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ2-10ˆ3&#39;</span></span>
+<span id="cb33-22"><a href="concepts-browser.html#cb33-22" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">10000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ3-10ˆ4&#39;</span></span>
+<span id="cb33-23"><a href="concepts-browser.html#cb33-23" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">100000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ4-10ˆ5&#39;</span></span>
+<span id="cb33-24"><a href="concepts-browser.html#cb33-24" aria-hidden="true"></a>        <span class="cf">WHEN</span> <span class="fu">sum</span>(q1.count_person)<span class="op">&lt;=</span><span class="dv">1000000</span> <span class="cf">THEN</span> <span class="st">&#39;10ˆ5-10ˆ6&#39;</span></span>
+<span id="cb33-25"><a href="concepts-browser.html#cb33-25" aria-hidden="true"></a>        <span class="cf">ELSE</span> <span class="st">&#39;&gt;10ˆ6&#39;</span></span>
+<span id="cb33-26"><a href="concepts-browser.html#cb33-26" aria-hidden="true"></a>    <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">&quot;magnitude_persons&quot;</span></span>
+<span id="cb33-27"><a href="concepts-browser.html#cb33-27" aria-hidden="true"></a><span class="kw">FROM</span> (<span class="kw">SELECT</span> analysis_id,</span>
+<span id="cb33-28"><a href="concepts-browser.html#cb33-28" aria-hidden="true"></a>             stratum_1 concept_id,</span>
+<span id="cb33-29"><a href="concepts-browser.html#cb33-29" aria-hidden="true"></a>             data_source_id,</span>
+<span id="cb33-30"><a href="concepts-browser.html#cb33-30" aria-hidden="true"></a>             concept_name,</span>
+<span id="cb33-31"><a href="concepts-browser.html#cb33-31" aria-hidden="true"></a>             domain_id,</span>
+<span id="cb33-32"><a href="concepts-browser.html#cb33-32" aria-hidden="true"></a>             count_value, <span class="dv">0</span> <span class="kw">as</span> count_person</span>
+<span id="cb33-33"><a href="concepts-browser.html#cb33-33" aria-hidden="true"></a>    <span class="kw">FROM</span> achilles_results</span>
+<span id="cb33-34"><a href="concepts-browser.html#cb33-34" aria-hidden="true"></a>    <span class="kw">JOIN</span> concept <span class="kw">ON</span> <span class="fu">cast</span>(stratum_1 <span class="kw">AS</span> BIGINT)<span class="op">=</span>concept_id</span>
+<span id="cb33-35"><a href="concepts-browser.html#cb33-35" aria-hidden="true"></a>    <span class="kw">WHERE</span> analysis_id <span class="kw">in</span> (<span class="dv">201</span>, <span class="dv">301</span>, <span class="dv">401</span>, <span class="dv">601</span>, <span class="dv">701</span>, <span class="dv">801</span>, <span class="dv">901</span>, <span class="dv">1001</span>, <span class="dv">1801</span>)</span>
+<span id="cb33-36"><a href="concepts-browser.html#cb33-36" aria-hidden="true"></a>    <span class="kw">UNION</span> (<span class="kw">SELECT</span>  analysis_id,</span>
+<span id="cb33-37"><a href="concepts-browser.html#cb33-37" aria-hidden="true"></a>                   stratum_1 concept_id,</span>
+<span id="cb33-38"><a href="concepts-browser.html#cb33-38" aria-hidden="true"></a>                   data_source_id,</span>
+<span id="cb33-39"><a href="concepts-browser.html#cb33-39" aria-hidden="true"></a>                   concept_name,</span>
+<span id="cb33-40"><a href="concepts-browser.html#cb33-40" aria-hidden="true"></a>                   domain_id,</span>
+<span id="cb33-41"><a href="concepts-browser.html#cb33-41" aria-hidden="true"></a>                   <span class="dv">0</span> <span class="kw">as</span> count_value,</span>
+<span id="cb33-42"><a href="concepts-browser.html#cb33-42" aria-hidden="true"></a>                   <span class="fu">sum</span>(count_value) <span class="kw">as</span> count_person</span>
+<span id="cb33-43"><a href="concepts-browser.html#cb33-43" aria-hidden="true"></a>            <span class="kw">FROM</span>  achilles_results</span>
+<span id="cb33-44"><a href="concepts-browser.html#cb33-44" aria-hidden="true"></a>            <span class="kw">JOIN</span> concept <span class="kw">on</span> <span class="fu">cast</span>(stratum_1 <span class="kw">as</span> BIGINT)<span class="op">=</span>concept_id</span>
+<span id="cb33-45"><a href="concepts-browser.html#cb33-45" aria-hidden="true"></a>            <span class="kw">WHERE</span> analysis_id <span class="kw">in</span> (<span class="dv">202</span>, <span class="dv">401</span>, <span class="dv">601</span>, <span class="dv">701</span>, <span class="dv">801</span>, <span class="dv">901</span>, <span class="dv">1001</span>, <span class="dv">1801</span>)</span>
+<span id="cb33-46"><a href="concepts-browser.html#cb33-46" aria-hidden="true"></a>            <span class="kw">GROUP</span> <span class="kw">BY</span> analysis_id,stratum_1,data_source_id,concept_name,domain_id) ) <span class="kw">as</span> q1</span>
+<span id="cb33-47"><a href="concepts-browser.html#cb33-47" aria-hidden="true"></a>    <span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> q1.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
+<span id="cb33-48"><a href="concepts-browser.html#cb33-48" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span> q1.concept_id,q1.concept_name,q1.domain_id,<span class="kw">source</span>.name, acronym</span>
+<span id="cb33-49"><a href="concepts-browser.html#cb33-49" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="ot">&quot;Person_count&quot;</span> <span class="kw">desc</span></span></code></pre></div>
 <div id="chart-settings-24" class="section level3" number="8.4.1">
 <h3><span class="header-section-number">8.4.1</span> Chart settings</h3>
 <ul>

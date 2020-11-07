@@ -53,10 +53,13 @@ Hides the X Axis Labels of the bar charts on the Data Provenance tab
 }
 ```
 
+With this every time you want to edit the dashboard layout you have to either comment the CSS inserted
+or remove it so the "Edit Dashboard" button can show again.
+
 ## Data Source Filter - hidden
 
 <div class="figure">
-<img src="images/shared/data_source_filter.png" alt="Settings for creating the Data Source filter chart" width="100%" />
+<img src="images/12-acronym_filter.png" alt="Settings for creating the Data Source filter chart" width="100%" />
 <p class="caption">(\#fig:dataSourceFilter)Settings for creating the Data Source filter chart</p>
 </div>
 

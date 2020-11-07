@@ -32,6 +32,9 @@ To hide the dashboard header insert the following css code to the `CSS` field on
 }
 ```
 
+With this every time you want to edit the dashboard layout you have to either comment the CSS inserted
+or remove it so the "Edit Dashboard" button can show again.
+
 ## Data Source Filter
 
 ```{r dataSourceFilter, fig.cap="Settings for creating the Data Source filter chart",echo=FALSE, out.width="100%"}

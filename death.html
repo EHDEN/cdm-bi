@@ -437,9 +437,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="css-4" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> CSS</h2>
 <p>To hide the dashboard header insert the following css code to the <code>CSS</code> field on the edit page:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb29-1"><a href="death.html#cb29-1" aria-hidden="true"></a><span class="fu">.dashboard</span> <span class="op">&gt;</span> div<span class="in">:not(</span><span class="fu">.dashboard-content</span><span class="in">)</span> {  <span class="co">/* dashboard header */</span></span>
-<span id="cb29-2"><a href="death.html#cb29-2" aria-hidden="true"></a>  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb29-3"><a href="death.html#cb29-3" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb28-1"><a href="death.html#cb28-1" aria-hidden="true"></a><span class="fu">.dashboard</span> <span class="op">&gt;</span> div<span class="in">:not(</span><span class="fu">.dashboard-content</span><span class="in">)</span> {  <span class="co">/* dashboard header */</span></span>
+<span id="cb28-2"><a href="death.html#cb28-2" aria-hidden="true"></a>  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb28-3"><a href="death.html#cb28-3" aria-hidden="true"></a>}</span></code></pre></div>
+<p>With this every time you want to edit the dashboard layout you have to either comment the CSS inserted
+or remove it so the “Edit Dashboard” button can show again.</p>
 </div>
 <div id="data-source-filter-3" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> Data Source Filter</h2>
@@ -490,12 +492,12 @@ Figure 7.1: Settings for creating the Number of Records chart
 </div>
 <div id="sql-query-19" class="section level3" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> SQL query</h3>
-<div class="sourceCode" id="cb30"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb30-1"><a href="death.html#cb30-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
-<span id="cb30-2"><a href="death.html#cb30-2" aria-hidden="true"></a>    count_value,</span>
-<span id="cb30-3"><a href="death.html#cb30-3" aria-hidden="true"></a>    <span class="kw">source</span>.acronym</span>
-<span id="cb30-4"><a href="death.html#cb30-4" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles</span>
-<span id="cb30-5"><a href="death.html#cb30-5" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
-<span id="cb30-6"><a href="death.html#cb30-6" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">501</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb29-1"><a href="death.html#cb29-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
+<span id="cb29-2"><a href="death.html#cb29-2" aria-hidden="true"></a>    count_value,</span>
+<span id="cb29-3"><a href="death.html#cb29-3" aria-hidden="true"></a>    <span class="kw">source</span>.acronym</span>
+<span id="cb29-4"><a href="death.html#cb29-4" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles</span>
+<span id="cb29-5"><a href="death.html#cb29-5" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
+<span id="cb29-6"><a href="death.html#cb29-6" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">501</span></span></code></pre></div>
 </div>
 <div id="chart-settings-20" class="section level3" number="7.3.2">
 <h3><span class="header-section-number">7.3.2</span> Chart settings</h3>
@@ -541,13 +543,13 @@ Figure 7.2: Settings for creating the Death by Year per Thousand People chart
 </div>
 <div id="sql-query-20" class="section level3" number="7.4.1">
 <h3><span class="header-section-number">7.4.1</span> SQL query</h3>
-<div class="sourceCode" id="cb31"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb31-1"><a href="death.html#cb31-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
-<span id="cb31-2"><a href="death.html#cb31-2" aria-hidden="true"></a>    <span class="kw">source</span>.acronym,</span>
-<span id="cb31-3"><a href="death.html#cb31-3" aria-hidden="true"></a>    <span class="fu">EXTRACT</span>(<span class="dt">year</span> <span class="kw">FROM</span> <span class="fu">TO_DATE</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>)) <span class="kw">AS</span> <span class="dt">Date</span>,</span>
-<span id="cb31-4"><a href="death.html#cb31-4" aria-hidden="true"></a>    count_value</span>
-<span id="cb31-5"><a href="death.html#cb31-5" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">as</span> achilles</span>
-<span id="cb31-6"><a href="death.html#cb31-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">as</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
-<span id="cb31-7"><a href="death.html#cb31-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">502</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb30-1"><a href="death.html#cb30-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
+<span id="cb30-2"><a href="death.html#cb30-2" aria-hidden="true"></a>    <span class="kw">source</span>.acronym,</span>
+<span id="cb30-3"><a href="death.html#cb30-3" aria-hidden="true"></a>    <span class="fu">EXTRACT</span>(<span class="dt">year</span> <span class="kw">FROM</span> <span class="fu">TO_DATE</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>)) <span class="kw">AS</span> <span class="dt">Date</span>,</span>
+<span id="cb30-4"><a href="death.html#cb30-4" aria-hidden="true"></a>    count_value</span>
+<span id="cb30-5"><a href="death.html#cb30-5" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">as</span> achilles</span>
+<span id="cb30-6"><a href="death.html#cb30-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">as</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
+<span id="cb30-7"><a href="death.html#cb30-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">502</span></span></code></pre></div>
 </div>
 <div id="chart-settings-21" class="section level3" number="7.4.2">
 <h3><span class="header-section-number">7.4.2</span> Chart settings</h3>

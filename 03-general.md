@@ -18,6 +18,9 @@ To hide the dashboard header insert the following css code to the `CSS` field on
 }
 ```
 
+With this every time you want to edit the dashboard layout you have to either comment the CSS inserted
+or remove it so the "Edit Dashboard" button can show again.
+
 ## Database Type and Country Filter
 
 <div class="figure">
@@ -43,23 +46,14 @@ INNER JOIN public.country AS country ON source.country_id=country.id
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Filter Box
-
   - Time
-
     - Time range: No filter
-
   - Filters Configuration
-
     - Filters:
-
       - database_type or country
-
     - Date Filter: off
-
     - Instant Filtering: on
 
 ## Total Number of Patients
@@ -86,29 +80,17 @@ WHERE analysis_id = 1
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Big Number with Trendline
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Metrics: MAX(sum)
-
     - Series: release_date
-
     - Breakdowns: source
-
 - Customize Tab
-
   - Chart Options
-
     - Big Number Font Size: Small
-
     - Subheader Font Size: Tiny
 
 ## Network Growth by Date
@@ -142,35 +124,20 @@ WHERE analysis_id = 2
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Bar Chart
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Metrics: SUM(count_value)
-
     - Series: release_date
-
     - Breakdowns: source
-
 - Customize Tab
-
   - Chart Options
-
     - Stacked Bars: on
-
     - Sort Bars: on
-
     - Extra Controls: on
-
   - X Axis
-
     - Reduce X ticks: on
 
 ## Patients per Country
@@ -195,31 +162,18 @@ WHERE analysis_id = 1
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Bar Chart
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Metrics: SUM(count_value)
-
     - Series: country
-
 - Customize Tab
-
   - Chart Options
-
     - Legend: off
-
     - Y Axis Label: Nº of Patients
-
   - X Axis
-
     - X Axis Label: Country
 
 ## Database Types per Country
@@ -233,38 +187,18 @@ WHERE analysis_id = 1
 
 Same as [Patients per Country](#patientsPerCountryQuery) query
 
-```sql
-SELECT country.country,
-       source.database_type,
-       count_value
-FROM public.achilles_results AS achilles 
-INNER JOIN public.data_source AS source ON achilles.data_source_id=source.id
-INNER JOIN public.country AS country ON source.country_id=country.id
-WHERE analysis_id = 1
-```
-
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Heatmap
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - X: country
-
     - Y: database_type
-
     - Metric: SUM(countr_value)
-
   - Heatmap Options
-
     - Left Margin: 75
     - Show Percentage: off
 
@@ -293,23 +227,14 @@ INNER JOIN public.country AS country ON source.country_id=country.id
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: MapBox
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Longitude: longitude
-
     - Latitude: latitude
-
   - Visual Tweaks
-
     - Map Style: Streets or Light or Outdoors
 
 ## Meta Data {#metaDataTable}
@@ -340,17 +265,10 @@ WHERE analysis_id=5000
 ### Chart settings
 
 - Data Tab
-
   - Datasource & Chart Type
-
     - Visualization Type: Table
-
   - Time
-
     - Time range: No filter
-
   - Query
-
     - Query Mode: Raw Records
-
     - Columns: name, source_release_date, cdm_release_date, cdm_version, vocabulary_version

@@ -440,6 +440,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb8-1"><a href="general.html#cb8-1" aria-hidden="true"></a><span class="fu">.dashboard</span> <span class="op">&gt;</span> div<span class="in">:not(</span><span class="fu">.dashboard-content</span><span class="in">)</span> {  <span class="co">/* dashboard header */</span></span>
 <span id="cb8-2"><a href="general.html#cb8-2" aria-hidden="true"></a>  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
 <span id="cb8-3"><a href="general.html#cb8-3" aria-hidden="true"></a>}</span></code></pre></div>
+<p>With this every time you want to edit the dashboard layout you have to either comment the CSS inserted
+or remove it so the “Edit Dashboard” button can show again.</p>
 </div>
 <div id="database-type-and-country-filter" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Database Type and Country Filter</h2>
@@ -463,24 +465,24 @@ Figure 3.1: Settings for creating filters charts
 <div id="chart-settings" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Chart settings</h3>
 <ul>
-<li><p>Data Tab</p>
+<li>Data Tab
 <ul>
-<li><p>Datasource &amp; Chart Type</p>
+<li>Datasource &amp; Chart Type
 <ul>
 <li>Visualization Type: Filter Box</li>
 </ul></li>
-<li><p>Time</p>
+<li>Time
 <ul>
 <li>Time range: No filter</li>
 </ul></li>
-<li><p>Filters Configuration</p>
+<li>Filters Configuration
 <ul>
-<li><p>Filters:</p>
+<li>Filters:
 <ul>
 <li>database_type or country</li>
 </ul></li>
-<li><p>Date Filter: off</p></li>
-<li><p>Instant Filtering: on</p></li>
+<li>Date Filter: off</li>
+<li>Instant Filtering: on</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -509,29 +511,29 @@ Figure 3.2: Settings for creating the Total Number of Patients chart
 <div id="chart-settings-1" class="section level3" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Chart settings</h3>
 <ul>
-<li><p>Data Tab</p>
+<li>Data Tab
 <ul>
-<li><p>Datasource &amp; Chart Type</p>
+<li>Datasource &amp; Chart Type
 <ul>
 <li>Visualization Type: Big Number with Trendline</li>
 </ul></li>
-<li><p>Time</p>
+<li>Time
 <ul>
 <li>Time range: No filter</li>
 </ul></li>
-<li><p>Query</p>
+<li>Query
 <ul>
-<li><p>Metrics: MAX(sum)</p></li>
-<li><p>Series: release_date</p></li>
-<li><p>Breakdowns: source</p></li>
+<li>Metrics: MAX(sum)</li>
+<li>Series: release_date</li>
+<li>Breakdowns: source</li>
 </ul></li>
 </ul></li>
-<li><p>Customize Tab</p>
+<li>Customize Tab
 <ul>
-<li><p>Chart Options</p>
+<li>Chart Options
 <ul>
-<li><p>Big Number Font Size: Small</p></li>
-<li><p>Subheader Font Size: Tiny</p></li>
+<li>Big Number Font Size: Small</li>
+<li>Subheader Font Size: Tiny</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -566,32 +568,32 @@ Figure 3.3: Settings for creating the Network Growth by Date chart
 <div id="chart-settings-2" class="section level3" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Chart settings</h3>
 <ul>
-<li><p>Data Tab</p>
+<li>Data Tab
 <ul>
-<li><p>Datasource &amp; Chart Type</p>
+<li>Datasource &amp; Chart Type
 <ul>
 <li>Visualization Type: Bar Chart</li>
 </ul></li>
-<li><p>Time</p>
+<li>Time
 <ul>
 <li>Time range: No filter</li>
 </ul></li>
-<li><p>Query</p>
+<li>Query
 <ul>
-<li><p>Metrics: SUM(count_value)</p></li>
-<li><p>Series: release_date</p></li>
-<li><p>Breakdowns: source</p></li>
+<li>Metrics: SUM(count_value)</li>
+<li>Series: release_date</li>
+<li>Breakdowns: source</li>
 </ul></li>
 </ul></li>
-<li><p>Customize Tab</p>
+<li>Customize Tab
 <ul>
-<li><p>Chart Options</p>
+<li>Chart Options
 <ul>
-<li><p>Stacked Bars: on</p></li>
-<li><p>Sort Bars: on</p></li>
-<li><p>Extra Controls: on</p></li>
+<li>Stacked Bars: on</li>
+<li>Sort Bars: on</li>
+<li>Extra Controls: on</li>
 </ul></li>
-<li><p>X Axis</p>
+<li>X Axis
 <ul>
 <li>Reduce X ticks: on</li>
 </ul></li>
@@ -620,30 +622,30 @@ Figure 3.4: Settings for creating the Patients per Country chart
 <div id="chart-settings-3" class="section level3" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Chart settings</h3>
 <ul>
-<li><p>Data Tab</p>
+<li>Data Tab
 <ul>
-<li><p>Datasource &amp; Chart Type</p>
+<li>Datasource &amp; Chart Type
 <ul>
 <li>Visualization Type: Bar Chart</li>
 </ul></li>
-<li><p>Time</p>
+<li>Time
 <ul>
 <li>Time range: No filter</li>
 </ul></li>
-<li><p>Query</p>
+<li>Query
 <ul>
-<li><p>Metrics: SUM(count_value)</p></li>
-<li><p>Series: country</p></li>
+<li>Metrics: SUM(count_value)</li>
+<li>Series: country</li>
 </ul></li>
 </ul></li>
-<li><p>Customize Tab</p>
+<li>Customize Tab
 <ul>
-<li><p>Chart Options</p>
+<li>Chart Options
 <ul>
-<li><p>Legend: off</p></li>
-<li><p>Y Axis Label: Nº of Patients</p></li>
+<li>Legend: off</li>
+<li>Y Axis Label: Nº of Patients</li>
 </ul></li>
-<li><p>X Axis</p>
+<li>X Axis
 <ul>
 <li>X Axis Label: Country</li>
 </ul></li>
@@ -662,34 +664,27 @@ Figure 3.5: Settings for creating the Database Type per Country chart
 <div id="sql-query-3" class="section level3" number="3.6.1">
 <h3><span class="header-section-number">3.6.1</span> SQL query</h3>
 <p>Same as <a href="general.html#patientsPerCountryQuery">Patients per Country</a> query</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb13-1"><a href="general.html#cb13-1" aria-hidden="true"></a><span class="kw">SELECT</span> country.country,</span>
-<span id="cb13-2"><a href="general.html#cb13-2" aria-hidden="true"></a>       <span class="kw">source</span>.database_type,</span>
-<span id="cb13-3"><a href="general.html#cb13-3" aria-hidden="true"></a>       count_value</span>
-<span id="cb13-4"><a href="general.html#cb13-4" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles </span>
-<span id="cb13-5"><a href="general.html#cb13-5" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
-<span id="cb13-6"><a href="general.html#cb13-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.country <span class="kw">AS</span> country <span class="kw">ON</span> <span class="kw">source</span>.country_id<span class="op">=</span>country.<span class="kw">id</span></span>
-<span id="cb13-7"><a href="general.html#cb13-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">1</span></span></code></pre></div>
 </div>
 <div id="chart-settings-4" class="section level3" number="3.6.2">
 <h3><span class="header-section-number">3.6.2</span> Chart settings</h3>
 <ul>
-<li><p>Data Tab</p>
+<li>Data Tab
 <ul>
-<li><p>Datasource &amp; Chart Type</p>
+<li>Datasource &amp; Chart Type
 <ul>
 <li>Visualization Type: Heatmap</li>
 </ul></li>
-<li><p>Time</p>
+<li>Time
 <ul>
 <li>Time range: No filter</li>
 </ul></li>
-<li><p>Query</p>
+<li>Query
 <ul>
-<li><p>X: country</p></li>
-<li><p>Y: database_type</p></li>
-<li><p>Metric: SUM(countr_value)</p></li>
+<li>X: country</li>
+<li>Y: database_type</li>
+<li>Metric: SUM(countr_value)</li>
 </ul></li>
-<li><p>Heatmap Options</p>
+<li>Heatmap Options
 <ul>
 <li>Left Margin: 75</li>
 <li>Show Percentage: off</li>
@@ -709,34 +704,34 @@ Figure 3.6: Settings for creating the World Map chart
 <!-- Discuss what is important to see in this chart... TO DO -->
 <div id="sql-query-4" class="section level3" number="3.7.1">
 <h3><span class="header-section-number">3.7.1</span> SQL query</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="general.html#cb14-1" aria-hidden="true"></a><span class="kw">SELECT</span>  name,</span>
-<span id="cb14-2"><a href="general.html#cb14-2" aria-hidden="true"></a>        acronym,</span>
-<span id="cb14-3"><a href="general.html#cb14-3" aria-hidden="true"></a>        database_type,</span>
-<span id="cb14-4"><a href="general.html#cb14-4" aria-hidden="true"></a>        latitude,</span>
-<span id="cb14-5"><a href="general.html#cb14-5" aria-hidden="true"></a>        longitude,</span>
-<span id="cb14-6"><a href="general.html#cb14-6" aria-hidden="true"></a>        country</span>
-<span id="cb14-7"><a href="general.html#cb14-7" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span></span>
-<span id="cb14-8"><a href="general.html#cb14-8" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.country <span class="kw">AS</span> country <span class="kw">ON</span> <span class="kw">source</span>.country_id<span class="op">=</span>country.<span class="kw">id</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb13-1"><a href="general.html#cb13-1" aria-hidden="true"></a><span class="kw">SELECT</span>  name,</span>
+<span id="cb13-2"><a href="general.html#cb13-2" aria-hidden="true"></a>        acronym,</span>
+<span id="cb13-3"><a href="general.html#cb13-3" aria-hidden="true"></a>        database_type,</span>
+<span id="cb13-4"><a href="general.html#cb13-4" aria-hidden="true"></a>        latitude,</span>
+<span id="cb13-5"><a href="general.html#cb13-5" aria-hidden="true"></a>        longitude,</span>
+<span id="cb13-6"><a href="general.html#cb13-6" aria-hidden="true"></a>        country</span>
+<span id="cb13-7"><a href="general.html#cb13-7" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span></span>
+<span id="cb13-8"><a href="general.html#cb13-8" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.country <span class="kw">AS</span> country <span class="kw">ON</span> <span class="kw">source</span>.country_id<span class="op">=</span>country.<span class="kw">id</span></span></code></pre></div>
 </div>
 <div id="chart-settings-5" class="section level3" number="3.7.2">
 <h3><span class="header-section-number">3.7.2</span> Chart settings</h3>
 <ul>
-<li><p>Data Tab</p>
+<li>Data Tab
 <ul>
-<li><p>Datasource &amp; Chart Type</p>
+<li>Datasource &amp; Chart Type
 <ul>
 <li>Visualization Type: MapBox</li>
 </ul></li>
-<li><p>Time</p>
+<li>Time
 <ul>
 <li>Time range: No filter</li>
 </ul></li>
-<li><p>Query</p>
+<li>Query
 <ul>
-<li><p>Longitude: longitude</p></li>
-<li><p>Latitude: latitude</p></li>
+<li>Longitude: longitude</li>
+<li>Latitude: latitude</li>
 </ul></li>
-<li><p>Visual Tweaks</p>
+<li>Visual Tweaks
 <ul>
 <li>Map Style: Streets or Light or Outdoors</li>
 </ul></li>
@@ -754,37 +749,37 @@ Figure 3.7: Settings for creating the Meta Data chart
 </div>
 <div id="sql-query-5" class="section level3" number="3.8.1">
 <h3><span class="header-section-number">3.8.1</span> SQL query</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb15-1"><a href="general.html#cb15-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
-<span id="cb15-2"><a href="general.html#cb15-2" aria-hidden="true"></a>  acronym,</span>
-<span id="cb15-3"><a href="general.html#cb15-3" aria-hidden="true"></a>  stratum_1 <span class="kw">as</span> <span class="ot">&quot;name&quot;</span>,</span>
-<span id="cb15-4"><a href="general.html#cb15-4" aria-hidden="true"></a>  database_type,</span>
-<span id="cb15-5"><a href="general.html#cb15-5" aria-hidden="true"></a>  country,</span>
-<span id="cb15-6"><a href="general.html#cb15-6" aria-hidden="true"></a>  stratum_2 <span class="kw">as</span> <span class="ot">&quot;source_release_date&quot;</span>,</span>
-<span id="cb15-7"><a href="general.html#cb15-7" aria-hidden="true"></a>  stratum_3 <span class="kw">as</span> <span class="ot">&quot;cdm_release_date&quot;</span>,</span>
-<span id="cb15-8"><a href="general.html#cb15-8" aria-hidden="true"></a>  stratum_4 <span class="kw">as</span> <span class="ot">&quot;cdm_version&quot;</span>,</span>
-<span id="cb15-9"><a href="general.html#cb15-9" aria-hidden="true"></a>  stratum_5 <span class="kw">as</span> <span class="ot">&quot;vocabulary_version&quot;</span></span>
-<span id="cb15-10"><a href="general.html#cb15-10" aria-hidden="true"></a><span class="kw">FROM</span> achilles_results</span>
-<span id="cb15-11"><a href="general.html#cb15-11" aria-hidden="true"></a><span class="kw">JOIN</span> data_source <span class="kw">ON</span> achilles_results.data_source_id <span class="op">=</span> data_source.<span class="kw">id</span></span>
-<span id="cb15-12"><a href="general.html#cb15-12" aria-hidden="true"></a><span class="kw">JOIN</span> country <span class="kw">ON</span> data_source.country_id <span class="op">=</span> country.<span class="kw">id</span></span>
-<span id="cb15-13"><a href="general.html#cb15-13" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id<span class="op">=</span><span class="dv">5000</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="general.html#cb14-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb14-2"><a href="general.html#cb14-2" aria-hidden="true"></a>  acronym,</span>
+<span id="cb14-3"><a href="general.html#cb14-3" aria-hidden="true"></a>  stratum_1 <span class="kw">as</span> <span class="ot">&quot;name&quot;</span>,</span>
+<span id="cb14-4"><a href="general.html#cb14-4" aria-hidden="true"></a>  database_type,</span>
+<span id="cb14-5"><a href="general.html#cb14-5" aria-hidden="true"></a>  country,</span>
+<span id="cb14-6"><a href="general.html#cb14-6" aria-hidden="true"></a>  stratum_2 <span class="kw">as</span> <span class="ot">&quot;source_release_date&quot;</span>,</span>
+<span id="cb14-7"><a href="general.html#cb14-7" aria-hidden="true"></a>  stratum_3 <span class="kw">as</span> <span class="ot">&quot;cdm_release_date&quot;</span>,</span>
+<span id="cb14-8"><a href="general.html#cb14-8" aria-hidden="true"></a>  stratum_4 <span class="kw">as</span> <span class="ot">&quot;cdm_version&quot;</span>,</span>
+<span id="cb14-9"><a href="general.html#cb14-9" aria-hidden="true"></a>  stratum_5 <span class="kw">as</span> <span class="ot">&quot;vocabulary_version&quot;</span></span>
+<span id="cb14-10"><a href="general.html#cb14-10" aria-hidden="true"></a><span class="kw">FROM</span> achilles_results</span>
+<span id="cb14-11"><a href="general.html#cb14-11" aria-hidden="true"></a><span class="kw">JOIN</span> data_source <span class="kw">ON</span> achilles_results.data_source_id <span class="op">=</span> data_source.<span class="kw">id</span></span>
+<span id="cb14-12"><a href="general.html#cb14-12" aria-hidden="true"></a><span class="kw">JOIN</span> country <span class="kw">ON</span> data_source.country_id <span class="op">=</span> country.<span class="kw">id</span></span>
+<span id="cb14-13"><a href="general.html#cb14-13" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id<span class="op">=</span><span class="dv">5000</span></span></code></pre></div>
 </div>
 <div id="chart-settings-6" class="section level3" number="3.8.2">
 <h3><span class="header-section-number">3.8.2</span> Chart settings</h3>
 <ul>
-<li><p>Data Tab</p>
+<li>Data Tab
 <ul>
-<li><p>Datasource &amp; Chart Type</p>
+<li>Datasource &amp; Chart Type
 <ul>
 <li>Visualization Type: Table</li>
 </ul></li>
-<li><p>Time</p>
+<li>Time
 <ul>
 <li>Time range: No filter</li>
 </ul></li>
-<li><p>Query</p>
+<li>Query
 <ul>
-<li><p>Query Mode: Raw Records</p></li>
-<li><p>Columns: name, source_release_date, cdm_release_date, cdm_version, vocabulary_version</p></li>
+<li>Query Mode: Raw Records</li>
+<li>Columns: name, source_release_date, cdm_release_date, cdm_version, vocabulary_version</li>
 </ul></li>
 </ul></li>
 </ul>

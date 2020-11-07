@@ -437,9 +437,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="css-2" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> CSS</h2>
 <p>To hide the dashboard header insert the following css code to the <code>CSS</code> field on the edit page:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb22-1"><a href="observation-period.html#cb22-1" aria-hidden="true"></a><span class="fu">.dashboard</span> <span class="op">&gt;</span> div<span class="in">:not(</span><span class="fu">.dashboard-content</span><span class="in">)</span> {  <span class="co">/* dashboard header */</span></span>
-<span id="cb22-2"><a href="observation-period.html#cb22-2" aria-hidden="true"></a>  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb22-3"><a href="observation-period.html#cb22-3" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb21-1"><a href="observation-period.html#cb21-1" aria-hidden="true"></a><span class="fu">.dashboard</span> <span class="op">&gt;</span> div<span class="in">:not(</span><span class="fu">.dashboard-content</span><span class="in">)</span> {  <span class="co">/* dashboard header */</span></span>
+<span id="cb21-2"><a href="observation-period.html#cb21-2" aria-hidden="true"></a>  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb21-3"><a href="observation-period.html#cb21-3" aria-hidden="true"></a>}</span></code></pre></div>
+<p>With this every time you want to edit the dashboard layout you have to either comment the CSS inserted
+or remove it so the “Edit Dashboard” button can show again.</p>
 </div>
 <div id="data-source-filter-1" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Data Source Filter</h2>
@@ -457,24 +459,24 @@ Figure 4.1: Settings for creating the Data Source filter chart
 <div id="chart-settings-12" class="section level3" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> Chart settings</h3>
 <ul>
-<li><p>Data Tab</p>
+<li>Data Tab
 <ul>
-<li><p>Datasource &amp; Chart Type</p>
+<li>Datasource &amp; Chart Type
 <ul>
 <li>Visualization Type: Filter Box</li>
 </ul></li>
-<li><p>Time</p>
+<li>Time
 <ul>
 <li>Time range: No filter</li>
 </ul></li>
-<li><p>Filters Configuration</p>
+<li>Filters Configuration
 <ul>
-<li><p>Filters:</p>
+<li>Filters:
 <ul>
 <li>name</li>
 </ul></li>
-<li><p>Date Filter: off</p></li>
-<li><p>Instant Filtering: on</p></li>
+<li>Date Filter: off</li>
+<li>Instant Filtering: on</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -491,46 +493,46 @@ Figure 5.1: Settings for creating the Number of Patients in Observation Period c
 </div>
 <div id="sql-query-12" class="section level3" number="5.3.1">
 <h3><span class="header-section-number">5.3.1</span> SQL query</h3>
-<div class="sourceCode" id="cb23"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb23-1"><a href="observation-period.html#cb23-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
-<span id="cb23-2"><a href="observation-period.html#cb23-2" aria-hidden="true"></a>       <span class="kw">source</span>.acronym,</span>
-<span id="cb23-3"><a href="observation-period.html#cb23-3" aria-hidden="true"></a>       <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">as</span> <span class="dt">Date</span>,</span>
-<span id="cb23-4"><a href="observation-period.html#cb23-4" aria-hidden="true"></a>       count_value</span>
-<span id="cb23-5"><a href="observation-period.html#cb23-5" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles</span>
-<span id="cb23-6"><a href="observation-period.html#cb23-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
-<span id="cb23-7"><a href="observation-period.html#cb23-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">110</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb22-1"><a href="observation-period.html#cb22-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
+<span id="cb22-2"><a href="observation-period.html#cb22-2" aria-hidden="true"></a>       <span class="kw">source</span>.acronym,</span>
+<span id="cb22-3"><a href="observation-period.html#cb22-3" aria-hidden="true"></a>       <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">as</span> <span class="dt">Date</span>,</span>
+<span id="cb22-4"><a href="observation-period.html#cb22-4" aria-hidden="true"></a>       count_value</span>
+<span id="cb22-5"><a href="observation-period.html#cb22-5" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles</span>
+<span id="cb22-6"><a href="observation-period.html#cb22-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
+<span id="cb22-7"><a href="observation-period.html#cb22-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">110</span></span></code></pre></div>
 </div>
 <div id="chart-settings-13" class="section level3" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> Chart settings</h3>
 <ul>
-<li><p>Data Tab</p>
+<li>Data Tab
 <ul>
-<li><p>Datasource &amp; Chart Type</p>
+<li>Datasource &amp; Chart Type
 <ul>
 <li>Visualization Type: Bar Chart</li>
 </ul></li>
-<li><p>Time</p>
+<li>Time
 <ul>
 <li>Time range: No filter</li>
 </ul></li>
-<li><p>Query</p>
+<li>Query
 <ul>
-<li><p>Metrics: MAX(count_value) with label “Num of Patients”</p></li>
-<li><p>Series: date</p></li>
-<li><p>Breakdowns: name</p></li>
+<li>Metrics: MAX(count_value) with label “Num of Patients”</li>
+<li>Series: date</li>
+<li>Breakdowns: name</li>
 </ul></li>
 </ul></li>
-<li><p>Customize Tab</p>
+<li>Customize Tab
 <ul>
-<li><p>Chart Options</p>
+<li>Chart Options
 <ul>
-<li><p>Stacked Bars: on</p></li>
-<li><p>Sort Bars: on</p></li>
-<li><p>Y Axis Label: Number of Patients</p></li>
+<li>Stacked Bars: on</li>
+<li>Sort Bars: on</li>
+<li>Y Axis Label: Number of Patients</li>
 </ul></li>
-<li><p>X Axis</p>
+<li>X Axis
 <ul>
-<li><p>X Axis Label: Dates</p></li>
-<li><p>Reduce X ticks: on</p></li>
+<li>X Axis Label: Dates</li>
+<li>Reduce X ticks: on</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -546,46 +548,46 @@ Figure 5.2: Settings for creating the Observation Period Start Dates chart
 </div>
 <div id="sql-query-13" class="section level3" number="5.4.1">
 <h3><span class="header-section-number">5.4.1</span> SQL query</h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb24-1"><a href="observation-period.html#cb24-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
-<span id="cb24-2"><a href="observation-period.html#cb24-2" aria-hidden="true"></a>       <span class="kw">source</span>.acronym,</span>
-<span id="cb24-3"><a href="observation-period.html#cb24-3" aria-hidden="true"></a>       <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">AS</span> year_month,</span>
-<span id="cb24-4"><a href="observation-period.html#cb24-4" aria-hidden="true"></a>       count_value</span>
-<span id="cb24-5"><a href="observation-period.html#cb24-5" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles</span>
-<span id="cb24-6"><a href="observation-period.html#cb24-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
-<span id="cb24-7"><a href="observation-period.html#cb24-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">111</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb23-1"><a href="observation-period.html#cb23-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
+<span id="cb23-2"><a href="observation-period.html#cb23-2" aria-hidden="true"></a>       <span class="kw">source</span>.acronym,</span>
+<span id="cb23-3"><a href="observation-period.html#cb23-3" aria-hidden="true"></a>       <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">AS</span> year_month,</span>
+<span id="cb23-4"><a href="observation-period.html#cb23-4" aria-hidden="true"></a>       count_value</span>
+<span id="cb23-5"><a href="observation-period.html#cb23-5" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles</span>
+<span id="cb23-6"><a href="observation-period.html#cb23-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
+<span id="cb23-7"><a href="observation-period.html#cb23-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">111</span></span></code></pre></div>
 </div>
 <div id="chart-settings-14" class="section level3" number="5.4.2">
 <h3><span class="header-section-number">5.4.2</span> Chart settings</h3>
 <ul>
-<li><p>Data Tab</p>
+<li>Data Tab
 <ul>
-<li><p>Datasource &amp; Chart Type</p>
+<li>Datasource &amp; Chart Type
 <ul>
 <li>Visualization Type: Bar Chart</li>
 </ul></li>
-<li><p>Time</p>
+<li>Time
 <ul>
 <li>Time range: No filter</li>
 </ul></li>
-<li><p>Query</p>
+<li>Query
 <ul>
-<li><p>Metrics: SUM(count_value) with label “Patients”</p></li>
-<li><p>Series: year_month</p></li>
-<li><p>Breakdowns: name</p></li>
+<li>Metrics: SUM(count_value) with label “Patients”</li>
+<li>Series: year_month</li>
+<li>Breakdowns: name</li>
 </ul></li>
 </ul></li>
-<li><p>Customize Tab</p>
+<li>Customize Tab
 <ul>
-<li><p>Chart Options</p>
+<li>Chart Options
 <ul>
-<li><p>Stacked Bars: on</p></li>
-<li><p>Sort Bars: on</p></li>
-<li><p>Y Axis Label: Number of Patients</p></li>
+<li>Stacked Bars: on</li>
+<li>Sort Bars: on</li>
+<li>Y Axis Label: Number of Patients</li>
 </ul></li>
-<li><p>X Axis</p>
+<li>X Axis
 <ul>
-<li><p>X Axis Label: Year</p></li>
-<li><p>Reduce X ticks: on</p></li>
+<li>X Axis Label: Year</li>
+<li>Reduce X ticks: on</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -601,46 +603,46 @@ Figure 5.3: Settings for creating the Observation Period End Dates chart
 </div>
 <div id="sql-query-14" class="section level3" number="5.5.1">
 <h3><span class="header-section-number">5.5.1</span> SQL query</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb25-1"><a href="observation-period.html#cb25-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
-<span id="cb25-2"><a href="observation-period.html#cb25-2" aria-hidden="true"></a>       <span class="kw">source</span>.acronym,</span>
-<span id="cb25-3"><a href="observation-period.html#cb25-3" aria-hidden="true"></a>       <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">AS</span> year_month,</span>
-<span id="cb25-4"><a href="observation-period.html#cb25-4" aria-hidden="true"></a>       count_value</span>
-<span id="cb25-5"><a href="observation-period.html#cb25-5" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles</span>
-<span id="cb25-6"><a href="observation-period.html#cb25-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
-<span id="cb25-7"><a href="observation-period.html#cb25-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">112</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb24-1"><a href="observation-period.html#cb24-1" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="kw">source</span>.name,</span>
+<span id="cb24-2"><a href="observation-period.html#cb24-2" aria-hidden="true"></a>       <span class="kw">source</span>.acronym,</span>
+<span id="cb24-3"><a href="observation-period.html#cb24-3" aria-hidden="true"></a>       <span class="fu">to_date</span>(stratum_1, <span class="st">&#39;YYYYMM&#39;</span>) <span class="kw">AS</span> year_month,</span>
+<span id="cb24-4"><a href="observation-period.html#cb24-4" aria-hidden="true"></a>       count_value</span>
+<span id="cb24-5"><a href="observation-period.html#cb24-5" aria-hidden="true"></a><span class="kw">FROM</span> <span class="kw">public</span>.achilles_results <span class="kw">AS</span> achilles</span>
+<span id="cb24-6"><a href="observation-period.html#cb24-6" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> <span class="kw">public</span>.data_source <span class="kw">AS</span> <span class="kw">source</span> <span class="kw">ON</span> achilles.data_source_id<span class="op">=</span><span class="kw">source</span>.<span class="kw">id</span></span>
+<span id="cb24-7"><a href="observation-period.html#cb24-7" aria-hidden="true"></a><span class="kw">WHERE</span> analysis_id <span class="op">=</span> <span class="dv">112</span></span></code></pre></div>
 </div>
 <div id="chart-settings-15" class="section level3" number="5.5.2">
 <h3><span class="header-section-number">5.5.2</span> Chart settings</h3>
 <ul>
-<li><p>Data Tab</p>
+<li>Data Tab
 <ul>
-<li><p>Datasource &amp; Chart Type</p>
+<li>Datasource &amp; Chart Type
 <ul>
 <li>Visualization Type: Bar Chart</li>
 </ul></li>
-<li><p>Time</p>
+<li>Time
 <ul>
 <li>Time range: No filter</li>
 </ul></li>
-<li><p>Query</p>
+<li>Query
 <ul>
-<li><p>Metrics: SUM(count_value) with label “Patients”</p></li>
-<li><p>Series: year_month</p></li>
-<li><p>Breakdowns: name</p></li>
+<li>Metrics: SUM(count_value) with label “Patients”</li>
+<li>Series: year_month</li>
+<li>Breakdowns: name</li>
 </ul></li>
 </ul></li>
-<li><p>Customize Tab</p>
+<li>Customize Tab
 <ul>
-<li><p>Chart Options</p>
+<li>Chart Options
 <ul>
-<li><p>Stacked Bars: on</p></li>
-<li><p>Sort Bars: on</p></li>
-<li><p>Y Axis Label: Number of Patients</p></li>
+<li>Stacked Bars: on</li>
+<li>Sort Bars: on</li>
+<li>Y Axis Label: Number of Patients</li>
 </ul></li>
-<li><p>X Axis</p>
+<li>X Axis
 <ul>
-<li><p>X Axis Label: Year</p></li>
-<li><p>Reduce X ticks: on</p></li>
+<li>X Axis Label: Year</li>
+<li>Reduce X ticks: on</li>
 </ul></li>
 </ul></li>
 </ul>
