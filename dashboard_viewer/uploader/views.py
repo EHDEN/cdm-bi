@@ -132,14 +132,12 @@ def _extract_data_from_uploaded_file(request):
         return None
 
     try:
-        achilles_results = achilles_results.astype(
-            {
-                "analysis_id": numpy.int64,
-                "count_value": numpy.int64,
-            },
-        )
+        type_dict = {
+            "analysis_id": numpy.int64,
+            "count_value": numpy.int64,
+        }
         if len(achilles_results.columns) == 16:
-            achilles_results = achilles_results.astype(
+            type_dict.update(
                 {
                     "min_value": float,
                     "max_value": float,
@@ -152,6 +150,8 @@ def _extract_data_from_uploaded_file(request):
                     "p90_value": float,
                 },
             )
+
+        achilles_results = achilles_results.astype(type_dict)
     except ValueError:
         messages.error(
             request,
@@ -162,6 +162,8 @@ def _extract_data_from_uploaded_file(request):
         )
 
         return None
+
+    return_value = {"achilles_results": achilles_results}
 
     output = _check_correct(
         ["0", "5000"],
@@ -198,8 +200,6 @@ def _extract_data_from_uploaded_file(request):
             ),
         )
         return None
-
-    return_value = {"achilles_results": achilles_results}
 
     errors = []
 
